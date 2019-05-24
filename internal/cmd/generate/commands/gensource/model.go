@@ -35,18 +35,26 @@ func NewEndpoint(f io.Reader) (*Endpoint, error) {
 	for name, e := range spec {
 		endpoint = e
 		endpoint.Name = name
+		endpoint.URL.Params = endpoint.Params
 	}
-	for partName, p := range endpoint.URL.Parts {
-		p.Endpoint = &endpoint
-		p.Name = partName
+
+	for _, path := range endpoint.URL.Paths {
+		for partName, part := range path.Parts {
+			part.Endpoint = &endpoint
+			part.Name = partName
+			part.Type = part.Type
+			part.Description = part.Description
+			part.Required = part.Required
+		}
 	}
+
 	for paramName, p := range endpoint.URL.Params {
 		p.Endpoint = &endpoint
 		p.Name = paramName
 	}
 
 	var partNames []string
-	for _, param := range endpoint.URL.Parts {
+	for _, param := range endpoint.URL.Paths[0].Parts {
 		partNames = append(partNames, param.Name)
 	}
 	sort.Slice(partNames, func(i, j int) bool {
@@ -63,17 +71,19 @@ func NewEndpoint(f io.Reader) (*Endpoint, error) {
 	})
 	endpoint.URL.ParamNamesSorted = paramNames
 
-	for _, param := range endpoint.URL.Parts {
-		if param.Name == "type" {
-			param.Default = "_doc"
+	for _, path := range endpoint.URL.Paths {
+		for _, part := range path.Parts {
+			if part.Name == "type" {
+				part.Default = "_doc"
+			}
 		}
 	}
 
-	if info, ok := apiDescriptions[endpoint.Name]; ok {
-		if desc, ok := info.(map[interface{}]interface{})["description"].(string); ok {
-			endpoint.Description = desc
-		}
-	}
+	// if info, ok := apiDescriptions[endpoint.Name]; ok {
+	// 	if desc, ok := info.(map[interface{}]interface{})["description"].(string); ok {
+	// 		endpoint.Documentation.Description = desc
+	// 	}
+	// }
 
 	return &endpoint, nil
 }
@@ -83,11 +93,14 @@ func NewEndpoint(f io.Reader) (*Endpoint, error) {
 type Endpoint struct {
 	Name string `json:"-"`
 
-	Description   string   `json:"-"`
-	Documentation string   `json:"documentation"`
-	Methods       []string `json:"methods"`
-	URL           *URL     `json:"url"`
-	Body          *Body    `json:"body"`
+	Documentation struct {
+		URL         string `json:"url"`
+		Description string `json:"description"`
+	} `json:"documentation"`
+
+	URL    *URL              `json:"url"`
+	Params map[string]*Param `json:"params"`
+	Body   *Body             `json:"body"`
 }
 
 // URL represents API endpoint URL.
@@ -95,13 +108,22 @@ type Endpoint struct {
 type URL struct {
 	Endpoint *Endpoint `json:"-"`
 
-	Path   string            `json:"path"`
-	Paths  []string          `json:"paths"`
-	Parts  map[string]*Part  `json:"parts"`
+	Paths  []Path            `json:"paths"`
 	Params map[string]*Param `json:"params"`
 
 	PartNamesSorted  []string
 	ParamNamesSorted []string
+}
+
+// Path represents URL path
+type Path struct {
+	Path       string           `json:"path"`
+	Methods    []string         `json:"methods"`
+	Parts      map[string]*Part `json:"parts"`
+	Deprecated struct {
+		Version     string `json:"version"`
+		Description string `json:"description"`
+	}
 }
 
 // Part represents part of the API endpoint URL.
@@ -227,7 +249,7 @@ func (e *Endpoint) RequiredArguments() []MethodArgument {
 
 	// Return the prominent arguments first
 	for _, d := range prominentArgs {
-		for _, p := range e.URL.Parts {
+		for _, p := range e.URL.Paths[0].Parts {
 			if p.Name != d {
 				continue
 			}
@@ -260,7 +282,7 @@ func (e *Endpoint) RequiredArguments() []MethodArgument {
 	}
 
 	// Return rest of the URL parts
-	for _, p := range e.URL.Parts {
+	for _, p := range e.URL.Paths[0].Parts {
 		if contains(p.Name) {
 			continue
 		}
