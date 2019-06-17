@@ -569,7 +569,12 @@ func (r ` + g.Endpoint.MethodWithNamespace() + `Request) Do(ctx context.Context,
 								pathContent.WriteString(`		path.WriteString(strings.Join(r.` + p + `, ","))` + "\n")
 								pathContent.WriteString(`	}` + "\n")
 							case "int", "long":
-								pathContent.WriteString("// TODO: type int or long")
+								pathContent.WriteString(`	if r.` + p + ` != nil {` + "\n")
+								pathContent.WriteString(`		value = strconv.FormatUint(uint64(r.` + p + `, 10))` + "\n")
+								pathContent.WriteString(`		path.Grow(1 + len(value))` + "\n")
+								pathContent.WriteString(`		path.WriteString("/")` + "\n")
+								pathContent.WriteString(`		path.WriteString(value)` + "\n")
+								pathContent.WriteString(`	}` + "\n")
 							default:
 								panic(fmt.Sprintf("FAIL: %q: unexpected type %q for URL part %q\n", g.Endpoint.Name, a.Type, a.Name))
 							}
@@ -646,6 +651,12 @@ func (r ` + g.Endpoint.MethodWithNamespace() + `Request) Do(ctx context.Context,
 			case "*int":
 				fieldCondition = `r.` + fieldName + ` != nil`
 				fieldValue = `strconv.FormatInt(int64(*r.` + fieldName + `), 10)`
+			case "uint":
+				fieldCondition = `r.` + fieldName + ` != 0`
+				fieldValue = `strconv.FormatUint(uint64(r.` + fieldName + `), 10)`
+			case "*uint":
+				fieldCondition = `r.` + fieldName + ` != 0`
+				fieldValue = `strconv.FormatUint(uint64(*r.` + fieldName + `), 10)`
 			case "[]string":
 				fieldCondition = ` len(r.` + fieldName + `) > 0`
 				fieldValue = `strings.Join(r.` + fieldName + `, ",")`
