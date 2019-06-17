@@ -78,7 +78,7 @@ func (g *Generator) genHeader() {
 	}
 	g.w(": DO NOT EDIT\n")
 	g.w("\n")
-	g.w("package esapi\n")
+	g.w("package " + g.Endpoint.PkgName + "\n")
 }
 
 func (g *Generator) genConstructor() {
@@ -570,7 +570,7 @@ func (r ` + g.Endpoint.MethodWithNamespace() + `Request) Do(ctx context.Context,
 								pathContent.WriteString(`	}` + "\n")
 							case "int", "long":
 								pathContent.WriteString(`	if r.` + p + ` != nil {` + "\n")
-								pathContent.WriteString(`		value = strconv.FormatUint(uint64(r.` + p + `, 10))` + "\n")
+								pathContent.WriteString(`		value := strconv.FormatInt(int64(*r.` + p + `), 10)` + "\n")
 								pathContent.WriteString(`		path.Grow(1 + len(value))` + "\n")
 								pathContent.WriteString(`		path.WriteString("/")` + "\n")
 								pathContent.WriteString(`		path.WriteString(value)` + "\n")

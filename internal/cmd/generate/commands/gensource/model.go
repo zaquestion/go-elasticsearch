@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"os"
 	"sort"
 	"strings"
 
@@ -32,9 +33,24 @@ func NewEndpoint(f io.Reader) (*Endpoint, error) {
 	if err := json.NewDecoder(f).Decode(&spec); err != nil {
 		return nil, err
 	}
+
 	for name, e := range spec {
 		endpoint = e
 		endpoint.Name = name
+	}
+
+	if fpath, ok := f.(*os.File); ok {
+		if strings.Contains(fpath.Name(), "x-pack") {
+			endpoint.PkgName = "xpack"
+		}
+	}
+	if endpoint.PkgName == "" {
+		endpoint.PkgName = "esapi"
+	}
+
+	// Add Path when it's empty
+	if endpoint.URL.Path == "" {
+		endpoint.URL.Path = endpoint.URL.Paths[0]
 	}
 
 	// Join "deprecated_paths" with paths
@@ -92,7 +108,8 @@ func NewEndpoint(f io.Reader) (*Endpoint, error) {
 // Endpoint represents an API endpoint.
 //
 type Endpoint struct {
-	Name string `json:"-"`
+	PkgName string `json:"-"`
+	Name    string `json:"-"`
 
 	Description   string   `json:"-"`
 	Documentation string   `json:"documentation"`
@@ -174,7 +191,7 @@ type MethodArgument struct {
 //
 func (e *Endpoint) Namespace() string {
 	ep := strings.Split(e.Name, ".")
-	return strings.Title(ep[0])
+	return utils.NameToGo(ep[0])
 }
 
 // MethodName returns the API endpoint method name.
@@ -203,7 +220,8 @@ func (e *Endpoint) MethodWithNamespace() string {
 		m := strings.Split(v, "_")
 		mn := make([]string, len(m))
 		for _, vv := range m {
-			mn = append(mn, strings.Title(vv))
+			// mn = append(mn, strings.Title(vv))
+			mn = append(mn, utils.NameToGo(vv))
 		}
 		ns = append(ns, strings.Join(mn, ""))
 	}

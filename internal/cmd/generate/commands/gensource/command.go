@@ -283,10 +283,22 @@ func (cmd *Command) processFile(f *os.File) (err error) {
 }
 
 func (cmd *Command) processAPIConstructor(endpoints []*Endpoint) (err error) {
-	var b bytes.Buffer
+	var (
+		b          bytes.Buffer
+		namespaces []string
+	)
 
-	// var namespaces = []string{"Cat", "Cluster", "Indices", "Ingest", "Nodes", "Remote", "Snapshot", "Tasks"}
-	var namespaces = []string{"Ccr", "Ilm", "Indices", "License", "Migration", "Ml", "Monitoring", "Rollup", "Security", "Sql", "Ssl", "Watcher", "Xpack"}
+	pkgName := endpoints[0].PkgName
+	typName := "API"
+	if pkgName == "xpack" {
+		typName = "XAPI"
+	}
+
+	if pkgName == "xpack" {
+		namespaces = []string{"CCR", "ILM", "Indices", "License", "Migration", "ML", "Monitoring", "Rollup", "Security", "SQL", "SSL", "Watcher", "XPack"}
+	} else {
+		namespaces = []string{"Cat", "Cluster", "Indices", "Ingest", "Nodes", "Remote", "Snapshot", "Tasks"}
+	}
 
 	b.WriteString("// Code generated")
 	if EsVersion != "" || GitCommit != "" || GitTag != "" {
@@ -302,11 +314,11 @@ func (cmd *Command) processAPIConstructor(endpoints []*Endpoint) (err error) {
 	b.WriteString(": DO NOT EDIT\n")
 	b.WriteString("\n")
 
-	b.WriteString(`package esapi
+	b.WriteString(`package ` + pkgName + `
 
-// API contains the Elasticsearch APIs
+// ` + typName + ` contains the Elasticsearch APIs
 //
-type API struct {
+type ` + typName + ` struct {
 `)
 	for _, n := range namespaces {
 		b.WriteString(fmt.Sprintf("\t%[1]s *%[1]s\n", n))
@@ -343,10 +355,10 @@ type API struct {
 		b.WriteString("}\n\n")
 	}
 
-	b.WriteString(`// New creates new API
+	b.WriteString(`// New creates new ` + typName + `
 //
-func New(t Transport) *API {
-	return &API{
+func New(t Transport) *` + typName + ` {
+	return &` + typName + `{
 `)
 
 	for _, e := range endpoints {
