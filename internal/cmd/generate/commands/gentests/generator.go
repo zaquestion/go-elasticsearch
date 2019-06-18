@@ -605,7 +605,18 @@ func (g *Generator) genAction(a Action, skipBody ...bool) {
 					case "time.Duration":
 						// re := regexp.MustCompile("^(\\d+).*")
 						// value = re.ReplaceAllString(fmt.Sprintf("%s", v), "$1")
-						dur, err := time.ParseDuration(v.(string))
+						inputValue := v.(string)
+						if strings.HasSuffix(inputValue, "d") {
+							inputValue = inputValue[:len(inputValue)-1]
+							numericValue, err := strconv.Atoi(inputValue)
+							if err != nil {
+								panic(fmt.Sprintf("Cannot convert duration [%s]: %s", inputValue, err))
+							}
+							// Convert to hours
+							inputValue = fmt.Sprintf("%dh", numericValue*24)
+						}
+
+						dur, err := time.ParseDuration(inputValue)
 						if err != nil {
 							panic(fmt.Sprintf("Cannot parse duration [%s]: %s", v, err))
 						}
@@ -638,7 +649,7 @@ func (g *Generator) genAction(a Action, skipBody ...bool) {
 			case "*int":
 				g.w(`esapi.IntPtr(` + fmt.Sprintf("%d", v) + `)`)
 			default:
-				value = fmt.Sprintf("%d", v)
+				value = fmt.Sprintf("%v", v)
 			}
 			g.w(value)
 			g.w(",\n")
