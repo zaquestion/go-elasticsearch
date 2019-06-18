@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -21,7 +21,7 @@ func newMonitoringBulkFunc(t Transport) MonitoringBulk {
 // ----- API Definition -------------------------------------------------------
 
 //
-// See full documentation at http://www.elastic.co/guide/en/monitoring/current/appendix-api-bulk.html.
+// See full documentation at https://www.elastic.co/guide/en/elasticsearch/reference/master/es-monitoring.html.
 //
 type MonitoringBulk func(body io.Reader, o ...func(*MonitoringBulkRequest)) (*Response, error)
 
@@ -29,7 +29,8 @@ type MonitoringBulk func(body io.Reader, o ...func(*MonitoringBulkRequest)) (*Re
 //
 type MonitoringBulkRequest struct {
 	DocumentType string
-	Body         io.Reader
+
+	Body io.Reader
 
 	Interval         string
 	SystemApiVersion string

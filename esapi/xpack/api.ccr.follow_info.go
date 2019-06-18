@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -7,9 +7,9 @@ import (
 	"strings"
 )
 
-func newCcrFollowInfoFunc(t Transport) CcrFollowInfo {
-	return func(o ...func(*CcrFollowInfoRequest)) (*Response, error) {
-		var r = CcrFollowInfoRequest{}
+func newCCRFollowInfoFunc(t Transport) CCRFollowInfo {
+	return func(o ...func(*CCRFollowInfoRequest)) (*Response, error) {
+		var r = CCRFollowInfoRequest{}
 		for _, f := range o {
 			f(&r)
 		}
@@ -22,11 +22,11 @@ func newCcrFollowInfoFunc(t Transport) CcrFollowInfo {
 //
 // See full documentation at https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-info.html.
 //
-type CcrFollowInfo func(o ...func(*CcrFollowInfoRequest)) (*Response, error)
+type CCRFollowInfo func(o ...func(*CCRFollowInfoRequest)) (*Response, error)
 
-// CcrFollowInfoRequest configures the Ccr  Follow Info API request.
+// CCRFollowInfoRequest configures the Ccr  Follow Info API request.
 //
-type CcrFollowInfoRequest struct {
+type CCRFollowInfoRequest struct {
 	Index []string
 
 	Pretty     bool
@@ -39,7 +39,7 @@ type CcrFollowInfoRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r CcrFollowInfoRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r CCRFollowInfoRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -106,48 +106,48 @@ func (r CcrFollowInfoRequest) Do(ctx context.Context, transport Transport) (*Res
 
 // WithContext sets the request context.
 //
-func (f CcrFollowInfo) WithContext(v context.Context) func(*CcrFollowInfoRequest) {
-	return func(r *CcrFollowInfoRequest) {
+func (f CCRFollowInfo) WithContext(v context.Context) func(*CCRFollowInfoRequest) {
+	return func(r *CCRFollowInfoRequest) {
 		r.ctx = v
 	}
 }
 
 // WithIndex - a list of index patterns; use `_all` to perform the operation on all indices.
 //
-func (f CcrFollowInfo) WithIndex(v ...string) func(*CcrFollowInfoRequest) {
-	return func(r *CcrFollowInfoRequest) {
+func (f CCRFollowInfo) WithIndex(v ...string) func(*CCRFollowInfoRequest) {
+	return func(r *CCRFollowInfoRequest) {
 		r.Index = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f CcrFollowInfo) WithPretty() func(*CcrFollowInfoRequest) {
-	return func(r *CcrFollowInfoRequest) {
+func (f CCRFollowInfo) WithPretty() func(*CCRFollowInfoRequest) {
+	return func(r *CCRFollowInfoRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f CcrFollowInfo) WithHuman() func(*CcrFollowInfoRequest) {
-	return func(r *CcrFollowInfoRequest) {
+func (f CCRFollowInfo) WithHuman() func(*CCRFollowInfoRequest) {
+	return func(r *CCRFollowInfoRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f CcrFollowInfo) WithErrorTrace() func(*CcrFollowInfoRequest) {
-	return func(r *CcrFollowInfoRequest) {
+func (f CCRFollowInfo) WithErrorTrace() func(*CCRFollowInfoRequest) {
+	return func(r *CCRFollowInfoRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f CcrFollowInfo) WithFilterPath(v ...string) func(*CcrFollowInfoRequest) {
-	return func(r *CcrFollowInfoRequest) {
+func (f CCRFollowInfo) WithFilterPath(v ...string) func(*CCRFollowInfoRequest) {
+	return func(r *CCRFollowInfoRequest) {
 		r.FilterPath = v
 	}
 }

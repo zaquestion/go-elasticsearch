@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -7,9 +7,9 @@ import (
 	"strings"
 )
 
-func newMlDeleteCalendarFunc(t Transport) MlDeleteCalendar {
-	return func(calendar_id string, o ...func(*MlDeleteCalendarRequest)) (*Response, error) {
-		var r = MlDeleteCalendarRequest{CalendarID: calendar_id}
+func newMLDeleteCalendarFunc(t Transport) MLDeleteCalendar {
+	return func(calendar_id string, o ...func(*MLDeleteCalendarRequest)) (*Response, error) {
+		var r = MLDeleteCalendarRequest{CalendarID: calendar_id}
 		for _, f := range o {
 			f(&r)
 		}
@@ -20,11 +20,11 @@ func newMlDeleteCalendarFunc(t Transport) MlDeleteCalendar {
 // ----- API Definition -------------------------------------------------------
 
 //
-type MlDeleteCalendar func(calendar_id string, o ...func(*MlDeleteCalendarRequest)) (*Response, error)
+type MLDeleteCalendar func(calendar_id string, o ...func(*MLDeleteCalendarRequest)) (*Response, error)
 
-// MlDeleteCalendarRequest configures the Ml  Delete Calendar API request.
+// MLDeleteCalendarRequest configures the Ml  Delete Calendar API request.
 //
-type MlDeleteCalendarRequest struct {
+type MLDeleteCalendarRequest struct {
 	CalendarID string
 
 	Pretty     bool
@@ -37,7 +37,7 @@ type MlDeleteCalendarRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r MlDeleteCalendarRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r MLDeleteCalendarRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -102,40 +102,40 @@ func (r MlDeleteCalendarRequest) Do(ctx context.Context, transport Transport) (*
 
 // WithContext sets the request context.
 //
-func (f MlDeleteCalendar) WithContext(v context.Context) func(*MlDeleteCalendarRequest) {
-	return func(r *MlDeleteCalendarRequest) {
+func (f MLDeleteCalendar) WithContext(v context.Context) func(*MLDeleteCalendarRequest) {
+	return func(r *MLDeleteCalendarRequest) {
 		r.ctx = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f MlDeleteCalendar) WithPretty() func(*MlDeleteCalendarRequest) {
-	return func(r *MlDeleteCalendarRequest) {
+func (f MLDeleteCalendar) WithPretty() func(*MLDeleteCalendarRequest) {
+	return func(r *MLDeleteCalendarRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f MlDeleteCalendar) WithHuman() func(*MlDeleteCalendarRequest) {
-	return func(r *MlDeleteCalendarRequest) {
+func (f MLDeleteCalendar) WithHuman() func(*MLDeleteCalendarRequest) {
+	return func(r *MLDeleteCalendarRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f MlDeleteCalendar) WithErrorTrace() func(*MlDeleteCalendarRequest) {
-	return func(r *MlDeleteCalendarRequest) {
+func (f MLDeleteCalendar) WithErrorTrace() func(*MLDeleteCalendarRequest) {
+	return func(r *MLDeleteCalendarRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f MlDeleteCalendar) WithFilterPath(v ...string) func(*MlDeleteCalendarRequest) {
-	return func(r *MlDeleteCalendarRequest) {
+func (f MLDeleteCalendar) WithFilterPath(v ...string) func(*MLDeleteCalendarRequest) {
+	return func(r *MLDeleteCalendarRequest) {
 		r.FilterPath = v
 	}
 }

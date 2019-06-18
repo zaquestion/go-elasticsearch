@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -7,9 +7,9 @@ import (
 	"strings"
 )
 
-func newXpackInfoFunc(t Transport) XpackInfo {
-	return func(o ...func(*XpackInfoRequest)) (*Response, error) {
-		var r = XpackInfoRequest{}
+func newXPackInfoFunc(t Transport) XPackInfo {
+	return func(o ...func(*XPackInfoRequest)) (*Response, error) {
+		var r = XPackInfoRequest{}
 		for _, f := range o {
 			f(&r)
 		}
@@ -22,11 +22,11 @@ func newXpackInfoFunc(t Transport) XpackInfo {
 //
 // See full documentation at https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html.
 //
-type XpackInfo func(o ...func(*XpackInfoRequest)) (*Response, error)
+type XPackInfo func(o ...func(*XPackInfoRequest)) (*Response, error)
 
-// XpackInfoRequest configures the Xpack Info API request.
+// XPackInfoRequest configures the Xpack Info API request.
 //
-type XpackInfoRequest struct {
+type XPackInfoRequest struct {
 	Categories []string
 
 	Pretty     bool
@@ -39,7 +39,7 @@ type XpackInfoRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r XpackInfoRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r XPackInfoRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -103,48 +103,48 @@ func (r XpackInfoRequest) Do(ctx context.Context, transport Transport) (*Respons
 
 // WithContext sets the request context.
 //
-func (f XpackInfo) WithContext(v context.Context) func(*XpackInfoRequest) {
-	return func(r *XpackInfoRequest) {
+func (f XPackInfo) WithContext(v context.Context) func(*XPackInfoRequest) {
+	return func(r *XPackInfoRequest) {
 		r.ctx = v
 	}
 }
 
 // WithCategories - comma-separated list of info categories. can be any of: build, license, features.
 //
-func (f XpackInfo) WithCategories(v ...string) func(*XpackInfoRequest) {
-	return func(r *XpackInfoRequest) {
+func (f XPackInfo) WithCategories(v ...string) func(*XPackInfoRequest) {
+	return func(r *XPackInfoRequest) {
 		r.Categories = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f XpackInfo) WithPretty() func(*XpackInfoRequest) {
-	return func(r *XpackInfoRequest) {
+func (f XPackInfo) WithPretty() func(*XPackInfoRequest) {
+	return func(r *XPackInfoRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f XpackInfo) WithHuman() func(*XpackInfoRequest) {
-	return func(r *XpackInfoRequest) {
+func (f XPackInfo) WithHuman() func(*XPackInfoRequest) {
+	return func(r *XPackInfoRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f XpackInfo) WithErrorTrace() func(*XpackInfoRequest) {
-	return func(r *XpackInfoRequest) {
+func (f XPackInfo) WithErrorTrace() func(*XPackInfoRequest) {
+	return func(r *XPackInfoRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f XpackInfo) WithFilterPath(v ...string) func(*XpackInfoRequest) {
-	return func(r *XpackInfoRequest) {
+func (f XPackInfo) WithFilterPath(v ...string) func(*XPackInfoRequest) {
+	return func(r *XPackInfoRequest) {
 		r.FilterPath = v
 	}
 }

@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -8,9 +8,9 @@ import (
 	"strings"
 )
 
-func newSqlClearCursorFunc(t Transport) SqlClearCursor {
-	return func(body io.Reader, o ...func(*SqlClearCursorRequest)) (*Response, error) {
-		var r = SqlClearCursorRequest{Body: body}
+func newSQLClearCursorFunc(t Transport) SQLClearCursor {
+	return func(body io.Reader, o ...func(*SQLClearCursorRequest)) (*Response, error) {
+		var r = SQLClearCursorRequest{Body: body}
 		for _, f := range o {
 			f(&r)
 		}
@@ -23,11 +23,11 @@ func newSqlClearCursorFunc(t Transport) SqlClearCursor {
 //
 // See full documentation at Clear SQL cursor.
 //
-type SqlClearCursor func(body io.Reader, o ...func(*SqlClearCursorRequest)) (*Response, error)
+type SQLClearCursor func(body io.Reader, o ...func(*SQLClearCursorRequest)) (*Response, error)
 
-// SqlClearCursorRequest configures the Sql  Clear Cursor API request.
+// SQLClearCursorRequest configures the Sql  Clear Cursor API request.
 //
-type SqlClearCursorRequest struct {
+type SQLClearCursorRequest struct {
 	Body io.Reader
 
 	Pretty     bool
@@ -40,7 +40,7 @@ type SqlClearCursorRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r SqlClearCursorRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r SQLClearCursorRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -104,40 +104,40 @@ func (r SqlClearCursorRequest) Do(ctx context.Context, transport Transport) (*Re
 
 // WithContext sets the request context.
 //
-func (f SqlClearCursor) WithContext(v context.Context) func(*SqlClearCursorRequest) {
-	return func(r *SqlClearCursorRequest) {
+func (f SQLClearCursor) WithContext(v context.Context) func(*SQLClearCursorRequest) {
+	return func(r *SQLClearCursorRequest) {
 		r.ctx = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f SqlClearCursor) WithPretty() func(*SqlClearCursorRequest) {
-	return func(r *SqlClearCursorRequest) {
+func (f SQLClearCursor) WithPretty() func(*SQLClearCursorRequest) {
+	return func(r *SQLClearCursorRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f SqlClearCursor) WithHuman() func(*SqlClearCursorRequest) {
-	return func(r *SqlClearCursorRequest) {
+func (f SQLClearCursor) WithHuman() func(*SQLClearCursorRequest) {
+	return func(r *SQLClearCursorRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f SqlClearCursor) WithErrorTrace() func(*SqlClearCursorRequest) {
-	return func(r *SqlClearCursorRequest) {
+func (f SQLClearCursor) WithErrorTrace() func(*SQLClearCursorRequest) {
+	return func(r *SQLClearCursorRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f SqlClearCursor) WithFilterPath(v ...string) func(*SqlClearCursorRequest) {
-	return func(r *SqlClearCursorRequest) {
+func (f SQLClearCursor) WithFilterPath(v ...string) func(*SQLClearCursorRequest) {
+	return func(r *SQLClearCursorRequest) {
 		r.FilterPath = v
 	}
 }

@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -8,9 +8,9 @@ import (
 	"strings"
 )
 
-func newMlDeleteDatafeedFunc(t Transport) MlDeleteDatafeed {
-	return func(datafeed_id string, o ...func(*MlDeleteDatafeedRequest)) (*Response, error) {
-		var r = MlDeleteDatafeedRequest{DatafeedID: datafeed_id}
+func newMLDeleteDatafeedFunc(t Transport) MLDeleteDatafeed {
+	return func(datafeed_id string, o ...func(*MLDeleteDatafeedRequest)) (*Response, error) {
+		var r = MLDeleteDatafeedRequest{DatafeedID: datafeed_id}
 		for _, f := range o {
 			f(&r)
 		}
@@ -23,13 +23,14 @@ func newMlDeleteDatafeedFunc(t Transport) MlDeleteDatafeed {
 //
 // See full documentation at http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html.
 //
-type MlDeleteDatafeed func(datafeed_id string, o ...func(*MlDeleteDatafeedRequest)) (*Response, error)
+type MLDeleteDatafeed func(datafeed_id string, o ...func(*MLDeleteDatafeedRequest)) (*Response, error)
 
-// MlDeleteDatafeedRequest configures the Ml  Delete Datafeed API request.
+// MLDeleteDatafeedRequest configures the Ml  Delete Datafeed API request.
 //
-type MlDeleteDatafeedRequest struct {
+type MLDeleteDatafeedRequest struct {
 	DatafeedID string
-	Force      *bool
+
+	Force *bool
 
 	Pretty     bool
 	Human      bool
@@ -41,7 +42,7 @@ type MlDeleteDatafeedRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r MlDeleteDatafeedRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r MLDeleteDatafeedRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -110,48 +111,48 @@ func (r MlDeleteDatafeedRequest) Do(ctx context.Context, transport Transport) (*
 
 // WithContext sets the request context.
 //
-func (f MlDeleteDatafeed) WithContext(v context.Context) func(*MlDeleteDatafeedRequest) {
-	return func(r *MlDeleteDatafeedRequest) {
+func (f MLDeleteDatafeed) WithContext(v context.Context) func(*MLDeleteDatafeedRequest) {
+	return func(r *MLDeleteDatafeedRequest) {
 		r.ctx = v
 	}
 }
 
 // WithForce - true if the datafeed should be forcefully deleted.
 //
-func (f MlDeleteDatafeed) WithForce(v bool) func(*MlDeleteDatafeedRequest) {
-	return func(r *MlDeleteDatafeedRequest) {
+func (f MLDeleteDatafeed) WithForce(v bool) func(*MLDeleteDatafeedRequest) {
+	return func(r *MLDeleteDatafeedRequest) {
 		r.Force = &v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f MlDeleteDatafeed) WithPretty() func(*MlDeleteDatafeedRequest) {
-	return func(r *MlDeleteDatafeedRequest) {
+func (f MLDeleteDatafeed) WithPretty() func(*MLDeleteDatafeedRequest) {
+	return func(r *MLDeleteDatafeedRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f MlDeleteDatafeed) WithHuman() func(*MlDeleteDatafeedRequest) {
-	return func(r *MlDeleteDatafeedRequest) {
+func (f MLDeleteDatafeed) WithHuman() func(*MLDeleteDatafeedRequest) {
+	return func(r *MLDeleteDatafeedRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f MlDeleteDatafeed) WithErrorTrace() func(*MlDeleteDatafeedRequest) {
-	return func(r *MlDeleteDatafeedRequest) {
+func (f MLDeleteDatafeed) WithErrorTrace() func(*MLDeleteDatafeedRequest) {
+	return func(r *MLDeleteDatafeedRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f MlDeleteDatafeed) WithFilterPath(v ...string) func(*MlDeleteDatafeedRequest) {
-	return func(r *MlDeleteDatafeedRequest) {
+func (f MLDeleteDatafeed) WithFilterPath(v ...string) func(*MLDeleteDatafeedRequest) {
+	return func(r *MLDeleteDatafeedRequest) {
 		r.FilterPath = v
 	}
 }

@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -7,9 +7,9 @@ import (
 	"strings"
 )
 
-func newSslCertificatesFunc(t Transport) SslCertificates {
-	return func(o ...func(*SslCertificatesRequest)) (*Response, error) {
-		var r = SslCertificatesRequest{}
+func newSSLCertificatesFunc(t Transport) SSLCertificates {
+	return func(o ...func(*SSLCertificatesRequest)) (*Response, error) {
+		var r = SSLCertificatesRequest{}
 		for _, f := range o {
 			f(&r)
 		}
@@ -22,11 +22,11 @@ func newSslCertificatesFunc(t Transport) SslCertificates {
 //
 // See full documentation at https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-ssl.html.
 //
-type SslCertificates func(o ...func(*SslCertificatesRequest)) (*Response, error)
+type SSLCertificates func(o ...func(*SSLCertificatesRequest)) (*Response, error)
 
-// SslCertificatesRequest configures the Ssl Certificates API request.
+// SSLCertificatesRequest configures the Ssl Certificates API request.
 //
-type SslCertificatesRequest struct {
+type SSLCertificatesRequest struct {
 	Pretty     bool
 	Human      bool
 	ErrorTrace bool
@@ -37,7 +37,7 @@ type SslCertificatesRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r SslCertificatesRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r SSLCertificatesRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -97,40 +97,40 @@ func (r SslCertificatesRequest) Do(ctx context.Context, transport Transport) (*R
 
 // WithContext sets the request context.
 //
-func (f SslCertificates) WithContext(v context.Context) func(*SslCertificatesRequest) {
-	return func(r *SslCertificatesRequest) {
+func (f SSLCertificates) WithContext(v context.Context) func(*SSLCertificatesRequest) {
+	return func(r *SSLCertificatesRequest) {
 		r.ctx = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f SslCertificates) WithPretty() func(*SslCertificatesRequest) {
-	return func(r *SslCertificatesRequest) {
+func (f SSLCertificates) WithPretty() func(*SSLCertificatesRequest) {
+	return func(r *SSLCertificatesRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f SslCertificates) WithHuman() func(*SslCertificatesRequest) {
-	return func(r *SslCertificatesRequest) {
+func (f SSLCertificates) WithHuman() func(*SSLCertificatesRequest) {
+	return func(r *SSLCertificatesRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f SslCertificates) WithErrorTrace() func(*SslCertificatesRequest) {
-	return func(r *SslCertificatesRequest) {
+func (f SSLCertificates) WithErrorTrace() func(*SSLCertificatesRequest) {
+	return func(r *SSLCertificatesRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f SslCertificates) WithFilterPath(v ...string) func(*SslCertificatesRequest) {
-	return func(r *SslCertificatesRequest) {
+func (f SSLCertificates) WithFilterPath(v ...string) func(*SSLCertificatesRequest) {
+	return func(r *SSLCertificatesRequest) {
 		r.FilterPath = v
 	}
 }

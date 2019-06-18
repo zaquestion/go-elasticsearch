@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -10,9 +10,9 @@ import (
 	"strings"
 )
 
-func newMlGetOverallBucketsFunc(t Transport) MlGetOverallBuckets {
-	return func(job_id string, o ...func(*MlGetOverallBucketsRequest)) (*Response, error) {
-		var r = MlGetOverallBucketsRequest{JobID: job_id}
+func newMLGetOverallBucketsFunc(t Transport) MLGetOverallBuckets {
+	return func(job_id string, o ...func(*MLGetOverallBucketsRequest)) (*Response, error) {
+		var r = MLGetOverallBucketsRequest{JobID: job_id}
 		for _, f := range o {
 			f(&r)
 		}
@@ -25,21 +25,22 @@ func newMlGetOverallBucketsFunc(t Transport) MlGetOverallBuckets {
 //
 // See full documentation at http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html.
 //
-type MlGetOverallBuckets func(job_id string, o ...func(*MlGetOverallBucketsRequest)) (*Response, error)
+type MLGetOverallBuckets func(job_id string, o ...func(*MLGetOverallBucketsRequest)) (*Response, error)
 
-// MlGetOverallBucketsRequest configures the Ml   Get Overall Buckets API request.
+// MLGetOverallBucketsRequest configures the Ml   Get Overall Buckets API request.
 //
-type MlGetOverallBucketsRequest struct {
+type MLGetOverallBucketsRequest struct {
 	Body io.Reader
 
-	JobID          string
+	JobID string
+
 	AllowNoJobs    *bool
 	BucketSpan     string
 	End            string
 	ExcludeInterim *bool
 	OverallScore   interface{}
 	Start          string
-	TopN           interface{}
+	TopN           *int
 
 	Pretty     bool
 	Human      bool
@@ -51,7 +52,7 @@ type MlGetOverallBucketsRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r MlGetOverallBucketsRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r MLGetOverallBucketsRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -99,7 +100,7 @@ func (r MlGetOverallBucketsRequest) Do(ctx context.Context, transport Transport)
 	}
 
 	if r.TopN != nil {
-		params["top_n"] = fmt.Sprintf("%v", r.TopN)
+		params["top_n"] = strconv.FormatInt(int64(*r.TopN), 10)
 	}
 
 	if r.Pretty {
@@ -152,104 +153,104 @@ func (r MlGetOverallBucketsRequest) Do(ctx context.Context, transport Transport)
 
 // WithContext sets the request context.
 //
-func (f MlGetOverallBuckets) WithContext(v context.Context) func(*MlGetOverallBucketsRequest) {
-	return func(r *MlGetOverallBucketsRequest) {
+func (f MLGetOverallBuckets) WithContext(v context.Context) func(*MLGetOverallBucketsRequest) {
+	return func(r *MLGetOverallBucketsRequest) {
 		r.ctx = v
 	}
 }
 
 // WithBody - Overall bucket selection details if not provided in URI.
 //
-func (f MlGetOverallBuckets) WithBody(v io.Reader) func(*MlGetOverallBucketsRequest) {
-	return func(r *MlGetOverallBucketsRequest) {
+func (f MLGetOverallBuckets) WithBody(v io.Reader) func(*MLGetOverallBucketsRequest) {
+	return func(r *MLGetOverallBucketsRequest) {
 		r.Body = v
 	}
 }
 
 // WithAllowNoJobs - whether to ignore if a wildcard expression matches no jobs. (this includes `_all` string or when no jobs have been specified).
 //
-func (f MlGetOverallBuckets) WithAllowNoJobs(v bool) func(*MlGetOverallBucketsRequest) {
-	return func(r *MlGetOverallBucketsRequest) {
+func (f MLGetOverallBuckets) WithAllowNoJobs(v bool) func(*MLGetOverallBucketsRequest) {
+	return func(r *MLGetOverallBucketsRequest) {
 		r.AllowNoJobs = &v
 	}
 }
 
 // WithBucketSpan - the span of the overall buckets. defaults to the longest job bucket_span.
 //
-func (f MlGetOverallBuckets) WithBucketSpan(v string) func(*MlGetOverallBucketsRequest) {
-	return func(r *MlGetOverallBucketsRequest) {
+func (f MLGetOverallBuckets) WithBucketSpan(v string) func(*MLGetOverallBucketsRequest) {
+	return func(r *MLGetOverallBucketsRequest) {
 		r.BucketSpan = v
 	}
 }
 
 // WithEnd - returns overall buckets with timestamps earlier than this time.
 //
-func (f MlGetOverallBuckets) WithEnd(v string) func(*MlGetOverallBucketsRequest) {
-	return func(r *MlGetOverallBucketsRequest) {
+func (f MLGetOverallBuckets) WithEnd(v string) func(*MLGetOverallBucketsRequest) {
+	return func(r *MLGetOverallBucketsRequest) {
 		r.End = v
 	}
 }
 
 // WithExcludeInterim - if true overall buckets that include interim buckets will be excluded.
 //
-func (f MlGetOverallBuckets) WithExcludeInterim(v bool) func(*MlGetOverallBucketsRequest) {
-	return func(r *MlGetOverallBucketsRequest) {
+func (f MLGetOverallBuckets) WithExcludeInterim(v bool) func(*MLGetOverallBucketsRequest) {
+	return func(r *MLGetOverallBucketsRequest) {
 		r.ExcludeInterim = &v
 	}
 }
 
 // WithOverallScore - returns overall buckets with overall scores higher than this value.
 //
-func (f MlGetOverallBuckets) WithOverallScore(v interface{}) func(*MlGetOverallBucketsRequest) {
-	return func(r *MlGetOverallBucketsRequest) {
+func (f MLGetOverallBuckets) WithOverallScore(v interface{}) func(*MLGetOverallBucketsRequest) {
+	return func(r *MLGetOverallBucketsRequest) {
 		r.OverallScore = v
 	}
 }
 
 // WithStart - returns overall buckets with timestamps after this time.
 //
-func (f MlGetOverallBuckets) WithStart(v string) func(*MlGetOverallBucketsRequest) {
-	return func(r *MlGetOverallBucketsRequest) {
+func (f MLGetOverallBuckets) WithStart(v string) func(*MLGetOverallBucketsRequest) {
+	return func(r *MLGetOverallBucketsRequest) {
 		r.Start = v
 	}
 }
 
 // WithTopN - the number of top job bucket scores to be used in the overall_score calculation.
 //
-func (f MlGetOverallBuckets) WithTopN(v interface{}) func(*MlGetOverallBucketsRequest) {
-	return func(r *MlGetOverallBucketsRequest) {
-		r.TopN = v
+func (f MLGetOverallBuckets) WithTopN(v int) func(*MLGetOverallBucketsRequest) {
+	return func(r *MLGetOverallBucketsRequest) {
+		r.TopN = &v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f MlGetOverallBuckets) WithPretty() func(*MlGetOverallBucketsRequest) {
-	return func(r *MlGetOverallBucketsRequest) {
+func (f MLGetOverallBuckets) WithPretty() func(*MLGetOverallBucketsRequest) {
+	return func(r *MLGetOverallBucketsRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f MlGetOverallBuckets) WithHuman() func(*MlGetOverallBucketsRequest) {
-	return func(r *MlGetOverallBucketsRequest) {
+func (f MLGetOverallBuckets) WithHuman() func(*MLGetOverallBucketsRequest) {
+	return func(r *MLGetOverallBucketsRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f MlGetOverallBuckets) WithErrorTrace() func(*MlGetOverallBucketsRequest) {
-	return func(r *MlGetOverallBucketsRequest) {
+func (f MLGetOverallBuckets) WithErrorTrace() func(*MLGetOverallBucketsRequest) {
+	return func(r *MLGetOverallBucketsRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f MlGetOverallBuckets) WithFilterPath(v ...string) func(*MlGetOverallBucketsRequest) {
-	return func(r *MlGetOverallBucketsRequest) {
+func (f MLGetOverallBuckets) WithFilterPath(v ...string) func(*MLGetOverallBucketsRequest) {
+	return func(r *MLGetOverallBucketsRequest) {
 		r.FilterPath = v
 	}
 }

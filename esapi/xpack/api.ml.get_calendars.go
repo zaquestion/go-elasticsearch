@@ -1,17 +1,17 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
 import (
 	"context"
-	"fmt"
 	"io"
+	"strconv"
 	"strings"
 )
 
-func newMlGetCalendarsFunc(t Transport) MlGetCalendars {
-	return func(o ...func(*MlGetCalendarsRequest)) (*Response, error) {
-		var r = MlGetCalendarsRequest{}
+func newMLGetCalendarsFunc(t Transport) MLGetCalendars {
+	return func(o ...func(*MLGetCalendarsRequest)) (*Response, error) {
+		var r = MLGetCalendarsRequest{}
 		for _, f := range o {
 			f(&r)
 		}
@@ -22,16 +22,17 @@ func newMlGetCalendarsFunc(t Transport) MlGetCalendars {
 // ----- API Definition -------------------------------------------------------
 
 //
-type MlGetCalendars func(o ...func(*MlGetCalendarsRequest)) (*Response, error)
+type MLGetCalendars func(o ...func(*MLGetCalendarsRequest)) (*Response, error)
 
-// MlGetCalendarsRequest configures the Ml  Get Calendars API request.
+// MLGetCalendarsRequest configures the Ml  Get Calendars API request.
 //
-type MlGetCalendarsRequest struct {
+type MLGetCalendarsRequest struct {
 	Body io.Reader
 
 	CalendarID string
-	From       interface{}
-	Size       interface{}
+
+	From *int
+	Size *int
 
 	Pretty     bool
 	Human      bool
@@ -43,7 +44,7 @@ type MlGetCalendarsRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r MlGetCalendarsRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r MLGetCalendarsRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -65,11 +66,11 @@ func (r MlGetCalendarsRequest) Do(ctx context.Context, transport Transport) (*Re
 	params = make(map[string]string)
 
 	if r.From != nil {
-		params["from"] = fmt.Sprintf("%v", r.From)
+		params["from"] = strconv.FormatInt(int64(*r.From), 10)
 	}
 
 	if r.Size != nil {
-		params["size"] = fmt.Sprintf("%v", r.Size)
+		params["size"] = strconv.FormatInt(int64(*r.Size), 10)
 	}
 
 	if r.Pretty {
@@ -122,72 +123,72 @@ func (r MlGetCalendarsRequest) Do(ctx context.Context, transport Transport) (*Re
 
 // WithContext sets the request context.
 //
-func (f MlGetCalendars) WithContext(v context.Context) func(*MlGetCalendarsRequest) {
-	return func(r *MlGetCalendarsRequest) {
+func (f MLGetCalendars) WithContext(v context.Context) func(*MLGetCalendarsRequest) {
+	return func(r *MLGetCalendarsRequest) {
 		r.ctx = v
-	}
-}
-
-// WithCalendarID - the ID of the calendar to fetch.
-//
-func (f MlGetCalendars) WithCalendarID(v string) func(*MlGetCalendarsRequest) {
-	return func(r *MlGetCalendarsRequest) {
-		r.CalendarID = v
 	}
 }
 
 // WithBody - The from and size parameters optionally sent in the body.
 //
-func (f MlGetCalendars) WithBody(v io.Reader) func(*MlGetCalendarsRequest) {
-	return func(r *MlGetCalendarsRequest) {
+func (f MLGetCalendars) WithBody(v io.Reader) func(*MLGetCalendarsRequest) {
+	return func(r *MLGetCalendarsRequest) {
 		r.Body = v
+	}
+}
+
+// WithCalendarID - the ID of the calendar to fetch.
+//
+func (f MLGetCalendars) WithCalendarID(v string) func(*MLGetCalendarsRequest) {
+	return func(r *MLGetCalendarsRequest) {
+		r.CalendarID = v
 	}
 }
 
 // WithFrom - skips a number of calendars.
 //
-func (f MlGetCalendars) WithFrom(v interface{}) func(*MlGetCalendarsRequest) {
-	return func(r *MlGetCalendarsRequest) {
-		r.From = v
+func (f MLGetCalendars) WithFrom(v int) func(*MLGetCalendarsRequest) {
+	return func(r *MLGetCalendarsRequest) {
+		r.From = &v
 	}
 }
 
 // WithSize - specifies a max number of calendars to get.
 //
-func (f MlGetCalendars) WithSize(v interface{}) func(*MlGetCalendarsRequest) {
-	return func(r *MlGetCalendarsRequest) {
-		r.Size = v
+func (f MLGetCalendars) WithSize(v int) func(*MLGetCalendarsRequest) {
+	return func(r *MLGetCalendarsRequest) {
+		r.Size = &v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f MlGetCalendars) WithPretty() func(*MlGetCalendarsRequest) {
-	return func(r *MlGetCalendarsRequest) {
+func (f MLGetCalendars) WithPretty() func(*MLGetCalendarsRequest) {
+	return func(r *MLGetCalendarsRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f MlGetCalendars) WithHuman() func(*MlGetCalendarsRequest) {
-	return func(r *MlGetCalendarsRequest) {
+func (f MLGetCalendars) WithHuman() func(*MLGetCalendarsRequest) {
+	return func(r *MLGetCalendarsRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f MlGetCalendars) WithErrorTrace() func(*MlGetCalendarsRequest) {
-	return func(r *MlGetCalendarsRequest) {
+func (f MLGetCalendars) WithErrorTrace() func(*MLGetCalendarsRequest) {
+	return func(r *MLGetCalendarsRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f MlGetCalendars) WithFilterPath(v ...string) func(*MlGetCalendarsRequest) {
-	return func(r *MlGetCalendarsRequest) {
+func (f MLGetCalendars) WithFilterPath(v ...string) func(*MLGetCalendarsRequest) {
+	return func(r *MLGetCalendarsRequest) {
 		r.FilterPath = v
 	}
 }

@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -9,9 +9,9 @@ import (
 	"time"
 )
 
-func newMlStartDatafeedFunc(t Transport) MlStartDatafeed {
-	return func(datafeed_id string, o ...func(*MlStartDatafeedRequest)) (*Response, error) {
-		var r = MlStartDatafeedRequest{DatafeedID: datafeed_id}
+func newMLStartDatafeedFunc(t Transport) MLStartDatafeed {
+	return func(datafeed_id string, o ...func(*MLStartDatafeedRequest)) (*Response, error) {
+		var r = MLStartDatafeedRequest{DatafeedID: datafeed_id}
 		for _, f := range o {
 			f(&r)
 		}
@@ -24,17 +24,18 @@ func newMlStartDatafeedFunc(t Transport) MlStartDatafeed {
 //
 // See full documentation at http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html.
 //
-type MlStartDatafeed func(datafeed_id string, o ...func(*MlStartDatafeedRequest)) (*Response, error)
+type MLStartDatafeed func(datafeed_id string, o ...func(*MLStartDatafeedRequest)) (*Response, error)
 
-// MlStartDatafeedRequest configures the Ml  Start Datafeed API request.
+// MLStartDatafeedRequest configures the Ml  Start Datafeed API request.
 //
-type MlStartDatafeedRequest struct {
+type MLStartDatafeedRequest struct {
 	Body io.Reader
 
 	DatafeedID string
-	End        string
-	Start      string
-	Timeout    time.Duration
+
+	End     string
+	Start   string
+	Timeout time.Duration
 
 	Pretty     bool
 	Human      bool
@@ -46,7 +47,7 @@ type MlStartDatafeedRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r MlStartDatafeedRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r MLStartDatafeedRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -129,72 +130,72 @@ func (r MlStartDatafeedRequest) Do(ctx context.Context, transport Transport) (*R
 
 // WithContext sets the request context.
 //
-func (f MlStartDatafeed) WithContext(v context.Context) func(*MlStartDatafeedRequest) {
-	return func(r *MlStartDatafeedRequest) {
+func (f MLStartDatafeed) WithContext(v context.Context) func(*MLStartDatafeedRequest) {
+	return func(r *MLStartDatafeedRequest) {
 		r.ctx = v
 	}
 }
 
 // WithBody - The start datafeed parameters.
 //
-func (f MlStartDatafeed) WithBody(v io.Reader) func(*MlStartDatafeedRequest) {
-	return func(r *MlStartDatafeedRequest) {
+func (f MLStartDatafeed) WithBody(v io.Reader) func(*MLStartDatafeedRequest) {
+	return func(r *MLStartDatafeedRequest) {
 		r.Body = v
 	}
 }
 
 // WithEnd - the end time when the datafeed should stop. when not set, the datafeed continues in real time.
 //
-func (f MlStartDatafeed) WithEnd(v string) func(*MlStartDatafeedRequest) {
-	return func(r *MlStartDatafeedRequest) {
+func (f MLStartDatafeed) WithEnd(v string) func(*MLStartDatafeedRequest) {
+	return func(r *MLStartDatafeedRequest) {
 		r.End = v
 	}
 }
 
 // WithStart - the start time from where the datafeed should begin.
 //
-func (f MlStartDatafeed) WithStart(v string) func(*MlStartDatafeedRequest) {
-	return func(r *MlStartDatafeedRequest) {
+func (f MLStartDatafeed) WithStart(v string) func(*MLStartDatafeedRequest) {
+	return func(r *MLStartDatafeedRequest) {
 		r.Start = v
 	}
 }
 
 // WithTimeout - controls the time to wait until a datafeed has started. default to 20 seconds.
 //
-func (f MlStartDatafeed) WithTimeout(v time.Duration) func(*MlStartDatafeedRequest) {
-	return func(r *MlStartDatafeedRequest) {
+func (f MLStartDatafeed) WithTimeout(v time.Duration) func(*MLStartDatafeedRequest) {
+	return func(r *MLStartDatafeedRequest) {
 		r.Timeout = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f MlStartDatafeed) WithPretty() func(*MlStartDatafeedRequest) {
-	return func(r *MlStartDatafeedRequest) {
+func (f MLStartDatafeed) WithPretty() func(*MLStartDatafeedRequest) {
+	return func(r *MLStartDatafeedRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f MlStartDatafeed) WithHuman() func(*MlStartDatafeedRequest) {
-	return func(r *MlStartDatafeedRequest) {
+func (f MLStartDatafeed) WithHuman() func(*MLStartDatafeedRequest) {
+	return func(r *MLStartDatafeedRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f MlStartDatafeed) WithErrorTrace() func(*MlStartDatafeedRequest) {
-	return func(r *MlStartDatafeedRequest) {
+func (f MLStartDatafeed) WithErrorTrace() func(*MLStartDatafeedRequest) {
+	return func(r *MLStartDatafeedRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f MlStartDatafeed) WithFilterPath(v ...string) func(*MlStartDatafeedRequest) {
-	return func(r *MlStartDatafeedRequest) {
+func (f MLStartDatafeed) WithFilterPath(v ...string) func(*MLStartDatafeedRequest) {
+	return func(r *MLStartDatafeedRequest) {
 		r.FilterPath = v
 	}
 }

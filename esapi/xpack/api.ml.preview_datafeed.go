@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -7,9 +7,9 @@ import (
 	"strings"
 )
 
-func newMlPreviewDatafeedFunc(t Transport) MlPreviewDatafeed {
-	return func(datafeed_id string, o ...func(*MlPreviewDatafeedRequest)) (*Response, error) {
-		var r = MlPreviewDatafeedRequest{DatafeedID: datafeed_id}
+func newMLPreviewDatafeedFunc(t Transport) MLPreviewDatafeed {
+	return func(datafeed_id string, o ...func(*MLPreviewDatafeedRequest)) (*Response, error) {
+		var r = MLPreviewDatafeedRequest{DatafeedID: datafeed_id}
 		for _, f := range o {
 			f(&r)
 		}
@@ -22,11 +22,11 @@ func newMlPreviewDatafeedFunc(t Transport) MlPreviewDatafeed {
 //
 // See full documentation at http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html.
 //
-type MlPreviewDatafeed func(datafeed_id string, o ...func(*MlPreviewDatafeedRequest)) (*Response, error)
+type MLPreviewDatafeed func(datafeed_id string, o ...func(*MLPreviewDatafeedRequest)) (*Response, error)
 
-// MlPreviewDatafeedRequest configures the Ml  Preview Datafeed API request.
+// MLPreviewDatafeedRequest configures the Ml  Preview Datafeed API request.
 //
-type MlPreviewDatafeedRequest struct {
+type MLPreviewDatafeedRequest struct {
 	DatafeedID string
 
 	Pretty     bool
@@ -39,7 +39,7 @@ type MlPreviewDatafeedRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r MlPreviewDatafeedRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r MLPreviewDatafeedRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -106,40 +106,40 @@ func (r MlPreviewDatafeedRequest) Do(ctx context.Context, transport Transport) (
 
 // WithContext sets the request context.
 //
-func (f MlPreviewDatafeed) WithContext(v context.Context) func(*MlPreviewDatafeedRequest) {
-	return func(r *MlPreviewDatafeedRequest) {
+func (f MLPreviewDatafeed) WithContext(v context.Context) func(*MLPreviewDatafeedRequest) {
+	return func(r *MLPreviewDatafeedRequest) {
 		r.ctx = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f MlPreviewDatafeed) WithPretty() func(*MlPreviewDatafeedRequest) {
-	return func(r *MlPreviewDatafeedRequest) {
+func (f MLPreviewDatafeed) WithPretty() func(*MLPreviewDatafeedRequest) {
+	return func(r *MLPreviewDatafeedRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f MlPreviewDatafeed) WithHuman() func(*MlPreviewDatafeedRequest) {
-	return func(r *MlPreviewDatafeedRequest) {
+func (f MLPreviewDatafeed) WithHuman() func(*MLPreviewDatafeedRequest) {
+	return func(r *MLPreviewDatafeedRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f MlPreviewDatafeed) WithErrorTrace() func(*MlPreviewDatafeedRequest) {
-	return func(r *MlPreviewDatafeedRequest) {
+func (f MLPreviewDatafeed) WithErrorTrace() func(*MLPreviewDatafeedRequest) {
+	return func(r *MLPreviewDatafeedRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f MlPreviewDatafeed) WithFilterPath(v ...string) func(*MlPreviewDatafeedRequest) {
-	return func(r *MlPreviewDatafeedRequest) {
+func (f MLPreviewDatafeed) WithFilterPath(v ...string) func(*MLPreviewDatafeedRequest) {
+	return func(r *MLPreviewDatafeedRequest) {
 		r.FilterPath = v
 	}
 }

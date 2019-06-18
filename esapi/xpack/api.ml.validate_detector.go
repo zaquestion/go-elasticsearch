@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -8,9 +8,9 @@ import (
 	"strings"
 )
 
-func newMlValidateDetectorFunc(t Transport) MlValidateDetector {
-	return func(body io.Reader, o ...func(*MlValidateDetectorRequest)) (*Response, error) {
-		var r = MlValidateDetectorRequest{Body: body}
+func newMLValidateDetectorFunc(t Transport) MLValidateDetector {
+	return func(body io.Reader, o ...func(*MLValidateDetectorRequest)) (*Response, error) {
+		var r = MLValidateDetectorRequest{Body: body}
 		for _, f := range o {
 			f(&r)
 		}
@@ -21,11 +21,11 @@ func newMlValidateDetectorFunc(t Transport) MlValidateDetector {
 // ----- API Definition -------------------------------------------------------
 
 //
-type MlValidateDetector func(body io.Reader, o ...func(*MlValidateDetectorRequest)) (*Response, error)
+type MLValidateDetector func(body io.Reader, o ...func(*MLValidateDetectorRequest)) (*Response, error)
 
-// MlValidateDetectorRequest configures the Ml  Validate Detector API request.
+// MLValidateDetectorRequest configures the Ml  Validate Detector API request.
 //
-type MlValidateDetectorRequest struct {
+type MLValidateDetectorRequest struct {
 	Body io.Reader
 
 	Pretty     bool
@@ -38,7 +38,7 @@ type MlValidateDetectorRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r MlValidateDetectorRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r MLValidateDetectorRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -102,40 +102,40 @@ func (r MlValidateDetectorRequest) Do(ctx context.Context, transport Transport) 
 
 // WithContext sets the request context.
 //
-func (f MlValidateDetector) WithContext(v context.Context) func(*MlValidateDetectorRequest) {
-	return func(r *MlValidateDetectorRequest) {
+func (f MLValidateDetector) WithContext(v context.Context) func(*MLValidateDetectorRequest) {
+	return func(r *MLValidateDetectorRequest) {
 		r.ctx = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f MlValidateDetector) WithPretty() func(*MlValidateDetectorRequest) {
-	return func(r *MlValidateDetectorRequest) {
+func (f MLValidateDetector) WithPretty() func(*MLValidateDetectorRequest) {
+	return func(r *MLValidateDetectorRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f MlValidateDetector) WithHuman() func(*MlValidateDetectorRequest) {
-	return func(r *MlValidateDetectorRequest) {
+func (f MLValidateDetector) WithHuman() func(*MLValidateDetectorRequest) {
+	return func(r *MLValidateDetectorRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f MlValidateDetector) WithErrorTrace() func(*MlValidateDetectorRequest) {
-	return func(r *MlValidateDetectorRequest) {
+func (f MLValidateDetector) WithErrorTrace() func(*MLValidateDetectorRequest) {
+	return func(r *MLValidateDetectorRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f MlValidateDetector) WithFilterPath(v ...string) func(*MlValidateDetectorRequest) {
-	return func(r *MlValidateDetectorRequest) {
+func (f MLValidateDetector) WithFilterPath(v ...string) func(*MLValidateDetectorRequest) {
+	return func(r *MLValidateDetectorRequest) {
 		r.FilterPath = v
 	}
 }

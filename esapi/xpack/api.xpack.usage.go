@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -8,9 +8,9 @@ import (
 	"time"
 )
 
-func newXpackUsageFunc(t Transport) XpackUsage {
-	return func(o ...func(*XpackUsageRequest)) (*Response, error) {
-		var r = XpackUsageRequest{}
+func newXPackUsageFunc(t Transport) XPackUsage {
+	return func(o ...func(*XPackUsageRequest)) (*Response, error) {
+		var r = XPackUsageRequest{}
 		for _, f := range o {
 			f(&r)
 		}
@@ -23,11 +23,11 @@ func newXpackUsageFunc(t Transport) XpackUsage {
 //
 // See full documentation at Retrieve information about xpack features usage.
 //
-type XpackUsage func(o ...func(*XpackUsageRequest)) (*Response, error)
+type XPackUsage func(o ...func(*XPackUsageRequest)) (*Response, error)
 
-// XpackUsageRequest configures the Xpack Usage API request.
+// XPackUsageRequest configures the Xpack Usage API request.
 //
-type XpackUsageRequest struct {
+type XPackUsageRequest struct {
 	MasterTimeout time.Duration
 
 	Pretty     bool
@@ -40,7 +40,7 @@ type XpackUsageRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r XpackUsageRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r XPackUsageRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -104,48 +104,48 @@ func (r XpackUsageRequest) Do(ctx context.Context, transport Transport) (*Respon
 
 // WithContext sets the request context.
 //
-func (f XpackUsage) WithContext(v context.Context) func(*XpackUsageRequest) {
-	return func(r *XpackUsageRequest) {
+func (f XPackUsage) WithContext(v context.Context) func(*XPackUsageRequest) {
+	return func(r *XPackUsageRequest) {
 		r.ctx = v
 	}
 }
 
 // WithMasterTimeout - specify timeout for watch write operation.
 //
-func (f XpackUsage) WithMasterTimeout(v time.Duration) func(*XpackUsageRequest) {
-	return func(r *XpackUsageRequest) {
+func (f XPackUsage) WithMasterTimeout(v time.Duration) func(*XPackUsageRequest) {
+	return func(r *XPackUsageRequest) {
 		r.MasterTimeout = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f XpackUsage) WithPretty() func(*XpackUsageRequest) {
-	return func(r *XpackUsageRequest) {
+func (f XPackUsage) WithPretty() func(*XPackUsageRequest) {
+	return func(r *XPackUsageRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f XpackUsage) WithHuman() func(*XpackUsageRequest) {
-	return func(r *XpackUsageRequest) {
+func (f XPackUsage) WithHuman() func(*XPackUsageRequest) {
+	return func(r *XPackUsageRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f XpackUsage) WithErrorTrace() func(*XpackUsageRequest) {
-	return func(r *XpackUsageRequest) {
+func (f XPackUsage) WithErrorTrace() func(*XPackUsageRequest) {
+	return func(r *XPackUsageRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f XpackUsage) WithFilterPath(v ...string) func(*XpackUsageRequest) {
-	return func(r *XpackUsageRequest) {
+func (f XPackUsage) WithFilterPath(v ...string) func(*XPackUsageRequest) {
+	return func(r *XPackUsageRequest) {
 		r.FilterPath = v
 	}
 }

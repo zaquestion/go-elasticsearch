@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -7,9 +7,9 @@ import (
 	"strings"
 )
 
-func newIlmStopFunc(t Transport) IlmStop {
-	return func(o ...func(*IlmStopRequest)) (*Response, error) {
-		var r = IlmStopRequest{}
+func newILMStopFunc(t Transport) ILMStop {
+	return func(o ...func(*ILMStopRequest)) (*Response, error) {
+		var r = ILMStopRequest{}
 		for _, f := range o {
 			f(&r)
 		}
@@ -22,11 +22,11 @@ func newIlmStopFunc(t Transport) IlmStop {
 //
 // See full documentation at https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-stop.html.
 //
-type IlmStop func(o ...func(*IlmStopRequest)) (*Response, error)
+type ILMStop func(o ...func(*ILMStopRequest)) (*Response, error)
 
-// IlmStopRequest configures the Ilm Stop API request.
+// ILMStopRequest configures the Ilm Stop API request.
 //
-type IlmStopRequest struct {
+type ILMStopRequest struct {
 	Pretty     bool
 	Human      bool
 	ErrorTrace bool
@@ -37,7 +37,7 @@ type IlmStopRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r IlmStopRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r ILMStopRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -97,40 +97,40 @@ func (r IlmStopRequest) Do(ctx context.Context, transport Transport) (*Response,
 
 // WithContext sets the request context.
 //
-func (f IlmStop) WithContext(v context.Context) func(*IlmStopRequest) {
-	return func(r *IlmStopRequest) {
+func (f ILMStop) WithContext(v context.Context) func(*ILMStopRequest) {
+	return func(r *ILMStopRequest) {
 		r.ctx = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f IlmStop) WithPretty() func(*IlmStopRequest) {
-	return func(r *IlmStopRequest) {
+func (f ILMStop) WithPretty() func(*ILMStopRequest) {
+	return func(r *ILMStopRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f IlmStop) WithHuman() func(*IlmStopRequest) {
-	return func(r *IlmStopRequest) {
+func (f ILMStop) WithHuman() func(*ILMStopRequest) {
+	return func(r *ILMStopRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f IlmStop) WithErrorTrace() func(*IlmStopRequest) {
-	return func(r *IlmStopRequest) {
+func (f ILMStop) WithErrorTrace() func(*ILMStopRequest) {
+	return func(r *ILMStopRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f IlmStop) WithFilterPath(v ...string) func(*IlmStopRequest) {
-	return func(r *IlmStopRequest) {
+func (f ILMStop) WithFilterPath(v ...string) func(*ILMStopRequest) {
+	return func(r *ILMStopRequest) {
 		r.FilterPath = v
 	}
 }

@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -20,7 +20,7 @@ func newLicenseGetBasicStatusFunc(t Transport) LicenseGetBasicStatus {
 // ----- API Definition -------------------------------------------------------
 
 //
-// See full documentation at https://www.elastic.co/guide/en/x-pack/current/license-management.html.
+// See full documentation at https://www.elastic.co/guide/en/elasticsearch/reference/master/get-basic-status.html.
 //
 type LicenseGetBasicStatus func(o ...func(*LicenseGetBasicStatusRequest)) (*Response, error)
 

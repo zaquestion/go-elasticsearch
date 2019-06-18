@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -8,9 +8,9 @@ import (
 	"strings"
 )
 
-func newMlPutJobFunc(t Transport) MlPutJob {
-	return func(body io.Reader, job_id string, o ...func(*MlPutJobRequest)) (*Response, error) {
-		var r = MlPutJobRequest{Body: body, JobID: job_id}
+func newMLPutJobFunc(t Transport) MLPutJob {
+	return func(body io.Reader, job_id string, o ...func(*MLPutJobRequest)) (*Response, error) {
+		var r = MLPutJobRequest{Body: body, JobID: job_id}
 		for _, f := range o {
 			f(&r)
 		}
@@ -23,11 +23,11 @@ func newMlPutJobFunc(t Transport) MlPutJob {
 //
 // See full documentation at http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html.
 //
-type MlPutJob func(body io.Reader, job_id string, o ...func(*MlPutJobRequest)) (*Response, error)
+type MLPutJob func(body io.Reader, job_id string, o ...func(*MLPutJobRequest)) (*Response, error)
 
-// MlPutJobRequest configures the Ml  Put Job API request.
+// MLPutJobRequest configures the Ml  Put Job API request.
 //
-type MlPutJobRequest struct {
+type MLPutJobRequest struct {
 	Body io.Reader
 
 	JobID string
@@ -42,7 +42,7 @@ type MlPutJobRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r MlPutJobRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r MLPutJobRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -111,40 +111,40 @@ func (r MlPutJobRequest) Do(ctx context.Context, transport Transport) (*Response
 
 // WithContext sets the request context.
 //
-func (f MlPutJob) WithContext(v context.Context) func(*MlPutJobRequest) {
-	return func(r *MlPutJobRequest) {
+func (f MLPutJob) WithContext(v context.Context) func(*MLPutJobRequest) {
+	return func(r *MLPutJobRequest) {
 		r.ctx = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f MlPutJob) WithPretty() func(*MlPutJobRequest) {
-	return func(r *MlPutJobRequest) {
+func (f MLPutJob) WithPretty() func(*MLPutJobRequest) {
+	return func(r *MLPutJobRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f MlPutJob) WithHuman() func(*MlPutJobRequest) {
-	return func(r *MlPutJobRequest) {
+func (f MLPutJob) WithHuman() func(*MLPutJobRequest) {
+	return func(r *MLPutJobRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f MlPutJob) WithErrorTrace() func(*MlPutJobRequest) {
-	return func(r *MlPutJobRequest) {
+func (f MLPutJob) WithErrorTrace() func(*MLPutJobRequest) {
+	return func(r *MLPutJobRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f MlPutJob) WithFilterPath(v ...string) func(*MlPutJobRequest) {
-	return func(r *MlPutJobRequest) {
+func (f MLPutJob) WithFilterPath(v ...string) func(*MLPutJobRequest) {
+	return func(r *MLPutJobRequest) {
 		r.FilterPath = v
 	}
 }

@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -8,9 +8,9 @@ import (
 	"strings"
 )
 
-func newMlValidateFunc(t Transport) MlValidate {
-	return func(body io.Reader, o ...func(*MlValidateRequest)) (*Response, error) {
-		var r = MlValidateRequest{Body: body}
+func newMLValidateFunc(t Transport) MLValidate {
+	return func(body io.Reader, o ...func(*MLValidateRequest)) (*Response, error) {
+		var r = MLValidateRequest{Body: body}
 		for _, f := range o {
 			f(&r)
 		}
@@ -21,11 +21,11 @@ func newMlValidateFunc(t Transport) MlValidate {
 // ----- API Definition -------------------------------------------------------
 
 //
-type MlValidate func(body io.Reader, o ...func(*MlValidateRequest)) (*Response, error)
+type MLValidate func(body io.Reader, o ...func(*MLValidateRequest)) (*Response, error)
 
-// MlValidateRequest configures the Ml Validate API request.
+// MLValidateRequest configures the Ml Validate API request.
 //
-type MlValidateRequest struct {
+type MLValidateRequest struct {
 	Body io.Reader
 
 	Pretty     bool
@@ -38,7 +38,7 @@ type MlValidateRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r MlValidateRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r MLValidateRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -102,40 +102,40 @@ func (r MlValidateRequest) Do(ctx context.Context, transport Transport) (*Respon
 
 // WithContext sets the request context.
 //
-func (f MlValidate) WithContext(v context.Context) func(*MlValidateRequest) {
-	return func(r *MlValidateRequest) {
+func (f MLValidate) WithContext(v context.Context) func(*MLValidateRequest) {
+	return func(r *MLValidateRequest) {
 		r.ctx = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f MlValidate) WithPretty() func(*MlValidateRequest) {
-	return func(r *MlValidateRequest) {
+func (f MLValidate) WithPretty() func(*MLValidateRequest) {
+	return func(r *MLValidateRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f MlValidate) WithHuman() func(*MlValidateRequest) {
-	return func(r *MlValidateRequest) {
+func (f MLValidate) WithHuman() func(*MLValidateRequest) {
+	return func(r *MLValidateRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f MlValidate) WithErrorTrace() func(*MlValidateRequest) {
-	return func(r *MlValidateRequest) {
+func (f MLValidate) WithErrorTrace() func(*MLValidateRequest) {
+	return func(r *MLValidateRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f MlValidate) WithFilterPath(v ...string) func(*MlValidateRequest) {
-	return func(r *MlValidateRequest) {
+func (f MLValidate) WithFilterPath(v ...string) func(*MLValidateRequest) {
+	return func(r *MLValidateRequest) {
 		r.FilterPath = v
 	}
 }

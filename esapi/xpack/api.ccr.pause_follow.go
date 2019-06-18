@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -7,9 +7,9 @@ import (
 	"strings"
 )
 
-func newCcrPauseFollowFunc(t Transport) CcrPauseFollow {
-	return func(index string, o ...func(*CcrPauseFollowRequest)) (*Response, error) {
-		var r = CcrPauseFollowRequest{Index: index}
+func newCCRPauseFollowFunc(t Transport) CCRPauseFollow {
+	return func(index string, o ...func(*CCRPauseFollowRequest)) (*Response, error) {
+		var r = CCRPauseFollowRequest{Index: index}
 		for _, f := range o {
 			f(&r)
 		}
@@ -22,11 +22,11 @@ func newCcrPauseFollowFunc(t Transport) CcrPauseFollow {
 //
 // See full documentation at https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-pause-follow.html.
 //
-type CcrPauseFollow func(index string, o ...func(*CcrPauseFollowRequest)) (*Response, error)
+type CCRPauseFollow func(index string, o ...func(*CCRPauseFollowRequest)) (*Response, error)
 
-// CcrPauseFollowRequest configures the Ccr  Pause Follow API request.
+// CCRPauseFollowRequest configures the Ccr  Pause Follow API request.
 //
-type CcrPauseFollowRequest struct {
+type CCRPauseFollowRequest struct {
 	Index string
 
 	Pretty     bool
@@ -39,7 +39,7 @@ type CcrPauseFollowRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r CcrPauseFollowRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r CCRPauseFollowRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -104,40 +104,40 @@ func (r CcrPauseFollowRequest) Do(ctx context.Context, transport Transport) (*Re
 
 // WithContext sets the request context.
 //
-func (f CcrPauseFollow) WithContext(v context.Context) func(*CcrPauseFollowRequest) {
-	return func(r *CcrPauseFollowRequest) {
+func (f CCRPauseFollow) WithContext(v context.Context) func(*CCRPauseFollowRequest) {
+	return func(r *CCRPauseFollowRequest) {
 		r.ctx = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f CcrPauseFollow) WithPretty() func(*CcrPauseFollowRequest) {
-	return func(r *CcrPauseFollowRequest) {
+func (f CCRPauseFollow) WithPretty() func(*CCRPauseFollowRequest) {
+	return func(r *CCRPauseFollowRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f CcrPauseFollow) WithHuman() func(*CcrPauseFollowRequest) {
-	return func(r *CcrPauseFollowRequest) {
+func (f CCRPauseFollow) WithHuman() func(*CCRPauseFollowRequest) {
+	return func(r *CCRPauseFollowRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f CcrPauseFollow) WithErrorTrace() func(*CcrPauseFollowRequest) {
-	return func(r *CcrPauseFollowRequest) {
+func (f CCRPauseFollow) WithErrorTrace() func(*CCRPauseFollowRequest) {
+	return func(r *CCRPauseFollowRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f CcrPauseFollow) WithFilterPath(v ...string) func(*CcrPauseFollowRequest) {
-	return func(r *CcrPauseFollowRequest) {
+func (f CCRPauseFollow) WithFilterPath(v ...string) func(*CCRPauseFollowRequest) {
+	return func(r *CCRPauseFollowRequest) {
 		r.FilterPath = v
 	}
 }

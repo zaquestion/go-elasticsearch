@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -8,9 +8,9 @@ import (
 	"strings"
 )
 
-func newCcrForgetFollowerFunc(t Transport) CcrForgetFollower {
-	return func(index string, body io.Reader, o ...func(*CcrForgetFollowerRequest)) (*Response, error) {
-		var r = CcrForgetFollowerRequest{Index: index, Body: body}
+func newCCRForgetFollowerFunc(t Transport) CCRForgetFollower {
+	return func(index string, body io.Reader, o ...func(*CCRForgetFollowerRequest)) (*Response, error) {
+		var r = CCRForgetFollowerRequest{Index: index, Body: body}
 		for _, f := range o {
 			f(&r)
 		}
@@ -23,13 +23,14 @@ func newCcrForgetFollowerFunc(t Transport) CcrForgetFollower {
 //
 // See full documentation at http://www.elastic.co/guide/en/elasticsearch/reference/current.
 //
-type CcrForgetFollower func(index string, body io.Reader, o ...func(*CcrForgetFollowerRequest)) (*Response, error)
+type CCRForgetFollower func(index string, body io.Reader, o ...func(*CCRForgetFollowerRequest)) (*Response, error)
 
-// CcrForgetFollowerRequest configures the Ccr  Forget Follower API request.
+// CCRForgetFollowerRequest configures the Ccr  Forget Follower API request.
 //
-type CcrForgetFollowerRequest struct {
+type CCRForgetFollowerRequest struct {
 	Index string
-	Body  io.Reader
+
+	Body io.Reader
 
 	Pretty     bool
 	Human      bool
@@ -41,7 +42,7 @@ type CcrForgetFollowerRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r CcrForgetFollowerRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r CCRForgetFollowerRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -110,40 +111,40 @@ func (r CcrForgetFollowerRequest) Do(ctx context.Context, transport Transport) (
 
 // WithContext sets the request context.
 //
-func (f CcrForgetFollower) WithContext(v context.Context) func(*CcrForgetFollowerRequest) {
-	return func(r *CcrForgetFollowerRequest) {
+func (f CCRForgetFollower) WithContext(v context.Context) func(*CCRForgetFollowerRequest) {
+	return func(r *CCRForgetFollowerRequest) {
 		r.ctx = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f CcrForgetFollower) WithPretty() func(*CcrForgetFollowerRequest) {
-	return func(r *CcrForgetFollowerRequest) {
+func (f CCRForgetFollower) WithPretty() func(*CCRForgetFollowerRequest) {
+	return func(r *CCRForgetFollowerRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f CcrForgetFollower) WithHuman() func(*CcrForgetFollowerRequest) {
-	return func(r *CcrForgetFollowerRequest) {
+func (f CCRForgetFollower) WithHuman() func(*CCRForgetFollowerRequest) {
+	return func(r *CCRForgetFollowerRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f CcrForgetFollower) WithErrorTrace() func(*CcrForgetFollowerRequest) {
-	return func(r *CcrForgetFollowerRequest) {
+func (f CCRForgetFollower) WithErrorTrace() func(*CCRForgetFollowerRequest) {
+	return func(r *CCRForgetFollowerRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f CcrForgetFollower) WithFilterPath(v ...string) func(*CcrForgetFollowerRequest) {
-	return func(r *CcrForgetFollowerRequest) {
+func (f CCRForgetFollower) WithFilterPath(v ...string) func(*CCRForgetFollowerRequest) {
+	return func(r *CCRForgetFollowerRequest) {
 		r.FilterPath = v
 	}
 }

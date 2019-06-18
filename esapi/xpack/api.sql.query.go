@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -8,9 +8,9 @@ import (
 	"strings"
 )
 
-func newSqlQueryFunc(t Transport) SqlQuery {
-	return func(body io.Reader, o ...func(*SqlQueryRequest)) (*Response, error) {
-		var r = SqlQueryRequest{Body: body}
+func newSQLQueryFunc(t Transport) SQLQuery {
+	return func(body io.Reader, o ...func(*SQLQueryRequest)) (*Response, error) {
+		var r = SQLQueryRequest{Body: body}
 		for _, f := range o {
 			f(&r)
 		}
@@ -23,11 +23,11 @@ func newSqlQueryFunc(t Transport) SqlQuery {
 //
 // See full documentation at Execute SQL.
 //
-type SqlQuery func(body io.Reader, o ...func(*SqlQueryRequest)) (*Response, error)
+type SQLQuery func(body io.Reader, o ...func(*SQLQueryRequest)) (*Response, error)
 
-// SqlQueryRequest configures the Sql Query API request.
+// SQLQueryRequest configures the Sql Query API request.
 //
-type SqlQueryRequest struct {
+type SQLQueryRequest struct {
 	Body io.Reader
 
 	Format string
@@ -42,7 +42,7 @@ type SqlQueryRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r SqlQueryRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r SQLQueryRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -110,48 +110,48 @@ func (r SqlQueryRequest) Do(ctx context.Context, transport Transport) (*Response
 
 // WithContext sets the request context.
 //
-func (f SqlQuery) WithContext(v context.Context) func(*SqlQueryRequest) {
-	return func(r *SqlQueryRequest) {
+func (f SQLQuery) WithContext(v context.Context) func(*SQLQueryRequest) {
+	return func(r *SQLQueryRequest) {
 		r.ctx = v
 	}
 }
 
 // WithFormat - a short version of the accept header, e.g. json, yaml.
 //
-func (f SqlQuery) WithFormat(v string) func(*SqlQueryRequest) {
-	return func(r *SqlQueryRequest) {
+func (f SQLQuery) WithFormat(v string) func(*SQLQueryRequest) {
+	return func(r *SQLQueryRequest) {
 		r.Format = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f SqlQuery) WithPretty() func(*SqlQueryRequest) {
-	return func(r *SqlQueryRequest) {
+func (f SQLQuery) WithPretty() func(*SQLQueryRequest) {
+	return func(r *SQLQueryRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f SqlQuery) WithHuman() func(*SqlQueryRequest) {
-	return func(r *SqlQueryRequest) {
+func (f SQLQuery) WithHuman() func(*SQLQueryRequest) {
+	return func(r *SQLQueryRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f SqlQuery) WithErrorTrace() func(*SqlQueryRequest) {
-	return func(r *SqlQueryRequest) {
+func (f SQLQuery) WithErrorTrace() func(*SQLQueryRequest) {
+	return func(r *SQLQueryRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f SqlQuery) WithFilterPath(v ...string) func(*SqlQueryRequest) {
-	return func(r *SqlQueryRequest) {
+func (f SQLQuery) WithFilterPath(v ...string) func(*SQLQueryRequest) {
+	return func(r *SQLQueryRequest) {
 		r.FilterPath = v
 	}
 }

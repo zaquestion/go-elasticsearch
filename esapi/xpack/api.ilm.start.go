@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -7,9 +7,9 @@ import (
 	"strings"
 )
 
-func newIlmStartFunc(t Transport) IlmStart {
-	return func(o ...func(*IlmStartRequest)) (*Response, error) {
-		var r = IlmStartRequest{}
+func newILMStartFunc(t Transport) ILMStart {
+	return func(o ...func(*ILMStartRequest)) (*Response, error) {
+		var r = ILMStartRequest{}
 		for _, f := range o {
 			f(&r)
 		}
@@ -22,11 +22,11 @@ func newIlmStartFunc(t Transport) IlmStart {
 //
 // See full documentation at https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-start.html.
 //
-type IlmStart func(o ...func(*IlmStartRequest)) (*Response, error)
+type ILMStart func(o ...func(*ILMStartRequest)) (*Response, error)
 
-// IlmStartRequest configures the Ilm Start API request.
+// ILMStartRequest configures the Ilm Start API request.
 //
-type IlmStartRequest struct {
+type ILMStartRequest struct {
 	Pretty     bool
 	Human      bool
 	ErrorTrace bool
@@ -37,7 +37,7 @@ type IlmStartRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r IlmStartRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r ILMStartRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -97,40 +97,40 @@ func (r IlmStartRequest) Do(ctx context.Context, transport Transport) (*Response
 
 // WithContext sets the request context.
 //
-func (f IlmStart) WithContext(v context.Context) func(*IlmStartRequest) {
-	return func(r *IlmStartRequest) {
+func (f ILMStart) WithContext(v context.Context) func(*ILMStartRequest) {
+	return func(r *ILMStartRequest) {
 		r.ctx = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f IlmStart) WithPretty() func(*IlmStartRequest) {
-	return func(r *IlmStartRequest) {
+func (f ILMStart) WithPretty() func(*ILMStartRequest) {
+	return func(r *ILMStartRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f IlmStart) WithHuman() func(*IlmStartRequest) {
-	return func(r *IlmStartRequest) {
+func (f ILMStart) WithHuman() func(*ILMStartRequest) {
+	return func(r *ILMStartRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f IlmStart) WithErrorTrace() func(*IlmStartRequest) {
-	return func(r *IlmStartRequest) {
+func (f ILMStart) WithErrorTrace() func(*ILMStartRequest) {
+	return func(r *ILMStartRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f IlmStart) WithFilterPath(v ...string) func(*IlmStartRequest) {
-	return func(r *IlmStartRequest) {
+func (f ILMStart) WithFilterPath(v ...string) func(*ILMStartRequest) {
+	return func(r *ILMStartRequest) {
 		r.FilterPath = v
 	}
 }

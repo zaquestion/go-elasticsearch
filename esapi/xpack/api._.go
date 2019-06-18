@@ -1,54 +1,61 @@
-// Code generated from specification version 7.0.0-SNAPSHOT (3499078): DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT (e343ed1633b): DO NOT EDIT
 
 package xpack
 
-// API contains the Elasticsearch APIs
+// XAPI contains the Elasticsearch APIs
 //
 type XAPI struct {
-	Ccr        *Ccr
-	Ilm        *Ilm
+	CCR        *CCR
+	ILM        *ILM
 	Indices    *Indices
 	License    *License
 	Migration  *Migration
-	Ml         *Ml
+	ML         *ML
 	Monitoring *Monitoring
 	Rollup     *Rollup
 	Security   *Security
-	Sql        *Sql
-	Ssl        *Ssl
+	SQL        *SQL
+	SSL        *SSL
 	Watcher    *Watcher
-	Xpack      *Xpack
+	XPack      *XPack
 
-	GraphExplore GraphExplore
+	DataFrameDeleteDataFrameTransform   DataFrameDeleteDataFrameTransform
+	DataFrameGetDataFrameTransform      DataFrameGetDataFrameTransform
+	DataFrameGetDataFrameTransformStats DataFrameGetDataFrameTransformStats
+	DataFramePreviewDataFrameTransform  DataFramePreviewDataFrameTransform
+	DataFramePutDataFrameTransform      DataFramePutDataFrameTransform
+	DataFrameStartDataFrameTransform    DataFrameStartDataFrameTransform
+	DataFrameStopDataFrameTransform     DataFrameStopDataFrameTransform
+	GraphExplore                        GraphExplore
 }
 
-// Ccr contains the Ccr APIs
-type Ccr struct {
-	DeleteAutoFollowPattern CcrDeleteAutoFollowPattern
-	Follow                  CcrFollow
-	FollowInfo              CcrFollowInfo
-	FollowStats             CcrFollowStats
-	ForgetFollower          CcrForgetFollower
-	GetAutoFollowPattern    CcrGetAutoFollowPattern
-	PauseFollow             CcrPauseFollow
-	PutAutoFollowPattern    CcrPutAutoFollowPattern
-	ResumeFollow            CcrResumeFollow
-	Stats                   CcrStats
-	Unfollow                CcrUnfollow
+// CCR contains the CCR APIs
+type CCR struct {
+	DeleteAutoFollowPattern CCRDeleteAutoFollowPattern
+	Follow                  CCRFollow
+	FollowInfo              CCRFollowInfo
+	FollowStats             CCRFollowStats
+	ForgetFollower          CCRForgetFollower
+	GetAutoFollowPattern    CCRGetAutoFollowPattern
+	PauseFollow             CCRPauseFollow
+	PutAutoFollowPattern    CCRPutAutoFollowPattern
+	ResumeFollow            CCRResumeFollow
+	Stats                   CCRStats
+	Unfollow                CCRUnfollow
 }
 
-// Ilm contains the Ilm APIs
-type Ilm struct {
-	DeleteLifecycle  IlmDeleteLifecycle
-	ExplainLifecycle IlmExplainLifecycle
-	GetLifecycle     IlmGetLifecycle
-	GetStatus        IlmGetStatus
-	MoveToStep       IlmMoveToStep
-	PutLifecycle     IlmPutLifecycle
-	RemovePolicy     IlmRemovePolicy
-	Retry            IlmRetry
-	Start            IlmStart
-	Stop             IlmStop
+// ILM contains the ILM APIs
+type ILM struct {
+	DeleteLifecycle  ILMDeleteLifecycle
+	ExplainLifecycle ILMExplainLifecycle
+	GetLifecycle     ILMGetLifecycle
+	GetStatus        ILMGetStatus
+	MoveToStep       ILMMoveToStep
+	PutLifecycle     ILMPutLifecycle
+	RemovePolicy     ILMRemovePolicy
+	Retry            ILMRetry
+	Start            ILMStart
+	Stop             ILMStop
 }
 
 // Indices contains the Indices APIs
@@ -73,54 +80,54 @@ type Migration struct {
 	Deprecations MigrationDeprecations
 }
 
-// Ml contains the Ml APIs
-type Ml struct {
-	CloseJob            MlCloseJob
-	DeleteCalendar      MlDeleteCalendar
-	DeleteCalendarEvent MlDeleteCalendarEvent
-	DeleteCalendarJob   MlDeleteCalendarJob
-	DeleteDatafeed      MlDeleteDatafeed
-	DeleteExpiredData   MlDeleteExpiredData
-	DeleteFilter        MlDeleteFilter
-	DeleteForecast      MlDeleteForecast
-	DeleteJob           MlDeleteJob
-	DeleteModelSnapshot MlDeleteModelSnapshot
-	FindFileStructure   MlFindFileStructure
-	FlushJob            MlFlushJob
-	Forecast            MlForecast
-	GetBuckets          MlGetBuckets
-	GetCalendarEvents   MlGetCalendarEvents
-	GetCalendars        MlGetCalendars
-	GetCategories       MlGetCategories
-	GetDatafeedStats    MlGetDatafeedStats
-	GetDatafeeds        MlGetDatafeeds
-	GetFilters          MlGetFilters
-	GetInfluencers      MlGetInfluencers
-	GetJobStats         MlGetJobStats
-	GetJobs             MlGetJobs
-	GetModelSnapshots   MlGetModelSnapshots
-	GetOverallBuckets   MlGetOverallBuckets
-	GetRecords          MlGetRecords
-	Info                MlInfo
-	OpenJob             MlOpenJob
-	PostCalendarEvents  MlPostCalendarEvents
-	PostData            MlPostData
-	PreviewDatafeed     MlPreviewDatafeed
-	PutCalendar         MlPutCalendar
-	PutCalendarJob      MlPutCalendarJob
-	PutDatafeed         MlPutDatafeed
-	PutFilter           MlPutFilter
-	PutJob              MlPutJob
-	RevertModelSnapshot MlRevertModelSnapshot
-	SetUpgradeMode      MlSetUpgradeMode
-	StartDatafeed       MlStartDatafeed
-	StopDatafeed        MlStopDatafeed
-	UpdateDatafeed      MlUpdateDatafeed
-	UpdateFilter        MlUpdateFilter
-	UpdateJob           MlUpdateJob
-	UpdateModelSnapshot MlUpdateModelSnapshot
-	Validate            MlValidate
-	ValidateDetector    MlValidateDetector
+// ML contains the ML APIs
+type ML struct {
+	CloseJob            MLCloseJob
+	DeleteCalendar      MLDeleteCalendar
+	DeleteCalendarEvent MLDeleteCalendarEvent
+	DeleteCalendarJob   MLDeleteCalendarJob
+	DeleteDatafeed      MLDeleteDatafeed
+	DeleteExpiredData   MLDeleteExpiredData
+	DeleteFilter        MLDeleteFilter
+	DeleteForecast      MLDeleteForecast
+	DeleteJob           MLDeleteJob
+	DeleteModelSnapshot MLDeleteModelSnapshot
+	FindFileStructure   MLFindFileStructure
+	FlushJob            MLFlushJob
+	Forecast            MLForecast
+	GetBuckets          MLGetBuckets
+	GetCalendarEvents   MLGetCalendarEvents
+	GetCalendars        MLGetCalendars
+	GetCategories       MLGetCategories
+	GetDatafeedStats    MLGetDatafeedStats
+	GetDatafeeds        MLGetDatafeeds
+	GetFilters          MLGetFilters
+	GetInfluencers      MLGetInfluencers
+	GetJobStats         MLGetJobStats
+	GetJobs             MLGetJobs
+	GetModelSnapshots   MLGetModelSnapshots
+	GetOverallBuckets   MLGetOverallBuckets
+	GetRecords          MLGetRecords
+	Info                MLInfo
+	OpenJob             MLOpenJob
+	PostCalendarEvents  MLPostCalendarEvents
+	PostData            MLPostData
+	PreviewDatafeed     MLPreviewDatafeed
+	PutCalendar         MLPutCalendar
+	PutCalendarJob      MLPutCalendarJob
+	PutDatafeed         MLPutDatafeed
+	PutFilter           MLPutFilter
+	PutJob              MLPutJob
+	RevertModelSnapshot MLRevertModelSnapshot
+	SetUpgradeMode      MLSetUpgradeMode
+	StartDatafeed       MLStartDatafeed
+	StopDatafeed        MLStopDatafeed
+	UpdateDatafeed      MLUpdateDatafeed
+	UpdateFilter        MLUpdateFilter
+	UpdateJob           MLUpdateJob
+	UpdateModelSnapshot MLUpdateModelSnapshot
+	Validate            MLValidate
+	ValidateDetector    MLValidateDetector
 }
 
 // Monitoring contains the Monitoring APIs
@@ -169,16 +176,16 @@ type Security struct {
 	PutUser           SecurityPutUser
 }
 
-// Sql contains the Sql APIs
-type Sql struct {
-	ClearCursor SqlClearCursor
-	Query       SqlQuery
-	Translate   SqlTranslate
+// SQL contains the SQL APIs
+type SQL struct {
+	ClearCursor SQLClearCursor
+	Query       SQLQuery
+	Translate   SQLTranslate
 }
 
-// Ssl contains the Ssl APIs
-type Ssl struct {
-	Certificates SslCertificates
+// SSL contains the SSL APIs
+type SSL struct {
+	Certificates SSLCertificates
 }
 
 // Watcher contains the Watcher APIs
@@ -195,41 +202,48 @@ type Watcher struct {
 	Stop            WatcherStop
 }
 
-// Xpack contains the Xpack APIs
-type Xpack struct {
-	Info  XpackInfo
-	Usage XpackUsage
+// XPack contains the XPack APIs
+type XPack struct {
+	Info  XPackInfo
+	Usage XPackUsage
 }
 
-// New creates new API
+// New creates new XAPI
 //
 func New(t Transport) *XAPI {
 	return &XAPI{
-		GraphExplore: newGraphExploreFunc(t),
-		Ccr: &Ccr{
-			DeleteAutoFollowPattern: newCcrDeleteAutoFollowPatternFunc(t),
-			Follow:                  newCcrFollowFunc(t),
-			FollowInfo:              newCcrFollowInfoFunc(t),
-			FollowStats:             newCcrFollowStatsFunc(t),
-			ForgetFollower:          newCcrForgetFollowerFunc(t),
-			GetAutoFollowPattern:    newCcrGetAutoFollowPatternFunc(t),
-			PauseFollow:             newCcrPauseFollowFunc(t),
-			PutAutoFollowPattern:    newCcrPutAutoFollowPatternFunc(t),
-			ResumeFollow:            newCcrResumeFollowFunc(t),
-			Stats:                   newCcrStatsFunc(t),
-			Unfollow:                newCcrUnfollowFunc(t),
+		DataFrameDeleteDataFrameTransform:   newDataFrameDeleteDataFrameTransformFunc(t),
+		DataFrameGetDataFrameTransform:      newDataFrameGetDataFrameTransformFunc(t),
+		DataFrameGetDataFrameTransformStats: newDataFrameGetDataFrameTransformStatsFunc(t),
+		DataFramePreviewDataFrameTransform:  newDataFramePreviewDataFrameTransformFunc(t),
+		DataFramePutDataFrameTransform:      newDataFramePutDataFrameTransformFunc(t),
+		DataFrameStartDataFrameTransform:    newDataFrameStartDataFrameTransformFunc(t),
+		DataFrameStopDataFrameTransform:     newDataFrameStopDataFrameTransformFunc(t),
+		GraphExplore:                        newGraphExploreFunc(t),
+		CCR: &CCR{
+			DeleteAutoFollowPattern: newCCRDeleteAutoFollowPatternFunc(t),
+			Follow:                  newCCRFollowFunc(t),
+			FollowInfo:              newCCRFollowInfoFunc(t),
+			FollowStats:             newCCRFollowStatsFunc(t),
+			ForgetFollower:          newCCRForgetFollowerFunc(t),
+			GetAutoFollowPattern:    newCCRGetAutoFollowPatternFunc(t),
+			PauseFollow:             newCCRPauseFollowFunc(t),
+			PutAutoFollowPattern:    newCCRPutAutoFollowPatternFunc(t),
+			ResumeFollow:            newCCRResumeFollowFunc(t),
+			Stats:                   newCCRStatsFunc(t),
+			Unfollow:                newCCRUnfollowFunc(t),
 		},
-		Ilm: &Ilm{
-			DeleteLifecycle:  newIlmDeleteLifecycleFunc(t),
-			ExplainLifecycle: newIlmExplainLifecycleFunc(t),
-			GetLifecycle:     newIlmGetLifecycleFunc(t),
-			GetStatus:        newIlmGetStatusFunc(t),
-			MoveToStep:       newIlmMoveToStepFunc(t),
-			PutLifecycle:     newIlmPutLifecycleFunc(t),
-			RemovePolicy:     newIlmRemovePolicyFunc(t),
-			Retry:            newIlmRetryFunc(t),
-			Start:            newIlmStartFunc(t),
-			Stop:             newIlmStopFunc(t),
+		ILM: &ILM{
+			DeleteLifecycle:  newILMDeleteLifecycleFunc(t),
+			ExplainLifecycle: newILMExplainLifecycleFunc(t),
+			GetLifecycle:     newILMGetLifecycleFunc(t),
+			GetStatus:        newILMGetStatusFunc(t),
+			MoveToStep:       newILMMoveToStepFunc(t),
+			PutLifecycle:     newILMPutLifecycleFunc(t),
+			RemovePolicy:     newILMRemovePolicyFunc(t),
+			Retry:            newILMRetryFunc(t),
+			Start:            newILMStartFunc(t),
+			Stop:             newILMStopFunc(t),
 		},
 		Indices: &Indices{
 			Freeze:   newIndicesFreezeFunc(t),
@@ -247,53 +261,53 @@ func New(t Transport) *XAPI {
 		Migration: &Migration{
 			Deprecations: newMigrationDeprecationsFunc(t),
 		},
-		Ml: &Ml{
-			CloseJob:            newMlCloseJobFunc(t),
-			DeleteCalendar:      newMlDeleteCalendarFunc(t),
-			DeleteCalendarEvent: newMlDeleteCalendarEventFunc(t),
-			DeleteCalendarJob:   newMlDeleteCalendarJobFunc(t),
-			DeleteDatafeed:      newMlDeleteDatafeedFunc(t),
-			DeleteExpiredData:   newMlDeleteExpiredDataFunc(t),
-			DeleteFilter:        newMlDeleteFilterFunc(t),
-			DeleteForecast:      newMlDeleteForecastFunc(t),
-			DeleteJob:           newMlDeleteJobFunc(t),
-			DeleteModelSnapshot: newMlDeleteModelSnapshotFunc(t),
-			FindFileStructure:   newMlFindFileStructureFunc(t),
-			FlushJob:            newMlFlushJobFunc(t),
-			Forecast:            newMlForecastFunc(t),
-			GetBuckets:          newMlGetBucketsFunc(t),
-			GetCalendarEvents:   newMlGetCalendarEventsFunc(t),
-			GetCalendars:        newMlGetCalendarsFunc(t),
-			GetCategories:       newMlGetCategoriesFunc(t),
-			GetDatafeedStats:    newMlGetDatafeedStatsFunc(t),
-			GetDatafeeds:        newMlGetDatafeedsFunc(t),
-			GetFilters:          newMlGetFiltersFunc(t),
-			GetInfluencers:      newMlGetInfluencersFunc(t),
-			GetJobStats:         newMlGetJobStatsFunc(t),
-			GetJobs:             newMlGetJobsFunc(t),
-			GetModelSnapshots:   newMlGetModelSnapshotsFunc(t),
-			GetOverallBuckets:   newMlGetOverallBucketsFunc(t),
-			GetRecords:          newMlGetRecordsFunc(t),
-			Info:                newMlInfoFunc(t),
-			OpenJob:             newMlOpenJobFunc(t),
-			PostCalendarEvents:  newMlPostCalendarEventsFunc(t),
-			PostData:            newMlPostDataFunc(t),
-			PreviewDatafeed:     newMlPreviewDatafeedFunc(t),
-			PutCalendar:         newMlPutCalendarFunc(t),
-			PutCalendarJob:      newMlPutCalendarJobFunc(t),
-			PutDatafeed:         newMlPutDatafeedFunc(t),
-			PutFilter:           newMlPutFilterFunc(t),
-			PutJob:              newMlPutJobFunc(t),
-			RevertModelSnapshot: newMlRevertModelSnapshotFunc(t),
-			SetUpgradeMode:      newMlSetUpgradeModeFunc(t),
-			StartDatafeed:       newMlStartDatafeedFunc(t),
-			StopDatafeed:        newMlStopDatafeedFunc(t),
-			UpdateDatafeed:      newMlUpdateDatafeedFunc(t),
-			UpdateFilter:        newMlUpdateFilterFunc(t),
-			UpdateJob:           newMlUpdateJobFunc(t),
-			UpdateModelSnapshot: newMlUpdateModelSnapshotFunc(t),
-			Validate:            newMlValidateFunc(t),
-			ValidateDetector:    newMlValidateDetectorFunc(t),
+		ML: &ML{
+			CloseJob:            newMLCloseJobFunc(t),
+			DeleteCalendar:      newMLDeleteCalendarFunc(t),
+			DeleteCalendarEvent: newMLDeleteCalendarEventFunc(t),
+			DeleteCalendarJob:   newMLDeleteCalendarJobFunc(t),
+			DeleteDatafeed:      newMLDeleteDatafeedFunc(t),
+			DeleteExpiredData:   newMLDeleteExpiredDataFunc(t),
+			DeleteFilter:        newMLDeleteFilterFunc(t),
+			DeleteForecast:      newMLDeleteForecastFunc(t),
+			DeleteJob:           newMLDeleteJobFunc(t),
+			DeleteModelSnapshot: newMLDeleteModelSnapshotFunc(t),
+			FindFileStructure:   newMLFindFileStructureFunc(t),
+			FlushJob:            newMLFlushJobFunc(t),
+			Forecast:            newMLForecastFunc(t),
+			GetBuckets:          newMLGetBucketsFunc(t),
+			GetCalendarEvents:   newMLGetCalendarEventsFunc(t),
+			GetCalendars:        newMLGetCalendarsFunc(t),
+			GetCategories:       newMLGetCategoriesFunc(t),
+			GetDatafeedStats:    newMLGetDatafeedStatsFunc(t),
+			GetDatafeeds:        newMLGetDatafeedsFunc(t),
+			GetFilters:          newMLGetFiltersFunc(t),
+			GetInfluencers:      newMLGetInfluencersFunc(t),
+			GetJobStats:         newMLGetJobStatsFunc(t),
+			GetJobs:             newMLGetJobsFunc(t),
+			GetModelSnapshots:   newMLGetModelSnapshotsFunc(t),
+			GetOverallBuckets:   newMLGetOverallBucketsFunc(t),
+			GetRecords:          newMLGetRecordsFunc(t),
+			Info:                newMLInfoFunc(t),
+			OpenJob:             newMLOpenJobFunc(t),
+			PostCalendarEvents:  newMLPostCalendarEventsFunc(t),
+			PostData:            newMLPostDataFunc(t),
+			PreviewDatafeed:     newMLPreviewDatafeedFunc(t),
+			PutCalendar:         newMLPutCalendarFunc(t),
+			PutCalendarJob:      newMLPutCalendarJobFunc(t),
+			PutDatafeed:         newMLPutDatafeedFunc(t),
+			PutFilter:           newMLPutFilterFunc(t),
+			PutJob:              newMLPutJobFunc(t),
+			RevertModelSnapshot: newMLRevertModelSnapshotFunc(t),
+			SetUpgradeMode:      newMLSetUpgradeModeFunc(t),
+			StartDatafeed:       newMLStartDatafeedFunc(t),
+			StopDatafeed:        newMLStopDatafeedFunc(t),
+			UpdateDatafeed:      newMLUpdateDatafeedFunc(t),
+			UpdateFilter:        newMLUpdateFilterFunc(t),
+			UpdateJob:           newMLUpdateJobFunc(t),
+			UpdateModelSnapshot: newMLUpdateModelSnapshotFunc(t),
+			Validate:            newMLValidateFunc(t),
+			ValidateDetector:    newMLValidateDetectorFunc(t),
 		},
 		Monitoring: &Monitoring{
 			Bulk: newMonitoringBulkFunc(t),
@@ -335,13 +349,13 @@ func New(t Transport) *XAPI {
 			PutRoleMapping:    newSecurityPutRoleMappingFunc(t),
 			PutUser:           newSecurityPutUserFunc(t),
 		},
-		Sql: &Sql{
-			ClearCursor: newSqlClearCursorFunc(t),
-			Query:       newSqlQueryFunc(t),
-			Translate:   newSqlTranslateFunc(t),
+		SQL: &SQL{
+			ClearCursor: newSQLClearCursorFunc(t),
+			Query:       newSQLQueryFunc(t),
+			Translate:   newSQLTranslateFunc(t),
 		},
-		Ssl: &Ssl{
-			Certificates: newSslCertificatesFunc(t),
+		SSL: &SSL{
+			Certificates: newSSLCertificatesFunc(t),
 		},
 		Watcher: &Watcher{
 			AckWatch:        newWatcherAckWatchFunc(t),
@@ -355,9 +369,9 @@ func New(t Transport) *XAPI {
 			Stats:           newWatcherStatsFunc(t),
 			Stop:            newWatcherStopFunc(t),
 		},
-		Xpack: &Xpack{
-			Info:  newXpackInfoFunc(t),
-			Usage: newXpackUsageFunc(t),
+		XPack: &XPack{
+			Info:  newXPackInfoFunc(t),
+			Usage: newXPackUsageFunc(t),
 		},
 	}
 }

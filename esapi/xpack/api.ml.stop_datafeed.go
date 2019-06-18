@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -9,9 +9,9 @@ import (
 	"time"
 )
 
-func newMlStopDatafeedFunc(t Transport) MlStopDatafeed {
-	return func(datafeed_id string, o ...func(*MlStopDatafeedRequest)) (*Response, error) {
-		var r = MlStopDatafeedRequest{DatafeedID: datafeed_id}
+func newMLStopDatafeedFunc(t Transport) MLStopDatafeed {
+	return func(datafeed_id string, o ...func(*MLStopDatafeedRequest)) (*Response, error) {
+		var r = MLStopDatafeedRequest{DatafeedID: datafeed_id}
 		for _, f := range o {
 			f(&r)
 		}
@@ -24,12 +24,13 @@ func newMlStopDatafeedFunc(t Transport) MlStopDatafeed {
 //
 // See full documentation at http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html.
 //
-type MlStopDatafeed func(datafeed_id string, o ...func(*MlStopDatafeedRequest)) (*Response, error)
+type MLStopDatafeed func(datafeed_id string, o ...func(*MLStopDatafeedRequest)) (*Response, error)
 
-// MlStopDatafeedRequest configures the Ml  Stop Datafeed API request.
+// MLStopDatafeedRequest configures the Ml  Stop Datafeed API request.
 //
-type MlStopDatafeedRequest struct {
-	DatafeedID       string
+type MLStopDatafeedRequest struct {
+	DatafeedID string
+
 	AllowNoDatafeeds *bool
 	Force            *bool
 	Timeout          time.Duration
@@ -44,7 +45,7 @@ type MlStopDatafeedRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r MlStopDatafeedRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r MLStopDatafeedRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -123,64 +124,64 @@ func (r MlStopDatafeedRequest) Do(ctx context.Context, transport Transport) (*Re
 
 // WithContext sets the request context.
 //
-func (f MlStopDatafeed) WithContext(v context.Context) func(*MlStopDatafeedRequest) {
-	return func(r *MlStopDatafeedRequest) {
+func (f MLStopDatafeed) WithContext(v context.Context) func(*MLStopDatafeedRequest) {
+	return func(r *MLStopDatafeedRequest) {
 		r.ctx = v
 	}
 }
 
 // WithAllowNoDatafeeds - whether to ignore if a wildcard expression matches no datafeeds. (this includes `_all` string or when no datafeeds have been specified).
 //
-func (f MlStopDatafeed) WithAllowNoDatafeeds(v bool) func(*MlStopDatafeedRequest) {
-	return func(r *MlStopDatafeedRequest) {
+func (f MLStopDatafeed) WithAllowNoDatafeeds(v bool) func(*MLStopDatafeedRequest) {
+	return func(r *MLStopDatafeedRequest) {
 		r.AllowNoDatafeeds = &v
 	}
 }
 
 // WithForce - true if the datafeed should be forcefully stopped..
 //
-func (f MlStopDatafeed) WithForce(v bool) func(*MlStopDatafeedRequest) {
-	return func(r *MlStopDatafeedRequest) {
+func (f MLStopDatafeed) WithForce(v bool) func(*MLStopDatafeedRequest) {
+	return func(r *MLStopDatafeedRequest) {
 		r.Force = &v
 	}
 }
 
 // WithTimeout - controls the time to wait until a datafeed has stopped. default to 20 seconds.
 //
-func (f MlStopDatafeed) WithTimeout(v time.Duration) func(*MlStopDatafeedRequest) {
-	return func(r *MlStopDatafeedRequest) {
+func (f MLStopDatafeed) WithTimeout(v time.Duration) func(*MLStopDatafeedRequest) {
+	return func(r *MLStopDatafeedRequest) {
 		r.Timeout = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f MlStopDatafeed) WithPretty() func(*MlStopDatafeedRequest) {
-	return func(r *MlStopDatafeedRequest) {
+func (f MLStopDatafeed) WithPretty() func(*MLStopDatafeedRequest) {
+	return func(r *MLStopDatafeedRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f MlStopDatafeed) WithHuman() func(*MlStopDatafeedRequest) {
-	return func(r *MlStopDatafeedRequest) {
+func (f MLStopDatafeed) WithHuman() func(*MLStopDatafeedRequest) {
+	return func(r *MLStopDatafeedRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f MlStopDatafeed) WithErrorTrace() func(*MlStopDatafeedRequest) {
-	return func(r *MlStopDatafeedRequest) {
+func (f MLStopDatafeed) WithErrorTrace() func(*MLStopDatafeedRequest) {
+	return func(r *MLStopDatafeedRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f MlStopDatafeed) WithFilterPath(v ...string) func(*MlStopDatafeedRequest) {
-	return func(r *MlStopDatafeedRequest) {
+func (f MLStopDatafeed) WithFilterPath(v ...string) func(*MLStopDatafeedRequest) {
+	return func(r *MLStopDatafeedRequest) {
 		r.FilterPath = v
 	}
 }

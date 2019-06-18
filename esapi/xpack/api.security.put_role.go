@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -30,7 +30,8 @@ type SecurityPutRole func(body io.Reader, name string, o ...func(*SecurityPutRol
 type SecurityPutRoleRequest struct {
 	Body io.Reader
 
-	Name    string
+	Name string
+
 	Refresh string
 
 	Pretty     bool

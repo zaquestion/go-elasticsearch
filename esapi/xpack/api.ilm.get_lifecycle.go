@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -7,9 +7,9 @@ import (
 	"strings"
 )
 
-func newIlmGetLifecycleFunc(t Transport) IlmGetLifecycle {
-	return func(o ...func(*IlmGetLifecycleRequest)) (*Response, error) {
-		var r = IlmGetLifecycleRequest{}
+func newILMGetLifecycleFunc(t Transport) ILMGetLifecycle {
+	return func(o ...func(*ILMGetLifecycleRequest)) (*Response, error) {
+		var r = ILMGetLifecycleRequest{}
 		for _, f := range o {
 			f(&r)
 		}
@@ -22,11 +22,11 @@ func newIlmGetLifecycleFunc(t Transport) IlmGetLifecycle {
 //
 // See full documentation at https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html.
 //
-type IlmGetLifecycle func(o ...func(*IlmGetLifecycleRequest)) (*Response, error)
+type ILMGetLifecycle func(o ...func(*ILMGetLifecycleRequest)) (*Response, error)
 
-// IlmGetLifecycleRequest configures the Ilm  Get Lifecycle API request.
+// ILMGetLifecycleRequest configures the Ilm  Get Lifecycle API request.
 //
-type IlmGetLifecycleRequest struct {
+type ILMGetLifecycleRequest struct {
 	Policy string
 
 	Pretty     bool
@@ -39,7 +39,7 @@ type IlmGetLifecycleRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r IlmGetLifecycleRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r ILMGetLifecycleRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -106,48 +106,48 @@ func (r IlmGetLifecycleRequest) Do(ctx context.Context, transport Transport) (*R
 
 // WithContext sets the request context.
 //
-func (f IlmGetLifecycle) WithContext(v context.Context) func(*IlmGetLifecycleRequest) {
-	return func(r *IlmGetLifecycleRequest) {
+func (f ILMGetLifecycle) WithContext(v context.Context) func(*ILMGetLifecycleRequest) {
+	return func(r *ILMGetLifecycleRequest) {
 		r.ctx = v
 	}
 }
 
 // WithPolicy - the name of the index lifecycle policy.
 //
-func (f IlmGetLifecycle) WithPolicy(v string) func(*IlmGetLifecycleRequest) {
-	return func(r *IlmGetLifecycleRequest) {
+func (f ILMGetLifecycle) WithPolicy(v string) func(*ILMGetLifecycleRequest) {
+	return func(r *ILMGetLifecycleRequest) {
 		r.Policy = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f IlmGetLifecycle) WithPretty() func(*IlmGetLifecycleRequest) {
-	return func(r *IlmGetLifecycleRequest) {
+func (f ILMGetLifecycle) WithPretty() func(*ILMGetLifecycleRequest) {
+	return func(r *ILMGetLifecycleRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f IlmGetLifecycle) WithHuman() func(*IlmGetLifecycleRequest) {
-	return func(r *IlmGetLifecycleRequest) {
+func (f ILMGetLifecycle) WithHuman() func(*ILMGetLifecycleRequest) {
+	return func(r *ILMGetLifecycleRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f IlmGetLifecycle) WithErrorTrace() func(*IlmGetLifecycleRequest) {
-	return func(r *IlmGetLifecycleRequest) {
+func (f ILMGetLifecycle) WithErrorTrace() func(*ILMGetLifecycleRequest) {
+	return func(r *ILMGetLifecycleRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f IlmGetLifecycle) WithFilterPath(v ...string) func(*IlmGetLifecycleRequest) {
-	return func(r *IlmGetLifecycleRequest) {
+func (f ILMGetLifecycle) WithFilterPath(v ...string) func(*ILMGetLifecycleRequest) {
+	return func(r *ILMGetLifecycleRequest) {
 		r.FilterPath = v
 	}
 }

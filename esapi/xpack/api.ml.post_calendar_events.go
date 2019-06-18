@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -8,9 +8,9 @@ import (
 	"strings"
 )
 
-func newMlPostCalendarEventsFunc(t Transport) MlPostCalendarEvents {
-	return func(body io.Reader, calendar_id string, o ...func(*MlPostCalendarEventsRequest)) (*Response, error) {
-		var r = MlPostCalendarEventsRequest{Body: body, CalendarID: calendar_id}
+func newMLPostCalendarEventsFunc(t Transport) MLPostCalendarEvents {
+	return func(body io.Reader, calendar_id string, o ...func(*MLPostCalendarEventsRequest)) (*Response, error) {
+		var r = MLPostCalendarEventsRequest{Body: body, CalendarID: calendar_id}
 		for _, f := range o {
 			f(&r)
 		}
@@ -21,11 +21,11 @@ func newMlPostCalendarEventsFunc(t Transport) MlPostCalendarEvents {
 // ----- API Definition -------------------------------------------------------
 
 //
-type MlPostCalendarEvents func(body io.Reader, calendar_id string, o ...func(*MlPostCalendarEventsRequest)) (*Response, error)
+type MLPostCalendarEvents func(body io.Reader, calendar_id string, o ...func(*MLPostCalendarEventsRequest)) (*Response, error)
 
-// MlPostCalendarEventsRequest configures the Ml   Post Calendar Events API request.
+// MLPostCalendarEventsRequest configures the Ml   Post Calendar Events API request.
 //
-type MlPostCalendarEventsRequest struct {
+type MLPostCalendarEventsRequest struct {
 	Body io.Reader
 
 	CalendarID string
@@ -40,7 +40,7 @@ type MlPostCalendarEventsRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r MlPostCalendarEventsRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r MLPostCalendarEventsRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -111,40 +111,40 @@ func (r MlPostCalendarEventsRequest) Do(ctx context.Context, transport Transport
 
 // WithContext sets the request context.
 //
-func (f MlPostCalendarEvents) WithContext(v context.Context) func(*MlPostCalendarEventsRequest) {
-	return func(r *MlPostCalendarEventsRequest) {
+func (f MLPostCalendarEvents) WithContext(v context.Context) func(*MLPostCalendarEventsRequest) {
+	return func(r *MLPostCalendarEventsRequest) {
 		r.ctx = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f MlPostCalendarEvents) WithPretty() func(*MlPostCalendarEventsRequest) {
-	return func(r *MlPostCalendarEventsRequest) {
+func (f MLPostCalendarEvents) WithPretty() func(*MLPostCalendarEventsRequest) {
+	return func(r *MLPostCalendarEventsRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f MlPostCalendarEvents) WithHuman() func(*MlPostCalendarEventsRequest) {
-	return func(r *MlPostCalendarEventsRequest) {
+func (f MLPostCalendarEvents) WithHuman() func(*MLPostCalendarEventsRequest) {
+	return func(r *MLPostCalendarEventsRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f MlPostCalendarEvents) WithErrorTrace() func(*MlPostCalendarEventsRequest) {
-	return func(r *MlPostCalendarEventsRequest) {
+func (f MLPostCalendarEvents) WithErrorTrace() func(*MLPostCalendarEventsRequest) {
+	return func(r *MLPostCalendarEventsRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f MlPostCalendarEvents) WithFilterPath(v ...string) func(*MlPostCalendarEventsRequest) {
-	return func(r *MlPostCalendarEventsRequest) {
+func (f MLPostCalendarEvents) WithFilterPath(v ...string) func(*MLPostCalendarEventsRequest) {
+	return func(r *MLPostCalendarEventsRequest) {
 		r.FilterPath = v
 	}
 }

@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -29,7 +29,8 @@ type RollupRollupSearch func(index []string, body io.Reader, o ...func(*RollupRo
 type RollupRollupSearchRequest struct {
 	Index        []string
 	DocumentType string
-	Body         io.Reader
+
+	Body io.Reader
 
 	RestTotalHitsAsInt *bool
 	TypedKeys          *bool

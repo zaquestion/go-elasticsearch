@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -7,9 +7,9 @@ import (
 	"strings"
 )
 
-func newIlmDeleteLifecycleFunc(t Transport) IlmDeleteLifecycle {
-	return func(o ...func(*IlmDeleteLifecycleRequest)) (*Response, error) {
-		var r = IlmDeleteLifecycleRequest{}
+func newILMDeleteLifecycleFunc(t Transport) ILMDeleteLifecycle {
+	return func(o ...func(*ILMDeleteLifecycleRequest)) (*Response, error) {
+		var r = ILMDeleteLifecycleRequest{}
 		for _, f := range o {
 			f(&r)
 		}
@@ -22,11 +22,11 @@ func newIlmDeleteLifecycleFunc(t Transport) IlmDeleteLifecycle {
 //
 // See full documentation at https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-delete-lifecycle.html.
 //
-type IlmDeleteLifecycle func(o ...func(*IlmDeleteLifecycleRequest)) (*Response, error)
+type ILMDeleteLifecycle func(o ...func(*ILMDeleteLifecycleRequest)) (*Response, error)
 
-// IlmDeleteLifecycleRequest configures the Ilm  Delete Lifecycle API request.
+// ILMDeleteLifecycleRequest configures the Ilm  Delete Lifecycle API request.
 //
-type IlmDeleteLifecycleRequest struct {
+type ILMDeleteLifecycleRequest struct {
 	Policy string
 
 	Pretty     bool
@@ -39,7 +39,7 @@ type IlmDeleteLifecycleRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r IlmDeleteLifecycleRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r ILMDeleteLifecycleRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -106,48 +106,48 @@ func (r IlmDeleteLifecycleRequest) Do(ctx context.Context, transport Transport) 
 
 // WithContext sets the request context.
 //
-func (f IlmDeleteLifecycle) WithContext(v context.Context) func(*IlmDeleteLifecycleRequest) {
-	return func(r *IlmDeleteLifecycleRequest) {
+func (f ILMDeleteLifecycle) WithContext(v context.Context) func(*ILMDeleteLifecycleRequest) {
+	return func(r *ILMDeleteLifecycleRequest) {
 		r.ctx = v
 	}
 }
 
 // WithPolicy - the name of the index lifecycle policy.
 //
-func (f IlmDeleteLifecycle) WithPolicy(v string) func(*IlmDeleteLifecycleRequest) {
-	return func(r *IlmDeleteLifecycleRequest) {
+func (f ILMDeleteLifecycle) WithPolicy(v string) func(*ILMDeleteLifecycleRequest) {
+	return func(r *ILMDeleteLifecycleRequest) {
 		r.Policy = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f IlmDeleteLifecycle) WithPretty() func(*IlmDeleteLifecycleRequest) {
-	return func(r *IlmDeleteLifecycleRequest) {
+func (f ILMDeleteLifecycle) WithPretty() func(*ILMDeleteLifecycleRequest) {
+	return func(r *ILMDeleteLifecycleRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f IlmDeleteLifecycle) WithHuman() func(*IlmDeleteLifecycleRequest) {
-	return func(r *IlmDeleteLifecycleRequest) {
+func (f ILMDeleteLifecycle) WithHuman() func(*ILMDeleteLifecycleRequest) {
+	return func(r *ILMDeleteLifecycleRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f IlmDeleteLifecycle) WithErrorTrace() func(*IlmDeleteLifecycleRequest) {
-	return func(r *IlmDeleteLifecycleRequest) {
+func (f ILMDeleteLifecycle) WithErrorTrace() func(*ILMDeleteLifecycleRequest) {
+	return func(r *ILMDeleteLifecycleRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f IlmDeleteLifecycle) WithFilterPath(v ...string) func(*IlmDeleteLifecycleRequest) {
-	return func(r *IlmDeleteLifecycleRequest) {
+func (f ILMDeleteLifecycle) WithFilterPath(v ...string) func(*ILMDeleteLifecycleRequest) {
+	return func(r *ILMDeleteLifecycleRequest) {
 		r.FilterPath = v
 	}
 }

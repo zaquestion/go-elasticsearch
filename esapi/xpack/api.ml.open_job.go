@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -8,9 +8,9 @@ import (
 	"time"
 )
 
-func newMlOpenJobFunc(t Transport) MlOpenJob {
-	return func(job_id string, o ...func(*MlOpenJobRequest)) (*Response, error) {
-		var r = MlOpenJobRequest{JobID: job_id}
+func newMLOpenJobFunc(t Transport) MLOpenJob {
+	return func(job_id string, o ...func(*MLOpenJobRequest)) (*Response, error) {
+		var r = MLOpenJobRequest{JobID: job_id}
 		for _, f := range o {
 			f(&r)
 		}
@@ -23,13 +23,13 @@ func newMlOpenJobFunc(t Transport) MlOpenJob {
 //
 // See full documentation at http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html.
 //
-type MlOpenJob func(job_id string, o ...func(*MlOpenJobRequest)) (*Response, error)
+type MLOpenJob func(job_id string, o ...func(*MLOpenJobRequest)) (*Response, error)
 
-// MlOpenJobRequest configures the Ml  Open Job API request.
+// MLOpenJobRequest configures the Ml  Open Job API request.
 //
-type MlOpenJobRequest struct {
-	JobID          string
+type MLOpenJobRequest struct {
 	IgnoreDowntime *bool
+	JobID          string
 	Timeout        time.Duration
 
 	Pretty     bool
@@ -42,7 +42,7 @@ type MlOpenJobRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r MlOpenJobRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r MLOpenJobRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -109,56 +109,56 @@ func (r MlOpenJobRequest) Do(ctx context.Context, transport Transport) (*Respons
 
 // WithContext sets the request context.
 //
-func (f MlOpenJob) WithContext(v context.Context) func(*MlOpenJobRequest) {
-	return func(r *MlOpenJobRequest) {
+func (f MLOpenJob) WithContext(v context.Context) func(*MLOpenJobRequest) {
+	return func(r *MLOpenJobRequest) {
 		r.ctx = v
 	}
 }
 
 // WithIgnoreDowntime - controls if gaps in data are treated as anomalous or as a maintenance window after a job re-start.
 //
-func (f MlOpenJob) WithIgnoreDowntime(v bool) func(*MlOpenJobRequest) {
-	return func(r *MlOpenJobRequest) {
+func (f MLOpenJob) WithIgnoreDowntime(v bool) func(*MLOpenJobRequest) {
+	return func(r *MLOpenJobRequest) {
 		r.IgnoreDowntime = &v
 	}
 }
 
 // WithTimeout - controls the time to wait until a job has opened. default to 30 minutes.
 //
-func (f MlOpenJob) WithTimeout(v time.Duration) func(*MlOpenJobRequest) {
-	return func(r *MlOpenJobRequest) {
+func (f MLOpenJob) WithTimeout(v time.Duration) func(*MLOpenJobRequest) {
+	return func(r *MLOpenJobRequest) {
 		r.Timeout = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f MlOpenJob) WithPretty() func(*MlOpenJobRequest) {
-	return func(r *MlOpenJobRequest) {
+func (f MLOpenJob) WithPretty() func(*MLOpenJobRequest) {
+	return func(r *MLOpenJobRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f MlOpenJob) WithHuman() func(*MlOpenJobRequest) {
-	return func(r *MlOpenJobRequest) {
+func (f MLOpenJob) WithHuman() func(*MLOpenJobRequest) {
+	return func(r *MLOpenJobRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f MlOpenJob) WithErrorTrace() func(*MlOpenJobRequest) {
-	return func(r *MlOpenJobRequest) {
+func (f MLOpenJob) WithErrorTrace() func(*MLOpenJobRequest) {
+	return func(r *MLOpenJobRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f MlOpenJob) WithFilterPath(v ...string) func(*MlOpenJobRequest) {
-	return func(r *MlOpenJobRequest) {
+func (f MLOpenJob) WithFilterPath(v ...string) func(*MLOpenJobRequest) {
+	return func(r *MLOpenJobRequest) {
 		r.FilterPath = v
 	}
 }

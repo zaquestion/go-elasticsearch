@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -7,9 +7,9 @@ import (
 	"strings"
 )
 
-func newCcrDeleteAutoFollowPatternFunc(t Transport) CcrDeleteAutoFollowPattern {
-	return func(name string, o ...func(*CcrDeleteAutoFollowPatternRequest)) (*Response, error) {
-		var r = CcrDeleteAutoFollowPatternRequest{Name: name}
+func newCCRDeleteAutoFollowPatternFunc(t Transport) CCRDeleteAutoFollowPattern {
+	return func(name string, o ...func(*CCRDeleteAutoFollowPatternRequest)) (*Response, error) {
+		var r = CCRDeleteAutoFollowPatternRequest{Name: name}
 		for _, f := range o {
 			f(&r)
 		}
@@ -22,11 +22,11 @@ func newCcrDeleteAutoFollowPatternFunc(t Transport) CcrDeleteAutoFollowPattern {
 //
 // See full documentation at https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-delete-auto-follow-pattern.html.
 //
-type CcrDeleteAutoFollowPattern func(name string, o ...func(*CcrDeleteAutoFollowPatternRequest)) (*Response, error)
+type CCRDeleteAutoFollowPattern func(name string, o ...func(*CCRDeleteAutoFollowPatternRequest)) (*Response, error)
 
-// CcrDeleteAutoFollowPatternRequest configures the Ccr    Delete Auto Follow Pattern API request.
+// CCRDeleteAutoFollowPatternRequest configures the Ccr    Delete Auto Follow Pattern API request.
 //
-type CcrDeleteAutoFollowPatternRequest struct {
+type CCRDeleteAutoFollowPatternRequest struct {
 	Name string
 
 	Pretty     bool
@@ -39,7 +39,7 @@ type CcrDeleteAutoFollowPatternRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r CcrDeleteAutoFollowPatternRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r CCRDeleteAutoFollowPatternRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -104,40 +104,40 @@ func (r CcrDeleteAutoFollowPatternRequest) Do(ctx context.Context, transport Tra
 
 // WithContext sets the request context.
 //
-func (f CcrDeleteAutoFollowPattern) WithContext(v context.Context) func(*CcrDeleteAutoFollowPatternRequest) {
-	return func(r *CcrDeleteAutoFollowPatternRequest) {
+func (f CCRDeleteAutoFollowPattern) WithContext(v context.Context) func(*CCRDeleteAutoFollowPatternRequest) {
+	return func(r *CCRDeleteAutoFollowPatternRequest) {
 		r.ctx = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f CcrDeleteAutoFollowPattern) WithPretty() func(*CcrDeleteAutoFollowPatternRequest) {
-	return func(r *CcrDeleteAutoFollowPatternRequest) {
+func (f CCRDeleteAutoFollowPattern) WithPretty() func(*CCRDeleteAutoFollowPatternRequest) {
+	return func(r *CCRDeleteAutoFollowPatternRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f CcrDeleteAutoFollowPattern) WithHuman() func(*CcrDeleteAutoFollowPatternRequest) {
-	return func(r *CcrDeleteAutoFollowPatternRequest) {
+func (f CCRDeleteAutoFollowPattern) WithHuman() func(*CCRDeleteAutoFollowPatternRequest) {
+	return func(r *CCRDeleteAutoFollowPatternRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f CcrDeleteAutoFollowPattern) WithErrorTrace() func(*CcrDeleteAutoFollowPatternRequest) {
-	return func(r *CcrDeleteAutoFollowPatternRequest) {
+func (f CCRDeleteAutoFollowPattern) WithErrorTrace() func(*CCRDeleteAutoFollowPatternRequest) {
+	return func(r *CCRDeleteAutoFollowPatternRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f CcrDeleteAutoFollowPattern) WithFilterPath(v ...string) func(*CcrDeleteAutoFollowPatternRequest) {
-	return func(r *CcrDeleteAutoFollowPatternRequest) {
+func (f CCRDeleteAutoFollowPattern) WithFilterPath(v ...string) func(*CCRDeleteAutoFollowPatternRequest) {
+	return func(r *CCRDeleteAutoFollowPatternRequest) {
 		r.FilterPath = v
 	}
 }

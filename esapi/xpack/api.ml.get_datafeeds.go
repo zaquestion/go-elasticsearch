@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -8,9 +8,9 @@ import (
 	"strings"
 )
 
-func newMlGetDatafeedsFunc(t Transport) MlGetDatafeeds {
-	return func(o ...func(*MlGetDatafeedsRequest)) (*Response, error) {
-		var r = MlGetDatafeedsRequest{}
+func newMLGetDatafeedsFunc(t Transport) MLGetDatafeeds {
+	return func(o ...func(*MLGetDatafeedsRequest)) (*Response, error) {
+		var r = MLGetDatafeedsRequest{}
 		for _, f := range o {
 			f(&r)
 		}
@@ -23,12 +23,13 @@ func newMlGetDatafeedsFunc(t Transport) MlGetDatafeeds {
 //
 // See full documentation at http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html.
 //
-type MlGetDatafeeds func(o ...func(*MlGetDatafeedsRequest)) (*Response, error)
+type MLGetDatafeeds func(o ...func(*MLGetDatafeedsRequest)) (*Response, error)
 
-// MlGetDatafeedsRequest configures the Ml  Get Datafeeds API request.
+// MLGetDatafeedsRequest configures the Ml  Get Datafeeds API request.
 //
-type MlGetDatafeedsRequest struct {
-	DatafeedID       string
+type MLGetDatafeedsRequest struct {
+	DatafeedID string
+
 	AllowNoDatafeeds *bool
 
 	Pretty     bool
@@ -41,7 +42,7 @@ type MlGetDatafeedsRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r MlGetDatafeedsRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r MLGetDatafeedsRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -112,56 +113,56 @@ func (r MlGetDatafeedsRequest) Do(ctx context.Context, transport Transport) (*Re
 
 // WithContext sets the request context.
 //
-func (f MlGetDatafeeds) WithContext(v context.Context) func(*MlGetDatafeedsRequest) {
-	return func(r *MlGetDatafeedsRequest) {
+func (f MLGetDatafeeds) WithContext(v context.Context) func(*MLGetDatafeedsRequest) {
+	return func(r *MLGetDatafeedsRequest) {
 		r.ctx = v
 	}
 }
 
 // WithDatafeedID - the ID of the datafeeds to fetch.
 //
-func (f MlGetDatafeeds) WithDatafeedID(v string) func(*MlGetDatafeedsRequest) {
-	return func(r *MlGetDatafeedsRequest) {
+func (f MLGetDatafeeds) WithDatafeedID(v string) func(*MLGetDatafeedsRequest) {
+	return func(r *MLGetDatafeedsRequest) {
 		r.DatafeedID = v
 	}
 }
 
 // WithAllowNoDatafeeds - whether to ignore if a wildcard expression matches no datafeeds. (this includes `_all` string or when no datafeeds have been specified).
 //
-func (f MlGetDatafeeds) WithAllowNoDatafeeds(v bool) func(*MlGetDatafeedsRequest) {
-	return func(r *MlGetDatafeedsRequest) {
+func (f MLGetDatafeeds) WithAllowNoDatafeeds(v bool) func(*MLGetDatafeedsRequest) {
+	return func(r *MLGetDatafeedsRequest) {
 		r.AllowNoDatafeeds = &v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f MlGetDatafeeds) WithPretty() func(*MlGetDatafeedsRequest) {
-	return func(r *MlGetDatafeedsRequest) {
+func (f MLGetDatafeeds) WithPretty() func(*MLGetDatafeedsRequest) {
+	return func(r *MLGetDatafeedsRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f MlGetDatafeeds) WithHuman() func(*MlGetDatafeedsRequest) {
-	return func(r *MlGetDatafeedsRequest) {
+func (f MLGetDatafeeds) WithHuman() func(*MLGetDatafeedsRequest) {
+	return func(r *MLGetDatafeedsRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f MlGetDatafeeds) WithErrorTrace() func(*MlGetDatafeedsRequest) {
-	return func(r *MlGetDatafeedsRequest) {
+func (f MLGetDatafeeds) WithErrorTrace() func(*MLGetDatafeedsRequest) {
+	return func(r *MLGetDatafeedsRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f MlGetDatafeeds) WithFilterPath(v ...string) func(*MlGetDatafeedsRequest) {
-	return func(r *MlGetDatafeedsRequest) {
+func (f MLGetDatafeeds) WithFilterPath(v ...string) func(*MLGetDatafeedsRequest) {
+	return func(r *MLGetDatafeedsRequest) {
 		r.FilterPath = v
 	}
 }

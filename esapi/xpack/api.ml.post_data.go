@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -8,9 +8,9 @@ import (
 	"strings"
 )
 
-func newMlPostDataFunc(t Transport) MlPostData {
-	return func(body io.Reader, job_id string, o ...func(*MlPostDataRequest)) (*Response, error) {
-		var r = MlPostDataRequest{Body: body, JobID: job_id}
+func newMLPostDataFunc(t Transport) MLPostData {
+	return func(body io.Reader, job_id string, o ...func(*MLPostDataRequest)) (*Response, error) {
+		var r = MLPostDataRequest{Body: body, JobID: job_id}
 		for _, f := range o {
 			f(&r)
 		}
@@ -23,14 +23,15 @@ func newMlPostDataFunc(t Transport) MlPostData {
 //
 // See full documentation at http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html.
 //
-type MlPostData func(body io.Reader, job_id string, o ...func(*MlPostDataRequest)) (*Response, error)
+type MLPostData func(body io.Reader, job_id string, o ...func(*MLPostDataRequest)) (*Response, error)
 
-// MlPostDataRequest configures the Ml  Post Data API request.
+// MLPostDataRequest configures the Ml  Post Data API request.
 //
-type MlPostDataRequest struct {
+type MLPostDataRequest struct {
 	Body io.Reader
 
-	JobID      string
+	JobID string
+
 	ResetEnd   string
 	ResetStart string
 
@@ -44,7 +45,7 @@ type MlPostDataRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r MlPostDataRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r MLPostDataRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -123,56 +124,56 @@ func (r MlPostDataRequest) Do(ctx context.Context, transport Transport) (*Respon
 
 // WithContext sets the request context.
 //
-func (f MlPostData) WithContext(v context.Context) func(*MlPostDataRequest) {
-	return func(r *MlPostDataRequest) {
+func (f MLPostData) WithContext(v context.Context) func(*MLPostDataRequest) {
+	return func(r *MLPostDataRequest) {
 		r.ctx = v
 	}
 }
 
 // WithResetEnd - optional parameter to specify the end of the bucket resetting range.
 //
-func (f MlPostData) WithResetEnd(v string) func(*MlPostDataRequest) {
-	return func(r *MlPostDataRequest) {
+func (f MLPostData) WithResetEnd(v string) func(*MLPostDataRequest) {
+	return func(r *MLPostDataRequest) {
 		r.ResetEnd = v
 	}
 }
 
 // WithResetStart - optional parameter to specify the start of the bucket resetting range.
 //
-func (f MlPostData) WithResetStart(v string) func(*MlPostDataRequest) {
-	return func(r *MlPostDataRequest) {
+func (f MLPostData) WithResetStart(v string) func(*MLPostDataRequest) {
+	return func(r *MLPostDataRequest) {
 		r.ResetStart = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f MlPostData) WithPretty() func(*MlPostDataRequest) {
-	return func(r *MlPostDataRequest) {
+func (f MLPostData) WithPretty() func(*MLPostDataRequest) {
+	return func(r *MLPostDataRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f MlPostData) WithHuman() func(*MlPostDataRequest) {
-	return func(r *MlPostDataRequest) {
+func (f MLPostData) WithHuman() func(*MLPostDataRequest) {
+	return func(r *MLPostDataRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f MlPostData) WithErrorTrace() func(*MlPostDataRequest) {
-	return func(r *MlPostDataRequest) {
+func (f MLPostData) WithErrorTrace() func(*MLPostDataRequest) {
+	return func(r *MLPostDataRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f MlPostData) WithFilterPath(v ...string) func(*MlPostDataRequest) {
-	return func(r *MlPostDataRequest) {
+func (f MLPostData) WithFilterPath(v ...string) func(*MLPostDataRequest) {
+	return func(r *MLPostDataRequest) {
 		r.FilterPath = v
 	}
 }

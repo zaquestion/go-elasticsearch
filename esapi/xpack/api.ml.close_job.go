@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -10,9 +10,9 @@ import (
 	"time"
 )
 
-func newMlCloseJobFunc(t Transport) MlCloseJob {
-	return func(job_id string, o ...func(*MlCloseJobRequest)) (*Response, error) {
-		var r = MlCloseJobRequest{JobID: job_id}
+func newMLCloseJobFunc(t Transport) MLCloseJob {
+	return func(job_id string, o ...func(*MLCloseJobRequest)) (*Response, error) {
+		var r = MLCloseJobRequest{JobID: job_id}
 		for _, f := range o {
 			f(&r)
 		}
@@ -25,14 +25,15 @@ func newMlCloseJobFunc(t Transport) MlCloseJob {
 //
 // See full documentation at http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-close-job.html.
 //
-type MlCloseJob func(job_id string, o ...func(*MlCloseJobRequest)) (*Response, error)
+type MLCloseJob func(job_id string, o ...func(*MLCloseJobRequest)) (*Response, error)
 
-// MlCloseJobRequest configures the Ml  Close Job API request.
+// MLCloseJobRequest configures the Ml  Close Job API request.
 //
-type MlCloseJobRequest struct {
+type MLCloseJobRequest struct {
 	Body io.Reader
 
-	JobID       string
+	JobID string
+
 	AllowNoJobs *bool
 	Force       *bool
 	Timeout     time.Duration
@@ -47,7 +48,7 @@ type MlCloseJobRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r MlCloseJobRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r MLCloseJobRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -130,72 +131,72 @@ func (r MlCloseJobRequest) Do(ctx context.Context, transport Transport) (*Respon
 
 // WithContext sets the request context.
 //
-func (f MlCloseJob) WithContext(v context.Context) func(*MlCloseJobRequest) {
-	return func(r *MlCloseJobRequest) {
+func (f MLCloseJob) WithContext(v context.Context) func(*MLCloseJobRequest) {
+	return func(r *MLCloseJobRequest) {
 		r.ctx = v
 	}
 }
 
 // WithBody - The URL params optionally sent in the body.
 //
-func (f MlCloseJob) WithBody(v io.Reader) func(*MlCloseJobRequest) {
-	return func(r *MlCloseJobRequest) {
+func (f MLCloseJob) WithBody(v io.Reader) func(*MLCloseJobRequest) {
+	return func(r *MLCloseJobRequest) {
 		r.Body = v
 	}
 }
 
 // WithAllowNoJobs - whether to ignore if a wildcard expression matches no jobs. (this includes `_all` string or when no jobs have been specified).
 //
-func (f MlCloseJob) WithAllowNoJobs(v bool) func(*MlCloseJobRequest) {
-	return func(r *MlCloseJobRequest) {
+func (f MLCloseJob) WithAllowNoJobs(v bool) func(*MLCloseJobRequest) {
+	return func(r *MLCloseJobRequest) {
 		r.AllowNoJobs = &v
 	}
 }
 
 // WithForce - true if the job should be forcefully closed.
 //
-func (f MlCloseJob) WithForce(v bool) func(*MlCloseJobRequest) {
-	return func(r *MlCloseJobRequest) {
+func (f MLCloseJob) WithForce(v bool) func(*MLCloseJobRequest) {
+	return func(r *MLCloseJobRequest) {
 		r.Force = &v
 	}
 }
 
 // WithTimeout - controls the time to wait until a job has closed. default to 30 minutes.
 //
-func (f MlCloseJob) WithTimeout(v time.Duration) func(*MlCloseJobRequest) {
-	return func(r *MlCloseJobRequest) {
+func (f MLCloseJob) WithTimeout(v time.Duration) func(*MLCloseJobRequest) {
+	return func(r *MLCloseJobRequest) {
 		r.Timeout = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f MlCloseJob) WithPretty() func(*MlCloseJobRequest) {
-	return func(r *MlCloseJobRequest) {
+func (f MLCloseJob) WithPretty() func(*MLCloseJobRequest) {
+	return func(r *MLCloseJobRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f MlCloseJob) WithHuman() func(*MlCloseJobRequest) {
-	return func(r *MlCloseJobRequest) {
+func (f MLCloseJob) WithHuman() func(*MLCloseJobRequest) {
+	return func(r *MLCloseJobRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f MlCloseJob) WithErrorTrace() func(*MlCloseJobRequest) {
-	return func(r *MlCloseJobRequest) {
+func (f MLCloseJob) WithErrorTrace() func(*MLCloseJobRequest) {
+	return func(r *MLCloseJobRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f MlCloseJob) WithFilterPath(v ...string) func(*MlCloseJobRequest) {
-	return func(r *MlCloseJobRequest) {
+func (f MLCloseJob) WithFilterPath(v ...string) func(*MLCloseJobRequest) {
+	return func(r *MLCloseJobRequest) {
 		r.FilterPath = v
 	}
 }

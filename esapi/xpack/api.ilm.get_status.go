@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -7,9 +7,9 @@ import (
 	"strings"
 )
 
-func newIlmGetStatusFunc(t Transport) IlmGetStatus {
-	return func(o ...func(*IlmGetStatusRequest)) (*Response, error) {
-		var r = IlmGetStatusRequest{}
+func newILMGetStatusFunc(t Transport) ILMGetStatus {
+	return func(o ...func(*ILMGetStatusRequest)) (*Response, error) {
+		var r = ILMGetStatusRequest{}
 		for _, f := range o {
 			f(&r)
 		}
@@ -22,11 +22,11 @@ func newIlmGetStatusFunc(t Transport) IlmGetStatus {
 //
 // See full documentation at https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-status.html.
 //
-type IlmGetStatus func(o ...func(*IlmGetStatusRequest)) (*Response, error)
+type ILMGetStatus func(o ...func(*ILMGetStatusRequest)) (*Response, error)
 
-// IlmGetStatusRequest configures the Ilm  Get Status API request.
+// ILMGetStatusRequest configures the Ilm  Get Status API request.
 //
-type IlmGetStatusRequest struct {
+type ILMGetStatusRequest struct {
 	Pretty     bool
 	Human      bool
 	ErrorTrace bool
@@ -37,7 +37,7 @@ type IlmGetStatusRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r IlmGetStatusRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r ILMGetStatusRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -97,40 +97,40 @@ func (r IlmGetStatusRequest) Do(ctx context.Context, transport Transport) (*Resp
 
 // WithContext sets the request context.
 //
-func (f IlmGetStatus) WithContext(v context.Context) func(*IlmGetStatusRequest) {
-	return func(r *IlmGetStatusRequest) {
+func (f ILMGetStatus) WithContext(v context.Context) func(*ILMGetStatusRequest) {
+	return func(r *ILMGetStatusRequest) {
 		r.ctx = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f IlmGetStatus) WithPretty() func(*IlmGetStatusRequest) {
-	return func(r *IlmGetStatusRequest) {
+func (f ILMGetStatus) WithPretty() func(*ILMGetStatusRequest) {
+	return func(r *ILMGetStatusRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f IlmGetStatus) WithHuman() func(*IlmGetStatusRequest) {
-	return func(r *IlmGetStatusRequest) {
+func (f ILMGetStatus) WithHuman() func(*ILMGetStatusRequest) {
+	return func(r *ILMGetStatusRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f IlmGetStatus) WithErrorTrace() func(*IlmGetStatusRequest) {
-	return func(r *IlmGetStatusRequest) {
+func (f ILMGetStatus) WithErrorTrace() func(*ILMGetStatusRequest) {
+	return func(r *ILMGetStatusRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f IlmGetStatus) WithFilterPath(v ...string) func(*IlmGetStatusRequest) {
-	return func(r *IlmGetStatusRequest) {
+func (f ILMGetStatus) WithFilterPath(v ...string) func(*ILMGetStatusRequest) {
+	return func(r *ILMGetStatusRequest) {
 		r.FilterPath = v
 	}
 }

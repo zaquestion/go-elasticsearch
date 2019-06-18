@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -8,9 +8,9 @@ import (
 	"strings"
 )
 
-func newMlDeleteJobFunc(t Transport) MlDeleteJob {
-	return func(job_id string, o ...func(*MlDeleteJobRequest)) (*Response, error) {
-		var r = MlDeleteJobRequest{JobID: job_id}
+func newMLDeleteJobFunc(t Transport) MLDeleteJob {
+	return func(job_id string, o ...func(*MLDeleteJobRequest)) (*Response, error) {
+		var r = MLDeleteJobRequest{JobID: job_id}
 		for _, f := range o {
 			f(&r)
 		}
@@ -23,12 +23,13 @@ func newMlDeleteJobFunc(t Transport) MlDeleteJob {
 //
 // See full documentation at http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html.
 //
-type MlDeleteJob func(job_id string, o ...func(*MlDeleteJobRequest)) (*Response, error)
+type MLDeleteJob func(job_id string, o ...func(*MLDeleteJobRequest)) (*Response, error)
 
-// MlDeleteJobRequest configures the Ml  Delete Job API request.
+// MLDeleteJobRequest configures the Ml  Delete Job API request.
 //
-type MlDeleteJobRequest struct {
-	JobID             string
+type MLDeleteJobRequest struct {
+	JobID string
+
 	Force             *bool
 	WaitForCompletion *bool
 
@@ -42,7 +43,7 @@ type MlDeleteJobRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r MlDeleteJobRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r MLDeleteJobRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -115,56 +116,56 @@ func (r MlDeleteJobRequest) Do(ctx context.Context, transport Transport) (*Respo
 
 // WithContext sets the request context.
 //
-func (f MlDeleteJob) WithContext(v context.Context) func(*MlDeleteJobRequest) {
-	return func(r *MlDeleteJobRequest) {
+func (f MLDeleteJob) WithContext(v context.Context) func(*MLDeleteJobRequest) {
+	return func(r *MLDeleteJobRequest) {
 		r.ctx = v
 	}
 }
 
 // WithForce - true if the job should be forcefully deleted.
 //
-func (f MlDeleteJob) WithForce(v bool) func(*MlDeleteJobRequest) {
-	return func(r *MlDeleteJobRequest) {
+func (f MLDeleteJob) WithForce(v bool) func(*MLDeleteJobRequest) {
+	return func(r *MLDeleteJobRequest) {
 		r.Force = &v
 	}
 }
 
 // WithWaitForCompletion - should this request wait until the operation has completed before returning.
 //
-func (f MlDeleteJob) WithWaitForCompletion(v bool) func(*MlDeleteJobRequest) {
-	return func(r *MlDeleteJobRequest) {
+func (f MLDeleteJob) WithWaitForCompletion(v bool) func(*MLDeleteJobRequest) {
+	return func(r *MLDeleteJobRequest) {
 		r.WaitForCompletion = &v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f MlDeleteJob) WithPretty() func(*MlDeleteJobRequest) {
-	return func(r *MlDeleteJobRequest) {
+func (f MLDeleteJob) WithPretty() func(*MLDeleteJobRequest) {
+	return func(r *MLDeleteJobRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f MlDeleteJob) WithHuman() func(*MlDeleteJobRequest) {
-	return func(r *MlDeleteJobRequest) {
+func (f MLDeleteJob) WithHuman() func(*MLDeleteJobRequest) {
+	return func(r *MLDeleteJobRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f MlDeleteJob) WithErrorTrace() func(*MlDeleteJobRequest) {
-	return func(r *MlDeleteJobRequest) {
+func (f MLDeleteJob) WithErrorTrace() func(*MLDeleteJobRequest) {
+	return func(r *MLDeleteJobRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f MlDeleteJob) WithFilterPath(v ...string) func(*MlDeleteJobRequest) {
-	return func(r *MlDeleteJobRequest) {
+func (f MLDeleteJob) WithFilterPath(v ...string) func(*MLDeleteJobRequest) {
+	return func(r *MLDeleteJobRequest) {
 		r.FilterPath = v
 	}
 }

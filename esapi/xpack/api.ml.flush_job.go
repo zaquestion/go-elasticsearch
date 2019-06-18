@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -9,9 +9,9 @@ import (
 	"strings"
 )
 
-func newMlFlushJobFunc(t Transport) MlFlushJob {
-	return func(job_id string, o ...func(*MlFlushJobRequest)) (*Response, error) {
-		var r = MlFlushJobRequest{JobID: job_id}
+func newMLFlushJobFunc(t Transport) MLFlushJob {
+	return func(job_id string, o ...func(*MLFlushJobRequest)) (*Response, error) {
+		var r = MLFlushJobRequest{JobID: job_id}
 		for _, f := range o {
 			f(&r)
 		}
@@ -24,14 +24,15 @@ func newMlFlushJobFunc(t Transport) MlFlushJob {
 //
 // See full documentation at http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html.
 //
-type MlFlushJob func(job_id string, o ...func(*MlFlushJobRequest)) (*Response, error)
+type MLFlushJob func(job_id string, o ...func(*MLFlushJobRequest)) (*Response, error)
 
-// MlFlushJobRequest configures the Ml  Flush Job API request.
+// MLFlushJobRequest configures the Ml  Flush Job API request.
 //
-type MlFlushJobRequest struct {
+type MLFlushJobRequest struct {
 	Body io.Reader
 
-	JobID       string
+	JobID string
+
 	AdvanceTime string
 	CalcInterim *bool
 	End         string
@@ -48,7 +49,7 @@ type MlFlushJobRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r MlFlushJobRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r MLFlushJobRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -139,88 +140,88 @@ func (r MlFlushJobRequest) Do(ctx context.Context, transport Transport) (*Respon
 
 // WithContext sets the request context.
 //
-func (f MlFlushJob) WithContext(v context.Context) func(*MlFlushJobRequest) {
-	return func(r *MlFlushJobRequest) {
+func (f MLFlushJob) WithContext(v context.Context) func(*MLFlushJobRequest) {
+	return func(r *MLFlushJobRequest) {
 		r.ctx = v
 	}
 }
 
 // WithBody - Flush parameters.
 //
-func (f MlFlushJob) WithBody(v io.Reader) func(*MlFlushJobRequest) {
-	return func(r *MlFlushJobRequest) {
+func (f MLFlushJob) WithBody(v io.Reader) func(*MLFlushJobRequest) {
+	return func(r *MLFlushJobRequest) {
 		r.Body = v
 	}
 }
 
 // WithAdvanceTime - advances time to the given value generating results and updating the model for the advanced interval.
 //
-func (f MlFlushJob) WithAdvanceTime(v string) func(*MlFlushJobRequest) {
-	return func(r *MlFlushJobRequest) {
+func (f MLFlushJob) WithAdvanceTime(v string) func(*MLFlushJobRequest) {
+	return func(r *MLFlushJobRequest) {
 		r.AdvanceTime = v
 	}
 }
 
 // WithCalcInterim - calculates interim results for the most recent bucket or all buckets within the latency period.
 //
-func (f MlFlushJob) WithCalcInterim(v bool) func(*MlFlushJobRequest) {
-	return func(r *MlFlushJobRequest) {
+func (f MLFlushJob) WithCalcInterim(v bool) func(*MLFlushJobRequest) {
+	return func(r *MLFlushJobRequest) {
 		r.CalcInterim = &v
 	}
 }
 
 // WithEnd - when used in conjunction with calc_interim, specifies the range of buckets on which to calculate interim results.
 //
-func (f MlFlushJob) WithEnd(v string) func(*MlFlushJobRequest) {
-	return func(r *MlFlushJobRequest) {
+func (f MLFlushJob) WithEnd(v string) func(*MLFlushJobRequest) {
+	return func(r *MLFlushJobRequest) {
 		r.End = v
 	}
 }
 
 // WithSkipTime - skips time to the given value without generating results or updating the model for the skipped interval.
 //
-func (f MlFlushJob) WithSkipTime(v string) func(*MlFlushJobRequest) {
-	return func(r *MlFlushJobRequest) {
+func (f MLFlushJob) WithSkipTime(v string) func(*MLFlushJobRequest) {
+	return func(r *MLFlushJobRequest) {
 		r.SkipTime = v
 	}
 }
 
 // WithStart - when used in conjunction with calc_interim, specifies the range of buckets on which to calculate interim results.
 //
-func (f MlFlushJob) WithStart(v string) func(*MlFlushJobRequest) {
-	return func(r *MlFlushJobRequest) {
+func (f MLFlushJob) WithStart(v string) func(*MLFlushJobRequest) {
+	return func(r *MLFlushJobRequest) {
 		r.Start = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f MlFlushJob) WithPretty() func(*MlFlushJobRequest) {
-	return func(r *MlFlushJobRequest) {
+func (f MLFlushJob) WithPretty() func(*MLFlushJobRequest) {
+	return func(r *MLFlushJobRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f MlFlushJob) WithHuman() func(*MlFlushJobRequest) {
-	return func(r *MlFlushJobRequest) {
+func (f MLFlushJob) WithHuman() func(*MLFlushJobRequest) {
+	return func(r *MLFlushJobRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f MlFlushJob) WithErrorTrace() func(*MlFlushJobRequest) {
-	return func(r *MlFlushJobRequest) {
+func (f MLFlushJob) WithErrorTrace() func(*MLFlushJobRequest) {
+	return func(r *MLFlushJobRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f MlFlushJob) WithFilterPath(v ...string) func(*MlFlushJobRequest) {
-	return func(r *MlFlushJobRequest) {
+func (f MLFlushJob) WithFilterPath(v ...string) func(*MLFlushJobRequest) {
+	return func(r *MLFlushJobRequest) {
 		r.FilterPath = v
 	}
 }

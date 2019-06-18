@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -8,9 +8,9 @@ import (
 	"strings"
 )
 
-func newMlPutFilterFunc(t Transport) MlPutFilter {
-	return func(body io.Reader, filter_id string, o ...func(*MlPutFilterRequest)) (*Response, error) {
-		var r = MlPutFilterRequest{Body: body, FilterID: filter_id}
+func newMLPutFilterFunc(t Transport) MLPutFilter {
+	return func(body io.Reader, filter_id string, o ...func(*MLPutFilterRequest)) (*Response, error) {
+		var r = MLPutFilterRequest{Body: body, FilterID: filter_id}
 		for _, f := range o {
 			f(&r)
 		}
@@ -21,11 +21,11 @@ func newMlPutFilterFunc(t Transport) MlPutFilter {
 // ----- API Definition -------------------------------------------------------
 
 //
-type MlPutFilter func(body io.Reader, filter_id string, o ...func(*MlPutFilterRequest)) (*Response, error)
+type MLPutFilter func(body io.Reader, filter_id string, o ...func(*MLPutFilterRequest)) (*Response, error)
 
-// MlPutFilterRequest configures the Ml  Put Filter API request.
+// MLPutFilterRequest configures the Ml  Put Filter API request.
 //
-type MlPutFilterRequest struct {
+type MLPutFilterRequest struct {
 	Body io.Reader
 
 	FilterID string
@@ -40,7 +40,7 @@ type MlPutFilterRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r MlPutFilterRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r MLPutFilterRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -109,40 +109,40 @@ func (r MlPutFilterRequest) Do(ctx context.Context, transport Transport) (*Respo
 
 // WithContext sets the request context.
 //
-func (f MlPutFilter) WithContext(v context.Context) func(*MlPutFilterRequest) {
-	return func(r *MlPutFilterRequest) {
+func (f MLPutFilter) WithContext(v context.Context) func(*MLPutFilterRequest) {
+	return func(r *MLPutFilterRequest) {
 		r.ctx = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f MlPutFilter) WithPretty() func(*MlPutFilterRequest) {
-	return func(r *MlPutFilterRequest) {
+func (f MLPutFilter) WithPretty() func(*MLPutFilterRequest) {
+	return func(r *MLPutFilterRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f MlPutFilter) WithHuman() func(*MlPutFilterRequest) {
-	return func(r *MlPutFilterRequest) {
+func (f MLPutFilter) WithHuman() func(*MLPutFilterRequest) {
+	return func(r *MLPutFilterRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f MlPutFilter) WithErrorTrace() func(*MlPutFilterRequest) {
-	return func(r *MlPutFilterRequest) {
+func (f MLPutFilter) WithErrorTrace() func(*MLPutFilterRequest) {
+	return func(r *MLPutFilterRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f MlPutFilter) WithFilterPath(v ...string) func(*MlPutFilterRequest) {
-	return func(r *MlPutFilterRequest) {
+func (f MLPutFilter) WithFilterPath(v ...string) func(*MLPutFilterRequest) {
+	return func(r *MLPutFilterRequest) {
 		r.FilterPath = v
 	}
 }

@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -7,9 +7,9 @@ import (
 	"strings"
 )
 
-func newMlDeleteFilterFunc(t Transport) MlDeleteFilter {
-	return func(filter_id string, o ...func(*MlDeleteFilterRequest)) (*Response, error) {
-		var r = MlDeleteFilterRequest{FilterID: filter_id}
+func newMLDeleteFilterFunc(t Transport) MLDeleteFilter {
+	return func(filter_id string, o ...func(*MLDeleteFilterRequest)) (*Response, error) {
+		var r = MLDeleteFilterRequest{FilterID: filter_id}
 		for _, f := range o {
 			f(&r)
 		}
@@ -20,11 +20,11 @@ func newMlDeleteFilterFunc(t Transport) MlDeleteFilter {
 // ----- API Definition -------------------------------------------------------
 
 //
-type MlDeleteFilter func(filter_id string, o ...func(*MlDeleteFilterRequest)) (*Response, error)
+type MLDeleteFilter func(filter_id string, o ...func(*MLDeleteFilterRequest)) (*Response, error)
 
-// MlDeleteFilterRequest configures the Ml  Delete Filter API request.
+// MLDeleteFilterRequest configures the Ml  Delete Filter API request.
 //
-type MlDeleteFilterRequest struct {
+type MLDeleteFilterRequest struct {
 	FilterID string
 
 	Pretty     bool
@@ -37,7 +37,7 @@ type MlDeleteFilterRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r MlDeleteFilterRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r MLDeleteFilterRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -102,40 +102,40 @@ func (r MlDeleteFilterRequest) Do(ctx context.Context, transport Transport) (*Re
 
 // WithContext sets the request context.
 //
-func (f MlDeleteFilter) WithContext(v context.Context) func(*MlDeleteFilterRequest) {
-	return func(r *MlDeleteFilterRequest) {
+func (f MLDeleteFilter) WithContext(v context.Context) func(*MLDeleteFilterRequest) {
+	return func(r *MLDeleteFilterRequest) {
 		r.ctx = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f MlDeleteFilter) WithPretty() func(*MlDeleteFilterRequest) {
-	return func(r *MlDeleteFilterRequest) {
+func (f MLDeleteFilter) WithPretty() func(*MLDeleteFilterRequest) {
+	return func(r *MLDeleteFilterRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f MlDeleteFilter) WithHuman() func(*MlDeleteFilterRequest) {
-	return func(r *MlDeleteFilterRequest) {
+func (f MLDeleteFilter) WithHuman() func(*MLDeleteFilterRequest) {
+	return func(r *MLDeleteFilterRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f MlDeleteFilter) WithErrorTrace() func(*MlDeleteFilterRequest) {
-	return func(r *MlDeleteFilterRequest) {
+func (f MLDeleteFilter) WithErrorTrace() func(*MLDeleteFilterRequest) {
+	return func(r *MLDeleteFilterRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f MlDeleteFilter) WithFilterPath(v ...string) func(*MlDeleteFilterRequest) {
-	return func(r *MlDeleteFilterRequest) {
+func (f MLDeleteFilter) WithFilterPath(v ...string) func(*MLDeleteFilterRequest) {
+	return func(r *MLDeleteFilterRequest) {
 		r.FilterPath = v
 	}
 }

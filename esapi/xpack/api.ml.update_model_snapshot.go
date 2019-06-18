@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -8,9 +8,9 @@ import (
 	"strings"
 )
 
-func newMlUpdateModelSnapshotFunc(t Transport) MlUpdateModelSnapshot {
-	return func(body io.Reader, snapshot_id string, job_id string, o ...func(*MlUpdateModelSnapshotRequest)) (*Response, error) {
-		var r = MlUpdateModelSnapshotRequest{Body: body, JobID: job_id, SnapshotID: snapshot_id}
+func newMLUpdateModelSnapshotFunc(t Transport) MLUpdateModelSnapshot {
+	return func(body io.Reader, job_id string, snapshot_id string, o ...func(*MLUpdateModelSnapshotRequest)) (*Response, error) {
+		var r = MLUpdateModelSnapshotRequest{Body: body, JobID: job_id, SnapshotID: snapshot_id}
 		for _, f := range o {
 			f(&r)
 		}
@@ -23,11 +23,11 @@ func newMlUpdateModelSnapshotFunc(t Transport) MlUpdateModelSnapshot {
 //
 // See full documentation at http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html.
 //
-type MlUpdateModelSnapshot func(body io.Reader, snapshot_id string, job_id string, o ...func(*MlUpdateModelSnapshotRequest)) (*Response, error)
+type MLUpdateModelSnapshot func(body io.Reader, job_id string, snapshot_id string, o ...func(*MLUpdateModelSnapshotRequest)) (*Response, error)
 
-// MlUpdateModelSnapshotRequest configures the Ml   Update Model Snapshot API request.
+// MLUpdateModelSnapshotRequest configures the Ml   Update Model Snapshot API request.
 //
-type MlUpdateModelSnapshotRequest struct {
+type MLUpdateModelSnapshotRequest struct {
 	Body io.Reader
 
 	JobID      string
@@ -43,7 +43,7 @@ type MlUpdateModelSnapshotRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r MlUpdateModelSnapshotRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r MLUpdateModelSnapshotRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -118,40 +118,40 @@ func (r MlUpdateModelSnapshotRequest) Do(ctx context.Context, transport Transpor
 
 // WithContext sets the request context.
 //
-func (f MlUpdateModelSnapshot) WithContext(v context.Context) func(*MlUpdateModelSnapshotRequest) {
-	return func(r *MlUpdateModelSnapshotRequest) {
+func (f MLUpdateModelSnapshot) WithContext(v context.Context) func(*MLUpdateModelSnapshotRequest) {
+	return func(r *MLUpdateModelSnapshotRequest) {
 		r.ctx = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f MlUpdateModelSnapshot) WithPretty() func(*MlUpdateModelSnapshotRequest) {
-	return func(r *MlUpdateModelSnapshotRequest) {
+func (f MLUpdateModelSnapshot) WithPretty() func(*MLUpdateModelSnapshotRequest) {
+	return func(r *MLUpdateModelSnapshotRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f MlUpdateModelSnapshot) WithHuman() func(*MlUpdateModelSnapshotRequest) {
-	return func(r *MlUpdateModelSnapshotRequest) {
+func (f MLUpdateModelSnapshot) WithHuman() func(*MLUpdateModelSnapshotRequest) {
+	return func(r *MLUpdateModelSnapshotRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f MlUpdateModelSnapshot) WithErrorTrace() func(*MlUpdateModelSnapshotRequest) {
-	return func(r *MlUpdateModelSnapshotRequest) {
+func (f MLUpdateModelSnapshot) WithErrorTrace() func(*MLUpdateModelSnapshotRequest) {
+	return func(r *MLUpdateModelSnapshotRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f MlUpdateModelSnapshot) WithFilterPath(v ...string) func(*MlUpdateModelSnapshotRequest) {
-	return func(r *MlUpdateModelSnapshotRequest) {
+func (f MLUpdateModelSnapshot) WithFilterPath(v ...string) func(*MLUpdateModelSnapshotRequest) {
+	return func(r *MLUpdateModelSnapshotRequest) {
 		r.FilterPath = v
 	}
 }

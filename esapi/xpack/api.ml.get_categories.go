@@ -1,17 +1,17 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
 import (
 	"context"
-	"fmt"
 	"io"
+	"strconv"
 	"strings"
 )
 
-func newMlGetCategoriesFunc(t Transport) MlGetCategories {
-	return func(job_id string, o ...func(*MlGetCategoriesRequest)) (*Response, error) {
-		var r = MlGetCategoriesRequest{JobID: job_id}
+func newMLGetCategoriesFunc(t Transport) MLGetCategories {
+	return func(job_id string, o ...func(*MLGetCategoriesRequest)) (*Response, error) {
+		var r = MLGetCategoriesRequest{JobID: job_id}
 		for _, f := range o {
 			f(&r)
 		}
@@ -24,17 +24,18 @@ func newMlGetCategoriesFunc(t Transport) MlGetCategories {
 //
 // See full documentation at http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html.
 //
-type MlGetCategories func(job_id string, o ...func(*MlGetCategoriesRequest)) (*Response, error)
+type MLGetCategories func(job_id string, o ...func(*MLGetCategoriesRequest)) (*Response, error)
 
-// MlGetCategoriesRequest configures the Ml  Get Categories API request.
+// MLGetCategoriesRequest configures the Ml  Get Categories API request.
 //
-type MlGetCategoriesRequest struct {
+type MLGetCategoriesRequest struct {
 	Body io.Reader
 
+	CategoryID *int
 	JobID      string
-	CategoryID interface{}
-	From       interface{}
-	Size       interface{}
+
+	From *int
+	Size *int
 
 	Pretty     bool
 	Human      bool
@@ -46,7 +47,7 @@ type MlGetCategoriesRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r MlGetCategoriesRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r MLGetCategoriesRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -66,16 +67,21 @@ func (r MlGetCategoriesRequest) Do(ctx context.Context, transport Transport) (*R
 	path.WriteString("results")
 	path.WriteString("/")
 	path.WriteString("categories")
-	// TODO: type int or long
+	if r.CategoryID != nil {
+		value := strconv.FormatInt(int64(*r.CategoryID), 10)
+		path.Grow(1 + len(value))
+		path.WriteString("/")
+		path.WriteString(value)
+	}
 
 	params = make(map[string]string)
 
 	if r.From != nil {
-		params["from"] = fmt.Sprintf("%v", r.From)
+		params["from"] = strconv.FormatInt(int64(*r.From), 10)
 	}
 
 	if r.Size != nil {
-		params["size"] = fmt.Sprintf("%v", r.Size)
+		params["size"] = strconv.FormatInt(int64(*r.Size), 10)
 	}
 
 	if r.Pretty {
@@ -128,72 +134,72 @@ func (r MlGetCategoriesRequest) Do(ctx context.Context, transport Transport) (*R
 
 // WithContext sets the request context.
 //
-func (f MlGetCategories) WithContext(v context.Context) func(*MlGetCategoriesRequest) {
-	return func(r *MlGetCategoriesRequest) {
+func (f MLGetCategories) WithContext(v context.Context) func(*MLGetCategoriesRequest) {
+	return func(r *MLGetCategoriesRequest) {
 		r.ctx = v
-	}
-}
-
-// WithCategoryID - the identifier of the category definition of interest.
-//
-func (f MlGetCategories) WithCategoryID(v interface{}) func(*MlGetCategoriesRequest) {
-	return func(r *MlGetCategoriesRequest) {
-		r.CategoryID = v
 	}
 }
 
 // WithBody - Category selection details if not provided in URI.
 //
-func (f MlGetCategories) WithBody(v io.Reader) func(*MlGetCategoriesRequest) {
-	return func(r *MlGetCategoriesRequest) {
+func (f MLGetCategories) WithBody(v io.Reader) func(*MLGetCategoriesRequest) {
+	return func(r *MLGetCategoriesRequest) {
 		r.Body = v
+	}
+}
+
+// WithCategoryID - the identifier of the category definition of interest.
+//
+func (f MLGetCategories) WithCategoryID(v int) func(*MLGetCategoriesRequest) {
+	return func(r *MLGetCategoriesRequest) {
+		r.CategoryID = &v
 	}
 }
 
 // WithFrom - skips a number of categories.
 //
-func (f MlGetCategories) WithFrom(v interface{}) func(*MlGetCategoriesRequest) {
-	return func(r *MlGetCategoriesRequest) {
-		r.From = v
+func (f MLGetCategories) WithFrom(v int) func(*MLGetCategoriesRequest) {
+	return func(r *MLGetCategoriesRequest) {
+		r.From = &v
 	}
 }
 
 // WithSize - specifies a max number of categories to get.
 //
-func (f MlGetCategories) WithSize(v interface{}) func(*MlGetCategoriesRequest) {
-	return func(r *MlGetCategoriesRequest) {
-		r.Size = v
+func (f MLGetCategories) WithSize(v int) func(*MLGetCategoriesRequest) {
+	return func(r *MLGetCategoriesRequest) {
+		r.Size = &v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f MlGetCategories) WithPretty() func(*MlGetCategoriesRequest) {
-	return func(r *MlGetCategoriesRequest) {
+func (f MLGetCategories) WithPretty() func(*MLGetCategoriesRequest) {
+	return func(r *MLGetCategoriesRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f MlGetCategories) WithHuman() func(*MlGetCategoriesRequest) {
-	return func(r *MlGetCategoriesRequest) {
+func (f MLGetCategories) WithHuman() func(*MLGetCategoriesRequest) {
+	return func(r *MLGetCategoriesRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f MlGetCategories) WithErrorTrace() func(*MlGetCategoriesRequest) {
-	return func(r *MlGetCategoriesRequest) {
+func (f MLGetCategories) WithErrorTrace() func(*MLGetCategoriesRequest) {
+	return func(r *MLGetCategoriesRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f MlGetCategories) WithFilterPath(v ...string) func(*MlGetCategoriesRequest) {
-	return func(r *MlGetCategoriesRequest) {
+func (f MLGetCategories) WithFilterPath(v ...string) func(*MLGetCategoriesRequest) {
+	return func(r *MLGetCategoriesRequest) {
 		r.FilterPath = v
 	}
 }

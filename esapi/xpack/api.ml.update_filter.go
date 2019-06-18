@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -8,9 +8,9 @@ import (
 	"strings"
 )
 
-func newMlUpdateFilterFunc(t Transport) MlUpdateFilter {
-	return func(body io.Reader, filter_id string, o ...func(*MlUpdateFilterRequest)) (*Response, error) {
-		var r = MlUpdateFilterRequest{Body: body, FilterID: filter_id}
+func newMLUpdateFilterFunc(t Transport) MLUpdateFilter {
+	return func(body io.Reader, filter_id string, o ...func(*MLUpdateFilterRequest)) (*Response, error) {
+		var r = MLUpdateFilterRequest{Body: body, FilterID: filter_id}
 		for _, f := range o {
 			f(&r)
 		}
@@ -21,11 +21,11 @@ func newMlUpdateFilterFunc(t Transport) MlUpdateFilter {
 // ----- API Definition -------------------------------------------------------
 
 //
-type MlUpdateFilter func(body io.Reader, filter_id string, o ...func(*MlUpdateFilterRequest)) (*Response, error)
+type MLUpdateFilter func(body io.Reader, filter_id string, o ...func(*MLUpdateFilterRequest)) (*Response, error)
 
-// MlUpdateFilterRequest configures the Ml  Update Filter API request.
+// MLUpdateFilterRequest configures the Ml  Update Filter API request.
 //
-type MlUpdateFilterRequest struct {
+type MLUpdateFilterRequest struct {
 	Body io.Reader
 
 	FilterID string
@@ -40,7 +40,7 @@ type MlUpdateFilterRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r MlUpdateFilterRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r MLUpdateFilterRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -111,40 +111,40 @@ func (r MlUpdateFilterRequest) Do(ctx context.Context, transport Transport) (*Re
 
 // WithContext sets the request context.
 //
-func (f MlUpdateFilter) WithContext(v context.Context) func(*MlUpdateFilterRequest) {
-	return func(r *MlUpdateFilterRequest) {
+func (f MLUpdateFilter) WithContext(v context.Context) func(*MLUpdateFilterRequest) {
+	return func(r *MLUpdateFilterRequest) {
 		r.ctx = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f MlUpdateFilter) WithPretty() func(*MlUpdateFilterRequest) {
-	return func(r *MlUpdateFilterRequest) {
+func (f MLUpdateFilter) WithPretty() func(*MLUpdateFilterRequest) {
+	return func(r *MLUpdateFilterRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f MlUpdateFilter) WithHuman() func(*MlUpdateFilterRequest) {
-	return func(r *MlUpdateFilterRequest) {
+func (f MLUpdateFilter) WithHuman() func(*MLUpdateFilterRequest) {
+	return func(r *MLUpdateFilterRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f MlUpdateFilter) WithErrorTrace() func(*MlUpdateFilterRequest) {
-	return func(r *MlUpdateFilterRequest) {
+func (f MLUpdateFilter) WithErrorTrace() func(*MLUpdateFilterRequest) {
+	return func(r *MLUpdateFilterRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f MlUpdateFilter) WithFilterPath(v ...string) func(*MlUpdateFilterRequest) {
-	return func(r *MlUpdateFilterRequest) {
+func (f MLUpdateFilter) WithFilterPath(v ...string) func(*MLUpdateFilterRequest) {
+	return func(r *MLUpdateFilterRequest) {
 		r.FilterPath = v
 	}
 }

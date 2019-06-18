@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -7,9 +7,9 @@ import (
 	"strings"
 )
 
-func newMlInfoFunc(t Transport) MlInfo {
-	return func(o ...func(*MlInfoRequest)) (*Response, error) {
-		var r = MlInfoRequest{}
+func newMLInfoFunc(t Transport) MLInfo {
+	return func(o ...func(*MLInfoRequest)) (*Response, error) {
+		var r = MLInfoRequest{}
 		for _, f := range o {
 			f(&r)
 		}
@@ -20,11 +20,11 @@ func newMlInfoFunc(t Transport) MlInfo {
 // ----- API Definition -------------------------------------------------------
 
 //
-type MlInfo func(o ...func(*MlInfoRequest)) (*Response, error)
+type MLInfo func(o ...func(*MLInfoRequest)) (*Response, error)
 
-// MlInfoRequest configures the Ml Info API request.
+// MLInfoRequest configures the Ml Info API request.
 //
-type MlInfoRequest struct {
+type MLInfoRequest struct {
 	Pretty     bool
 	Human      bool
 	ErrorTrace bool
@@ -35,7 +35,7 @@ type MlInfoRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r MlInfoRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r MLInfoRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -95,40 +95,40 @@ func (r MlInfoRequest) Do(ctx context.Context, transport Transport) (*Response, 
 
 // WithContext sets the request context.
 //
-func (f MlInfo) WithContext(v context.Context) func(*MlInfoRequest) {
-	return func(r *MlInfoRequest) {
+func (f MLInfo) WithContext(v context.Context) func(*MLInfoRequest) {
+	return func(r *MLInfoRequest) {
 		r.ctx = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f MlInfo) WithPretty() func(*MlInfoRequest) {
-	return func(r *MlInfoRequest) {
+func (f MLInfo) WithPretty() func(*MLInfoRequest) {
+	return func(r *MLInfoRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f MlInfo) WithHuman() func(*MlInfoRequest) {
-	return func(r *MlInfoRequest) {
+func (f MLInfo) WithHuman() func(*MLInfoRequest) {
+	return func(r *MLInfoRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f MlInfo) WithErrorTrace() func(*MlInfoRequest) {
-	return func(r *MlInfoRequest) {
+func (f MLInfo) WithErrorTrace() func(*MLInfoRequest) {
+	return func(r *MLInfoRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f MlInfo) WithFilterPath(v ...string) func(*MlInfoRequest) {
-	return func(r *MlInfoRequest) {
+func (f MLInfo) WithFilterPath(v ...string) func(*MLInfoRequest) {
+	return func(r *MLInfoRequest) {
 		r.FilterPath = v
 	}
 }

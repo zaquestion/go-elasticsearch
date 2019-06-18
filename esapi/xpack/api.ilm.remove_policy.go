@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -7,9 +7,9 @@ import (
 	"strings"
 )
 
-func newIlmRemovePolicyFunc(t Transport) IlmRemovePolicy {
-	return func(o ...func(*IlmRemovePolicyRequest)) (*Response, error) {
-		var r = IlmRemovePolicyRequest{}
+func newILMRemovePolicyFunc(t Transport) ILMRemovePolicy {
+	return func(o ...func(*ILMRemovePolicyRequest)) (*Response, error) {
+		var r = ILMRemovePolicyRequest{}
 		for _, f := range o {
 			f(&r)
 		}
@@ -22,11 +22,11 @@ func newIlmRemovePolicyFunc(t Transport) IlmRemovePolicy {
 //
 // See full documentation at https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html.
 //
-type IlmRemovePolicy func(o ...func(*IlmRemovePolicyRequest)) (*Response, error)
+type ILMRemovePolicy func(o ...func(*ILMRemovePolicyRequest)) (*Response, error)
 
-// IlmRemovePolicyRequest configures the Ilm  Remove Policy API request.
+// ILMRemovePolicyRequest configures the Ilm  Remove Policy API request.
 //
-type IlmRemovePolicyRequest struct {
+type ILMRemovePolicyRequest struct {
 	Index string
 
 	Pretty     bool
@@ -39,7 +39,7 @@ type IlmRemovePolicyRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r IlmRemovePolicyRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r ILMRemovePolicyRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -106,48 +106,48 @@ func (r IlmRemovePolicyRequest) Do(ctx context.Context, transport Transport) (*R
 
 // WithContext sets the request context.
 //
-func (f IlmRemovePolicy) WithContext(v context.Context) func(*IlmRemovePolicyRequest) {
-	return func(r *IlmRemovePolicyRequest) {
+func (f ILMRemovePolicy) WithContext(v context.Context) func(*ILMRemovePolicyRequest) {
+	return func(r *ILMRemovePolicyRequest) {
 		r.ctx = v
 	}
 }
 
 // WithIndex - the name of the index to remove policy on.
 //
-func (f IlmRemovePolicy) WithIndex(v string) func(*IlmRemovePolicyRequest) {
-	return func(r *IlmRemovePolicyRequest) {
+func (f ILMRemovePolicy) WithIndex(v string) func(*ILMRemovePolicyRequest) {
+	return func(r *ILMRemovePolicyRequest) {
 		r.Index = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f IlmRemovePolicy) WithPretty() func(*IlmRemovePolicyRequest) {
-	return func(r *IlmRemovePolicyRequest) {
+func (f ILMRemovePolicy) WithPretty() func(*ILMRemovePolicyRequest) {
+	return func(r *ILMRemovePolicyRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f IlmRemovePolicy) WithHuman() func(*IlmRemovePolicyRequest) {
-	return func(r *IlmRemovePolicyRequest) {
+func (f ILMRemovePolicy) WithHuman() func(*ILMRemovePolicyRequest) {
+	return func(r *ILMRemovePolicyRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f IlmRemovePolicy) WithErrorTrace() func(*IlmRemovePolicyRequest) {
-	return func(r *IlmRemovePolicyRequest) {
+func (f ILMRemovePolicy) WithErrorTrace() func(*ILMRemovePolicyRequest) {
+	return func(r *ILMRemovePolicyRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f IlmRemovePolicy) WithFilterPath(v ...string) func(*IlmRemovePolicyRequest) {
-	return func(r *IlmRemovePolicyRequest) {
+func (f ILMRemovePolicy) WithFilterPath(v ...string) func(*ILMRemovePolicyRequest) {
+	return func(r *ILMRemovePolicyRequest) {
 		r.FilterPath = v
 	}
 }

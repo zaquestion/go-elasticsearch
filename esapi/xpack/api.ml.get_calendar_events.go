@@ -1,16 +1,17 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
 import (
 	"context"
 	"fmt"
+	"strconv"
 	"strings"
 )
 
-func newMlGetCalendarEventsFunc(t Transport) MlGetCalendarEvents {
-	return func(calendar_id string, o ...func(*MlGetCalendarEventsRequest)) (*Response, error) {
-		var r = MlGetCalendarEventsRequest{CalendarID: calendar_id}
+func newMLGetCalendarEventsFunc(t Transport) MLGetCalendarEvents {
+	return func(calendar_id string, o ...func(*MLGetCalendarEventsRequest)) (*Response, error) {
+		var r = MLGetCalendarEventsRequest{CalendarID: calendar_id}
 		for _, f := range o {
 			f(&r)
 		}
@@ -21,17 +22,18 @@ func newMlGetCalendarEventsFunc(t Transport) MlGetCalendarEvents {
 // ----- API Definition -------------------------------------------------------
 
 //
-type MlGetCalendarEvents func(calendar_id string, o ...func(*MlGetCalendarEventsRequest)) (*Response, error)
+type MLGetCalendarEvents func(calendar_id string, o ...func(*MLGetCalendarEventsRequest)) (*Response, error)
 
-// MlGetCalendarEventsRequest configures the Ml   Get Calendar Events API request.
+// MLGetCalendarEventsRequest configures the Ml   Get Calendar Events API request.
 //
-type MlGetCalendarEventsRequest struct {
+type MLGetCalendarEventsRequest struct {
 	CalendarID string
-	End        interface{}
-	From       interface{}
-	JobID      string
-	Size       interface{}
-	Start      string
+
+	End   interface{}
+	From  *int
+	JobID string
+	Size  *int
+	Start string
 
 	Pretty     bool
 	Human      bool
@@ -43,7 +45,7 @@ type MlGetCalendarEventsRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r MlGetCalendarEventsRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r MLGetCalendarEventsRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -69,7 +71,7 @@ func (r MlGetCalendarEventsRequest) Do(ctx context.Context, transport Transport)
 	}
 
 	if r.From != nil {
-		params["from"] = fmt.Sprintf("%v", r.From)
+		params["from"] = strconv.FormatInt(int64(*r.From), 10)
 	}
 
 	if r.JobID != "" {
@@ -77,7 +79,7 @@ func (r MlGetCalendarEventsRequest) Do(ctx context.Context, transport Transport)
 	}
 
 	if r.Size != nil {
-		params["size"] = fmt.Sprintf("%v", r.Size)
+		params["size"] = strconv.FormatInt(int64(*r.Size), 10)
 	}
 
 	if r.Start != "" {
@@ -130,80 +132,80 @@ func (r MlGetCalendarEventsRequest) Do(ctx context.Context, transport Transport)
 
 // WithContext sets the request context.
 //
-func (f MlGetCalendarEvents) WithContext(v context.Context) func(*MlGetCalendarEventsRequest) {
-	return func(r *MlGetCalendarEventsRequest) {
+func (f MLGetCalendarEvents) WithContext(v context.Context) func(*MLGetCalendarEventsRequest) {
+	return func(r *MLGetCalendarEventsRequest) {
 		r.ctx = v
 	}
 }
 
 // WithEnd - get events before this time.
 //
-func (f MlGetCalendarEvents) WithEnd(v interface{}) func(*MlGetCalendarEventsRequest) {
-	return func(r *MlGetCalendarEventsRequest) {
+func (f MLGetCalendarEvents) WithEnd(v interface{}) func(*MLGetCalendarEventsRequest) {
+	return func(r *MLGetCalendarEventsRequest) {
 		r.End = v
 	}
 }
 
 // WithFrom - skips a number of events.
 //
-func (f MlGetCalendarEvents) WithFrom(v interface{}) func(*MlGetCalendarEventsRequest) {
-	return func(r *MlGetCalendarEventsRequest) {
-		r.From = v
+func (f MLGetCalendarEvents) WithFrom(v int) func(*MLGetCalendarEventsRequest) {
+	return func(r *MLGetCalendarEventsRequest) {
+		r.From = &v
 	}
 }
 
 // WithJobID - get events for the job. when this option is used calendar_id must be '_all'.
 //
-func (f MlGetCalendarEvents) WithJobID(v string) func(*MlGetCalendarEventsRequest) {
-	return func(r *MlGetCalendarEventsRequest) {
+func (f MLGetCalendarEvents) WithJobID(v string) func(*MLGetCalendarEventsRequest) {
+	return func(r *MLGetCalendarEventsRequest) {
 		r.JobID = v
 	}
 }
 
 // WithSize - specifies a max number of events to get.
 //
-func (f MlGetCalendarEvents) WithSize(v interface{}) func(*MlGetCalendarEventsRequest) {
-	return func(r *MlGetCalendarEventsRequest) {
-		r.Size = v
+func (f MLGetCalendarEvents) WithSize(v int) func(*MLGetCalendarEventsRequest) {
+	return func(r *MLGetCalendarEventsRequest) {
+		r.Size = &v
 	}
 }
 
 // WithStart - get events after this time.
 //
-func (f MlGetCalendarEvents) WithStart(v string) func(*MlGetCalendarEventsRequest) {
-	return func(r *MlGetCalendarEventsRequest) {
+func (f MLGetCalendarEvents) WithStart(v string) func(*MLGetCalendarEventsRequest) {
+	return func(r *MLGetCalendarEventsRequest) {
 		r.Start = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f MlGetCalendarEvents) WithPretty() func(*MlGetCalendarEventsRequest) {
-	return func(r *MlGetCalendarEventsRequest) {
+func (f MLGetCalendarEvents) WithPretty() func(*MLGetCalendarEventsRequest) {
+	return func(r *MLGetCalendarEventsRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f MlGetCalendarEvents) WithHuman() func(*MlGetCalendarEventsRequest) {
-	return func(r *MlGetCalendarEventsRequest) {
+func (f MLGetCalendarEvents) WithHuman() func(*MLGetCalendarEventsRequest) {
+	return func(r *MLGetCalendarEventsRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f MlGetCalendarEvents) WithErrorTrace() func(*MlGetCalendarEventsRequest) {
-	return func(r *MlGetCalendarEventsRequest) {
+func (f MLGetCalendarEvents) WithErrorTrace() func(*MLGetCalendarEventsRequest) {
+	return func(r *MLGetCalendarEventsRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f MlGetCalendarEvents) WithFilterPath(v ...string) func(*MlGetCalendarEventsRequest) {
-	return func(r *MlGetCalendarEventsRequest) {
+func (f MLGetCalendarEvents) WithFilterPath(v ...string) func(*MLGetCalendarEventsRequest) {
+	return func(r *MLGetCalendarEventsRequest) {
 		r.FilterPath = v
 	}
 }

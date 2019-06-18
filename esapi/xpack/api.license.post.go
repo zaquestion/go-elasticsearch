@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -22,7 +22,7 @@ func newLicensePostFunc(t Transport) LicensePost {
 // ----- API Definition -------------------------------------------------------
 
 //
-// See full documentation at https://www.elastic.co/guide/en/x-pack/current/license-management.html.
+// See full documentation at https://www.elastic.co/guide/en/elasticsearch/reference/master/update-license.html.
 //
 type LicensePost func(o ...func(*LicensePostRequest)) (*Response, error)
 

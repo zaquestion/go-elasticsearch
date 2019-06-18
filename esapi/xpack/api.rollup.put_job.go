@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -27,7 +27,8 @@ type RollupPutJob func(id string, body io.Reader, o ...func(*RollupPutJobRequest
 //
 type RollupPutJobRequest struct {
 	DocumentID string
-	Body       io.Reader
+
+	Body io.Reader
 
 	Pretty     bool
 	Human      bool

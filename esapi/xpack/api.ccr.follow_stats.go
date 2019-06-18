@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -7,9 +7,9 @@ import (
 	"strings"
 )
 
-func newCcrFollowStatsFunc(t Transport) CcrFollowStats {
-	return func(index []string, o ...func(*CcrFollowStatsRequest)) (*Response, error) {
-		var r = CcrFollowStatsRequest{Index: index}
+func newCCRFollowStatsFunc(t Transport) CCRFollowStats {
+	return func(index []string, o ...func(*CCRFollowStatsRequest)) (*Response, error) {
+		var r = CCRFollowStatsRequest{Index: index}
 		for _, f := range o {
 			f(&r)
 		}
@@ -22,11 +22,11 @@ func newCcrFollowStatsFunc(t Transport) CcrFollowStats {
 //
 // See full documentation at https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-stats.html.
 //
-type CcrFollowStats func(index []string, o ...func(*CcrFollowStatsRequest)) (*Response, error)
+type CCRFollowStats func(index []string, o ...func(*CCRFollowStatsRequest)) (*Response, error)
 
-// CcrFollowStatsRequest configures the Ccr  Follow Stats API request.
+// CCRFollowStatsRequest configures the Ccr  Follow Stats API request.
 //
-type CcrFollowStatsRequest struct {
+type CCRFollowStatsRequest struct {
 	Index []string
 
 	Pretty     bool
@@ -39,7 +39,7 @@ type CcrFollowStatsRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r CcrFollowStatsRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r CCRFollowStatsRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -104,40 +104,40 @@ func (r CcrFollowStatsRequest) Do(ctx context.Context, transport Transport) (*Re
 
 // WithContext sets the request context.
 //
-func (f CcrFollowStats) WithContext(v context.Context) func(*CcrFollowStatsRequest) {
-	return func(r *CcrFollowStatsRequest) {
+func (f CCRFollowStats) WithContext(v context.Context) func(*CCRFollowStatsRequest) {
+	return func(r *CCRFollowStatsRequest) {
 		r.ctx = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f CcrFollowStats) WithPretty() func(*CcrFollowStatsRequest) {
-	return func(r *CcrFollowStatsRequest) {
+func (f CCRFollowStats) WithPretty() func(*CCRFollowStatsRequest) {
+	return func(r *CCRFollowStatsRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f CcrFollowStats) WithHuman() func(*CcrFollowStatsRequest) {
-	return func(r *CcrFollowStatsRequest) {
+func (f CCRFollowStats) WithHuman() func(*CCRFollowStatsRequest) {
+	return func(r *CCRFollowStatsRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f CcrFollowStats) WithErrorTrace() func(*CcrFollowStatsRequest) {
-	return func(r *CcrFollowStatsRequest) {
+func (f CCRFollowStats) WithErrorTrace() func(*CCRFollowStatsRequest) {
+	return func(r *CCRFollowStatsRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f CcrFollowStats) WithFilterPath(v ...string) func(*CcrFollowStatsRequest) {
-	return func(r *CcrFollowStatsRequest) {
+func (f CCRFollowStats) WithFilterPath(v ...string) func(*CCRFollowStatsRequest) {
+	return func(r *CCRFollowStatsRequest) {
 		r.FilterPath = v
 	}
 }

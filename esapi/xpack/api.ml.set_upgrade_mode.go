@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -9,9 +9,9 @@ import (
 	"time"
 )
 
-func newMlSetUpgradeModeFunc(t Transport) MlSetUpgradeMode {
-	return func(o ...func(*MlSetUpgradeModeRequest)) (*Response, error) {
-		var r = MlSetUpgradeModeRequest{}
+func newMLSetUpgradeModeFunc(t Transport) MLSetUpgradeMode {
+	return func(o ...func(*MLSetUpgradeModeRequest)) (*Response, error) {
+		var r = MLSetUpgradeModeRequest{}
 		for _, f := range o {
 			f(&r)
 		}
@@ -24,11 +24,11 @@ func newMlSetUpgradeModeFunc(t Transport) MlSetUpgradeMode {
 //
 // See full documentation at http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-set-upgrade-mode.html.
 //
-type MlSetUpgradeMode func(o ...func(*MlSetUpgradeModeRequest)) (*Response, error)
+type MLSetUpgradeMode func(o ...func(*MLSetUpgradeModeRequest)) (*Response, error)
 
-// MlSetUpgradeModeRequest configures the Ml   Set Upgrade Mode API request.
+// MLSetUpgradeModeRequest configures the Ml   Set Upgrade Mode API request.
 //
-type MlSetUpgradeModeRequest struct {
+type MLSetUpgradeModeRequest struct {
 	Enabled *bool
 	Timeout time.Duration
 
@@ -42,7 +42,7 @@ type MlSetUpgradeModeRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r MlSetUpgradeModeRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r MLSetUpgradeModeRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -110,56 +110,56 @@ func (r MlSetUpgradeModeRequest) Do(ctx context.Context, transport Transport) (*
 
 // WithContext sets the request context.
 //
-func (f MlSetUpgradeMode) WithContext(v context.Context) func(*MlSetUpgradeModeRequest) {
-	return func(r *MlSetUpgradeModeRequest) {
+func (f MLSetUpgradeMode) WithContext(v context.Context) func(*MLSetUpgradeModeRequest) {
+	return func(r *MLSetUpgradeModeRequest) {
 		r.ctx = v
 	}
 }
 
 // WithEnabled - whether to enable upgrade_mode ml setting or not. defaults to false..
 //
-func (f MlSetUpgradeMode) WithEnabled(v bool) func(*MlSetUpgradeModeRequest) {
-	return func(r *MlSetUpgradeModeRequest) {
+func (f MLSetUpgradeMode) WithEnabled(v bool) func(*MLSetUpgradeModeRequest) {
+	return func(r *MLSetUpgradeModeRequest) {
 		r.Enabled = &v
 	}
 }
 
 // WithTimeout - controls the time to wait before action times out. defaults to 30 seconds.
 //
-func (f MlSetUpgradeMode) WithTimeout(v time.Duration) func(*MlSetUpgradeModeRequest) {
-	return func(r *MlSetUpgradeModeRequest) {
+func (f MLSetUpgradeMode) WithTimeout(v time.Duration) func(*MLSetUpgradeModeRequest) {
+	return func(r *MLSetUpgradeModeRequest) {
 		r.Timeout = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f MlSetUpgradeMode) WithPretty() func(*MlSetUpgradeModeRequest) {
-	return func(r *MlSetUpgradeModeRequest) {
+func (f MLSetUpgradeMode) WithPretty() func(*MLSetUpgradeModeRequest) {
+	return func(r *MLSetUpgradeModeRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f MlSetUpgradeMode) WithHuman() func(*MlSetUpgradeModeRequest) {
-	return func(r *MlSetUpgradeModeRequest) {
+func (f MLSetUpgradeMode) WithHuman() func(*MLSetUpgradeModeRequest) {
+	return func(r *MLSetUpgradeModeRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f MlSetUpgradeMode) WithErrorTrace() func(*MlSetUpgradeModeRequest) {
-	return func(r *MlSetUpgradeModeRequest) {
+func (f MLSetUpgradeMode) WithErrorTrace() func(*MLSetUpgradeModeRequest) {
+	return func(r *MLSetUpgradeModeRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f MlSetUpgradeMode) WithFilterPath(v ...string) func(*MlSetUpgradeModeRequest) {
-	return func(r *MlSetUpgradeModeRequest) {
+func (f MLSetUpgradeMode) WithFilterPath(v ...string) func(*MLSetUpgradeModeRequest) {
+	return func(r *MLSetUpgradeModeRequest) {
 		r.FilterPath = v
 	}
 }

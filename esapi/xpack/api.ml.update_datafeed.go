@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -8,9 +8,9 @@ import (
 	"strings"
 )
 
-func newMlUpdateDatafeedFunc(t Transport) MlUpdateDatafeed {
-	return func(body io.Reader, datafeed_id string, o ...func(*MlUpdateDatafeedRequest)) (*Response, error) {
-		var r = MlUpdateDatafeedRequest{Body: body, DatafeedID: datafeed_id}
+func newMLUpdateDatafeedFunc(t Transport) MLUpdateDatafeed {
+	return func(body io.Reader, datafeed_id string, o ...func(*MLUpdateDatafeedRequest)) (*Response, error) {
+		var r = MLUpdateDatafeedRequest{Body: body, DatafeedID: datafeed_id}
 		for _, f := range o {
 			f(&r)
 		}
@@ -23,11 +23,11 @@ func newMlUpdateDatafeedFunc(t Transport) MlUpdateDatafeed {
 //
 // See full documentation at http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html.
 //
-type MlUpdateDatafeed func(body io.Reader, datafeed_id string, o ...func(*MlUpdateDatafeedRequest)) (*Response, error)
+type MLUpdateDatafeed func(body io.Reader, datafeed_id string, o ...func(*MLUpdateDatafeedRequest)) (*Response, error)
 
-// MlUpdateDatafeedRequest configures the Ml  Update Datafeed API request.
+// MLUpdateDatafeedRequest configures the Ml  Update Datafeed API request.
 //
-type MlUpdateDatafeedRequest struct {
+type MLUpdateDatafeedRequest struct {
 	Body io.Reader
 
 	DatafeedID string
@@ -42,7 +42,7 @@ type MlUpdateDatafeedRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r MlUpdateDatafeedRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r MLUpdateDatafeedRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -113,40 +113,40 @@ func (r MlUpdateDatafeedRequest) Do(ctx context.Context, transport Transport) (*
 
 // WithContext sets the request context.
 //
-func (f MlUpdateDatafeed) WithContext(v context.Context) func(*MlUpdateDatafeedRequest) {
-	return func(r *MlUpdateDatafeedRequest) {
+func (f MLUpdateDatafeed) WithContext(v context.Context) func(*MLUpdateDatafeedRequest) {
+	return func(r *MLUpdateDatafeedRequest) {
 		r.ctx = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f MlUpdateDatafeed) WithPretty() func(*MlUpdateDatafeedRequest) {
-	return func(r *MlUpdateDatafeedRequest) {
+func (f MLUpdateDatafeed) WithPretty() func(*MLUpdateDatafeedRequest) {
+	return func(r *MLUpdateDatafeedRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f MlUpdateDatafeed) WithHuman() func(*MlUpdateDatafeedRequest) {
-	return func(r *MlUpdateDatafeedRequest) {
+func (f MLUpdateDatafeed) WithHuman() func(*MLUpdateDatafeedRequest) {
+	return func(r *MLUpdateDatafeedRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f MlUpdateDatafeed) WithErrorTrace() func(*MlUpdateDatafeedRequest) {
-	return func(r *MlUpdateDatafeedRequest) {
+func (f MLUpdateDatafeed) WithErrorTrace() func(*MLUpdateDatafeedRequest) {
+	return func(r *MLUpdateDatafeedRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f MlUpdateDatafeed) WithFilterPath(v ...string) func(*MlUpdateDatafeedRequest) {
-	return func(r *MlUpdateDatafeedRequest) {
+func (f MLUpdateDatafeed) WithFilterPath(v ...string) func(*MLUpdateDatafeedRequest) {
+	return func(r *MLUpdateDatafeedRequest) {
 		r.FilterPath = v
 	}
 }

@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -20,7 +20,7 @@ func newMigrationDeprecationsFunc(t Transport) MigrationDeprecations {
 // ----- API Definition -------------------------------------------------------
 
 //
-// See full documentation at http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html.
+// See full documentation at http://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-deprecation.html.
 //
 type MigrationDeprecations func(o ...func(*MigrationDeprecationsRequest)) (*Response, error)
 

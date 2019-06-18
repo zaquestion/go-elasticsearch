@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -7,9 +7,9 @@ import (
 	"strings"
 )
 
-func newMlDeleteExpiredDataFunc(t Transport) MlDeleteExpiredData {
-	return func(o ...func(*MlDeleteExpiredDataRequest)) (*Response, error) {
-		var r = MlDeleteExpiredDataRequest{}
+func newMLDeleteExpiredDataFunc(t Transport) MLDeleteExpiredData {
+	return func(o ...func(*MLDeleteExpiredDataRequest)) (*Response, error) {
+		var r = MLDeleteExpiredDataRequest{}
 		for _, f := range o {
 			f(&r)
 		}
@@ -20,11 +20,11 @@ func newMlDeleteExpiredDataFunc(t Transport) MlDeleteExpiredData {
 // ----- API Definition -------------------------------------------------------
 
 //
-type MlDeleteExpiredData func(o ...func(*MlDeleteExpiredDataRequest)) (*Response, error)
+type MLDeleteExpiredData func(o ...func(*MLDeleteExpiredDataRequest)) (*Response, error)
 
-// MlDeleteExpiredDataRequest configures the Ml   Delete Expired Data API request.
+// MLDeleteExpiredDataRequest configures the Ml   Delete Expired Data API request.
 //
-type MlDeleteExpiredDataRequest struct {
+type MLDeleteExpiredDataRequest struct {
 	Pretty     bool
 	Human      bool
 	ErrorTrace bool
@@ -35,7 +35,7 @@ type MlDeleteExpiredDataRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r MlDeleteExpiredDataRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r MLDeleteExpiredDataRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -95,40 +95,40 @@ func (r MlDeleteExpiredDataRequest) Do(ctx context.Context, transport Transport)
 
 // WithContext sets the request context.
 //
-func (f MlDeleteExpiredData) WithContext(v context.Context) func(*MlDeleteExpiredDataRequest) {
-	return func(r *MlDeleteExpiredDataRequest) {
+func (f MLDeleteExpiredData) WithContext(v context.Context) func(*MLDeleteExpiredDataRequest) {
+	return func(r *MLDeleteExpiredDataRequest) {
 		r.ctx = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f MlDeleteExpiredData) WithPretty() func(*MlDeleteExpiredDataRequest) {
-	return func(r *MlDeleteExpiredDataRequest) {
+func (f MLDeleteExpiredData) WithPretty() func(*MLDeleteExpiredDataRequest) {
+	return func(r *MLDeleteExpiredDataRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f MlDeleteExpiredData) WithHuman() func(*MlDeleteExpiredDataRequest) {
-	return func(r *MlDeleteExpiredDataRequest) {
+func (f MLDeleteExpiredData) WithHuman() func(*MLDeleteExpiredDataRequest) {
+	return func(r *MLDeleteExpiredDataRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f MlDeleteExpiredData) WithErrorTrace() func(*MlDeleteExpiredDataRequest) {
-	return func(r *MlDeleteExpiredDataRequest) {
+func (f MLDeleteExpiredData) WithErrorTrace() func(*MLDeleteExpiredDataRequest) {
+	return func(r *MLDeleteExpiredDataRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f MlDeleteExpiredData) WithFilterPath(v ...string) func(*MlDeleteExpiredDataRequest) {
-	return func(r *MlDeleteExpiredDataRequest) {
+func (f MLDeleteExpiredData) WithFilterPath(v ...string) func(*MLDeleteExpiredDataRequest) {
+	return func(r *MLDeleteExpiredDataRequest) {
 		r.FilterPath = v
 	}
 }

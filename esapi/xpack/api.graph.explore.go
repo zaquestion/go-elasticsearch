@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -31,7 +31,8 @@ type GraphExplore func(o ...func(*GraphExploreRequest)) (*Response, error)
 type GraphExploreRequest struct {
 	Index        []string
 	DocumentType []string
-	Body         io.Reader
+
+	Body io.Reader
 
 	Routing string
 	Timeout time.Duration
@@ -135,6 +136,14 @@ func (f GraphExplore) WithContext(v context.Context) func(*GraphExploreRequest) 
 	}
 }
 
+// WithBody - Graph Query DSL.
+//
+func (f GraphExplore) WithBody(v io.Reader) func(*GraphExploreRequest) {
+	return func(r *GraphExploreRequest) {
+		r.Body = v
+	}
+}
+
 // WithIndex - a list of index names to search; use _all to perform the operation on all indices.
 //
 func (f GraphExplore) WithIndex(v ...string) func(*GraphExploreRequest) {
@@ -148,14 +157,6 @@ func (f GraphExplore) WithIndex(v ...string) func(*GraphExploreRequest) {
 func (f GraphExplore) WithDocumentType(v ...string) func(*GraphExploreRequest) {
 	return func(r *GraphExploreRequest) {
 		r.DocumentType = v
-	}
-}
-
-// WithBody - Graph Query DSL.
-//
-func (f GraphExplore) WithBody(v io.Reader) func(*GraphExploreRequest) {
-	return func(r *GraphExploreRequest) {
-		r.Body = v
 	}
 }
 

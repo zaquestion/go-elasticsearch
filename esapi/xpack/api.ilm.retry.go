@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -7,9 +7,9 @@ import (
 	"strings"
 )
 
-func newIlmRetryFunc(t Transport) IlmRetry {
-	return func(o ...func(*IlmRetryRequest)) (*Response, error) {
-		var r = IlmRetryRequest{}
+func newILMRetryFunc(t Transport) ILMRetry {
+	return func(o ...func(*ILMRetryRequest)) (*Response, error) {
+		var r = ILMRetryRequest{}
 		for _, f := range o {
 			f(&r)
 		}
@@ -22,11 +22,11 @@ func newIlmRetryFunc(t Transport) IlmRetry {
 //
 // See full documentation at https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html.
 //
-type IlmRetry func(o ...func(*IlmRetryRequest)) (*Response, error)
+type ILMRetry func(o ...func(*ILMRetryRequest)) (*Response, error)
 
-// IlmRetryRequest configures the Ilm Retry API request.
+// ILMRetryRequest configures the Ilm Retry API request.
 //
-type IlmRetryRequest struct {
+type ILMRetryRequest struct {
 	Index string
 
 	Pretty     bool
@@ -39,7 +39,7 @@ type IlmRetryRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r IlmRetryRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r ILMRetryRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -106,48 +106,48 @@ func (r IlmRetryRequest) Do(ctx context.Context, transport Transport) (*Response
 
 // WithContext sets the request context.
 //
-func (f IlmRetry) WithContext(v context.Context) func(*IlmRetryRequest) {
-	return func(r *IlmRetryRequest) {
+func (f ILMRetry) WithContext(v context.Context) func(*ILMRetryRequest) {
+	return func(r *ILMRetryRequest) {
 		r.ctx = v
 	}
 }
 
 // WithIndex - the name of the indices (comma-separated) whose failed lifecycle step is to be retry.
 //
-func (f IlmRetry) WithIndex(v string) func(*IlmRetryRequest) {
-	return func(r *IlmRetryRequest) {
+func (f ILMRetry) WithIndex(v string) func(*ILMRetryRequest) {
+	return func(r *ILMRetryRequest) {
 		r.Index = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f IlmRetry) WithPretty() func(*IlmRetryRequest) {
-	return func(r *IlmRetryRequest) {
+func (f ILMRetry) WithPretty() func(*ILMRetryRequest) {
+	return func(r *ILMRetryRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f IlmRetry) WithHuman() func(*IlmRetryRequest) {
-	return func(r *IlmRetryRequest) {
+func (f ILMRetry) WithHuman() func(*ILMRetryRequest) {
+	return func(r *ILMRetryRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f IlmRetry) WithErrorTrace() func(*IlmRetryRequest) {
-	return func(r *IlmRetryRequest) {
+func (f ILMRetry) WithErrorTrace() func(*ILMRetryRequest) {
+	return func(r *ILMRetryRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f IlmRetry) WithFilterPath(v ...string) func(*IlmRetryRequest) {
-	return func(r *IlmRetryRequest) {
+func (f ILMRetry) WithFilterPath(v ...string) func(*ILMRetryRequest) {
+	return func(r *ILMRetryRequest) {
 		r.FilterPath = v
 	}
 }

@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -9,9 +9,9 @@ import (
 	"time"
 )
 
-func newMlDeleteForecastFunc(t Transport) MlDeleteForecast {
-	return func(job_id string, o ...func(*MlDeleteForecastRequest)) (*Response, error) {
-		var r = MlDeleteForecastRequest{JobID: job_id}
+func newMLDeleteForecastFunc(t Transport) MLDeleteForecast {
+	return func(job_id string, o ...func(*MLDeleteForecastRequest)) (*Response, error) {
+		var r = MLDeleteForecastRequest{JobID: job_id}
 		for _, f := range o {
 			f(&r)
 		}
@@ -24,13 +24,14 @@ func newMlDeleteForecastFunc(t Transport) MlDeleteForecast {
 //
 // See full documentation at http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html.
 //
-type MlDeleteForecast func(job_id string, o ...func(*MlDeleteForecastRequest)) (*Response, error)
+type MLDeleteForecast func(job_id string, o ...func(*MLDeleteForecastRequest)) (*Response, error)
 
-// MlDeleteForecastRequest configures the Ml  Delete Forecast API request.
+// MLDeleteForecastRequest configures the Ml  Delete Forecast API request.
 //
-type MlDeleteForecastRequest struct {
-	JobID            string
-	ForecastID       string
+type MLDeleteForecastRequest struct {
+	ForecastID string
+	JobID      string
+
 	AllowNoForecasts *bool
 	Timeout          time.Duration
 
@@ -44,7 +45,7 @@ type MlDeleteForecastRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r MlDeleteForecastRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r MLDeleteForecastRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -123,64 +124,64 @@ func (r MlDeleteForecastRequest) Do(ctx context.Context, transport Transport) (*
 
 // WithContext sets the request context.
 //
-func (f MlDeleteForecast) WithContext(v context.Context) func(*MlDeleteForecastRequest) {
-	return func(r *MlDeleteForecastRequest) {
+func (f MLDeleteForecast) WithContext(v context.Context) func(*MLDeleteForecastRequest) {
+	return func(r *MLDeleteForecastRequest) {
 		r.ctx = v
 	}
 }
 
 // WithForecastID - the ID of the forecast to delete, can be comma delimited list. leaving blank implies `_all`.
 //
-func (f MlDeleteForecast) WithForecastID(v string) func(*MlDeleteForecastRequest) {
-	return func(r *MlDeleteForecastRequest) {
+func (f MLDeleteForecast) WithForecastID(v string) func(*MLDeleteForecastRequest) {
+	return func(r *MLDeleteForecastRequest) {
 		r.ForecastID = v
 	}
 }
 
 // WithAllowNoForecasts - whether to ignore if `_all` matches no forecasts.
 //
-func (f MlDeleteForecast) WithAllowNoForecasts(v bool) func(*MlDeleteForecastRequest) {
-	return func(r *MlDeleteForecastRequest) {
+func (f MLDeleteForecast) WithAllowNoForecasts(v bool) func(*MLDeleteForecastRequest) {
+	return func(r *MLDeleteForecastRequest) {
 		r.AllowNoForecasts = &v
 	}
 }
 
 // WithTimeout - controls the time to wait until the forecast(s) are deleted. default to 30 seconds.
 //
-func (f MlDeleteForecast) WithTimeout(v time.Duration) func(*MlDeleteForecastRequest) {
-	return func(r *MlDeleteForecastRequest) {
+func (f MLDeleteForecast) WithTimeout(v time.Duration) func(*MLDeleteForecastRequest) {
+	return func(r *MLDeleteForecastRequest) {
 		r.Timeout = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f MlDeleteForecast) WithPretty() func(*MlDeleteForecastRequest) {
-	return func(r *MlDeleteForecastRequest) {
+func (f MLDeleteForecast) WithPretty() func(*MLDeleteForecastRequest) {
+	return func(r *MLDeleteForecastRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f MlDeleteForecast) WithHuman() func(*MlDeleteForecastRequest) {
-	return func(r *MlDeleteForecastRequest) {
+func (f MLDeleteForecast) WithHuman() func(*MLDeleteForecastRequest) {
+	return func(r *MLDeleteForecastRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f MlDeleteForecast) WithErrorTrace() func(*MlDeleteForecastRequest) {
-	return func(r *MlDeleteForecastRequest) {
+func (f MLDeleteForecast) WithErrorTrace() func(*MLDeleteForecastRequest) {
+	return func(r *MLDeleteForecastRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f MlDeleteForecast) WithFilterPath(v ...string) func(*MlDeleteForecastRequest) {
-	return func(r *MlDeleteForecastRequest) {
+func (f MLDeleteForecast) WithFilterPath(v ...string) func(*MLDeleteForecastRequest) {
+	return func(r *MLDeleteForecastRequest) {
 		r.FilterPath = v
 	}
 }

@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -10,9 +10,9 @@ import (
 	"strings"
 )
 
-func newMlGetRecordsFunc(t Transport) MlGetRecords {
-	return func(job_id string, o ...func(*MlGetRecordsRequest)) (*Response, error) {
-		var r = MlGetRecordsRequest{JobID: job_id}
+func newMLGetRecordsFunc(t Transport) MLGetRecords {
+	return func(job_id string, o ...func(*MLGetRecordsRequest)) (*Response, error) {
+		var r = MLGetRecordsRequest{JobID: job_id}
 		for _, f := range o {
 			f(&r)
 		}
@@ -25,20 +25,21 @@ func newMlGetRecordsFunc(t Transport) MlGetRecords {
 //
 // See full documentation at http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html.
 //
-type MlGetRecords func(job_id string, o ...func(*MlGetRecordsRequest)) (*Response, error)
+type MLGetRecords func(job_id string, o ...func(*MLGetRecordsRequest)) (*Response, error)
 
-// MlGetRecordsRequest configures the Ml  Get Records API request.
+// MLGetRecordsRequest configures the Ml  Get Records API request.
 //
-type MlGetRecordsRequest struct {
+type MLGetRecordsRequest struct {
 	Body io.Reader
 
-	JobID          string
+	JobID string
+
 	Desc           *bool
 	End            string
 	ExcludeInterim *bool
-	From           interface{}
+	From           *int
 	RecordScore    interface{}
-	Size           interface{}
+	Size           *int
 	Sort           string
 	Start          string
 
@@ -52,7 +53,7 @@ type MlGetRecordsRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r MlGetRecordsRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r MLGetRecordsRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -88,7 +89,7 @@ func (r MlGetRecordsRequest) Do(ctx context.Context, transport Transport) (*Resp
 	}
 
 	if r.From != nil {
-		params["from"] = fmt.Sprintf("%v", r.From)
+		params["from"] = strconv.FormatInt(int64(*r.From), 10)
 	}
 
 	if r.RecordScore != nil {
@@ -96,7 +97,7 @@ func (r MlGetRecordsRequest) Do(ctx context.Context, transport Transport) (*Resp
 	}
 
 	if r.Size != nil {
-		params["size"] = fmt.Sprintf("%v", r.Size)
+		params["size"] = strconv.FormatInt(int64(*r.Size), 10)
 	}
 
 	if r.Sort != "" {
@@ -157,112 +158,112 @@ func (r MlGetRecordsRequest) Do(ctx context.Context, transport Transport) (*Resp
 
 // WithContext sets the request context.
 //
-func (f MlGetRecords) WithContext(v context.Context) func(*MlGetRecordsRequest) {
-	return func(r *MlGetRecordsRequest) {
+func (f MLGetRecords) WithContext(v context.Context) func(*MLGetRecordsRequest) {
+	return func(r *MLGetRecordsRequest) {
 		r.ctx = v
 	}
 }
 
 // WithBody - Record selection criteria.
 //
-func (f MlGetRecords) WithBody(v io.Reader) func(*MlGetRecordsRequest) {
-	return func(r *MlGetRecordsRequest) {
+func (f MLGetRecords) WithBody(v io.Reader) func(*MLGetRecordsRequest) {
+	return func(r *MLGetRecordsRequest) {
 		r.Body = v
 	}
 }
 
 // WithDesc - set the sort direction.
 //
-func (f MlGetRecords) WithDesc(v bool) func(*MlGetRecordsRequest) {
-	return func(r *MlGetRecordsRequest) {
+func (f MLGetRecords) WithDesc(v bool) func(*MLGetRecordsRequest) {
+	return func(r *MLGetRecordsRequest) {
 		r.Desc = &v
 	}
 }
 
 // WithEnd - end time filter for records.
 //
-func (f MlGetRecords) WithEnd(v string) func(*MlGetRecordsRequest) {
-	return func(r *MlGetRecordsRequest) {
+func (f MLGetRecords) WithEnd(v string) func(*MLGetRecordsRequest) {
+	return func(r *MLGetRecordsRequest) {
 		r.End = v
 	}
 }
 
 // WithExcludeInterim - exclude interim results.
 //
-func (f MlGetRecords) WithExcludeInterim(v bool) func(*MlGetRecordsRequest) {
-	return func(r *MlGetRecordsRequest) {
+func (f MLGetRecords) WithExcludeInterim(v bool) func(*MLGetRecordsRequest) {
+	return func(r *MLGetRecordsRequest) {
 		r.ExcludeInterim = &v
 	}
 }
 
 // WithFrom - skips a number of records.
 //
-func (f MlGetRecords) WithFrom(v interface{}) func(*MlGetRecordsRequest) {
-	return func(r *MlGetRecordsRequest) {
-		r.From = v
+func (f MLGetRecords) WithFrom(v int) func(*MLGetRecordsRequest) {
+	return func(r *MLGetRecordsRequest) {
+		r.From = &v
 	}
 }
 
 // WithRecordScore - .
 //
-func (f MlGetRecords) WithRecordScore(v interface{}) func(*MlGetRecordsRequest) {
-	return func(r *MlGetRecordsRequest) {
+func (f MLGetRecords) WithRecordScore(v interface{}) func(*MLGetRecordsRequest) {
+	return func(r *MLGetRecordsRequest) {
 		r.RecordScore = v
 	}
 }
 
 // WithSize - specifies a max number of records to get.
 //
-func (f MlGetRecords) WithSize(v interface{}) func(*MlGetRecordsRequest) {
-	return func(r *MlGetRecordsRequest) {
-		r.Size = v
+func (f MLGetRecords) WithSize(v int) func(*MLGetRecordsRequest) {
+	return func(r *MLGetRecordsRequest) {
+		r.Size = &v
 	}
 }
 
 // WithSort - sort records by a particular field.
 //
-func (f MlGetRecords) WithSort(v string) func(*MlGetRecordsRequest) {
-	return func(r *MlGetRecordsRequest) {
+func (f MLGetRecords) WithSort(v string) func(*MLGetRecordsRequest) {
+	return func(r *MLGetRecordsRequest) {
 		r.Sort = v
 	}
 }
 
 // WithStart - start time filter for records.
 //
-func (f MlGetRecords) WithStart(v string) func(*MlGetRecordsRequest) {
-	return func(r *MlGetRecordsRequest) {
+func (f MLGetRecords) WithStart(v string) func(*MLGetRecordsRequest) {
+	return func(r *MLGetRecordsRequest) {
 		r.Start = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f MlGetRecords) WithPretty() func(*MlGetRecordsRequest) {
-	return func(r *MlGetRecordsRequest) {
+func (f MLGetRecords) WithPretty() func(*MLGetRecordsRequest) {
+	return func(r *MLGetRecordsRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f MlGetRecords) WithHuman() func(*MlGetRecordsRequest) {
-	return func(r *MlGetRecordsRequest) {
+func (f MLGetRecords) WithHuman() func(*MLGetRecordsRequest) {
+	return func(r *MLGetRecordsRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f MlGetRecords) WithErrorTrace() func(*MlGetRecordsRequest) {
-	return func(r *MlGetRecordsRequest) {
+func (f MLGetRecords) WithErrorTrace() func(*MLGetRecordsRequest) {
+	return func(r *MLGetRecordsRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f MlGetRecords) WithFilterPath(v ...string) func(*MlGetRecordsRequest) {
-	return func(r *MlGetRecordsRequest) {
+func (f MLGetRecords) WithFilterPath(v ...string) func(*MLGetRecordsRequest) {
+	return func(r *MLGetRecordsRequest) {
 		r.FilterPath = v
 	}
 }

@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -9,9 +9,9 @@ import (
 	"strings"
 )
 
-func newMlRevertModelSnapshotFunc(t Transport) MlRevertModelSnapshot {
-	return func(job_id string, snapshot_id string, o ...func(*MlRevertModelSnapshotRequest)) (*Response, error) {
-		var r = MlRevertModelSnapshotRequest{JobID: job_id, SnapshotID: snapshot_id}
+func newMLRevertModelSnapshotFunc(t Transport) MLRevertModelSnapshot {
+	return func(job_id string, snapshot_id string, o ...func(*MLRevertModelSnapshotRequest)) (*Response, error) {
+		var r = MLRevertModelSnapshotRequest{JobID: job_id, SnapshotID: snapshot_id}
 		for _, f := range o {
 			f(&r)
 		}
@@ -24,15 +24,16 @@ func newMlRevertModelSnapshotFunc(t Transport) MlRevertModelSnapshot {
 //
 // See full documentation at http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html.
 //
-type MlRevertModelSnapshot func(snapshot_id string, job_id string, o ...func(*MlRevertModelSnapshotRequest)) (*Response, error)
+type MLRevertModelSnapshot func(job_id string, snapshot_id string, o ...func(*MLRevertModelSnapshotRequest)) (*Response, error)
 
-// MlRevertModelSnapshotRequest configures the Ml   Revert Model Snapshot API request.
+// MLRevertModelSnapshotRequest configures the Ml   Revert Model Snapshot API request.
 //
-type MlRevertModelSnapshotRequest struct {
+type MLRevertModelSnapshotRequest struct {
 	Body io.Reader
 
-	JobID                    string
-	SnapshotID               string
+	JobID      string
+	SnapshotID string
+
 	DeleteInterveningResults *bool
 
 	Pretty     bool
@@ -45,7 +46,7 @@ type MlRevertModelSnapshotRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r MlRevertModelSnapshotRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r MLRevertModelSnapshotRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -124,56 +125,56 @@ func (r MlRevertModelSnapshotRequest) Do(ctx context.Context, transport Transpor
 
 // WithContext sets the request context.
 //
-func (f MlRevertModelSnapshot) WithContext(v context.Context) func(*MlRevertModelSnapshotRequest) {
-	return func(r *MlRevertModelSnapshotRequest) {
+func (f MLRevertModelSnapshot) WithContext(v context.Context) func(*MLRevertModelSnapshotRequest) {
+	return func(r *MLRevertModelSnapshotRequest) {
 		r.ctx = v
 	}
 }
 
 // WithBody - Reversion options.
 //
-func (f MlRevertModelSnapshot) WithBody(v io.Reader) func(*MlRevertModelSnapshotRequest) {
-	return func(r *MlRevertModelSnapshotRequest) {
+func (f MLRevertModelSnapshot) WithBody(v io.Reader) func(*MLRevertModelSnapshotRequest) {
+	return func(r *MLRevertModelSnapshotRequest) {
 		r.Body = v
 	}
 }
 
 // WithDeleteInterveningResults - should we reset the results back to the time of the snapshot?.
 //
-func (f MlRevertModelSnapshot) WithDeleteInterveningResults(v bool) func(*MlRevertModelSnapshotRequest) {
-	return func(r *MlRevertModelSnapshotRequest) {
+func (f MLRevertModelSnapshot) WithDeleteInterveningResults(v bool) func(*MLRevertModelSnapshotRequest) {
+	return func(r *MLRevertModelSnapshotRequest) {
 		r.DeleteInterveningResults = &v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f MlRevertModelSnapshot) WithPretty() func(*MlRevertModelSnapshotRequest) {
-	return func(r *MlRevertModelSnapshotRequest) {
+func (f MLRevertModelSnapshot) WithPretty() func(*MLRevertModelSnapshotRequest) {
+	return func(r *MLRevertModelSnapshotRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f MlRevertModelSnapshot) WithHuman() func(*MlRevertModelSnapshotRequest) {
-	return func(r *MlRevertModelSnapshotRequest) {
+func (f MLRevertModelSnapshot) WithHuman() func(*MLRevertModelSnapshotRequest) {
+	return func(r *MLRevertModelSnapshotRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f MlRevertModelSnapshot) WithErrorTrace() func(*MlRevertModelSnapshotRequest) {
-	return func(r *MlRevertModelSnapshotRequest) {
+func (f MLRevertModelSnapshot) WithErrorTrace() func(*MLRevertModelSnapshotRequest) {
+	return func(r *MLRevertModelSnapshotRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f MlRevertModelSnapshot) WithFilterPath(v ...string) func(*MlRevertModelSnapshotRequest) {
-	return func(r *MlRevertModelSnapshotRequest) {
+func (f MLRevertModelSnapshot) WithFilterPath(v ...string) func(*MLRevertModelSnapshotRequest) {
+	return func(r *MLRevertModelSnapshotRequest) {
 		r.FilterPath = v
 	}
 }

@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -7,9 +7,9 @@ import (
 	"strings"
 )
 
-func newMlDeleteModelSnapshotFunc(t Transport) MlDeleteModelSnapshot {
-	return func(job_id string, snapshot_id string, o ...func(*MlDeleteModelSnapshotRequest)) (*Response, error) {
-		var r = MlDeleteModelSnapshotRequest{JobID: job_id, SnapshotID: snapshot_id}
+func newMLDeleteModelSnapshotFunc(t Transport) MLDeleteModelSnapshot {
+	return func(job_id string, snapshot_id string, o ...func(*MLDeleteModelSnapshotRequest)) (*Response, error) {
+		var r = MLDeleteModelSnapshotRequest{JobID: job_id, SnapshotID: snapshot_id}
 		for _, f := range o {
 			f(&r)
 		}
@@ -22,11 +22,11 @@ func newMlDeleteModelSnapshotFunc(t Transport) MlDeleteModelSnapshot {
 //
 // See full documentation at http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html.
 //
-type MlDeleteModelSnapshot func(job_id string, snapshot_id string, o ...func(*MlDeleteModelSnapshotRequest)) (*Response, error)
+type MLDeleteModelSnapshot func(job_id string, snapshot_id string, o ...func(*MLDeleteModelSnapshotRequest)) (*Response, error)
 
-// MlDeleteModelSnapshotRequest configures the Ml   Delete Model Snapshot API request.
+// MLDeleteModelSnapshotRequest configures the Ml   Delete Model Snapshot API request.
 //
-type MlDeleteModelSnapshotRequest struct {
+type MLDeleteModelSnapshotRequest struct {
 	JobID      string
 	SnapshotID string
 
@@ -40,7 +40,7 @@ type MlDeleteModelSnapshotRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r MlDeleteModelSnapshotRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r MLDeleteModelSnapshotRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -109,40 +109,40 @@ func (r MlDeleteModelSnapshotRequest) Do(ctx context.Context, transport Transpor
 
 // WithContext sets the request context.
 //
-func (f MlDeleteModelSnapshot) WithContext(v context.Context) func(*MlDeleteModelSnapshotRequest) {
-	return func(r *MlDeleteModelSnapshotRequest) {
+func (f MLDeleteModelSnapshot) WithContext(v context.Context) func(*MLDeleteModelSnapshotRequest) {
+	return func(r *MLDeleteModelSnapshotRequest) {
 		r.ctx = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f MlDeleteModelSnapshot) WithPretty() func(*MlDeleteModelSnapshotRequest) {
-	return func(r *MlDeleteModelSnapshotRequest) {
+func (f MLDeleteModelSnapshot) WithPretty() func(*MLDeleteModelSnapshotRequest) {
+	return func(r *MLDeleteModelSnapshotRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f MlDeleteModelSnapshot) WithHuman() func(*MlDeleteModelSnapshotRequest) {
-	return func(r *MlDeleteModelSnapshotRequest) {
+func (f MLDeleteModelSnapshot) WithHuman() func(*MLDeleteModelSnapshotRequest) {
+	return func(r *MLDeleteModelSnapshotRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f MlDeleteModelSnapshot) WithErrorTrace() func(*MlDeleteModelSnapshotRequest) {
-	return func(r *MlDeleteModelSnapshotRequest) {
+func (f MLDeleteModelSnapshot) WithErrorTrace() func(*MLDeleteModelSnapshotRequest) {
+	return func(r *MLDeleteModelSnapshotRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f MlDeleteModelSnapshot) WithFilterPath(v ...string) func(*MlDeleteModelSnapshotRequest) {
-	return func(r *MlDeleteModelSnapshotRequest) {
+func (f MLDeleteModelSnapshot) WithFilterPath(v ...string) func(*MLDeleteModelSnapshotRequest) {
+	return func(r *MLDeleteModelSnapshotRequest) {
 		r.FilterPath = v
 	}
 }

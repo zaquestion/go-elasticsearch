@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -8,9 +8,9 @@ import (
 	"strings"
 )
 
-func newMlGetJobsFunc(t Transport) MlGetJobs {
-	return func(o ...func(*MlGetJobsRequest)) (*Response, error) {
-		var r = MlGetJobsRequest{}
+func newMLGetJobsFunc(t Transport) MLGetJobs {
+	return func(o ...func(*MLGetJobsRequest)) (*Response, error) {
+		var r = MLGetJobsRequest{}
 		for _, f := range o {
 			f(&r)
 		}
@@ -23,12 +23,13 @@ func newMlGetJobsFunc(t Transport) MlGetJobs {
 //
 // See full documentation at http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html.
 //
-type MlGetJobs func(o ...func(*MlGetJobsRequest)) (*Response, error)
+type MLGetJobs func(o ...func(*MLGetJobsRequest)) (*Response, error)
 
-// MlGetJobsRequest configures the Ml  Get Jobs API request.
+// MLGetJobsRequest configures the Ml  Get Jobs API request.
 //
-type MlGetJobsRequest struct {
-	JobID       string
+type MLGetJobsRequest struct {
+	JobID string
+
 	AllowNoJobs *bool
 
 	Pretty     bool
@@ -41,7 +42,7 @@ type MlGetJobsRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r MlGetJobsRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r MLGetJobsRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -112,56 +113,56 @@ func (r MlGetJobsRequest) Do(ctx context.Context, transport Transport) (*Respons
 
 // WithContext sets the request context.
 //
-func (f MlGetJobs) WithContext(v context.Context) func(*MlGetJobsRequest) {
-	return func(r *MlGetJobsRequest) {
+func (f MLGetJobs) WithContext(v context.Context) func(*MLGetJobsRequest) {
+	return func(r *MLGetJobsRequest) {
 		r.ctx = v
 	}
 }
 
 // WithJobID - the ID of the jobs to fetch.
 //
-func (f MlGetJobs) WithJobID(v string) func(*MlGetJobsRequest) {
-	return func(r *MlGetJobsRequest) {
+func (f MLGetJobs) WithJobID(v string) func(*MLGetJobsRequest) {
+	return func(r *MLGetJobsRequest) {
 		r.JobID = v
 	}
 }
 
 // WithAllowNoJobs - whether to ignore if a wildcard expression matches no jobs. (this includes `_all` string or when no jobs have been specified).
 //
-func (f MlGetJobs) WithAllowNoJobs(v bool) func(*MlGetJobsRequest) {
-	return func(r *MlGetJobsRequest) {
+func (f MLGetJobs) WithAllowNoJobs(v bool) func(*MLGetJobsRequest) {
+	return func(r *MLGetJobsRequest) {
 		r.AllowNoJobs = &v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f MlGetJobs) WithPretty() func(*MlGetJobsRequest) {
-	return func(r *MlGetJobsRequest) {
+func (f MLGetJobs) WithPretty() func(*MLGetJobsRequest) {
+	return func(r *MLGetJobsRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f MlGetJobs) WithHuman() func(*MlGetJobsRequest) {
-	return func(r *MlGetJobsRequest) {
+func (f MLGetJobs) WithHuman() func(*MLGetJobsRequest) {
+	return func(r *MLGetJobsRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f MlGetJobs) WithErrorTrace() func(*MlGetJobsRequest) {
-	return func(r *MlGetJobsRequest) {
+func (f MLGetJobs) WithErrorTrace() func(*MLGetJobsRequest) {
+	return func(r *MLGetJobsRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f MlGetJobs) WithFilterPath(v ...string) func(*MlGetJobsRequest) {
-	return func(r *MlGetJobsRequest) {
+func (f MLGetJobs) WithFilterPath(v ...string) func(*MLGetJobsRequest) {
+	return func(r *MLGetJobsRequest) {
 		r.FilterPath = v
 	}
 }

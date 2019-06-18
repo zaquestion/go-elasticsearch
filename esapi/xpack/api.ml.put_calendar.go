@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -8,9 +8,9 @@ import (
 	"strings"
 )
 
-func newMlPutCalendarFunc(t Transport) MlPutCalendar {
-	return func(calendar_id string, o ...func(*MlPutCalendarRequest)) (*Response, error) {
-		var r = MlPutCalendarRequest{CalendarID: calendar_id}
+func newMLPutCalendarFunc(t Transport) MLPutCalendar {
+	return func(calendar_id string, o ...func(*MLPutCalendarRequest)) (*Response, error) {
+		var r = MLPutCalendarRequest{CalendarID: calendar_id}
 		for _, f := range o {
 			f(&r)
 		}
@@ -21,11 +21,11 @@ func newMlPutCalendarFunc(t Transport) MlPutCalendar {
 // ----- API Definition -------------------------------------------------------
 
 //
-type MlPutCalendar func(calendar_id string, o ...func(*MlPutCalendarRequest)) (*Response, error)
+type MLPutCalendar func(calendar_id string, o ...func(*MLPutCalendarRequest)) (*Response, error)
 
-// MlPutCalendarRequest configures the Ml  Put Calendar API request.
+// MLPutCalendarRequest configures the Ml  Put Calendar API request.
 //
-type MlPutCalendarRequest struct {
+type MLPutCalendarRequest struct {
 	Body io.Reader
 
 	CalendarID string
@@ -40,7 +40,7 @@ type MlPutCalendarRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r MlPutCalendarRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r MLPutCalendarRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -109,48 +109,48 @@ func (r MlPutCalendarRequest) Do(ctx context.Context, transport Transport) (*Res
 
 // WithContext sets the request context.
 //
-func (f MlPutCalendar) WithContext(v context.Context) func(*MlPutCalendarRequest) {
-	return func(r *MlPutCalendarRequest) {
+func (f MLPutCalendar) WithContext(v context.Context) func(*MLPutCalendarRequest) {
+	return func(r *MLPutCalendarRequest) {
 		r.ctx = v
 	}
 }
 
 // WithBody - The calendar details.
 //
-func (f MlPutCalendar) WithBody(v io.Reader) func(*MlPutCalendarRequest) {
-	return func(r *MlPutCalendarRequest) {
+func (f MLPutCalendar) WithBody(v io.Reader) func(*MLPutCalendarRequest) {
+	return func(r *MLPutCalendarRequest) {
 		r.Body = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f MlPutCalendar) WithPretty() func(*MlPutCalendarRequest) {
-	return func(r *MlPutCalendarRequest) {
+func (f MLPutCalendar) WithPretty() func(*MLPutCalendarRequest) {
+	return func(r *MLPutCalendarRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f MlPutCalendar) WithHuman() func(*MlPutCalendarRequest) {
-	return func(r *MlPutCalendarRequest) {
+func (f MLPutCalendar) WithHuman() func(*MLPutCalendarRequest) {
+	return func(r *MLPutCalendarRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f MlPutCalendar) WithErrorTrace() func(*MlPutCalendarRequest) {
-	return func(r *MlPutCalendarRequest) {
+func (f MLPutCalendar) WithErrorTrace() func(*MLPutCalendarRequest) {
+	return func(r *MLPutCalendarRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f MlPutCalendar) WithFilterPath(v ...string) func(*MlPutCalendarRequest) {
-	return func(r *MlPutCalendarRequest) {
+func (f MLPutCalendar) WithFilterPath(v ...string) func(*MLPutCalendarRequest) {
+	return func(r *MLPutCalendarRequest) {
 		r.FilterPath = v
 	}
 }

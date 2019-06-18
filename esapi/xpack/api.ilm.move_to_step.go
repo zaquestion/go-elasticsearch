@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -8,9 +8,9 @@ import (
 	"strings"
 )
 
-func newIlmMoveToStepFunc(t Transport) IlmMoveToStep {
-	return func(o ...func(*IlmMoveToStepRequest)) (*Response, error) {
-		var r = IlmMoveToStepRequest{}
+func newILMMoveToStepFunc(t Transport) ILMMoveToStep {
+	return func(o ...func(*ILMMoveToStepRequest)) (*Response, error) {
+		var r = ILMMoveToStepRequest{}
 		for _, f := range o {
 			f(&r)
 		}
@@ -23,13 +23,14 @@ func newIlmMoveToStepFunc(t Transport) IlmMoveToStep {
 //
 // See full documentation at https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html.
 //
-type IlmMoveToStep func(o ...func(*IlmMoveToStepRequest)) (*Response, error)
+type ILMMoveToStep func(o ...func(*ILMMoveToStepRequest)) (*Response, error)
 
-// IlmMoveToStepRequest configures the Ilm   Move To Step API request.
+// ILMMoveToStepRequest configures the Ilm   Move To Step API request.
 //
-type IlmMoveToStepRequest struct {
+type ILMMoveToStepRequest struct {
 	Index string
-	Body  io.Reader
+
+	Body io.Reader
 
 	Pretty     bool
 	Human      bool
@@ -41,7 +42,7 @@ type IlmMoveToStepRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r IlmMoveToStepRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r ILMMoveToStepRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -112,56 +113,56 @@ func (r IlmMoveToStepRequest) Do(ctx context.Context, transport Transport) (*Res
 
 // WithContext sets the request context.
 //
-func (f IlmMoveToStep) WithContext(v context.Context) func(*IlmMoveToStepRequest) {
-	return func(r *IlmMoveToStepRequest) {
+func (f ILMMoveToStep) WithContext(v context.Context) func(*ILMMoveToStepRequest) {
+	return func(r *ILMMoveToStepRequest) {
 		r.ctx = v
-	}
-}
-
-// WithIndex - the name of the index whose lifecycle step is to change.
-//
-func (f IlmMoveToStep) WithIndex(v string) func(*IlmMoveToStepRequest) {
-	return func(r *IlmMoveToStepRequest) {
-		r.Index = v
 	}
 }
 
 // WithBody - The new lifecycle step to move to.
 //
-func (f IlmMoveToStep) WithBody(v io.Reader) func(*IlmMoveToStepRequest) {
-	return func(r *IlmMoveToStepRequest) {
+func (f ILMMoveToStep) WithBody(v io.Reader) func(*ILMMoveToStepRequest) {
+	return func(r *ILMMoveToStepRequest) {
 		r.Body = v
+	}
+}
+
+// WithIndex - the name of the index whose lifecycle step is to change.
+//
+func (f ILMMoveToStep) WithIndex(v string) func(*ILMMoveToStepRequest) {
+	return func(r *ILMMoveToStepRequest) {
+		r.Index = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f IlmMoveToStep) WithPretty() func(*IlmMoveToStepRequest) {
-	return func(r *IlmMoveToStepRequest) {
+func (f ILMMoveToStep) WithPretty() func(*ILMMoveToStepRequest) {
+	return func(r *ILMMoveToStepRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f IlmMoveToStep) WithHuman() func(*IlmMoveToStepRequest) {
-	return func(r *IlmMoveToStepRequest) {
+func (f ILMMoveToStep) WithHuman() func(*ILMMoveToStepRequest) {
+	return func(r *ILMMoveToStepRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f IlmMoveToStep) WithErrorTrace() func(*IlmMoveToStepRequest) {
-	return func(r *IlmMoveToStepRequest) {
+func (f ILMMoveToStep) WithErrorTrace() func(*ILMMoveToStepRequest) {
+	return func(r *ILMMoveToStepRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f IlmMoveToStep) WithFilterPath(v ...string) func(*IlmMoveToStepRequest) {
-	return func(r *IlmMoveToStepRequest) {
+func (f ILMMoveToStep) WithFilterPath(v ...string) func(*ILMMoveToStepRequest) {
+	return func(r *ILMMoveToStepRequest) {
 		r.FilterPath = v
 	}
 }

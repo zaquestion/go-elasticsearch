@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -8,9 +8,9 @@ import (
 	"strings"
 )
 
-func newCcrFollowFunc(t Transport) CcrFollow {
-	return func(index string, body io.Reader, o ...func(*CcrFollowRequest)) (*Response, error) {
-		var r = CcrFollowRequest{Index: index, Body: body}
+func newCCRFollowFunc(t Transport) CCRFollow {
+	return func(index string, body io.Reader, o ...func(*CCRFollowRequest)) (*Response, error) {
+		var r = CCRFollowRequest{Index: index, Body: body}
 		for _, f := range o {
 			f(&r)
 		}
@@ -23,13 +23,14 @@ func newCcrFollowFunc(t Transport) CcrFollow {
 //
 // See full documentation at https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-follow.html.
 //
-type CcrFollow func(index string, body io.Reader, o ...func(*CcrFollowRequest)) (*Response, error)
+type CCRFollow func(index string, body io.Reader, o ...func(*CCRFollowRequest)) (*Response, error)
 
-// CcrFollowRequest configures the Ccr Follow API request.
+// CCRFollowRequest configures the Ccr Follow API request.
 //
-type CcrFollowRequest struct {
+type CCRFollowRequest struct {
 	Index string
-	Body  io.Reader
+
+	Body io.Reader
 
 	WaitForActiveShards string
 
@@ -43,7 +44,7 @@ type CcrFollowRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r CcrFollowRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r CCRFollowRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -116,48 +117,48 @@ func (r CcrFollowRequest) Do(ctx context.Context, transport Transport) (*Respons
 
 // WithContext sets the request context.
 //
-func (f CcrFollow) WithContext(v context.Context) func(*CcrFollowRequest) {
-	return func(r *CcrFollowRequest) {
+func (f CCRFollow) WithContext(v context.Context) func(*CCRFollowRequest) {
+	return func(r *CCRFollowRequest) {
 		r.ctx = v
 	}
 }
 
 // WithWaitForActiveShards - sets the number of shard copies that must be active before returning. defaults to 0. set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1).
 //
-func (f CcrFollow) WithWaitForActiveShards(v string) func(*CcrFollowRequest) {
-	return func(r *CcrFollowRequest) {
+func (f CCRFollow) WithWaitForActiveShards(v string) func(*CCRFollowRequest) {
+	return func(r *CCRFollowRequest) {
 		r.WaitForActiveShards = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f CcrFollow) WithPretty() func(*CcrFollowRequest) {
-	return func(r *CcrFollowRequest) {
+func (f CCRFollow) WithPretty() func(*CCRFollowRequest) {
+	return func(r *CCRFollowRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f CcrFollow) WithHuman() func(*CcrFollowRequest) {
-	return func(r *CcrFollowRequest) {
+func (f CCRFollow) WithHuman() func(*CCRFollowRequest) {
+	return func(r *CCRFollowRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f CcrFollow) WithErrorTrace() func(*CcrFollowRequest) {
-	return func(r *CcrFollowRequest) {
+func (f CCRFollow) WithErrorTrace() func(*CCRFollowRequest) {
+	return func(r *CCRFollowRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f CcrFollow) WithFilterPath(v ...string) func(*CcrFollowRequest) {
-	return func(r *CcrFollowRequest) {
+func (f CCRFollow) WithFilterPath(v ...string) func(*CCRFollowRequest) {
+	return func(r *CCRFollowRequest) {
 		r.FilterPath = v
 	}
 }

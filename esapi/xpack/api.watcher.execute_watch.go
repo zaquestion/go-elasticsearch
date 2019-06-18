@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -30,7 +30,8 @@ type WatcherExecuteWatch func(o ...func(*WatcherExecuteWatchRequest)) (*Response
 //
 type WatcherExecuteWatchRequest struct {
 	DocumentID string
-	Body       io.Reader
+
+	Body io.Reader
 
 	Debug *bool
 
@@ -127,19 +128,19 @@ func (f WatcherExecuteWatch) WithContext(v context.Context) func(*WatcherExecute
 	}
 }
 
-// WithDocumentID - watch ID.
-//
-func (f WatcherExecuteWatch) WithDocumentID(v string) func(*WatcherExecuteWatchRequest) {
-	return func(r *WatcherExecuteWatchRequest) {
-		r.DocumentID = v
-	}
-}
-
 // WithBody - Execution control.
 //
 func (f WatcherExecuteWatch) WithBody(v io.Reader) func(*WatcherExecuteWatchRequest) {
 	return func(r *WatcherExecuteWatchRequest) {
 		r.Body = v
+	}
+}
+
+// WithDocumentID - watch ID.
+//
+func (f WatcherExecuteWatch) WithDocumentID(v string) func(*WatcherExecuteWatchRequest) {
+	return func(r *WatcherExecuteWatchRequest) {
+		r.DocumentID = v
 	}
 }
 

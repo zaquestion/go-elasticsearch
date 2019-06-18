@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -10,9 +10,9 @@ import (
 	"strings"
 )
 
-func newMlGetInfluencersFunc(t Transport) MlGetInfluencers {
-	return func(job_id string, o ...func(*MlGetInfluencersRequest)) (*Response, error) {
-		var r = MlGetInfluencersRequest{JobID: job_id}
+func newMLGetInfluencersFunc(t Transport) MLGetInfluencers {
+	return func(job_id string, o ...func(*MLGetInfluencersRequest)) (*Response, error) {
+		var r = MLGetInfluencersRequest{JobID: job_id}
 		for _, f := range o {
 			f(&r)
 		}
@@ -25,20 +25,21 @@ func newMlGetInfluencersFunc(t Transport) MlGetInfluencers {
 //
 // See full documentation at http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html.
 //
-type MlGetInfluencers func(job_id string, o ...func(*MlGetInfluencersRequest)) (*Response, error)
+type MLGetInfluencers func(job_id string, o ...func(*MLGetInfluencersRequest)) (*Response, error)
 
-// MlGetInfluencersRequest configures the Ml  Get Influencers API request.
+// MLGetInfluencersRequest configures the Ml  Get Influencers API request.
 //
-type MlGetInfluencersRequest struct {
+type MLGetInfluencersRequest struct {
 	Body io.Reader
 
-	JobID           string
+	JobID string
+
 	Desc            *bool
 	End             string
 	ExcludeInterim  *bool
-	From            interface{}
+	From            *int
 	InfluencerScore interface{}
-	Size            interface{}
+	Size            *int
 	Sort            string
 	Start           string
 
@@ -52,7 +53,7 @@ type MlGetInfluencersRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r MlGetInfluencersRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r MLGetInfluencersRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -88,7 +89,7 @@ func (r MlGetInfluencersRequest) Do(ctx context.Context, transport Transport) (*
 	}
 
 	if r.From != nil {
-		params["from"] = fmt.Sprintf("%v", r.From)
+		params["from"] = strconv.FormatInt(int64(*r.From), 10)
 	}
 
 	if r.InfluencerScore != nil {
@@ -96,7 +97,7 @@ func (r MlGetInfluencersRequest) Do(ctx context.Context, transport Transport) (*
 	}
 
 	if r.Size != nil {
-		params["size"] = fmt.Sprintf("%v", r.Size)
+		params["size"] = strconv.FormatInt(int64(*r.Size), 10)
 	}
 
 	if r.Sort != "" {
@@ -157,112 +158,112 @@ func (r MlGetInfluencersRequest) Do(ctx context.Context, transport Transport) (*
 
 // WithContext sets the request context.
 //
-func (f MlGetInfluencers) WithContext(v context.Context) func(*MlGetInfluencersRequest) {
-	return func(r *MlGetInfluencersRequest) {
+func (f MLGetInfluencers) WithContext(v context.Context) func(*MLGetInfluencersRequest) {
+	return func(r *MLGetInfluencersRequest) {
 		r.ctx = v
 	}
 }
 
 // WithBody - Influencer selection criteria.
 //
-func (f MlGetInfluencers) WithBody(v io.Reader) func(*MlGetInfluencersRequest) {
-	return func(r *MlGetInfluencersRequest) {
+func (f MLGetInfluencers) WithBody(v io.Reader) func(*MLGetInfluencersRequest) {
+	return func(r *MLGetInfluencersRequest) {
 		r.Body = v
 	}
 }
 
 // WithDesc - whether the results should be sorted in decending order.
 //
-func (f MlGetInfluencers) WithDesc(v bool) func(*MlGetInfluencersRequest) {
-	return func(r *MlGetInfluencersRequest) {
+func (f MLGetInfluencers) WithDesc(v bool) func(*MLGetInfluencersRequest) {
+	return func(r *MLGetInfluencersRequest) {
 		r.Desc = &v
 	}
 }
 
 // WithEnd - end timestamp for the requested influencers.
 //
-func (f MlGetInfluencers) WithEnd(v string) func(*MlGetInfluencersRequest) {
-	return func(r *MlGetInfluencersRequest) {
+func (f MLGetInfluencers) WithEnd(v string) func(*MLGetInfluencersRequest) {
+	return func(r *MLGetInfluencersRequest) {
 		r.End = v
 	}
 }
 
 // WithExcludeInterim - exclude interim results.
 //
-func (f MlGetInfluencers) WithExcludeInterim(v bool) func(*MlGetInfluencersRequest) {
-	return func(r *MlGetInfluencersRequest) {
+func (f MLGetInfluencers) WithExcludeInterim(v bool) func(*MLGetInfluencersRequest) {
+	return func(r *MLGetInfluencersRequest) {
 		r.ExcludeInterim = &v
 	}
 }
 
 // WithFrom - skips a number of influencers.
 //
-func (f MlGetInfluencers) WithFrom(v interface{}) func(*MlGetInfluencersRequest) {
-	return func(r *MlGetInfluencersRequest) {
-		r.From = v
+func (f MLGetInfluencers) WithFrom(v int) func(*MLGetInfluencersRequest) {
+	return func(r *MLGetInfluencersRequest) {
+		r.From = &v
 	}
 }
 
 // WithInfluencerScore - influencer score threshold for the requested influencers.
 //
-func (f MlGetInfluencers) WithInfluencerScore(v interface{}) func(*MlGetInfluencersRequest) {
-	return func(r *MlGetInfluencersRequest) {
+func (f MLGetInfluencers) WithInfluencerScore(v interface{}) func(*MLGetInfluencersRequest) {
+	return func(r *MLGetInfluencersRequest) {
 		r.InfluencerScore = v
 	}
 }
 
 // WithSize - specifies a max number of influencers to get.
 //
-func (f MlGetInfluencers) WithSize(v interface{}) func(*MlGetInfluencersRequest) {
-	return func(r *MlGetInfluencersRequest) {
-		r.Size = v
+func (f MLGetInfluencers) WithSize(v int) func(*MLGetInfluencersRequest) {
+	return func(r *MLGetInfluencersRequest) {
+		r.Size = &v
 	}
 }
 
 // WithSort - sort field for the requested influencers.
 //
-func (f MlGetInfluencers) WithSort(v string) func(*MlGetInfluencersRequest) {
-	return func(r *MlGetInfluencersRequest) {
+func (f MLGetInfluencers) WithSort(v string) func(*MLGetInfluencersRequest) {
+	return func(r *MLGetInfluencersRequest) {
 		r.Sort = v
 	}
 }
 
 // WithStart - start timestamp for the requested influencers.
 //
-func (f MlGetInfluencers) WithStart(v string) func(*MlGetInfluencersRequest) {
-	return func(r *MlGetInfluencersRequest) {
+func (f MLGetInfluencers) WithStart(v string) func(*MLGetInfluencersRequest) {
+	return func(r *MLGetInfluencersRequest) {
 		r.Start = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f MlGetInfluencers) WithPretty() func(*MlGetInfluencersRequest) {
-	return func(r *MlGetInfluencersRequest) {
+func (f MLGetInfluencers) WithPretty() func(*MLGetInfluencersRequest) {
+	return func(r *MLGetInfluencersRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f MlGetInfluencers) WithHuman() func(*MlGetInfluencersRequest) {
-	return func(r *MlGetInfluencersRequest) {
+func (f MLGetInfluencers) WithHuman() func(*MLGetInfluencersRequest) {
+	return func(r *MLGetInfluencersRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f MlGetInfluencers) WithErrorTrace() func(*MlGetInfluencersRequest) {
-	return func(r *MlGetInfluencersRequest) {
+func (f MLGetInfluencers) WithErrorTrace() func(*MLGetInfluencersRequest) {
+	return func(r *MLGetInfluencersRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f MlGetInfluencers) WithFilterPath(v ...string) func(*MlGetInfluencersRequest) {
-	return func(r *MlGetInfluencersRequest) {
+func (f MLGetInfluencers) WithFilterPath(v ...string) func(*MLGetInfluencersRequest) {
+	return func(r *MLGetInfluencersRequest) {
 		r.FilterPath = v
 	}
 }

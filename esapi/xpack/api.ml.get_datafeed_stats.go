@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -8,9 +8,9 @@ import (
 	"strings"
 )
 
-func newMlGetDatafeedStatsFunc(t Transport) MlGetDatafeedStats {
-	return func(o ...func(*MlGetDatafeedStatsRequest)) (*Response, error) {
-		var r = MlGetDatafeedStatsRequest{}
+func newMLGetDatafeedStatsFunc(t Transport) MLGetDatafeedStats {
+	return func(o ...func(*MLGetDatafeedStatsRequest)) (*Response, error) {
+		var r = MLGetDatafeedStatsRequest{}
 		for _, f := range o {
 			f(&r)
 		}
@@ -23,12 +23,13 @@ func newMlGetDatafeedStatsFunc(t Transport) MlGetDatafeedStats {
 //
 // See full documentation at http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html.
 //
-type MlGetDatafeedStats func(o ...func(*MlGetDatafeedStatsRequest)) (*Response, error)
+type MLGetDatafeedStats func(o ...func(*MLGetDatafeedStatsRequest)) (*Response, error)
 
-// MlGetDatafeedStatsRequest configures the Ml   Get Datafeed Stats API request.
+// MLGetDatafeedStatsRequest configures the Ml   Get Datafeed Stats API request.
 //
-type MlGetDatafeedStatsRequest struct {
-	DatafeedID       string
+type MLGetDatafeedStatsRequest struct {
+	DatafeedID string
+
 	AllowNoDatafeeds *bool
 
 	Pretty     bool
@@ -41,7 +42,7 @@ type MlGetDatafeedStatsRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r MlGetDatafeedStatsRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r MLGetDatafeedStatsRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -114,56 +115,56 @@ func (r MlGetDatafeedStatsRequest) Do(ctx context.Context, transport Transport) 
 
 // WithContext sets the request context.
 //
-func (f MlGetDatafeedStats) WithContext(v context.Context) func(*MlGetDatafeedStatsRequest) {
-	return func(r *MlGetDatafeedStatsRequest) {
+func (f MLGetDatafeedStats) WithContext(v context.Context) func(*MLGetDatafeedStatsRequest) {
+	return func(r *MLGetDatafeedStatsRequest) {
 		r.ctx = v
 	}
 }
 
 // WithDatafeedID - the ID of the datafeeds stats to fetch.
 //
-func (f MlGetDatafeedStats) WithDatafeedID(v string) func(*MlGetDatafeedStatsRequest) {
-	return func(r *MlGetDatafeedStatsRequest) {
+func (f MLGetDatafeedStats) WithDatafeedID(v string) func(*MLGetDatafeedStatsRequest) {
+	return func(r *MLGetDatafeedStatsRequest) {
 		r.DatafeedID = v
 	}
 }
 
 // WithAllowNoDatafeeds - whether to ignore if a wildcard expression matches no datafeeds. (this includes `_all` string or when no datafeeds have been specified).
 //
-func (f MlGetDatafeedStats) WithAllowNoDatafeeds(v bool) func(*MlGetDatafeedStatsRequest) {
-	return func(r *MlGetDatafeedStatsRequest) {
+func (f MLGetDatafeedStats) WithAllowNoDatafeeds(v bool) func(*MLGetDatafeedStatsRequest) {
+	return func(r *MLGetDatafeedStatsRequest) {
 		r.AllowNoDatafeeds = &v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f MlGetDatafeedStats) WithPretty() func(*MlGetDatafeedStatsRequest) {
-	return func(r *MlGetDatafeedStatsRequest) {
+func (f MLGetDatafeedStats) WithPretty() func(*MLGetDatafeedStatsRequest) {
+	return func(r *MLGetDatafeedStatsRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f MlGetDatafeedStats) WithHuman() func(*MlGetDatafeedStatsRequest) {
-	return func(r *MlGetDatafeedStatsRequest) {
+func (f MLGetDatafeedStats) WithHuman() func(*MLGetDatafeedStatsRequest) {
+	return func(r *MLGetDatafeedStatsRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f MlGetDatafeedStats) WithErrorTrace() func(*MlGetDatafeedStatsRequest) {
-	return func(r *MlGetDatafeedStatsRequest) {
+func (f MLGetDatafeedStats) WithErrorTrace() func(*MLGetDatafeedStatsRequest) {
+	return func(r *MLGetDatafeedStatsRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f MlGetDatafeedStats) WithFilterPath(v ...string) func(*MlGetDatafeedStatsRequest) {
-	return func(r *MlGetDatafeedStatsRequest) {
+func (f MLGetDatafeedStats) WithFilterPath(v ...string) func(*MLGetDatafeedStatsRequest) {
+	return func(r *MLGetDatafeedStatsRequest) {
 		r.FilterPath = v
 	}
 }

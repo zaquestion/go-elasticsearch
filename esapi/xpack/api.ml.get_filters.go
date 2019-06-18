@@ -1,16 +1,16 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
 import (
 	"context"
-	"fmt"
+	"strconv"
 	"strings"
 )
 
-func newMlGetFiltersFunc(t Transport) MlGetFilters {
-	return func(o ...func(*MlGetFiltersRequest)) (*Response, error) {
-		var r = MlGetFiltersRequest{}
+func newMLGetFiltersFunc(t Transport) MLGetFilters {
+	return func(o ...func(*MLGetFiltersRequest)) (*Response, error) {
+		var r = MLGetFiltersRequest{}
 		for _, f := range o {
 			f(&r)
 		}
@@ -21,14 +21,15 @@ func newMlGetFiltersFunc(t Transport) MlGetFilters {
 // ----- API Definition -------------------------------------------------------
 
 //
-type MlGetFilters func(o ...func(*MlGetFiltersRequest)) (*Response, error)
+type MLGetFilters func(o ...func(*MLGetFiltersRequest)) (*Response, error)
 
-// MlGetFiltersRequest configures the Ml  Get Filters API request.
+// MLGetFiltersRequest configures the Ml  Get Filters API request.
 //
-type MlGetFiltersRequest struct {
+type MLGetFiltersRequest struct {
 	FilterID string
-	From     interface{}
-	Size     interface{}
+
+	From *int
+	Size *int
 
 	Pretty     bool
 	Human      bool
@@ -40,7 +41,7 @@ type MlGetFiltersRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r MlGetFiltersRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r MLGetFiltersRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -62,11 +63,11 @@ func (r MlGetFiltersRequest) Do(ctx context.Context, transport Transport) (*Resp
 	params = make(map[string]string)
 
 	if r.From != nil {
-		params["from"] = fmt.Sprintf("%v", r.From)
+		params["from"] = strconv.FormatInt(int64(*r.From), 10)
 	}
 
 	if r.Size != nil {
-		params["size"] = fmt.Sprintf("%v", r.Size)
+		params["size"] = strconv.FormatInt(int64(*r.Size), 10)
 	}
 
 	if r.Pretty {
@@ -115,64 +116,64 @@ func (r MlGetFiltersRequest) Do(ctx context.Context, transport Transport) (*Resp
 
 // WithContext sets the request context.
 //
-func (f MlGetFilters) WithContext(v context.Context) func(*MlGetFiltersRequest) {
-	return func(r *MlGetFiltersRequest) {
+func (f MLGetFilters) WithContext(v context.Context) func(*MLGetFiltersRequest) {
+	return func(r *MLGetFiltersRequest) {
 		r.ctx = v
 	}
 }
 
 // WithFilterID - the ID of the filter to fetch.
 //
-func (f MlGetFilters) WithFilterID(v string) func(*MlGetFiltersRequest) {
-	return func(r *MlGetFiltersRequest) {
+func (f MLGetFilters) WithFilterID(v string) func(*MLGetFiltersRequest) {
+	return func(r *MLGetFiltersRequest) {
 		r.FilterID = v
 	}
 }
 
 // WithFrom - skips a number of filters.
 //
-func (f MlGetFilters) WithFrom(v interface{}) func(*MlGetFiltersRequest) {
-	return func(r *MlGetFiltersRequest) {
-		r.From = v
+func (f MLGetFilters) WithFrom(v int) func(*MLGetFiltersRequest) {
+	return func(r *MLGetFiltersRequest) {
+		r.From = &v
 	}
 }
 
 // WithSize - specifies a max number of filters to get.
 //
-func (f MlGetFilters) WithSize(v interface{}) func(*MlGetFiltersRequest) {
-	return func(r *MlGetFiltersRequest) {
-		r.Size = v
+func (f MLGetFilters) WithSize(v int) func(*MLGetFiltersRequest) {
+	return func(r *MLGetFiltersRequest) {
+		r.Size = &v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f MlGetFilters) WithPretty() func(*MlGetFiltersRequest) {
-	return func(r *MlGetFiltersRequest) {
+func (f MLGetFilters) WithPretty() func(*MLGetFiltersRequest) {
+	return func(r *MLGetFiltersRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f MlGetFilters) WithHuman() func(*MlGetFiltersRequest) {
-	return func(r *MlGetFiltersRequest) {
+func (f MLGetFilters) WithHuman() func(*MLGetFiltersRequest) {
+	return func(r *MLGetFiltersRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f MlGetFilters) WithErrorTrace() func(*MlGetFiltersRequest) {
-	return func(r *MlGetFiltersRequest) {
+func (f MLGetFilters) WithErrorTrace() func(*MLGetFiltersRequest) {
+	return func(r *MLGetFiltersRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f MlGetFilters) WithFilterPath(v ...string) func(*MlGetFiltersRequest) {
-	return func(r *MlGetFiltersRequest) {
+func (f MLGetFilters) WithFilterPath(v ...string) func(*MLGetFiltersRequest) {
+	return func(r *MLGetFiltersRequest) {
 		r.FilterPath = v
 	}
 }

@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -7,9 +7,9 @@ import (
 	"strings"
 )
 
-func newMlDeleteCalendarEventFunc(t Transport) MlDeleteCalendarEvent {
-	return func(calendar_id string, event_id string, o ...func(*MlDeleteCalendarEventRequest)) (*Response, error) {
-		var r = MlDeleteCalendarEventRequest{CalendarID: calendar_id, EventID: event_id}
+func newMLDeleteCalendarEventFunc(t Transport) MLDeleteCalendarEvent {
+	return func(calendar_id string, event_id string, o ...func(*MLDeleteCalendarEventRequest)) (*Response, error) {
+		var r = MLDeleteCalendarEventRequest{EventID: event_id, CalendarID: calendar_id}
 		for _, f := range o {
 			f(&r)
 		}
@@ -20,11 +20,11 @@ func newMlDeleteCalendarEventFunc(t Transport) MlDeleteCalendarEvent {
 // ----- API Definition -------------------------------------------------------
 
 //
-type MlDeleteCalendarEvent func(calendar_id string, event_id string, o ...func(*MlDeleteCalendarEventRequest)) (*Response, error)
+type MLDeleteCalendarEvent func(calendar_id string, event_id string, o ...func(*MLDeleteCalendarEventRequest)) (*Response, error)
 
-// MlDeleteCalendarEventRequest configures the Ml   Delete Calendar Event API request.
+// MLDeleteCalendarEventRequest configures the Ml   Delete Calendar Event API request.
 //
-type MlDeleteCalendarEventRequest struct {
+type MLDeleteCalendarEventRequest struct {
 	CalendarID string
 	EventID    string
 
@@ -38,7 +38,7 @@ type MlDeleteCalendarEventRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r MlDeleteCalendarEventRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r MLDeleteCalendarEventRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -107,40 +107,40 @@ func (r MlDeleteCalendarEventRequest) Do(ctx context.Context, transport Transpor
 
 // WithContext sets the request context.
 //
-func (f MlDeleteCalendarEvent) WithContext(v context.Context) func(*MlDeleteCalendarEventRequest) {
-	return func(r *MlDeleteCalendarEventRequest) {
+func (f MLDeleteCalendarEvent) WithContext(v context.Context) func(*MLDeleteCalendarEventRequest) {
+	return func(r *MLDeleteCalendarEventRequest) {
 		r.ctx = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f MlDeleteCalendarEvent) WithPretty() func(*MlDeleteCalendarEventRequest) {
-	return func(r *MlDeleteCalendarEventRequest) {
+func (f MLDeleteCalendarEvent) WithPretty() func(*MLDeleteCalendarEventRequest) {
+	return func(r *MLDeleteCalendarEventRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f MlDeleteCalendarEvent) WithHuman() func(*MlDeleteCalendarEventRequest) {
-	return func(r *MlDeleteCalendarEventRequest) {
+func (f MLDeleteCalendarEvent) WithHuman() func(*MLDeleteCalendarEventRequest) {
+	return func(r *MLDeleteCalendarEventRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f MlDeleteCalendarEvent) WithErrorTrace() func(*MlDeleteCalendarEventRequest) {
-	return func(r *MlDeleteCalendarEventRequest) {
+func (f MLDeleteCalendarEvent) WithErrorTrace() func(*MLDeleteCalendarEventRequest) {
+	return func(r *MLDeleteCalendarEventRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f MlDeleteCalendarEvent) WithFilterPath(v ...string) func(*MlDeleteCalendarEventRequest) {
-	return func(r *MlDeleteCalendarEventRequest) {
+func (f MLDeleteCalendarEvent) WithFilterPath(v ...string) func(*MLDeleteCalendarEventRequest) {
+	return func(r *MLDeleteCalendarEventRequest) {
 		r.FilterPath = v
 	}
 }

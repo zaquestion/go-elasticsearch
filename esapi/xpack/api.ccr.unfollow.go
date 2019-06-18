@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -7,9 +7,9 @@ import (
 	"strings"
 )
 
-func newCcrUnfollowFunc(t Transport) CcrUnfollow {
-	return func(index string, o ...func(*CcrUnfollowRequest)) (*Response, error) {
-		var r = CcrUnfollowRequest{Index: index}
+func newCCRUnfollowFunc(t Transport) CCRUnfollow {
+	return func(index string, o ...func(*CCRUnfollowRequest)) (*Response, error) {
+		var r = CCRUnfollowRequest{Index: index}
 		for _, f := range o {
 			f(&r)
 		}
@@ -22,11 +22,11 @@ func newCcrUnfollowFunc(t Transport) CcrUnfollow {
 //
 // See full documentation at http://www.elastic.co/guide/en/elasticsearch/reference/current.
 //
-type CcrUnfollow func(index string, o ...func(*CcrUnfollowRequest)) (*Response, error)
+type CCRUnfollow func(index string, o ...func(*CCRUnfollowRequest)) (*Response, error)
 
-// CcrUnfollowRequest configures the Ccr Unfollow API request.
+// CCRUnfollowRequest configures the Ccr Unfollow API request.
 //
-type CcrUnfollowRequest struct {
+type CCRUnfollowRequest struct {
 	Index string
 
 	Pretty     bool
@@ -39,7 +39,7 @@ type CcrUnfollowRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r CcrUnfollowRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r CCRUnfollowRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -104,40 +104,40 @@ func (r CcrUnfollowRequest) Do(ctx context.Context, transport Transport) (*Respo
 
 // WithContext sets the request context.
 //
-func (f CcrUnfollow) WithContext(v context.Context) func(*CcrUnfollowRequest) {
-	return func(r *CcrUnfollowRequest) {
+func (f CCRUnfollow) WithContext(v context.Context) func(*CCRUnfollowRequest) {
+	return func(r *CCRUnfollowRequest) {
 		r.ctx = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f CcrUnfollow) WithPretty() func(*CcrUnfollowRequest) {
-	return func(r *CcrUnfollowRequest) {
+func (f CCRUnfollow) WithPretty() func(*CCRUnfollowRequest) {
+	return func(r *CCRUnfollowRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f CcrUnfollow) WithHuman() func(*CcrUnfollowRequest) {
-	return func(r *CcrUnfollowRequest) {
+func (f CCRUnfollow) WithHuman() func(*CCRUnfollowRequest) {
+	return func(r *CCRUnfollowRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f CcrUnfollow) WithErrorTrace() func(*CcrUnfollowRequest) {
-	return func(r *CcrUnfollowRequest) {
+func (f CCRUnfollow) WithErrorTrace() func(*CCRUnfollowRequest) {
+	return func(r *CCRUnfollowRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f CcrUnfollow) WithFilterPath(v ...string) func(*CcrUnfollowRequest) {
-	return func(r *CcrUnfollowRequest) {
+func (f CCRUnfollow) WithFilterPath(v ...string) func(*CCRUnfollowRequest) {
+	return func(r *CCRUnfollowRequest) {
 		r.FilterPath = v
 	}
 }

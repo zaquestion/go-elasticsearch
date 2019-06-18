@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -8,9 +8,9 @@ import (
 	"strings"
 )
 
-func newCcrPutAutoFollowPatternFunc(t Transport) CcrPutAutoFollowPattern {
-	return func(body io.Reader, name string, o ...func(*CcrPutAutoFollowPatternRequest)) (*Response, error) {
-		var r = CcrPutAutoFollowPatternRequest{Body: body, Name: name}
+func newCCRPutAutoFollowPatternFunc(t Transport) CCRPutAutoFollowPattern {
+	return func(body io.Reader, name string, o ...func(*CCRPutAutoFollowPatternRequest)) (*Response, error) {
+		var r = CCRPutAutoFollowPatternRequest{Body: body, Name: name}
 		for _, f := range o {
 			f(&r)
 		}
@@ -23,11 +23,11 @@ func newCcrPutAutoFollowPatternFunc(t Transport) CcrPutAutoFollowPattern {
 //
 // See full documentation at https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-auto-follow-pattern.html.
 //
-type CcrPutAutoFollowPattern func(body io.Reader, name string, o ...func(*CcrPutAutoFollowPatternRequest)) (*Response, error)
+type CCRPutAutoFollowPattern func(body io.Reader, name string, o ...func(*CCRPutAutoFollowPatternRequest)) (*Response, error)
 
-// CcrPutAutoFollowPatternRequest configures the Ccr    Put Auto Follow Pattern API request.
+// CCRPutAutoFollowPatternRequest configures the Ccr    Put Auto Follow Pattern API request.
 //
-type CcrPutAutoFollowPatternRequest struct {
+type CCRPutAutoFollowPatternRequest struct {
 	Body io.Reader
 
 	Name string
@@ -42,7 +42,7 @@ type CcrPutAutoFollowPatternRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r CcrPutAutoFollowPatternRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r CCRPutAutoFollowPatternRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -111,40 +111,40 @@ func (r CcrPutAutoFollowPatternRequest) Do(ctx context.Context, transport Transp
 
 // WithContext sets the request context.
 //
-func (f CcrPutAutoFollowPattern) WithContext(v context.Context) func(*CcrPutAutoFollowPatternRequest) {
-	return func(r *CcrPutAutoFollowPatternRequest) {
+func (f CCRPutAutoFollowPattern) WithContext(v context.Context) func(*CCRPutAutoFollowPatternRequest) {
+	return func(r *CCRPutAutoFollowPatternRequest) {
 		r.ctx = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f CcrPutAutoFollowPattern) WithPretty() func(*CcrPutAutoFollowPatternRequest) {
-	return func(r *CcrPutAutoFollowPatternRequest) {
+func (f CCRPutAutoFollowPattern) WithPretty() func(*CCRPutAutoFollowPatternRequest) {
+	return func(r *CCRPutAutoFollowPatternRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f CcrPutAutoFollowPattern) WithHuman() func(*CcrPutAutoFollowPatternRequest) {
-	return func(r *CcrPutAutoFollowPatternRequest) {
+func (f CCRPutAutoFollowPattern) WithHuman() func(*CCRPutAutoFollowPatternRequest) {
+	return func(r *CCRPutAutoFollowPatternRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f CcrPutAutoFollowPattern) WithErrorTrace() func(*CcrPutAutoFollowPatternRequest) {
-	return func(r *CcrPutAutoFollowPatternRequest) {
+func (f CCRPutAutoFollowPattern) WithErrorTrace() func(*CCRPutAutoFollowPatternRequest) {
+	return func(r *CCRPutAutoFollowPatternRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f CcrPutAutoFollowPattern) WithFilterPath(v ...string) func(*CcrPutAutoFollowPatternRequest) {
-	return func(r *CcrPutAutoFollowPatternRequest) {
+func (f CCRPutAutoFollowPattern) WithFilterPath(v ...string) func(*CCRPutAutoFollowPatternRequest) {
+	return func(r *CCRPutAutoFollowPatternRequest) {
 		r.FilterPath = v
 	}
 }

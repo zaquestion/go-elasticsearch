@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -10,9 +10,9 @@ import (
 	"strings"
 )
 
-func newMlGetModelSnapshotsFunc(t Transport) MlGetModelSnapshots {
-	return func(job_id string, o ...func(*MlGetModelSnapshotsRequest)) (*Response, error) {
-		var r = MlGetModelSnapshotsRequest{JobID: job_id}
+func newMLGetModelSnapshotsFunc(t Transport) MLGetModelSnapshots {
+	return func(job_id string, o ...func(*MLGetModelSnapshotsRequest)) (*Response, error) {
+		var r = MLGetModelSnapshotsRequest{JobID: job_id}
 		for _, f := range o {
 			f(&r)
 		}
@@ -25,21 +25,22 @@ func newMlGetModelSnapshotsFunc(t Transport) MlGetModelSnapshots {
 //
 // See full documentation at http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html.
 //
-type MlGetModelSnapshots func(job_id string, o ...func(*MlGetModelSnapshotsRequest)) (*Response, error)
+type MLGetModelSnapshots func(job_id string, o ...func(*MLGetModelSnapshotsRequest)) (*Response, error)
 
-// MlGetModelSnapshotsRequest configures the Ml   Get Model Snapshots API request.
+// MLGetModelSnapshotsRequest configures the Ml   Get Model Snapshots API request.
 //
-type MlGetModelSnapshotsRequest struct {
+type MLGetModelSnapshotsRequest struct {
 	Body io.Reader
 
 	JobID      string
 	SnapshotID string
-	Desc       *bool
-	End        interface{}
-	From       interface{}
-	Size       interface{}
-	Sort       string
-	Start      interface{}
+
+	Desc  *bool
+	End   interface{}
+	From  *int
+	Size  *int
+	Sort  string
+	Start interface{}
 
 	Pretty     bool
 	Human      bool
@@ -51,7 +52,7 @@ type MlGetModelSnapshotsRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r MlGetModelSnapshotsRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r MLGetModelSnapshotsRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -85,11 +86,11 @@ func (r MlGetModelSnapshotsRequest) Do(ctx context.Context, transport Transport)
 	}
 
 	if r.From != nil {
-		params["from"] = fmt.Sprintf("%v", r.From)
+		params["from"] = strconv.FormatInt(int64(*r.From), 10)
 	}
 
 	if r.Size != nil {
-		params["size"] = fmt.Sprintf("%v", r.Size)
+		params["size"] = strconv.FormatInt(int64(*r.Size), 10)
 	}
 
 	if r.Sort != "" {
@@ -150,104 +151,104 @@ func (r MlGetModelSnapshotsRequest) Do(ctx context.Context, transport Transport)
 
 // WithContext sets the request context.
 //
-func (f MlGetModelSnapshots) WithContext(v context.Context) func(*MlGetModelSnapshotsRequest) {
-	return func(r *MlGetModelSnapshotsRequest) {
+func (f MLGetModelSnapshots) WithContext(v context.Context) func(*MLGetModelSnapshotsRequest) {
+	return func(r *MLGetModelSnapshotsRequest) {
 		r.ctx = v
-	}
-}
-
-// WithSnapshotID - the ID of the snapshot to fetch.
-//
-func (f MlGetModelSnapshots) WithSnapshotID(v string) func(*MlGetModelSnapshotsRequest) {
-	return func(r *MlGetModelSnapshotsRequest) {
-		r.SnapshotID = v
 	}
 }
 
 // WithBody - Model snapshot selection criteria.
 //
-func (f MlGetModelSnapshots) WithBody(v io.Reader) func(*MlGetModelSnapshotsRequest) {
-	return func(r *MlGetModelSnapshotsRequest) {
+func (f MLGetModelSnapshots) WithBody(v io.Reader) func(*MLGetModelSnapshotsRequest) {
+	return func(r *MLGetModelSnapshotsRequest) {
 		r.Body = v
+	}
+}
+
+// WithSnapshotID - the ID of the snapshot to fetch.
+//
+func (f MLGetModelSnapshots) WithSnapshotID(v string) func(*MLGetModelSnapshotsRequest) {
+	return func(r *MLGetModelSnapshotsRequest) {
+		r.SnapshotID = v
 	}
 }
 
 // WithDesc - true if the results should be sorted in descending order.
 //
-func (f MlGetModelSnapshots) WithDesc(v bool) func(*MlGetModelSnapshotsRequest) {
-	return func(r *MlGetModelSnapshotsRequest) {
+func (f MLGetModelSnapshots) WithDesc(v bool) func(*MLGetModelSnapshotsRequest) {
+	return func(r *MLGetModelSnapshotsRequest) {
 		r.Desc = &v
 	}
 }
 
 // WithEnd - the filter 'end' query parameter.
 //
-func (f MlGetModelSnapshots) WithEnd(v interface{}) func(*MlGetModelSnapshotsRequest) {
-	return func(r *MlGetModelSnapshotsRequest) {
+func (f MLGetModelSnapshots) WithEnd(v interface{}) func(*MLGetModelSnapshotsRequest) {
+	return func(r *MLGetModelSnapshotsRequest) {
 		r.End = v
 	}
 }
 
 // WithFrom - skips a number of documents.
 //
-func (f MlGetModelSnapshots) WithFrom(v interface{}) func(*MlGetModelSnapshotsRequest) {
-	return func(r *MlGetModelSnapshotsRequest) {
-		r.From = v
+func (f MLGetModelSnapshots) WithFrom(v int) func(*MLGetModelSnapshotsRequest) {
+	return func(r *MLGetModelSnapshotsRequest) {
+		r.From = &v
 	}
 }
 
 // WithSize - the default number of documents returned in queries as a string..
 //
-func (f MlGetModelSnapshots) WithSize(v interface{}) func(*MlGetModelSnapshotsRequest) {
-	return func(r *MlGetModelSnapshotsRequest) {
-		r.Size = v
+func (f MLGetModelSnapshots) WithSize(v int) func(*MLGetModelSnapshotsRequest) {
+	return func(r *MLGetModelSnapshotsRequest) {
+		r.Size = &v
 	}
 }
 
 // WithSort - name of the field to sort on.
 //
-func (f MlGetModelSnapshots) WithSort(v string) func(*MlGetModelSnapshotsRequest) {
-	return func(r *MlGetModelSnapshotsRequest) {
+func (f MLGetModelSnapshots) WithSort(v string) func(*MLGetModelSnapshotsRequest) {
+	return func(r *MLGetModelSnapshotsRequest) {
 		r.Sort = v
 	}
 }
 
 // WithStart - the filter 'start' query parameter.
 //
-func (f MlGetModelSnapshots) WithStart(v interface{}) func(*MlGetModelSnapshotsRequest) {
-	return func(r *MlGetModelSnapshotsRequest) {
+func (f MLGetModelSnapshots) WithStart(v interface{}) func(*MLGetModelSnapshotsRequest) {
+	return func(r *MLGetModelSnapshotsRequest) {
 		r.Start = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f MlGetModelSnapshots) WithPretty() func(*MlGetModelSnapshotsRequest) {
-	return func(r *MlGetModelSnapshotsRequest) {
+func (f MLGetModelSnapshots) WithPretty() func(*MLGetModelSnapshotsRequest) {
+	return func(r *MLGetModelSnapshotsRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f MlGetModelSnapshots) WithHuman() func(*MlGetModelSnapshotsRequest) {
-	return func(r *MlGetModelSnapshotsRequest) {
+func (f MLGetModelSnapshots) WithHuman() func(*MLGetModelSnapshotsRequest) {
+	return func(r *MLGetModelSnapshotsRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f MlGetModelSnapshots) WithErrorTrace() func(*MlGetModelSnapshotsRequest) {
-	return func(r *MlGetModelSnapshotsRequest) {
+func (f MLGetModelSnapshots) WithErrorTrace() func(*MLGetModelSnapshotsRequest) {
+	return func(r *MLGetModelSnapshotsRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f MlGetModelSnapshots) WithFilterPath(v ...string) func(*MlGetModelSnapshotsRequest) {
-	return func(r *MlGetModelSnapshotsRequest) {
+func (f MLGetModelSnapshots) WithFilterPath(v ...string) func(*MLGetModelSnapshotsRequest) {
+	return func(r *MLGetModelSnapshotsRequest) {
 		r.FilterPath = v
 	}
 }

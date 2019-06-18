@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -8,7 +8,7 @@ import (
 )
 
 func newSecurityDeletePrivilegesFunc(t Transport) SecurityDeletePrivileges {
-	return func(application string, name string, o ...func(*SecurityDeletePrivilegesRequest)) (*Response, error) {
+	return func(name string, application string, o ...func(*SecurityDeletePrivilegesRequest)) (*Response, error) {
 		var r = SecurityDeletePrivilegesRequest{Application: application, Name: name}
 		for _, f := range o {
 			f(&r)
@@ -29,7 +29,8 @@ type SecurityDeletePrivileges func(application string, name string, o ...func(*S
 type SecurityDeletePrivilegesRequest struct {
 	Application string
 	Name        string
-	Refresh     string
+
+	Refresh string
 
 	Pretty     bool
 	Human      bool

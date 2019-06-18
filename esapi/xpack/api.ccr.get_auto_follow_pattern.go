@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -7,9 +7,9 @@ import (
 	"strings"
 )
 
-func newCcrGetAutoFollowPatternFunc(t Transport) CcrGetAutoFollowPattern {
-	return func(o ...func(*CcrGetAutoFollowPatternRequest)) (*Response, error) {
-		var r = CcrGetAutoFollowPatternRequest{}
+func newCCRGetAutoFollowPatternFunc(t Transport) CCRGetAutoFollowPattern {
+	return func(o ...func(*CCRGetAutoFollowPatternRequest)) (*Response, error) {
+		var r = CCRGetAutoFollowPatternRequest{}
 		for _, f := range o {
 			f(&r)
 		}
@@ -22,11 +22,11 @@ func newCcrGetAutoFollowPatternFunc(t Transport) CcrGetAutoFollowPattern {
 //
 // See full documentation at https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-auto-follow-pattern.html.
 //
-type CcrGetAutoFollowPattern func(o ...func(*CcrGetAutoFollowPatternRequest)) (*Response, error)
+type CCRGetAutoFollowPattern func(o ...func(*CCRGetAutoFollowPatternRequest)) (*Response, error)
 
-// CcrGetAutoFollowPatternRequest configures the Ccr    Get Auto Follow Pattern API request.
+// CCRGetAutoFollowPatternRequest configures the Ccr    Get Auto Follow Pattern API request.
 //
-type CcrGetAutoFollowPatternRequest struct {
+type CCRGetAutoFollowPatternRequest struct {
 	Name string
 
 	Pretty     bool
@@ -39,7 +39,7 @@ type CcrGetAutoFollowPatternRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r CcrGetAutoFollowPatternRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r CCRGetAutoFollowPatternRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -106,48 +106,48 @@ func (r CcrGetAutoFollowPatternRequest) Do(ctx context.Context, transport Transp
 
 // WithContext sets the request context.
 //
-func (f CcrGetAutoFollowPattern) WithContext(v context.Context) func(*CcrGetAutoFollowPatternRequest) {
-	return func(r *CcrGetAutoFollowPatternRequest) {
+func (f CCRGetAutoFollowPattern) WithContext(v context.Context) func(*CCRGetAutoFollowPatternRequest) {
+	return func(r *CCRGetAutoFollowPatternRequest) {
 		r.ctx = v
 	}
 }
 
 // WithName - the name of the auto follow pattern..
 //
-func (f CcrGetAutoFollowPattern) WithName(v string) func(*CcrGetAutoFollowPatternRequest) {
-	return func(r *CcrGetAutoFollowPatternRequest) {
+func (f CCRGetAutoFollowPattern) WithName(v string) func(*CCRGetAutoFollowPatternRequest) {
+	return func(r *CCRGetAutoFollowPatternRequest) {
 		r.Name = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f CcrGetAutoFollowPattern) WithPretty() func(*CcrGetAutoFollowPatternRequest) {
-	return func(r *CcrGetAutoFollowPatternRequest) {
+func (f CCRGetAutoFollowPattern) WithPretty() func(*CCRGetAutoFollowPatternRequest) {
+	return func(r *CCRGetAutoFollowPatternRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f CcrGetAutoFollowPattern) WithHuman() func(*CcrGetAutoFollowPatternRequest) {
-	return func(r *CcrGetAutoFollowPatternRequest) {
+func (f CCRGetAutoFollowPattern) WithHuman() func(*CCRGetAutoFollowPatternRequest) {
+	return func(r *CCRGetAutoFollowPatternRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f CcrGetAutoFollowPattern) WithErrorTrace() func(*CcrGetAutoFollowPatternRequest) {
-	return func(r *CcrGetAutoFollowPatternRequest) {
+func (f CCRGetAutoFollowPattern) WithErrorTrace() func(*CCRGetAutoFollowPatternRequest) {
+	return func(r *CCRGetAutoFollowPatternRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f CcrGetAutoFollowPattern) WithFilterPath(v ...string) func(*CcrGetAutoFollowPatternRequest) {
-	return func(r *CcrGetAutoFollowPatternRequest) {
+func (f CCRGetAutoFollowPattern) WithFilterPath(v ...string) func(*CCRGetAutoFollowPatternRequest) {
+	return func(r *CCRGetAutoFollowPatternRequest) {
 		r.FilterPath = v
 	}
 }

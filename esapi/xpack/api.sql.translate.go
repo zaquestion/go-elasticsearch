@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -8,9 +8,9 @@ import (
 	"strings"
 )
 
-func newSqlTranslateFunc(t Transport) SqlTranslate {
-	return func(body io.Reader, o ...func(*SqlTranslateRequest)) (*Response, error) {
-		var r = SqlTranslateRequest{Body: body}
+func newSQLTranslateFunc(t Transport) SQLTranslate {
+	return func(body io.Reader, o ...func(*SQLTranslateRequest)) (*Response, error) {
+		var r = SQLTranslateRequest{Body: body}
 		for _, f := range o {
 			f(&r)
 		}
@@ -23,11 +23,11 @@ func newSqlTranslateFunc(t Transport) SqlTranslate {
 //
 // See full documentation at Translate SQL into Elasticsearch queries.
 //
-type SqlTranslate func(body io.Reader, o ...func(*SqlTranslateRequest)) (*Response, error)
+type SQLTranslate func(body io.Reader, o ...func(*SQLTranslateRequest)) (*Response, error)
 
-// SqlTranslateRequest configures the Sql Translate API request.
+// SQLTranslateRequest configures the Sql Translate API request.
 //
-type SqlTranslateRequest struct {
+type SQLTranslateRequest struct {
 	Body io.Reader
 
 	Pretty     bool
@@ -40,7 +40,7 @@ type SqlTranslateRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r SqlTranslateRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r SQLTranslateRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -104,40 +104,40 @@ func (r SqlTranslateRequest) Do(ctx context.Context, transport Transport) (*Resp
 
 // WithContext sets the request context.
 //
-func (f SqlTranslate) WithContext(v context.Context) func(*SqlTranslateRequest) {
-	return func(r *SqlTranslateRequest) {
+func (f SQLTranslate) WithContext(v context.Context) func(*SQLTranslateRequest) {
+	return func(r *SQLTranslateRequest) {
 		r.ctx = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f SqlTranslate) WithPretty() func(*SqlTranslateRequest) {
-	return func(r *SqlTranslateRequest) {
+func (f SQLTranslate) WithPretty() func(*SQLTranslateRequest) {
+	return func(r *SQLTranslateRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f SqlTranslate) WithHuman() func(*SqlTranslateRequest) {
-	return func(r *SqlTranslateRequest) {
+func (f SQLTranslate) WithHuman() func(*SQLTranslateRequest) {
+	return func(r *SQLTranslateRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f SqlTranslate) WithErrorTrace() func(*SqlTranslateRequest) {
-	return func(r *SqlTranslateRequest) {
+func (f SQLTranslate) WithErrorTrace() func(*SQLTranslateRequest) {
+	return func(r *SQLTranslateRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f SqlTranslate) WithFilterPath(v ...string) func(*SqlTranslateRequest) {
-	return func(r *SqlTranslateRequest) {
+func (f SQLTranslate) WithFilterPath(v ...string) func(*SQLTranslateRequest) {
+	return func(r *SQLTranslateRequest) {
 		r.FilterPath = v
 	}
 }

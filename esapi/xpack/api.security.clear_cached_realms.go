@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -27,7 +27,8 @@ type SecurityClearCachedRealms func(realms []string, o ...func(*SecurityClearCac
 // SecurityClearCachedRealmsRequest configures the Security   Clear Cached Realms API request.
 //
 type SecurityClearCachedRealmsRequest struct {
-	Realms    []string
+	Realms []string
+
 	Usernames []string
 
 	Pretty     bool

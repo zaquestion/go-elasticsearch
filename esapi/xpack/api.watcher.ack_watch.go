@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -27,8 +27,8 @@ type WatcherAckWatch func(watch_id string, o ...func(*WatcherAckWatchRequest)) (
 // WatcherAckWatchRequest configures the Watcher  Ack Watch API request.
 //
 type WatcherAckWatchRequest struct {
-	WatchID  string
 	ActionID []string
+	WatchID  string
 
 	Pretty     bool
 	Human      bool

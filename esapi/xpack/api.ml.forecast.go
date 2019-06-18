@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -8,9 +8,9 @@ import (
 	"time"
 )
 
-func newMlForecastFunc(t Transport) MlForecast {
-	return func(job_id string, o ...func(*MlForecastRequest)) (*Response, error) {
-		var r = MlForecastRequest{JobID: job_id}
+func newMLForecastFunc(t Transport) MLForecast {
+	return func(job_id string, o ...func(*MLForecastRequest)) (*Response, error) {
+		var r = MLForecastRequest{JobID: job_id}
 		for _, f := range o {
 			f(&r)
 		}
@@ -21,12 +21,13 @@ func newMlForecastFunc(t Transport) MlForecast {
 // ----- API Definition -------------------------------------------------------
 
 //
-type MlForecast func(job_id string, o ...func(*MlForecastRequest)) (*Response, error)
+type MLForecast func(job_id string, o ...func(*MLForecastRequest)) (*Response, error)
 
-// MlForecastRequest configures the Ml Forecast API request.
+// MLForecastRequest configures the Ml Forecast API request.
 //
-type MlForecastRequest struct {
-	JobID     string
+type MLForecastRequest struct {
+	JobID string
+
 	Duration  time.Duration
 	ExpiresIn time.Duration
 
@@ -40,7 +41,7 @@ type MlForecastRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r MlForecastRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r MLForecastRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -115,56 +116,56 @@ func (r MlForecastRequest) Do(ctx context.Context, transport Transport) (*Respon
 
 // WithContext sets the request context.
 //
-func (f MlForecast) WithContext(v context.Context) func(*MlForecastRequest) {
-	return func(r *MlForecastRequest) {
+func (f MLForecast) WithContext(v context.Context) func(*MLForecastRequest) {
+	return func(r *MLForecastRequest) {
 		r.ctx = v
 	}
 }
 
 // WithDuration - the duration of the forecast.
 //
-func (f MlForecast) WithDuration(v time.Duration) func(*MlForecastRequest) {
-	return func(r *MlForecastRequest) {
+func (f MLForecast) WithDuration(v time.Duration) func(*MLForecastRequest) {
+	return func(r *MLForecastRequest) {
 		r.Duration = v
 	}
 }
 
 // WithExpiresIn - the time interval after which the forecast expires. expired forecasts will be deleted at the first opportunity..
 //
-func (f MlForecast) WithExpiresIn(v time.Duration) func(*MlForecastRequest) {
-	return func(r *MlForecastRequest) {
+func (f MLForecast) WithExpiresIn(v time.Duration) func(*MLForecastRequest) {
+	return func(r *MLForecastRequest) {
 		r.ExpiresIn = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f MlForecast) WithPretty() func(*MlForecastRequest) {
-	return func(r *MlForecastRequest) {
+func (f MLForecast) WithPretty() func(*MLForecastRequest) {
+	return func(r *MLForecastRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f MlForecast) WithHuman() func(*MlForecastRequest) {
-	return func(r *MlForecastRequest) {
+func (f MLForecast) WithHuman() func(*MLForecastRequest) {
+	return func(r *MLForecastRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f MlForecast) WithErrorTrace() func(*MlForecastRequest) {
-	return func(r *MlForecastRequest) {
+func (f MLForecast) WithErrorTrace() func(*MLForecastRequest) {
+	return func(r *MLForecastRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f MlForecast) WithFilterPath(v ...string) func(*MlForecastRequest) {
-	return func(r *MlForecastRequest) {
+func (f MLForecast) WithFilterPath(v ...string) func(*MLForecastRequest) {
+	return func(r *MLForecastRequest) {
 		r.FilterPath = v
 	}
 }

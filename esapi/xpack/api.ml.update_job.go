@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -8,9 +8,9 @@ import (
 	"strings"
 )
 
-func newMlUpdateJobFunc(t Transport) MlUpdateJob {
-	return func(body io.Reader, job_id string, o ...func(*MlUpdateJobRequest)) (*Response, error) {
-		var r = MlUpdateJobRequest{Body: body, JobID: job_id}
+func newMLUpdateJobFunc(t Transport) MLUpdateJob {
+	return func(body io.Reader, job_id string, o ...func(*MLUpdateJobRequest)) (*Response, error) {
+		var r = MLUpdateJobRequest{Body: body, JobID: job_id}
 		for _, f := range o {
 			f(&r)
 		}
@@ -23,11 +23,11 @@ func newMlUpdateJobFunc(t Transport) MlUpdateJob {
 //
 // See full documentation at http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html.
 //
-type MlUpdateJob func(body io.Reader, job_id string, o ...func(*MlUpdateJobRequest)) (*Response, error)
+type MLUpdateJob func(body io.Reader, job_id string, o ...func(*MLUpdateJobRequest)) (*Response, error)
 
-// MlUpdateJobRequest configures the Ml  Update Job API request.
+// MLUpdateJobRequest configures the Ml  Update Job API request.
 //
-type MlUpdateJobRequest struct {
+type MLUpdateJobRequest struct {
 	Body io.Reader
 
 	JobID string
@@ -42,7 +42,7 @@ type MlUpdateJobRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r MlUpdateJobRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r MLUpdateJobRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -113,40 +113,40 @@ func (r MlUpdateJobRequest) Do(ctx context.Context, transport Transport) (*Respo
 
 // WithContext sets the request context.
 //
-func (f MlUpdateJob) WithContext(v context.Context) func(*MlUpdateJobRequest) {
-	return func(r *MlUpdateJobRequest) {
+func (f MLUpdateJob) WithContext(v context.Context) func(*MLUpdateJobRequest) {
+	return func(r *MLUpdateJobRequest) {
 		r.ctx = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f MlUpdateJob) WithPretty() func(*MlUpdateJobRequest) {
-	return func(r *MlUpdateJobRequest) {
+func (f MLUpdateJob) WithPretty() func(*MLUpdateJobRequest) {
+	return func(r *MLUpdateJobRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f MlUpdateJob) WithHuman() func(*MlUpdateJobRequest) {
-	return func(r *MlUpdateJobRequest) {
+func (f MLUpdateJob) WithHuman() func(*MLUpdateJobRequest) {
+	return func(r *MLUpdateJobRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f MlUpdateJob) WithErrorTrace() func(*MlUpdateJobRequest) {
-	return func(r *MlUpdateJobRequest) {
+func (f MLUpdateJob) WithErrorTrace() func(*MLUpdateJobRequest) {
+	return func(r *MLUpdateJobRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f MlUpdateJob) WithFilterPath(v ...string) func(*MlUpdateJobRequest) {
-	return func(r *MlUpdateJobRequest) {
+func (f MLUpdateJob) WithFilterPath(v ...string) func(*MLUpdateJobRequest) {
+	return func(r *MLUpdateJobRequest) {
 		r.FilterPath = v
 	}
 }

@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -10,9 +10,9 @@ import (
 	"strings"
 )
 
-func newMlGetBucketsFunc(t Transport) MlGetBuckets {
-	return func(job_id string, o ...func(*MlGetBucketsRequest)) (*Response, error) {
-		var r = MlGetBucketsRequest{JobID: job_id}
+func newMLGetBucketsFunc(t Transport) MLGetBuckets {
+	return func(job_id string, o ...func(*MLGetBucketsRequest)) (*Response, error) {
+		var r = MLGetBucketsRequest{JobID: job_id}
 		for _, f := range o {
 			f(&r)
 		}
@@ -25,22 +25,23 @@ func newMlGetBucketsFunc(t Transport) MlGetBuckets {
 //
 // See full documentation at http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html.
 //
-type MlGetBuckets func(job_id string, o ...func(*MlGetBucketsRequest)) (*Response, error)
+type MLGetBuckets func(job_id string, o ...func(*MLGetBucketsRequest)) (*Response, error)
 
-// MlGetBucketsRequest configures the Ml  Get Buckets API request.
+// MLGetBucketsRequest configures the Ml  Get Buckets API request.
 //
-type MlGetBucketsRequest struct {
+type MLGetBucketsRequest struct {
 	Body io.Reader
 
-	JobID          string
-	Timestamp      string
+	JobID     string
+	Timestamp string
+
 	AnomalyScore   interface{}
 	Desc           *bool
 	End            string
 	ExcludeInterim *bool
 	Expand         *bool
-	From           interface{}
-	Size           interface{}
+	From           *int
+	Size           *int
 	Sort           string
 	Start          string
 
@@ -54,7 +55,7 @@ type MlGetBucketsRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r MlGetBucketsRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r MLGetBucketsRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -102,11 +103,11 @@ func (r MlGetBucketsRequest) Do(ctx context.Context, transport Transport) (*Resp
 	}
 
 	if r.From != nil {
-		params["from"] = fmt.Sprintf("%v", r.From)
+		params["from"] = strconv.FormatInt(int64(*r.From), 10)
 	}
 
 	if r.Size != nil {
-		params["size"] = fmt.Sprintf("%v", r.Size)
+		params["size"] = strconv.FormatInt(int64(*r.Size), 10)
 	}
 
 	if r.Sort != "" {
@@ -167,128 +168,128 @@ func (r MlGetBucketsRequest) Do(ctx context.Context, transport Transport) (*Resp
 
 // WithContext sets the request context.
 //
-func (f MlGetBuckets) WithContext(v context.Context) func(*MlGetBucketsRequest) {
-	return func(r *MlGetBucketsRequest) {
+func (f MLGetBuckets) WithContext(v context.Context) func(*MLGetBucketsRequest) {
+	return func(r *MLGetBucketsRequest) {
 		r.ctx = v
-	}
-}
-
-// WithTimestamp - the timestamp of the desired single bucket result.
-//
-func (f MlGetBuckets) WithTimestamp(v string) func(*MlGetBucketsRequest) {
-	return func(r *MlGetBucketsRequest) {
-		r.Timestamp = v
 	}
 }
 
 // WithBody - Bucket selection details if not provided in URI.
 //
-func (f MlGetBuckets) WithBody(v io.Reader) func(*MlGetBucketsRequest) {
-	return func(r *MlGetBucketsRequest) {
+func (f MLGetBuckets) WithBody(v io.Reader) func(*MLGetBucketsRequest) {
+	return func(r *MLGetBucketsRequest) {
 		r.Body = v
+	}
+}
+
+// WithTimestamp - the timestamp of the desired single bucket result.
+//
+func (f MLGetBuckets) WithTimestamp(v string) func(*MLGetBucketsRequest) {
+	return func(r *MLGetBucketsRequest) {
+		r.Timestamp = v
 	}
 }
 
 // WithAnomalyScore - filter for the most anomalous buckets.
 //
-func (f MlGetBuckets) WithAnomalyScore(v interface{}) func(*MlGetBucketsRequest) {
-	return func(r *MlGetBucketsRequest) {
+func (f MLGetBuckets) WithAnomalyScore(v interface{}) func(*MLGetBucketsRequest) {
+	return func(r *MLGetBucketsRequest) {
 		r.AnomalyScore = v
 	}
 }
 
 // WithDesc - set the sort direction.
 //
-func (f MlGetBuckets) WithDesc(v bool) func(*MlGetBucketsRequest) {
-	return func(r *MlGetBucketsRequest) {
+func (f MLGetBuckets) WithDesc(v bool) func(*MLGetBucketsRequest) {
+	return func(r *MLGetBucketsRequest) {
 		r.Desc = &v
 	}
 }
 
 // WithEnd - end time filter for buckets.
 //
-func (f MlGetBuckets) WithEnd(v string) func(*MlGetBucketsRequest) {
-	return func(r *MlGetBucketsRequest) {
+func (f MLGetBuckets) WithEnd(v string) func(*MLGetBucketsRequest) {
+	return func(r *MLGetBucketsRequest) {
 		r.End = v
 	}
 }
 
 // WithExcludeInterim - exclude interim results.
 //
-func (f MlGetBuckets) WithExcludeInterim(v bool) func(*MlGetBucketsRequest) {
-	return func(r *MlGetBucketsRequest) {
+func (f MLGetBuckets) WithExcludeInterim(v bool) func(*MLGetBucketsRequest) {
+	return func(r *MLGetBucketsRequest) {
 		r.ExcludeInterim = &v
 	}
 }
 
 // WithExpand - include anomaly records.
 //
-func (f MlGetBuckets) WithExpand(v bool) func(*MlGetBucketsRequest) {
-	return func(r *MlGetBucketsRequest) {
+func (f MLGetBuckets) WithExpand(v bool) func(*MLGetBucketsRequest) {
+	return func(r *MLGetBucketsRequest) {
 		r.Expand = &v
 	}
 }
 
 // WithFrom - skips a number of buckets.
 //
-func (f MlGetBuckets) WithFrom(v interface{}) func(*MlGetBucketsRequest) {
-	return func(r *MlGetBucketsRequest) {
-		r.From = v
+func (f MLGetBuckets) WithFrom(v int) func(*MLGetBucketsRequest) {
+	return func(r *MLGetBucketsRequest) {
+		r.From = &v
 	}
 }
 
 // WithSize - specifies a max number of buckets to get.
 //
-func (f MlGetBuckets) WithSize(v interface{}) func(*MlGetBucketsRequest) {
-	return func(r *MlGetBucketsRequest) {
-		r.Size = v
+func (f MLGetBuckets) WithSize(v int) func(*MLGetBucketsRequest) {
+	return func(r *MLGetBucketsRequest) {
+		r.Size = &v
 	}
 }
 
 // WithSort - sort buckets by a particular field.
 //
-func (f MlGetBuckets) WithSort(v string) func(*MlGetBucketsRequest) {
-	return func(r *MlGetBucketsRequest) {
+func (f MLGetBuckets) WithSort(v string) func(*MLGetBucketsRequest) {
+	return func(r *MLGetBucketsRequest) {
 		r.Sort = v
 	}
 }
 
 // WithStart - start time filter for buckets.
 //
-func (f MlGetBuckets) WithStart(v string) func(*MlGetBucketsRequest) {
-	return func(r *MlGetBucketsRequest) {
+func (f MLGetBuckets) WithStart(v string) func(*MLGetBucketsRequest) {
+	return func(r *MLGetBucketsRequest) {
 		r.Start = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f MlGetBuckets) WithPretty() func(*MlGetBucketsRequest) {
-	return func(r *MlGetBucketsRequest) {
+func (f MLGetBuckets) WithPretty() func(*MLGetBucketsRequest) {
+	return func(r *MLGetBucketsRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f MlGetBuckets) WithHuman() func(*MlGetBucketsRequest) {
-	return func(r *MlGetBucketsRequest) {
+func (f MLGetBuckets) WithHuman() func(*MLGetBucketsRequest) {
+	return func(r *MLGetBucketsRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f MlGetBuckets) WithErrorTrace() func(*MlGetBucketsRequest) {
-	return func(r *MlGetBucketsRequest) {
+func (f MLGetBuckets) WithErrorTrace() func(*MLGetBucketsRequest) {
+	return func(r *MLGetBucketsRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f MlGetBuckets) WithFilterPath(v ...string) func(*MlGetBucketsRequest) {
-	return func(r *MlGetBucketsRequest) {
+func (f MLGetBuckets) WithFilterPath(v ...string) func(*MLGetBucketsRequest) {
+	return func(r *MLGetBucketsRequest) {
 		r.FilterPath = v
 	}
 }

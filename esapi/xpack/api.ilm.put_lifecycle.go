@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -8,9 +8,9 @@ import (
 	"strings"
 )
 
-func newIlmPutLifecycleFunc(t Transport) IlmPutLifecycle {
-	return func(o ...func(*IlmPutLifecycleRequest)) (*Response, error) {
-		var r = IlmPutLifecycleRequest{}
+func newILMPutLifecycleFunc(t Transport) ILMPutLifecycle {
+	return func(o ...func(*ILMPutLifecycleRequest)) (*Response, error) {
+		var r = ILMPutLifecycleRequest{}
 		for _, f := range o {
 			f(&r)
 		}
@@ -23,11 +23,11 @@ func newIlmPutLifecycleFunc(t Transport) IlmPutLifecycle {
 //
 // See full documentation at https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html.
 //
-type IlmPutLifecycle func(o ...func(*IlmPutLifecycleRequest)) (*Response, error)
+type ILMPutLifecycle func(o ...func(*ILMPutLifecycleRequest)) (*Response, error)
 
-// IlmPutLifecycleRequest configures the Ilm  Put Lifecycle API request.
+// ILMPutLifecycleRequest configures the Ilm  Put Lifecycle API request.
 //
-type IlmPutLifecycleRequest struct {
+type ILMPutLifecycleRequest struct {
 	Body io.Reader
 
 	Policy string
@@ -42,7 +42,7 @@ type IlmPutLifecycleRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r IlmPutLifecycleRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r ILMPutLifecycleRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -113,56 +113,56 @@ func (r IlmPutLifecycleRequest) Do(ctx context.Context, transport Transport) (*R
 
 // WithContext sets the request context.
 //
-func (f IlmPutLifecycle) WithContext(v context.Context) func(*IlmPutLifecycleRequest) {
-	return func(r *IlmPutLifecycleRequest) {
+func (f ILMPutLifecycle) WithContext(v context.Context) func(*ILMPutLifecycleRequest) {
+	return func(r *ILMPutLifecycleRequest) {
 		r.ctx = v
-	}
-}
-
-// WithPolicy - the name of the index lifecycle policy.
-//
-func (f IlmPutLifecycle) WithPolicy(v string) func(*IlmPutLifecycleRequest) {
-	return func(r *IlmPutLifecycleRequest) {
-		r.Policy = v
 	}
 }
 
 // WithBody - The lifecycle policy definition to register.
 //
-func (f IlmPutLifecycle) WithBody(v io.Reader) func(*IlmPutLifecycleRequest) {
-	return func(r *IlmPutLifecycleRequest) {
+func (f ILMPutLifecycle) WithBody(v io.Reader) func(*ILMPutLifecycleRequest) {
+	return func(r *ILMPutLifecycleRequest) {
 		r.Body = v
+	}
+}
+
+// WithPolicy - the name of the index lifecycle policy.
+//
+func (f ILMPutLifecycle) WithPolicy(v string) func(*ILMPutLifecycleRequest) {
+	return func(r *ILMPutLifecycleRequest) {
+		r.Policy = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f IlmPutLifecycle) WithPretty() func(*IlmPutLifecycleRequest) {
-	return func(r *IlmPutLifecycleRequest) {
+func (f ILMPutLifecycle) WithPretty() func(*ILMPutLifecycleRequest) {
+	return func(r *ILMPutLifecycleRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f IlmPutLifecycle) WithHuman() func(*IlmPutLifecycleRequest) {
-	return func(r *IlmPutLifecycleRequest) {
+func (f ILMPutLifecycle) WithHuman() func(*ILMPutLifecycleRequest) {
+	return func(r *ILMPutLifecycleRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f IlmPutLifecycle) WithErrorTrace() func(*IlmPutLifecycleRequest) {
-	return func(r *IlmPutLifecycleRequest) {
+func (f ILMPutLifecycle) WithErrorTrace() func(*ILMPutLifecycleRequest) {
+	return func(r *ILMPutLifecycleRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f IlmPutLifecycle) WithFilterPath(v ...string) func(*IlmPutLifecycleRequest) {
-	return func(r *IlmPutLifecycleRequest) {
+func (f ILMPutLifecycle) WithFilterPath(v ...string) func(*ILMPutLifecycleRequest) {
+	return func(r *ILMPutLifecycleRequest) {
 		r.FilterPath = v
 	}
 }

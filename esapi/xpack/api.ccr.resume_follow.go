@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -8,9 +8,9 @@ import (
 	"strings"
 )
 
-func newCcrResumeFollowFunc(t Transport) CcrResumeFollow {
-	return func(index string, o ...func(*CcrResumeFollowRequest)) (*Response, error) {
-		var r = CcrResumeFollowRequest{Index: index}
+func newCCRResumeFollowFunc(t Transport) CCRResumeFollow {
+	return func(index string, o ...func(*CCRResumeFollowRequest)) (*Response, error) {
+		var r = CCRResumeFollowRequest{Index: index}
 		for _, f := range o {
 			f(&r)
 		}
@@ -23,13 +23,14 @@ func newCcrResumeFollowFunc(t Transport) CcrResumeFollow {
 //
 // See full documentation at https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-resume-follow.html.
 //
-type CcrResumeFollow func(index string, o ...func(*CcrResumeFollowRequest)) (*Response, error)
+type CCRResumeFollow func(index string, o ...func(*CCRResumeFollowRequest)) (*Response, error)
 
-// CcrResumeFollowRequest configures the Ccr  Resume Follow API request.
+// CCRResumeFollowRequest configures the Ccr  Resume Follow API request.
 //
-type CcrResumeFollowRequest struct {
+type CCRResumeFollowRequest struct {
 	Index string
-	Body  io.Reader
+
+	Body io.Reader
 
 	Pretty     bool
 	Human      bool
@@ -41,7 +42,7 @@ type CcrResumeFollowRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r CcrResumeFollowRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r CCRResumeFollowRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -110,48 +111,48 @@ func (r CcrResumeFollowRequest) Do(ctx context.Context, transport Transport) (*R
 
 // WithContext sets the request context.
 //
-func (f CcrResumeFollow) WithContext(v context.Context) func(*CcrResumeFollowRequest) {
-	return func(r *CcrResumeFollowRequest) {
+func (f CCRResumeFollow) WithContext(v context.Context) func(*CCRResumeFollowRequest) {
+	return func(r *CCRResumeFollowRequest) {
 		r.ctx = v
 	}
 }
 
 // WithBody - The name of the leader index and other optional ccr related parameters.
 //
-func (f CcrResumeFollow) WithBody(v io.Reader) func(*CcrResumeFollowRequest) {
-	return func(r *CcrResumeFollowRequest) {
+func (f CCRResumeFollow) WithBody(v io.Reader) func(*CCRResumeFollowRequest) {
+	return func(r *CCRResumeFollowRequest) {
 		r.Body = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f CcrResumeFollow) WithPretty() func(*CcrResumeFollowRequest) {
-	return func(r *CcrResumeFollowRequest) {
+func (f CCRResumeFollow) WithPretty() func(*CCRResumeFollowRequest) {
+	return func(r *CCRResumeFollowRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f CcrResumeFollow) WithHuman() func(*CcrResumeFollowRequest) {
-	return func(r *CcrResumeFollowRequest) {
+func (f CCRResumeFollow) WithHuman() func(*CCRResumeFollowRequest) {
+	return func(r *CCRResumeFollowRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f CcrResumeFollow) WithErrorTrace() func(*CcrResumeFollowRequest) {
-	return func(r *CcrResumeFollowRequest) {
+func (f CCRResumeFollow) WithErrorTrace() func(*CCRResumeFollowRequest) {
+	return func(r *CCRResumeFollowRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f CcrResumeFollow) WithFilterPath(v ...string) func(*CcrResumeFollowRequest) {
-	return func(r *CcrResumeFollowRequest) {
+func (f CCRResumeFollow) WithFilterPath(v ...string) func(*CCRResumeFollowRequest) {
+	return func(r *CCRResumeFollowRequest) {
 		r.FilterPath = v
 	}
 }

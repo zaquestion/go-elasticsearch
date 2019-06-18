@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -30,7 +30,8 @@ type WatcherPutWatch func(id string, o ...func(*WatcherPutWatchRequest)) (*Respo
 //
 type WatcherPutWatchRequest struct {
 	DocumentID string
-	Body       io.Reader
+
+	Body io.Reader
 
 	Active        *bool
 	IfPrimaryTerm *int

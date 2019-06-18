@@ -1,4 +1,4 @@
-// Code generated from specification version 7.0.0-SNAPSHOT: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package xpack
 
@@ -27,7 +27,8 @@ type SecurityDeleteRole func(name string, o ...func(*SecurityDeleteRoleRequest))
 // SecurityDeleteRoleRequest configures the Security  Delete Role API request.
 //
 type SecurityDeleteRoleRequest struct {
-	Name    string
+	Name string
+
 	Refresh string
 
 	Pretty     bool
