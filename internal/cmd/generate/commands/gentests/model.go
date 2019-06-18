@@ -340,13 +340,18 @@ func (s Steps) ContainsStash(keys ...string) bool {
 // Method returns the API method name for the action.
 //
 func (a Action) Method() string {
-	return strings.Title(a.method)
+	return utils.NameToGo(a.method)
 }
 
 // Request returns the API request name for the action.
 //
 func (a Action) Request() string {
-	return utils.NameToGo(strings.Replace(strings.Title(a.method), ".", "", -1)) + "Request"
+	var rParts []string
+	parts := strings.Split(a.method, ".")
+	for _, p := range parts {
+		rParts = append(rParts, utils.NameToGo(p))
+	}
+	return strings.Join(rParts, "") + "Request"
 }
 
 // Params returns a map of parameters for the action.
