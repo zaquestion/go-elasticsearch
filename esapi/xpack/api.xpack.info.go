@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-func newXPackInfoFunc(t Transport) XPackInfo {
+func NewXPackInfoFunc(t Transport) XPackInfo {
 	return func(o ...func(*XPackInfoRequest)) (*Response, error) {
 		var r = XPackInfoRequest{}
 		for _, f := range o {

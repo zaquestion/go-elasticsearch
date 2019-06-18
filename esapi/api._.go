@@ -2,6 +2,10 @@
 
 package esapi
 
+import (
+	"github.com/elastic/go-elasticsearch/v8/esapi/xpack"
+)
+
 // API contains the Elasticsearch APIs
 //
 type API struct {
@@ -50,6 +54,29 @@ type API struct {
 	Update                  Update
 	UpdateByQuery           UpdateByQuery
 	UpdateByQueryRethrottle UpdateByQueryRethrottle
+
+	// X-Pack
+	CCR        *CCR
+	ILM        *ILM
+	License    *License
+	Migration  *Migration
+	ML         *ML
+	Monitoring *Monitoring
+	Rollup     *Rollup
+	Security   *Security
+	SQL        *SQL
+	SSL        *SSL
+	Watcher    *Watcher
+	XPack      *XPack
+
+	DataFrameDeleteDataFrameTransform   xpack.DataFrameDeleteDataFrameTransform
+	DataFrameGetDataFrameTransform      xpack.DataFrameGetDataFrameTransform
+	DataFrameGetDataFrameTransformStats xpack.DataFrameGetDataFrameTransformStats
+	DataFramePreviewDataFrameTransform  xpack.DataFramePreviewDataFrameTransform
+	DataFramePutDataFrameTransform      xpack.DataFramePutDataFrameTransform
+	DataFrameStartDataFrameTransform    xpack.DataFrameStartDataFrameTransform
+	DataFrameStopDataFrameTransform     xpack.DataFrameStopDataFrameTransform
+	GraphExplore                        xpack.GraphExplore
 }
 
 // Cat contains the Cat APIs
@@ -128,6 +155,9 @@ type Indices struct {
 	UpdateAliases   IndicesUpdateAliases
 	Upgrade         IndicesUpgrade
 	ValidateQuery   IndicesValidateQuery
+
+	Freeze   xpack.IndicesFreeze
+	Unfreeze xpack.IndicesUnfreeze
 }
 
 // Ingest contains the Ingest APIs
@@ -170,6 +200,179 @@ type Tasks struct {
 	Cancel TasksCancel
 	Get    TasksGet
 	List   TasksList
+}
+
+// CCR contains the CCR APIs
+type CCR struct {
+	DeleteAutoFollowPattern xpack.CCRDeleteAutoFollowPattern
+	Follow                  xpack.CCRFollow
+	FollowInfo              xpack.CCRFollowInfo
+	FollowStats             xpack.CCRFollowStats
+	ForgetFollower          xpack.CCRForgetFollower
+	GetAutoFollowPattern    xpack.CCRGetAutoFollowPattern
+	PauseFollow             xpack.CCRPauseFollow
+	PutAutoFollowPattern    xpack.CCRPutAutoFollowPattern
+	ResumeFollow            xpack.CCRResumeFollow
+	Stats                   xpack.CCRStats
+	Unfollow                xpack.CCRUnfollow
+}
+
+// ILM contains the ILM APIs
+type ILM struct {
+	DeleteLifecycle  xpack.ILMDeleteLifecycle
+	ExplainLifecycle xpack.ILMExplainLifecycle
+	GetLifecycle     xpack.ILMGetLifecycle
+	GetStatus        xpack.ILMGetStatus
+	MoveToStep       xpack.ILMMoveToStep
+	PutLifecycle     xpack.ILMPutLifecycle
+	RemovePolicy     xpack.ILMRemovePolicy
+	Retry            xpack.ILMRetry
+	Start            xpack.ILMStart
+	Stop             xpack.ILMStop
+}
+
+// License contains the License APIs
+type License struct {
+	Delete         xpack.LicenseDelete
+	Get            xpack.LicenseGet
+	GetBasicStatus xpack.LicenseGetBasicStatus
+	GetTrialStatus xpack.LicenseGetTrialStatus
+	Post           xpack.LicensePost
+	PostStartBasic xpack.LicensePostStartBasic
+	PostStartTrial xpack.LicensePostStartTrial
+}
+
+// Migration contains the Migration APIs
+type Migration struct {
+	Deprecations xpack.MigrationDeprecations
+}
+
+// ML contains the ML APIs
+type ML struct {
+	CloseJob            xpack.MLCloseJob
+	DeleteCalendar      xpack.MLDeleteCalendar
+	DeleteCalendarEvent xpack.MLDeleteCalendarEvent
+	DeleteCalendarJob   xpack.MLDeleteCalendarJob
+	DeleteDatafeed      xpack.MLDeleteDatafeed
+	DeleteExpiredData   xpack.MLDeleteExpiredData
+	DeleteFilter        xpack.MLDeleteFilter
+	DeleteForecast      xpack.MLDeleteForecast
+	DeleteJob           xpack.MLDeleteJob
+	DeleteModelSnapshot xpack.MLDeleteModelSnapshot
+	FindFileStructure   xpack.MLFindFileStructure
+	FlushJob            xpack.MLFlushJob
+	Forecast            xpack.MLForecast
+	GetBuckets          xpack.MLGetBuckets
+	GetCalendarEvents   xpack.MLGetCalendarEvents
+	GetCalendars        xpack.MLGetCalendars
+	GetCategories       xpack.MLGetCategories
+	GetDatafeedStats    xpack.MLGetDatafeedStats
+	GetDatafeeds        xpack.MLGetDatafeeds
+	GetFilters          xpack.MLGetFilters
+	GetInfluencers      xpack.MLGetInfluencers
+	GetJobStats         xpack.MLGetJobStats
+	GetJobs             xpack.MLGetJobs
+	GetModelSnapshots   xpack.MLGetModelSnapshots
+	GetOverallBuckets   xpack.MLGetOverallBuckets
+	GetRecords          xpack.MLGetRecords
+	Info                xpack.MLInfo
+	OpenJob             xpack.MLOpenJob
+	PostCalendarEvents  xpack.MLPostCalendarEvents
+	PostData            xpack.MLPostData
+	PreviewDatafeed     xpack.MLPreviewDatafeed
+	PutCalendar         xpack.MLPutCalendar
+	PutCalendarJob      xpack.MLPutCalendarJob
+	PutDatafeed         xpack.MLPutDatafeed
+	PutFilter           xpack.MLPutFilter
+	PutJob              xpack.MLPutJob
+	RevertModelSnapshot xpack.MLRevertModelSnapshot
+	SetUpgradeMode      xpack.MLSetUpgradeMode
+	StartDatafeed       xpack.MLStartDatafeed
+	StopDatafeed        xpack.MLStopDatafeed
+	UpdateDatafeed      xpack.MLUpdateDatafeed
+	UpdateFilter        xpack.MLUpdateFilter
+	UpdateJob           xpack.MLUpdateJob
+	UpdateModelSnapshot xpack.MLUpdateModelSnapshot
+	Validate            xpack.MLValidate
+	ValidateDetector    xpack.MLValidateDetector
+}
+
+// Monitoring contains the Monitoring APIs
+type Monitoring struct {
+	Bulk xpack.MonitoringBulk
+}
+
+// Rollup contains the Rollup APIs
+type Rollup struct {
+	DeleteJob          xpack.RollupDeleteJob
+	GetJobs            xpack.RollupGetJobs
+	GetRollupCaps      xpack.RollupGetRollupCaps
+	GetRollupIndexCaps xpack.RollupGetRollupIndexCaps
+	PutJob             xpack.RollupPutJob
+	RollupSearch       xpack.RollupRollupSearch
+	StartJob           xpack.RollupStartJob
+	StopJob            xpack.RollupStopJob
+}
+
+// Security contains the Security APIs
+type Security struct {
+	Authenticate      xpack.SecurityAuthenticate
+	ChangePassword    xpack.SecurityChangePassword
+	ClearCachedRealms xpack.SecurityClearCachedRealms
+	ClearCachedRoles  xpack.SecurityClearCachedRoles
+	CreateApiKey      xpack.SecurityCreateApiKey
+	DeletePrivileges  xpack.SecurityDeletePrivileges
+	DeleteRole        xpack.SecurityDeleteRole
+	DeleteRoleMapping xpack.SecurityDeleteRoleMapping
+	DeleteUser        xpack.SecurityDeleteUser
+	DisableUser       xpack.SecurityDisableUser
+	EnableUser        xpack.SecurityEnableUser
+	GetApiKey         xpack.SecurityGetApiKey
+	GetPrivileges     xpack.SecurityGetPrivileges
+	GetRole           xpack.SecurityGetRole
+	GetRoleMapping    xpack.SecurityGetRoleMapping
+	GetToken          xpack.SecurityGetToken
+	GetUser           xpack.SecurityGetUser
+	GetUserPrivileges xpack.SecurityGetUserPrivileges
+	HasPrivileges     xpack.SecurityHasPrivileges
+	InvalidateApiKey  xpack.SecurityInvalidateApiKey
+	InvalidateToken   xpack.SecurityInvalidateToken
+	PutPrivileges     xpack.SecurityPutPrivileges
+	PutRole           xpack.SecurityPutRole
+	PutRoleMapping    xpack.SecurityPutRoleMapping
+	PutUser           xpack.SecurityPutUser
+}
+
+// SQL contains the SQL APIs
+type SQL struct {
+	ClearCursor xpack.SQLClearCursor
+	Query       xpack.SQLQuery
+	Translate   xpack.SQLTranslate
+}
+
+// SSL contains the SSL APIs
+type SSL struct {
+	Certificates xpack.SSLCertificates
+}
+
+// Watcher contains the Watcher APIs
+type Watcher struct {
+	AckWatch        xpack.WatcherAckWatch
+	ActivateWatch   xpack.WatcherActivateWatch
+	DeactivateWatch xpack.WatcherDeactivateWatch
+	DeleteWatch     xpack.WatcherDeleteWatch
+	ExecuteWatch    xpack.WatcherExecuteWatch
+	GetWatch        xpack.WatcherGetWatch
+	PutWatch        xpack.WatcherPutWatch
+	Start           xpack.WatcherStart
+	Stats           xpack.WatcherStats
+	Stop            xpack.WatcherStop
+}
+
+// XPack contains the XPack APIs
+type XPack struct {
+	Info  xpack.XPackInfo
+	Usage xpack.XPackUsage
 }
 
 // New creates new API
@@ -283,6 +486,9 @@ func New(t Transport) *API {
 			UpdateAliases:   newIndicesUpdateAliasesFunc(t),
 			Upgrade:         newIndicesUpgradeFunc(t),
 			ValidateQuery:   newIndicesValidateQueryFunc(t),
+
+			Freeze:   xpack.NewIndicesFreezeFunc(t),
+			Unfreeze: xpack.NewIndicesUnfreezeFunc(t),
 		},
 		Ingest: &Ingest{
 			DeletePipeline: newIngestDeletePipelineFunc(t),
@@ -314,6 +520,20 @@ func New(t Transport) *API {
 			Cancel: newTasksCancelFunc(t),
 			Get:    newTasksGetFunc(t),
 			List:   newTasksListFunc(t),
+		},
+
+		License: &License{
+			Delete:         xpack.NewLicenseDeleteFunc(t),
+			Get:            xpack.NewLicenseGetFunc(t),
+			GetBasicStatus: xpack.NewLicenseGetBasicStatusFunc(t),
+			GetTrialStatus: xpack.NewLicenseGetTrialStatusFunc(t),
+			Post:           xpack.NewLicensePostFunc(t),
+			PostStartBasic: xpack.NewLicensePostStartBasicFunc(t),
+			PostStartTrial: xpack.NewLicensePostStartTrialFunc(t),
+		},
+		XPack: &XPack{
+			Info:  xpack.NewXPackInfoFunc(t),
+			Usage: xpack.NewXPackUsageFunc(t),
 		},
 	}
 }

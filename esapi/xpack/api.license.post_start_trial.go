@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-func newLicensePostStartTrialFunc(t Transport) LicensePostStartTrial {
+func NewLicensePostStartTrialFunc(t Transport) LicensePostStartTrial {
 	return func(o ...func(*LicensePostStartTrialRequest)) (*Response, error) {
 		var r = LicensePostStartTrialRequest{}
 		for _, f := range o {

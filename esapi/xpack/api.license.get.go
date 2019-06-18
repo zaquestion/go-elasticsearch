@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-func newLicenseGetFunc(t Transport) LicenseGet {
+func NewLicenseGetFunc(t Transport) LicenseGet {
 	return func(o ...func(*LicenseGetRequest)) (*Response, error) {
 		var r = LicenseGetRequest{}
 		for _, f := range o {

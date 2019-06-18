@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-func newLicensePostFunc(t Transport) LicensePost {
+func NewLicensePostFunc(t Transport) LicensePost {
 	return func(o ...func(*LicensePostRequest)) (*Response, error) {
 		var r = LicensePostRequest{}
 		for _, f := range o {

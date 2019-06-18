@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-func newLicenseGetTrialStatusFunc(t Transport) LicenseGetTrialStatus {
+func NewLicenseGetTrialStatusFunc(t Transport) LicenseGetTrialStatus {
 	return func(o ...func(*LicenseGetTrialStatusRequest)) (*Response, error) {
 		var r = LicenseGetTrialStatusRequest{}
 		for _, f := range o {

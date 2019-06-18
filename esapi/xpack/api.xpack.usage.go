@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-func newXPackUsageFunc(t Transport) XPackUsage {
+func NewXPackUsageFunc(t Transport) XPackUsage {
 	return func(o ...func(*XPackUsageRequest)) (*Response, error) {
 		var r = XPackUsageRequest{}
 		for _, f := range o {

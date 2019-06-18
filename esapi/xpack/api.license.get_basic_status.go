@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-func newLicenseGetBasicStatusFunc(t Transport) LicenseGetBasicStatus {
+func NewLicenseGetBasicStatusFunc(t Transport) LicenseGetBasicStatus {
 	return func(o ...func(*LicenseGetBasicStatusRequest)) (*Response, error) {
 		var r = LicenseGetBasicStatusRequest{}
 		for _, f := range o {

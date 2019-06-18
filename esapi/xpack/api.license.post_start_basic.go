@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-func newLicensePostStartBasicFunc(t Transport) LicensePostStartBasic {
+func NewLicensePostStartBasicFunc(t Transport) LicensePostStartBasic {
 	return func(o ...func(*LicensePostStartBasicRequest)) (*Response, error) {
 		var r = LicensePostStartBasicRequest{}
 		for _, f := range o {

@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-func newIndicesFreezeFunc(t Transport) IndicesFreeze {
+func NewIndicesFreezeFunc(t Transport) IndicesFreeze {
 	return func(index string, o ...func(*IndicesFreezeRequest)) (*Response, error) {
 		var r = IndicesFreezeRequest{Index: index}
 		for _, f := range o {

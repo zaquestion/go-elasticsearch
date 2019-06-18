@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-func newLicenseDeleteFunc(t Transport) LicenseDelete {
+func NewLicenseDeleteFunc(t Transport) LicenseDelete {
 	return func(o ...func(*LicenseDeleteRequest)) (*Response, error) {
 		var r = LicenseDeleteRequest{}
 		for _, f := range o {
