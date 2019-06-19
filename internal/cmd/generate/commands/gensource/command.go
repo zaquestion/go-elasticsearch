@@ -265,7 +265,13 @@ func (cmd *Command) processFile(f *os.File) (err error) {
 			return fmt.Errorf("error creating directory: %s", err)
 		}
 
-		fName := filepath.Join(cmd.Output, "api."+gen.Endpoint.Name+".go")
+		var fName string
+		if gen.Endpoint.Type == "core" {
+			fName = filepath.Join(cmd.Output, "api."+gen.Endpoint.Name+".go")
+		} else {
+			fName = filepath.Join(cmd.Output, "api."+gen.Endpoint.Type+"."+gen.Endpoint.Name+".go")
+		}
+
 		f, err := os.OpenFile(fName, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0755)
 		if err != nil {
 			return fmt.Errorf("error creating file: %s", err)
@@ -288,17 +294,32 @@ func (cmd *Command) processAPIConstructor(endpoints []*Endpoint) (err error) {
 		namespaces []string
 	)
 
-	pkgName := endpoints[0].PkgName
-	typName := "API"
-	if pkgName == "xpack" {
-		typName = "XAPI"
+	namespaces = []string{
+		"Cat",
+		"Cluster",
+		"Indices",
+		"Ingest",
+		"Nodes",
+		"Remote",
+		"Snapshot",
+		"Tasks",
 	}
 
-	if pkgName == "xpack" {
-		namespaces = []string{"CCR", "ILM", "Indices", "License", "Migration", "ML", "Monitoring", "Rollup", "Security", "SQL", "SSL", "Watcher", "XPack"}
-	} else {
-		namespaces = []string{"Cat", "Cluster", "Indices", "Ingest", "Nodes", "Remote", "Snapshot", "Tasks"}
-	}
+	namespaces = append(namespaces, []string{
+		"CCR",
+		"ILM",
+		// "Indices",
+		"License",
+		"Migration",
+		"ML",
+		"Monitoring",
+		"Rollup",
+		"Security",
+		"SQL",
+		"SSL",
+		"Watcher",
+		"XPack",
+	}...)
 
 	b.WriteString("// Code generated")
 	if EsVersion != "" || GitCommit != "" || GitTag != "" {
@@ -314,11 +335,11 @@ func (cmd *Command) processAPIConstructor(endpoints []*Endpoint) (err error) {
 	b.WriteString(": DO NOT EDIT\n")
 	b.WriteString("\n")
 
-	b.WriteString(`package ` + pkgName + `
+	b.WriteString(`package esapi
 
-// ` + typName + ` contains the Elasticsearch APIs
+// API contains the Elasticsearch APIs
 //
-type ` + typName + ` struct {
+type API struct {
 `)
 	for _, n := range namespaces {
 		b.WriteString(fmt.Sprintf("\t%[1]s *%[1]s\n", n))
@@ -355,10 +376,10 @@ type ` + typName + ` struct {
 		b.WriteString("}\n\n")
 	}
 
-	b.WriteString(`// New creates new ` + typName + `
+	b.WriteString(`// New creates new API
 //
-func New(t Transport) *` + typName + ` {
-	return &` + typName + `{
+func New(t Transport) *API {
+	return &API{
 `)
 
 	for _, e := range endpoints {

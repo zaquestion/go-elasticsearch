@@ -41,11 +41,11 @@ func NewEndpoint(f io.Reader) (*Endpoint, error) {
 
 	if fpath, ok := f.(*os.File); ok {
 		if strings.Contains(fpath.Name(), "x-pack") {
-			endpoint.PkgName = "xpack"
+			endpoint.Type = "xpack"
 		}
 	}
-	if endpoint.PkgName == "" {
-		endpoint.PkgName = "esapi"
+	if endpoint.Type == "" {
+		endpoint.Type = "core"
 	}
 
 	// Add Path when it's empty
@@ -108,8 +108,8 @@ func NewEndpoint(f io.Reader) (*Endpoint, error) {
 // Endpoint represents an API endpoint.
 //
 type Endpoint struct {
-	PkgName string `json:"-"`
-	Name    string `json:"-"`
+	Name string `json:"-"`
+	Type string `json:"-"`
 
 	Description   string   `json:"-"`
 	Documentation string   `json:"documentation"`

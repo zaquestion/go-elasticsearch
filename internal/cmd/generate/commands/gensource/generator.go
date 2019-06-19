@@ -78,7 +78,7 @@ func (g *Generator) genHeader() {
 	}
 	g.w(": DO NOT EDIT\n")
 	g.w("\n")
-	g.w("package " + g.Endpoint.PkgName + "\n")
+	g.w("package esapi\n")
 }
 
 func (g *Generator) genConstructor() {
