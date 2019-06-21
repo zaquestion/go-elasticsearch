@@ -19,6 +19,10 @@ func init() {
 var skipFiles = []string{
 	"update/85_fields_meta.yml",            // Uses non-existing API property
 	"update/86_fields_meta_with_types.yml", // --||--
+
+	"ml/jobs_get_result_buckets.yml",    // Passes string value to int variable
+	"ml/jobs_get_result_categories.yml", // --||--
+	"ml/set_upgrade_mode.yml",           // --||--
 }
 
 // TODO: Comments into descriptions for `Skip()`
