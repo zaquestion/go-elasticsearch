@@ -47,6 +47,9 @@ func (g *Generator) Output() (io.Reader, error) {
 	g.genInitializeClient()
 	g.genHelpers()
 	g.genCommonSetup()
+	if g.TestSuite.Type == "xpack" {
+		g.genXPackSetup()
+	}
 	if len(g.TestSuite.Setup) > 0 {
 		g.w("// ----- Test Suite Setup --------------------------------------------------------\n")
 		g.w("testSuiteSetup := func() {\n")
@@ -275,7 +278,20 @@ func (g *Generator) genCommonSetup() {
 		}
 	}
 	commonSetup()
-	// --------------------------------------------------------------------------------
+
+	`)
+}
+
+func (g *Generator) genXPackSetup() {
+	g.w(`
+		// ----- XPack Setup -------------------------------------------------------------
+		xpackSetup := func() {
+			var res *esapi.Response
+
+			res, _ = es.Watcher.DeleteWatch("my_watch")
+			res.Body.Close()
+		}
+		xpackSetup()
 
 	`)
 }
