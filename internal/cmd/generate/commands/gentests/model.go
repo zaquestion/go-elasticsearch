@@ -29,6 +29,7 @@ type TestSuite struct {
 	Filepath string
 	Skip     bool
 	SkipInfo string
+	Type     string
 
 	Setup    []Action
 	Teardown []Action
@@ -90,6 +91,13 @@ func NewTestSuite(fpath string, payloads []TestPayload) TestSuite {
 	ts := TestSuite{
 		Dir:      strings.Title(filepath.Base(filepath.Dir(fpath))),
 		Filepath: fpath,
+	}
+
+	if strings.Contains(fpath, "x-pack") {
+		ts.Type = "xpack"
+	}
+	if ts.Type == "" {
+		ts.Type = "core"
 	}
 
 	for _, payload := range payloads {
@@ -252,6 +260,11 @@ func (ts TestSuite) Name() string {
 //
 func (ts TestSuite) Filename() string {
 	var b strings.Builder
+
+	if ts.Type == "xpack" {
+		b.WriteString("xpack_")
+	}
+
 	b.WriteString(strings.ToLower(strings.Replace(ts.Dir, ".", "_", -1)))
 	b.WriteString("__")
 

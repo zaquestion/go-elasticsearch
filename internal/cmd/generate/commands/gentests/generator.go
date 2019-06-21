@@ -37,8 +37,13 @@ type Generator struct {
 // Output returns the generator output.
 //
 func (g *Generator) Output() (io.Reader, error) {
+	name := g.TestSuite.Name()
+	if g.TestSuite.Type == "xpack" {
+		name = "XPack_" + name
+	}
+
 	g.genFileHeader()
-	g.w("func Test" + g.TestSuite.Name() + "(t *testing.T) {\n")
+	g.w("func Test" + name + "(t *testing.T) {\n")
 	g.genInitializeClient()
 	g.genHelpers()
 	g.genCommonSetup()
