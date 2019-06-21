@@ -52,8 +52,8 @@ func init() {
 }
 
 var gentestsCmd = &cobra.Command{
-	Use:   "tests",
-	Short: "Generate Go integration tests from Elasticsearch common test suite",
+	Use:   "apitests",
+	Short: "Generate the Go integration tests from the Elasticsearch common test suite",
 	Run: func(cmd *cobra.Command, args []string) {
 		command := &Command{
 			Input:          *input,

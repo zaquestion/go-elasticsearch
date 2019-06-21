@@ -26,7 +26,6 @@ func init() {
 	} else {
 		pkgNames = []string{
 			"github.com/elastic/go-elasticsearch/v8/esapi",
-			"github.com/elastic/go-elasticsearch/v8/esapi/xpack",
 		}
 	}
 
