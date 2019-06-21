@@ -190,6 +190,7 @@ func (g *Generator) genFileHeader() {
 import (
 	encjson "encoding/json"
 	encyaml "gopkg.in/yaml.v2"
+	"crypto/tls"
 	"testing"
 
 	"github.com/elastic/go-elasticsearch/v8"
@@ -200,17 +201,38 @@ var (
 	// Prevent compilation errors for unused packages
 	_ = encjson.NewDecoder
 	_ = encyaml.NewDecoder
+	_ = tls.Certificate{}
 	_ = fmt.Printf
 )` + "\n")
 }
 
 func (g *Generator) genInitializeClient() {
-	g.w(`	es, eserr := elasticsearch.NewDefaultClient()
+	if g.TestSuite.Type == "xpack" {
+		g.w(`
+	cfg := elasticsearch.Config{
+		Addresses: []string{"https://localhost:9200"},
+		Username:  "elastic",
+		Password:  "elastic",
+		Transport: &http.Transport{
+			TLSClientConfig: &tls.Config{
+				InsecureSkipVerify: true,
+			},
+		},
+	}
+	es, eserr := elasticsearch.NewClient(cfg)
 	if eserr != nil {
 		t.Fatalf("Error creating the client: %s\n", eserr)
 	}
 
 `)
+	} else {
+		g.w(`	es, eserr := elasticsearch.NewDefaultClient()
+	if eserr != nil {
+		t.Fatalf("Error creating the client: %s\n", eserr)
+	}
+
+`)
+	}
 }
 
 func (g *Generator) genHelpers() {
