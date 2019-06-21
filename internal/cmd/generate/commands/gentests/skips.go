@@ -86,4 +86,7 @@ search/issue9606.yml:
 bulk/80_cas.yml:
 bulk/81_cas_with_types.yml:
 
+# ----- X-Pack ----------------------------------------------------------------
+change_password/10_basic.yml:
+  - Test user changing their own password
 `
