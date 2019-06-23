@@ -312,6 +312,8 @@ func (g *Generator) genXPackSetup() {
 
 			res, _ = es.Watcher.DeleteWatch("my_watch")
 			res.Body.Close()
+			res, _ = es.Security.PutUser(strings.NewReader(` + "`" + `{"password":"x-pack-test-password", "roles":['superuser']}` + "`" + `), "x_pack_rest_user")
+			res.Body.Close()
 		}
 		xpackSetup()
 
