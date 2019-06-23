@@ -818,7 +818,29 @@ func (g *Generator) genAssertion(a Assertion) {
 
 func (g *Generator) genStashSet(s Stash) {
 	g.w(fmt.Sprintf("// Set %q\n", s.Key()))
-	g.w(fmt.Sprintf("stash[%q] = %s\n", s.Key(), s.Value()))
+
+	value := s.Value()
+	if strings.HasPrefix(value, `mapi["#`) {
+		switch {
+		case strings.HasPrefix(value, `mapi["#base64EncodeCredentials`):
+			i, j := strings.Index(value, "("), strings.Index(value, ")")
+			values := strings.Split(value[i+1:j], ",")
+			value = `base64.StdEncoding.EncodeToString([]byte(`
+			value += `strings.Join([]string{`
+			for n, v := range values {
+				value += `mapi["` + v + `"].(string)`
+				if n < len(values)-1 {
+					value += ","
+				}
+			}
+			value += `}, ":")`
+			value += `))`
+		default:
+			panic(fmt.Sprintf("Unknown transformation: %s", value))
+		}
+	}
+
+	g.w(fmt.Sprintf("stash[%q] = %s\n", s.Key(), value))
 }
 
 func convert(i interface{}) interface{} {

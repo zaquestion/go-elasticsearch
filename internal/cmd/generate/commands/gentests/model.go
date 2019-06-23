@@ -169,6 +169,16 @@ func NewTestSuite(fpath string, payloads []TestPayload) TestSuite {
 						for _, vvv := range vv.(map[interface{}]interface{}) {
 							steps = append(steps, NewStash(vvv))
 						}
+					case "transform_and_set":
+						for _, vvv := range vv.(map[interface{}]interface{}) {
+							// NOTE: `set_and_transform` has flipped ordering of key and value, compared to `set`
+							key := utils.MapValues(vvv)[0]
+							val := utils.MapKeys(vvv)[0]
+							payload := make(map[interface{}]interface{})
+							payload[key] = val
+							// fmt.Println(payload)
+							steps = append(steps, NewStash(payload))
+						}
 					case "do":
 						for _, vvv := range vv.(map[interface{}]interface{}) {
 							steps = append(steps, NewAction(vvv))
