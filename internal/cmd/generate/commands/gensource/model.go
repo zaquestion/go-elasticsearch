@@ -248,7 +248,17 @@ func (e *Endpoint) HumanMethodWithNamespace() string {
 //
 func (e *Endpoint) RequiredArguments() []MethodArgument {
 	var args = make([]MethodArgument, 0)
-	var prominentArgs = []string{"index", "type", "id", "repository", "snapshot"}
+	var prominentArgs = []string{
+		"index",
+		"type",
+		"id",
+		"repository",
+		"snapshot",
+		"snapshot_id",
+		"calendar_id",
+		"job_id",
+		"username",
+	}
 
 	var contains = func(s string) bool {
 		for _, v := range args {
