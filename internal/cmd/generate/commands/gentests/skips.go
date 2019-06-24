@@ -90,4 +90,6 @@ bulk/81_cas_with_types.yml:
 change_password/10_basic.yml:
   - Test user changing their own password
 license/20_put_license.yml:
+api_key/10_basic.yml:
+  - Test invalidate api key
 `
