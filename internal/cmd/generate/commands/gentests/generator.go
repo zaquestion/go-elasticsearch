@@ -71,6 +71,9 @@ func (g *Generator) Output() (io.Reader, error) {
 		g.genSkip(t)
 		g.w("\tdefer recoverPanic(t)\n")
 		g.w("\tcommonSetup()\n")
+		if g.TestSuite.Type == "xpack" {
+			g.w("\txpackSetup()\n")
+		}
 		if len(g.TestSuite.Setup) > 0 {
 			g.w("\ttestSuiteSetup()\n")
 		}
@@ -218,6 +221,11 @@ func (g *Generator) genInitializeClient() {
 				InsecureSkipVerify: true,
 			},
 		},
+		// Logger: &estransport.TextLogger{
+		// 	Output: os.Stdout,
+		// 	// EnableRequestBody:  true,
+		// 	// EnableResponseBody: true,
+		// },
 	}
 	es, eserr := elasticsearch.NewClient(cfg)
 	if eserr != nil {
@@ -252,17 +260,19 @@ func (g *Generator) genHelpers() {
 }
 ` + "\n")
 
-	g.w(`debug := func(v interface{}) {
-		if os.Getenv("DEBUG") != "" {
-			t.Logf("%s", v)
-		}
-	}
-`)
 	g.w(`
 	handleResponseError := func(t *testing.T, res *esapi.Response) {
 		if res.IsError() {
-			t.Logf("Response error: %s", res)
-			// t.Fatalf("Response error: %s", res.Status())
+			reLocation := regexp.MustCompile("(.*_test.go:\\d+).*")
+			var loc string
+			s := strings.Split(string(debug.Stack()), "\n")
+			for i := len(s) - 1; i >= 0; i-- {
+				if reLocation.MatchString(s[i]) {
+					loc = strings.TrimSpace(s[i])
+					break
+				}
+			}
+			t.Logf("Response error: %s in %s", res, reLocation.ReplaceAllString(loc, "$1"))
 		}
 	}
 	_ = handleResponseError
@@ -278,28 +288,27 @@ func (g *Generator) genCommonSetup() {
 	commonSetup := func() {
 		var res *esapi.Response
 		res, _ = es.Indices.Delete([]string{"_all"})
-		res.Body.Close()
+		if (res != nil && res.Body != nil) { res.Body.Close() }
 
 		res, _ = es.Indices.DeleteTemplate("*")
-		res.Body.Close()
+		if (res != nil && res.Body != nil) { res.Body.Close() }
 
 		res, _ = es.Indices.DeleteAlias([]string{"_all"}, []string{"_all"})
-		res.Body.Close()
+		if (res != nil && res.Body != nil) { res.Body.Close() }
 
 		res, _ = es.Snapshot.Delete("test_repo_create_1", "test_snapshot")
-		res.Body.Close()
+		if (res != nil && res.Body != nil) { res.Body.Close() }
 		res, _ = es.Snapshot.Delete("test_repo_restore_1", "test_snapshot")
-		res.Body.Close()
+		if (res != nil && res.Body != nil) { res.Body.Close() }
 		res, _ = es.Snapshot.Delete("test_cat_snapshots_1", "snap1")
-		res.Body.Close()
+		if (res != nil && res.Body != nil) { res.Body.Close() }
 		res, _ = es.Snapshot.Delete("test_cat_snapshots_1", "snap2")
-		res.Body.Close()
+		if (res != nil && res.Body != nil) { res.Body.Close() }
 		for _, n := range []string{"test_repo_create_1", "test_repo_restore_1", "test_repo_get_1", "test_repo_get_2", "test_repo_status_1", "test_cat_repo_1", "test_cat_repo_2", "test_cat_snapshots_1"} {
 			res, _ = es.Snapshot.DeleteRepository([]string{n})
-			res.Body.Close()
+			if (res != nil && res.Body != nil) { res.Body.Close() }
 		}
 	}
-	commonSetup()
 
 	`)
 }
@@ -311,11 +320,10 @@ func (g *Generator) genXPackSetup() {
 			var res *esapi.Response
 
 			res, _ = es.Watcher.DeleteWatch("my_watch")
-			res.Body.Close()
-			res, _ = es.Security.PutUser(strings.NewReader(` + "`" + `{"password":"x-pack-test-password", "roles":['superuser']}` + "`" + `), "x_pack_rest_user")
-			res.Body.Close()
+			if (res != nil && res.Body != nil) { res.Body.Close() }
+			res, _ = es.Security.PutUser("x_pack_rest_user", strings.NewReader(` + "`" + `{"password":"x-pack-test-password", "roles":["superuser"]}` + "`" + `))
+			if (res != nil && res.Body != nil) { res.Body.Close() }
 		}
-		xpackSetup()
 
 	`)
 }
@@ -779,8 +787,23 @@ func (g *Generator) genAction(a Action, skipBody ...bool) {
 		}
 	}
 
-	if len(a.headers) > 0 && strings.Contains(a.headers["Accept"], "yaml") && strings.HasPrefix(a.Request(), "Cat") {
-		g.w("\t\t" + `Format: "yaml",` + "\n")
+	if len(a.headers) > 0 {
+		if strings.Contains(a.headers["Accept"], "yaml") && strings.HasPrefix(a.Request(), "Cat") {
+			g.w("\t\t" + `Format: "yaml",` + "\n")
+		}
+		if auth_header, ok := a.headers["Authorization"]; ok {
+			auth_fields := strings.Split(auth_header, " ")
+			auth_name := auth_fields[0]
+			auth_value := auth_fields[1]
+			if strings.HasPrefix(auth_value, "$") {
+				auth_value = `fmt.Sprintf("%s", stash["` + strings.ReplaceAll(strings.ReplaceAll(auth_value, "{", ""), "}", "") + `"])`
+			} else {
+				auth_value = `"` + auth_value + `"`
+			}
+			g.w("\t\t" + `Header: http.Header{` + "\n")
+			g.w("\t\t\t" + `"Authorization": []string{"` + auth_name + ` " + ` + auth_value + `},` + "\n")
+			g.w("\t\t" + `},` + "\n")
+		}
 	}
 
 	g.w("\t\t}\n\n")
@@ -792,7 +815,6 @@ func (g *Generator) genAction(a Action, skipBody ...bool) {
 			t.Fatalf("ERROR: %s", err)
 		}
 		defer res.Body.Close()
-		debug(res)
 	`)
 
 	g.w("\n\n")
