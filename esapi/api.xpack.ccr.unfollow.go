@@ -4,6 +4,7 @@ package esapi
 
 import (
 	"context"
+	"net/http"
 	"strings"
 )
 
@@ -33,6 +34,8 @@ type CCRUnfollowRequest struct {
 	Human      bool
 	ErrorTrace bool
 	FilterPath []string
+
+	Header http.Header
 
 	ctx context.Context
 }
@@ -82,6 +85,14 @@ func (r CCRUnfollowRequest) Do(ctx context.Context, transport Transport) (*Respo
 			q.Set(k, v)
 		}
 		req.URL.RawQuery = q.Encode()
+	}
+
+	if len(r.Header) > 0 {
+		for k, vv := range r.Header {
+			for _, v := range vv {
+				req.Header.Add(k, v)
+			}
+		}
 	}
 
 	if ctx != nil {
@@ -139,5 +150,18 @@ func (f CCRUnfollow) WithErrorTrace() func(*CCRUnfollowRequest) {
 func (f CCRUnfollow) WithFilterPath(v ...string) func(*CCRUnfollowRequest) {
 	return func(r *CCRUnfollowRequest) {
 		r.FilterPath = v
+	}
+}
+
+// WithHeader adds the headers to the HTTP request
+//
+func (f CCRUnfollow) WithHeader(h map[string]string) func(*CCRUnfollowRequest) {
+	return func(r *CCRUnfollowRequest) {
+		if r.Header == nil {
+			r.Header = make(http.Header)
+		}
+		for k, v := range h {
+			r.Header.Add(k, v)
+		}
 	}
 }

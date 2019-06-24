@@ -4,6 +4,7 @@ package esapi
 
 import (
 	"context"
+	"net/http"
 	"strings"
 )
 
@@ -33,6 +34,8 @@ type XPackInfoRequest struct {
 	Human      bool
 	ErrorTrace bool
 	FilterPath []string
+
+	Header http.Header
 
 	ctx context.Context
 }
@@ -81,6 +84,14 @@ func (r XPackInfoRequest) Do(ctx context.Context, transport Transport) (*Respons
 			q.Set(k, v)
 		}
 		req.URL.RawQuery = q.Encode()
+	}
+
+	if len(r.Header) > 0 {
+		for k, vv := range r.Header {
+			for _, v := range vv {
+				req.Header.Add(k, v)
+			}
+		}
 	}
 
 	if ctx != nil {
@@ -146,5 +157,18 @@ func (f XPackInfo) WithErrorTrace() func(*XPackInfoRequest) {
 func (f XPackInfo) WithFilterPath(v ...string) func(*XPackInfoRequest) {
 	return func(r *XPackInfoRequest) {
 		r.FilterPath = v
+	}
+}
+
+// WithHeader adds the headers to the HTTP request
+//
+func (f XPackInfo) WithHeader(h map[string]string) func(*XPackInfoRequest) {
+	return func(r *XPackInfoRequest) {
+		if r.Header == nil {
+			r.Header = make(http.Header)
+		}
+		for k, v := range h {
+			r.Header.Add(k, v)
+		}
 	}
 }

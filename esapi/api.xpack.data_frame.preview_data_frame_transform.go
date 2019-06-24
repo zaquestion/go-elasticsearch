@@ -5,6 +5,7 @@ package esapi
 import (
 	"context"
 	"io"
+	"net/http"
 	"strings"
 )
 
@@ -34,6 +35,8 @@ type DataFramePreviewDataFrameTransformRequest struct {
 	Human      bool
 	ErrorTrace bool
 	FilterPath []string
+
+	Header http.Header
 
 	ctx context.Context
 }
@@ -82,6 +85,14 @@ func (r DataFramePreviewDataFrameTransformRequest) Do(ctx context.Context, trans
 
 	if r.Body != nil {
 		req.Header[headerContentType] = headerContentTypeJSON
+	}
+
+	if len(r.Header) > 0 {
+		for k, vv := range r.Header {
+			for _, v := range vv {
+				req.Header.Add(k, v)
+			}
+		}
 	}
 
 	if ctx != nil {
@@ -139,5 +150,18 @@ func (f DataFramePreviewDataFrameTransform) WithErrorTrace() func(*DataFramePrev
 func (f DataFramePreviewDataFrameTransform) WithFilterPath(v ...string) func(*DataFramePreviewDataFrameTransformRequest) {
 	return func(r *DataFramePreviewDataFrameTransformRequest) {
 		r.FilterPath = v
+	}
+}
+
+// WithHeader adds the headers to the HTTP request
+//
+func (f DataFramePreviewDataFrameTransform) WithHeader(h map[string]string) func(*DataFramePreviewDataFrameTransformRequest) {
+	return func(r *DataFramePreviewDataFrameTransformRequest) {
+		if r.Header == nil {
+			r.Header = make(http.Header)
+		}
+		for k, v := range h {
+			r.Header.Add(k, v)
+		}
 	}
 }

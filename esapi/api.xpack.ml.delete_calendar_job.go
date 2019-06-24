@@ -4,11 +4,12 @@ package esapi
 
 import (
 	"context"
+	"net/http"
 	"strings"
 )
 
 func newMLDeleteCalendarJobFunc(t Transport) MLDeleteCalendarJob {
-	return func(job_id string, calendar_id string, o ...func(*MLDeleteCalendarJobRequest)) (*Response, error) {
+	return func(calendar_id string, job_id string, o ...func(*MLDeleteCalendarJobRequest)) (*Response, error) {
 		var r = MLDeleteCalendarJobRequest{CalendarID: calendar_id, JobID: job_id}
 		for _, f := range o {
 			f(&r)
@@ -32,6 +33,8 @@ type MLDeleteCalendarJobRequest struct {
 	Human      bool
 	ErrorTrace bool
 	FilterPath []string
+
+	Header http.Header
 
 	ctx context.Context
 }
@@ -85,6 +88,14 @@ func (r MLDeleteCalendarJobRequest) Do(ctx context.Context, transport Transport)
 			q.Set(k, v)
 		}
 		req.URL.RawQuery = q.Encode()
+	}
+
+	if len(r.Header) > 0 {
+		for k, vv := range r.Header {
+			for _, v := range vv {
+				req.Header.Add(k, v)
+			}
+		}
 	}
 
 	if ctx != nil {
@@ -142,5 +153,18 @@ func (f MLDeleteCalendarJob) WithErrorTrace() func(*MLDeleteCalendarJobRequest) 
 func (f MLDeleteCalendarJob) WithFilterPath(v ...string) func(*MLDeleteCalendarJobRequest) {
 	return func(r *MLDeleteCalendarJobRequest) {
 		r.FilterPath = v
+	}
+}
+
+// WithHeader adds the headers to the HTTP request
+//
+func (f MLDeleteCalendarJob) WithHeader(h map[string]string) func(*MLDeleteCalendarJobRequest) {
+	return func(r *MLDeleteCalendarJobRequest) {
+		if r.Header == nil {
+			r.Header = make(http.Header)
+		}
+		for k, v := range h {
+			r.Header.Add(k, v)
+		}
 	}
 }

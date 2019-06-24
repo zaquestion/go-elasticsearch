@@ -462,6 +462,14 @@ func (f DeleteByQuery) WithSearchType(v string) func(*DeleteByQueryRequest) {
 	}
 }
 
+// WithSize - deprecated, please use `max_docs` instead.
+//
+func (f DeleteByQuery) WithSize(v int) func(*DeleteByQueryRequest) {
+	return func(r *DeleteByQueryRequest) {
+		r.Size = &v
+	}
+}
+
 // WithSlices - the number of slices this task should be divided into. defaults to 1 meaning the task isn't sliced into subtasks..
 //
 func (f DeleteByQuery) WithSlices(v int) func(*DeleteByQueryRequest) {

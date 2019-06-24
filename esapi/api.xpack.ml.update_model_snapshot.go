@@ -5,12 +5,13 @@ package esapi
 import (
 	"context"
 	"io"
+	"net/http"
 	"strings"
 )
 
 func newMLUpdateModelSnapshotFunc(t Transport) MLUpdateModelSnapshot {
-	return func(body io.Reader, job_id string, snapshot_id string, o ...func(*MLUpdateModelSnapshotRequest)) (*Response, error) {
-		var r = MLUpdateModelSnapshotRequest{Body: body, JobID: job_id, SnapshotID: snapshot_id}
+	return func(snapshot_id string, job_id string, body io.Reader, o ...func(*MLUpdateModelSnapshotRequest)) (*Response, error) {
+		var r = MLUpdateModelSnapshotRequest{SnapshotID: snapshot_id, JobID: job_id, Body: body}
 		for _, f := range o {
 			f(&r)
 		}
@@ -23,7 +24,7 @@ func newMLUpdateModelSnapshotFunc(t Transport) MLUpdateModelSnapshot {
 //
 // See full documentation at http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html.
 //
-type MLUpdateModelSnapshot func(body io.Reader, job_id string, snapshot_id string, o ...func(*MLUpdateModelSnapshotRequest)) (*Response, error)
+type MLUpdateModelSnapshot func(snapshot_id string, job_id string, body io.Reader, o ...func(*MLUpdateModelSnapshotRequest)) (*Response, error)
 
 // MLUpdateModelSnapshotRequest configures the Ml   Update Model Snapshot API request.
 //
@@ -37,6 +38,8 @@ type MLUpdateModelSnapshotRequest struct {
 	Human      bool
 	ErrorTrace bool
 	FilterPath []string
+
+	Header http.Header
 
 	ctx context.Context
 }
@@ -98,6 +101,14 @@ func (r MLUpdateModelSnapshotRequest) Do(ctx context.Context, transport Transpor
 		req.Header[headerContentType] = headerContentTypeJSON
 	}
 
+	if len(r.Header) > 0 {
+		for k, vv := range r.Header {
+			for _, v := range vv {
+				req.Header.Add(k, v)
+			}
+		}
+	}
+
 	if ctx != nil {
 		req = req.WithContext(ctx)
 	}
@@ -153,5 +164,18 @@ func (f MLUpdateModelSnapshot) WithErrorTrace() func(*MLUpdateModelSnapshotReque
 func (f MLUpdateModelSnapshot) WithFilterPath(v ...string) func(*MLUpdateModelSnapshotRequest) {
 	return func(r *MLUpdateModelSnapshotRequest) {
 		r.FilterPath = v
+	}
+}
+
+// WithHeader adds the headers to the HTTP request
+//
+func (f MLUpdateModelSnapshot) WithHeader(h map[string]string) func(*MLUpdateModelSnapshotRequest) {
+	return func(r *MLUpdateModelSnapshotRequest) {
+		if r.Header == nil {
+			r.Header = make(http.Header)
+		}
+		for k, v := range h {
+			r.Header.Add(k, v)
+		}
 	}
 }

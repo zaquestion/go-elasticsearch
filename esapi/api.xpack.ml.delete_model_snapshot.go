@@ -4,11 +4,12 @@ package esapi
 
 import (
 	"context"
+	"net/http"
 	"strings"
 )
 
 func newMLDeleteModelSnapshotFunc(t Transport) MLDeleteModelSnapshot {
-	return func(job_id string, snapshot_id string, o ...func(*MLDeleteModelSnapshotRequest)) (*Response, error) {
+	return func(snapshot_id string, job_id string, o ...func(*MLDeleteModelSnapshotRequest)) (*Response, error) {
 		var r = MLDeleteModelSnapshotRequest{SnapshotID: snapshot_id, JobID: job_id}
 		for _, f := range o {
 			f(&r)
@@ -34,6 +35,8 @@ type MLDeleteModelSnapshotRequest struct {
 	Human      bool
 	ErrorTrace bool
 	FilterPath []string
+
+	Header http.Header
 
 	ctx context.Context
 }
@@ -87,6 +90,14 @@ func (r MLDeleteModelSnapshotRequest) Do(ctx context.Context, transport Transpor
 			q.Set(k, v)
 		}
 		req.URL.RawQuery = q.Encode()
+	}
+
+	if len(r.Header) > 0 {
+		for k, vv := range r.Header {
+			for _, v := range vv {
+				req.Header.Add(k, v)
+			}
+		}
 	}
 
 	if ctx != nil {
@@ -144,5 +155,18 @@ func (f MLDeleteModelSnapshot) WithErrorTrace() func(*MLDeleteModelSnapshotReque
 func (f MLDeleteModelSnapshot) WithFilterPath(v ...string) func(*MLDeleteModelSnapshotRequest) {
 	return func(r *MLDeleteModelSnapshotRequest) {
 		r.FilterPath = v
+	}
+}
+
+// WithHeader adds the headers to the HTTP request
+//
+func (f MLDeleteModelSnapshot) WithHeader(h map[string]string) func(*MLDeleteModelSnapshotRequest) {
+	return func(r *MLDeleteModelSnapshotRequest) {
+		if r.Header == nil {
+			r.Header = make(http.Header)
+		}
+		for k, v := range h {
+			r.Header.Add(k, v)
+		}
 	}
 }

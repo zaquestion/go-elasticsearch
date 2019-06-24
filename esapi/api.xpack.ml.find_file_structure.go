@@ -5,6 +5,7 @@ package esapi
 import (
 	"context"
 	"io"
+	"net/http"
 	"strconv"
 	"strings"
 	"time"
@@ -51,6 +52,8 @@ type MLFindFileStructureRequest struct {
 	Human      bool
 	ErrorTrace bool
 	FilterPath []string
+
+	Header http.Header
 
 	ctx context.Context
 }
@@ -155,6 +158,14 @@ func (r MLFindFileStructureRequest) Do(ctx context.Context, transport Transport)
 
 	if r.Body != nil {
 		req.Header[headerContentType] = headerContentTypeJSON
+	}
+
+	if len(r.Header) > 0 {
+		for k, vv := range r.Header {
+			for _, v := range vv {
+				req.Header.Add(k, v)
+			}
+		}
 	}
 
 	if ctx != nil {
@@ -324,5 +335,18 @@ func (f MLFindFileStructure) WithErrorTrace() func(*MLFindFileStructureRequest) 
 func (f MLFindFileStructure) WithFilterPath(v ...string) func(*MLFindFileStructureRequest) {
 	return func(r *MLFindFileStructureRequest) {
 		r.FilterPath = v
+	}
+}
+
+// WithHeader adds the headers to the HTTP request
+//
+func (f MLFindFileStructure) WithHeader(h map[string]string) func(*MLFindFileStructureRequest) {
+	return func(r *MLFindFileStructureRequest) {
+		if r.Header == nil {
+			r.Header = make(http.Header)
+		}
+		for k, v := range h {
+			r.Header.Add(k, v)
+		}
 	}
 }

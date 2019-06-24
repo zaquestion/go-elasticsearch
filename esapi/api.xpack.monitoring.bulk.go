@@ -5,6 +5,7 @@ package esapi
 import (
 	"context"
 	"io"
+	"net/http"
 	"strings"
 )
 
@@ -40,6 +41,8 @@ type MonitoringBulkRequest struct {
 	Human      bool
 	ErrorTrace bool
 	FilterPath []string
+
+	Header http.Header
 
 	ctx context.Context
 }
@@ -107,6 +110,14 @@ func (r MonitoringBulkRequest) Do(ctx context.Context, transport Transport) (*Re
 
 	if r.Body != nil {
 		req.Header[headerContentType] = headerContentTypeJSON
+	}
+
+	if len(r.Header) > 0 {
+		for k, vv := range r.Header {
+			for _, v := range vv {
+				req.Header.Add(k, v)
+			}
+		}
 	}
 
 	if ctx != nil {
@@ -196,5 +207,18 @@ func (f MonitoringBulk) WithErrorTrace() func(*MonitoringBulkRequest) {
 func (f MonitoringBulk) WithFilterPath(v ...string) func(*MonitoringBulkRequest) {
 	return func(r *MonitoringBulkRequest) {
 		r.FilterPath = v
+	}
+}
+
+// WithHeader adds the headers to the HTTP request
+//
+func (f MonitoringBulk) WithHeader(h map[string]string) func(*MonitoringBulkRequest) {
+	return func(r *MonitoringBulkRequest) {
+		if r.Header == nil {
+			r.Header = make(http.Header)
+		}
+		for k, v := range h {
+			r.Header.Add(k, v)
+		}
 	}
 }

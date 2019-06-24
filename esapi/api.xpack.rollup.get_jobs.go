@@ -4,6 +4,7 @@ package esapi
 
 import (
 	"context"
+	"net/http"
 	"strings"
 )
 
@@ -31,6 +32,8 @@ type RollupGetJobsRequest struct {
 	Human      bool
 	ErrorTrace bool
 	FilterPath []string
+
+	Header http.Header
 
 	ctx context.Context
 }
@@ -82,6 +85,14 @@ func (r RollupGetJobsRequest) Do(ctx context.Context, transport Transport) (*Res
 			q.Set(k, v)
 		}
 		req.URL.RawQuery = q.Encode()
+	}
+
+	if len(r.Header) > 0 {
+		for k, vv := range r.Header {
+			for _, v := range vv {
+				req.Header.Add(k, v)
+			}
+		}
 	}
 
 	if ctx != nil {
@@ -147,5 +158,18 @@ func (f RollupGetJobs) WithErrorTrace() func(*RollupGetJobsRequest) {
 func (f RollupGetJobs) WithFilterPath(v ...string) func(*RollupGetJobsRequest) {
 	return func(r *RollupGetJobsRequest) {
 		r.FilterPath = v
+	}
+}
+
+// WithHeader adds the headers to the HTTP request
+//
+func (f RollupGetJobs) WithHeader(h map[string]string) func(*RollupGetJobsRequest) {
+	return func(r *RollupGetJobsRequest) {
+		if r.Header == nil {
+			r.Header = make(http.Header)
+		}
+		for k, v := range h {
+			r.Header.Add(k, v)
+		}
 	}
 }

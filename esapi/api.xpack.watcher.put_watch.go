@@ -5,6 +5,7 @@ package esapi
 import (
 	"context"
 	"io"
+	"net/http"
 	"strconv"
 	"strings"
 )
@@ -42,6 +43,8 @@ type WatcherPutWatchRequest struct {
 	Human      bool
 	ErrorTrace bool
 	FilterPath []string
+
+	Header http.Header
 
 	ctx context.Context
 }
@@ -111,6 +114,14 @@ func (r WatcherPutWatchRequest) Do(ctx context.Context, transport Transport) (*R
 
 	if r.Body != nil {
 		req.Header[headerContentType] = headerContentTypeJSON
+	}
+
+	if len(r.Header) > 0 {
+		for k, vv := range r.Header {
+			for _, v := range vv {
+				req.Header.Add(k, v)
+			}
+		}
 	}
 
 	if ctx != nil {
@@ -208,5 +219,18 @@ func (f WatcherPutWatch) WithErrorTrace() func(*WatcherPutWatchRequest) {
 func (f WatcherPutWatch) WithFilterPath(v ...string) func(*WatcherPutWatchRequest) {
 	return func(r *WatcherPutWatchRequest) {
 		r.FilterPath = v
+	}
+}
+
+// WithHeader adds the headers to the HTTP request
+//
+func (f WatcherPutWatch) WithHeader(h map[string]string) func(*WatcherPutWatchRequest) {
+	return func(r *WatcherPutWatchRequest) {
+		if r.Header == nil {
+			r.Header = make(http.Header)
+		}
+		for k, v := range h {
+			r.Header.Add(k, v)
+		}
 	}
 }

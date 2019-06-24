@@ -4,6 +4,7 @@ package esapi
 
 import (
 	"context"
+	"net/http"
 	"strings"
 )
 
@@ -31,6 +32,8 @@ type CCRStatsRequest struct {
 	Human      bool
 	ErrorTrace bool
 	FilterPath []string
+
+	Header http.Header
 
 	ctx context.Context
 }
@@ -75,6 +78,14 @@ func (r CCRStatsRequest) Do(ctx context.Context, transport Transport) (*Response
 			q.Set(k, v)
 		}
 		req.URL.RawQuery = q.Encode()
+	}
+
+	if len(r.Header) > 0 {
+		for k, vv := range r.Header {
+			for _, v := range vv {
+				req.Header.Add(k, v)
+			}
+		}
 	}
 
 	if ctx != nil {
@@ -132,5 +143,18 @@ func (f CCRStats) WithErrorTrace() func(*CCRStatsRequest) {
 func (f CCRStats) WithFilterPath(v ...string) func(*CCRStatsRequest) {
 	return func(r *CCRStatsRequest) {
 		r.FilterPath = v
+	}
+}
+
+// WithHeader adds the headers to the HTTP request
+//
+func (f CCRStats) WithHeader(h map[string]string) func(*CCRStatsRequest) {
+	return func(r *CCRStatsRequest) {
+		if r.Header == nil {
+			r.Header = make(http.Header)
+		}
+		for k, v := range h {
+			r.Header.Add(k, v)
+		}
 	}
 }

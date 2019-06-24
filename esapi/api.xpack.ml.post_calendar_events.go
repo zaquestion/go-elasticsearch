@@ -5,12 +5,13 @@ package esapi
 import (
 	"context"
 	"io"
+	"net/http"
 	"strings"
 )
 
 func newMLPostCalendarEventsFunc(t Transport) MLPostCalendarEvents {
-	return func(body io.Reader, calendar_id string, o ...func(*MLPostCalendarEventsRequest)) (*Response, error) {
-		var r = MLPostCalendarEventsRequest{Body: body, CalendarID: calendar_id}
+	return func(calendar_id string, body io.Reader, o ...func(*MLPostCalendarEventsRequest)) (*Response, error) {
+		var r = MLPostCalendarEventsRequest{CalendarID: calendar_id, Body: body}
 		for _, f := range o {
 			f(&r)
 		}
@@ -21,7 +22,7 @@ func newMLPostCalendarEventsFunc(t Transport) MLPostCalendarEvents {
 // ----- API Definition -------------------------------------------------------
 
 //
-type MLPostCalendarEvents func(body io.Reader, calendar_id string, o ...func(*MLPostCalendarEventsRequest)) (*Response, error)
+type MLPostCalendarEvents func(calendar_id string, body io.Reader, o ...func(*MLPostCalendarEventsRequest)) (*Response, error)
 
 // MLPostCalendarEventsRequest configures the Ml   Post Calendar Events API request.
 //
@@ -34,6 +35,8 @@ type MLPostCalendarEventsRequest struct {
 	Human      bool
 	ErrorTrace bool
 	FilterPath []string
+
+	Header http.Header
 
 	ctx context.Context
 }
@@ -91,6 +94,14 @@ func (r MLPostCalendarEventsRequest) Do(ctx context.Context, transport Transport
 		req.Header[headerContentType] = headerContentTypeJSON
 	}
 
+	if len(r.Header) > 0 {
+		for k, vv := range r.Header {
+			for _, v := range vv {
+				req.Header.Add(k, v)
+			}
+		}
+	}
+
 	if ctx != nil {
 		req = req.WithContext(ctx)
 	}
@@ -146,5 +157,18 @@ func (f MLPostCalendarEvents) WithErrorTrace() func(*MLPostCalendarEventsRequest
 func (f MLPostCalendarEvents) WithFilterPath(v ...string) func(*MLPostCalendarEventsRequest) {
 	return func(r *MLPostCalendarEventsRequest) {
 		r.FilterPath = v
+	}
+}
+
+// WithHeader adds the headers to the HTTP request
+//
+func (f MLPostCalendarEvents) WithHeader(h map[string]string) func(*MLPostCalendarEventsRequest) {
+	return func(r *MLPostCalendarEventsRequest) {
+		if r.Header == nil {
+			r.Header = make(http.Header)
+		}
+		for k, v := range h {
+			r.Header.Add(k, v)
+		}
 	}
 }

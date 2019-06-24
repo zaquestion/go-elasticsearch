@@ -5,12 +5,13 @@ package esapi
 import (
 	"context"
 	"io"
+	"net/http"
 	"strings"
 )
 
 func newMLPutJobFunc(t Transport) MLPutJob {
-	return func(body io.Reader, job_id string, o ...func(*MLPutJobRequest)) (*Response, error) {
-		var r = MLPutJobRequest{Body: body, JobID: job_id}
+	return func(job_id string, body io.Reader, o ...func(*MLPutJobRequest)) (*Response, error) {
+		var r = MLPutJobRequest{JobID: job_id, Body: body}
 		for _, f := range o {
 			f(&r)
 		}
@@ -23,7 +24,7 @@ func newMLPutJobFunc(t Transport) MLPutJob {
 //
 // See full documentation at http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html.
 //
-type MLPutJob func(body io.Reader, job_id string, o ...func(*MLPutJobRequest)) (*Response, error)
+type MLPutJob func(job_id string, body io.Reader, o ...func(*MLPutJobRequest)) (*Response, error)
 
 // MLPutJobRequest configures the Ml  Put Job API request.
 //
@@ -36,6 +37,8 @@ type MLPutJobRequest struct {
 	Human      bool
 	ErrorTrace bool
 	FilterPath []string
+
+	Header http.Header
 
 	ctx context.Context
 }
@@ -89,6 +92,14 @@ func (r MLPutJobRequest) Do(ctx context.Context, transport Transport) (*Response
 
 	if r.Body != nil {
 		req.Header[headerContentType] = headerContentTypeJSON
+	}
+
+	if len(r.Header) > 0 {
+		for k, vv := range r.Header {
+			for _, v := range vv {
+				req.Header.Add(k, v)
+			}
+		}
 	}
 
 	if ctx != nil {
@@ -146,5 +157,18 @@ func (f MLPutJob) WithErrorTrace() func(*MLPutJobRequest) {
 func (f MLPutJob) WithFilterPath(v ...string) func(*MLPutJobRequest) {
 	return func(r *MLPutJobRequest) {
 		r.FilterPath = v
+	}
+}
+
+// WithHeader adds the headers to the HTTP request
+//
+func (f MLPutJob) WithHeader(h map[string]string) func(*MLPutJobRequest) {
+	return func(r *MLPutJobRequest) {
+		if r.Header == nil {
+			r.Header = make(http.Header)
+		}
+		for k, v := range h {
+			r.Header.Add(k, v)
+		}
 	}
 }

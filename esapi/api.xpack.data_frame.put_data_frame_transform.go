@@ -5,6 +5,7 @@ package esapi
 import (
 	"context"
 	"io"
+	"net/http"
 	"strings"
 )
 
@@ -36,6 +37,8 @@ type DataFramePutDataFrameTransformRequest struct {
 	Human      bool
 	ErrorTrace bool
 	FilterPath []string
+
+	Header http.Header
 
 	ctx context.Context
 }
@@ -89,6 +92,14 @@ func (r DataFramePutDataFrameTransformRequest) Do(ctx context.Context, transport
 
 	if r.Body != nil {
 		req.Header[headerContentType] = headerContentTypeJSON
+	}
+
+	if len(r.Header) > 0 {
+		for k, vv := range r.Header {
+			for _, v := range vv {
+				req.Header.Add(k, v)
+			}
+		}
 	}
 
 	if ctx != nil {
@@ -146,5 +157,18 @@ func (f DataFramePutDataFrameTransform) WithErrorTrace() func(*DataFramePutDataF
 func (f DataFramePutDataFrameTransform) WithFilterPath(v ...string) func(*DataFramePutDataFrameTransformRequest) {
 	return func(r *DataFramePutDataFrameTransformRequest) {
 		r.FilterPath = v
+	}
+}
+
+// WithHeader adds the headers to the HTTP request
+//
+func (f DataFramePutDataFrameTransform) WithHeader(h map[string]string) func(*DataFramePutDataFrameTransformRequest) {
+	return func(r *DataFramePutDataFrameTransformRequest) {
+		if r.Header == nil {
+			r.Header = make(http.Header)
+		}
+		for k, v := range h {
+			r.Header.Add(k, v)
+		}
 	}
 }

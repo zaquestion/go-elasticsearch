@@ -5,12 +5,13 @@ package esapi
 import (
 	"context"
 	"io"
+	"net/http"
 	"strings"
 )
 
 func newSecurityPutUserFunc(t Transport) SecurityPutUser {
-	return func(body io.Reader, username string, o ...func(*SecurityPutUserRequest)) (*Response, error) {
-		var r = SecurityPutUserRequest{Body: body, Username: username}
+	return func(username string, body io.Reader, o ...func(*SecurityPutUserRequest)) (*Response, error) {
+		var r = SecurityPutUserRequest{Username: username, Body: body}
 		for _, f := range o {
 			f(&r)
 		}
@@ -23,7 +24,7 @@ func newSecurityPutUserFunc(t Transport) SecurityPutUser {
 //
 // See full documentation at https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-user.html.
 //
-type SecurityPutUser func(body io.Reader, username string, o ...func(*SecurityPutUserRequest)) (*Response, error)
+type SecurityPutUser func(username string, body io.Reader, o ...func(*SecurityPutUserRequest)) (*Response, error)
 
 // SecurityPutUserRequest configures the Security  Put User API request.
 //
@@ -38,6 +39,8 @@ type SecurityPutUserRequest struct {
 	Human      bool
 	ErrorTrace bool
 	FilterPath []string
+
+	Header http.Header
 
 	ctx context.Context
 }
@@ -95,6 +98,14 @@ func (r SecurityPutUserRequest) Do(ctx context.Context, transport Transport) (*R
 
 	if r.Body != nil {
 		req.Header[headerContentType] = headerContentTypeJSON
+	}
+
+	if len(r.Header) > 0 {
+		for k, vv := range r.Header {
+			for _, v := range vv {
+				req.Header.Add(k, v)
+			}
+		}
 	}
 
 	if ctx != nil {
@@ -160,5 +171,18 @@ func (f SecurityPutUser) WithErrorTrace() func(*SecurityPutUserRequest) {
 func (f SecurityPutUser) WithFilterPath(v ...string) func(*SecurityPutUserRequest) {
 	return func(r *SecurityPutUserRequest) {
 		r.FilterPath = v
+	}
+}
+
+// WithHeader adds the headers to the HTTP request
+//
+func (f SecurityPutUser) WithHeader(h map[string]string) func(*SecurityPutUserRequest) {
+	return func(r *SecurityPutUserRequest) {
+		if r.Header == nil {
+			r.Header = make(http.Header)
+		}
+		for k, v := range h {
+			r.Header.Add(k, v)
+		}
 	}
 }

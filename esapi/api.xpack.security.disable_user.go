@@ -4,6 +4,7 @@ package esapi
 
 import (
 	"context"
+	"net/http"
 	"strings"
 )
 
@@ -35,6 +36,8 @@ type SecurityDisableUserRequest struct {
 	Human      bool
 	ErrorTrace bool
 	FilterPath []string
+
+	Header http.Header
 
 	ctx context.Context
 }
@@ -90,6 +93,14 @@ func (r SecurityDisableUserRequest) Do(ctx context.Context, transport Transport)
 			q.Set(k, v)
 		}
 		req.URL.RawQuery = q.Encode()
+	}
+
+	if len(r.Header) > 0 {
+		for k, vv := range r.Header {
+			for _, v := range vv {
+				req.Header.Add(k, v)
+			}
+		}
 	}
 
 	if ctx != nil {
@@ -155,5 +166,18 @@ func (f SecurityDisableUser) WithErrorTrace() func(*SecurityDisableUserRequest) 
 func (f SecurityDisableUser) WithFilterPath(v ...string) func(*SecurityDisableUserRequest) {
 	return func(r *SecurityDisableUserRequest) {
 		r.FilterPath = v
+	}
+}
+
+// WithHeader adds the headers to the HTTP request
+//
+func (f SecurityDisableUser) WithHeader(h map[string]string) func(*SecurityDisableUserRequest) {
+	return func(r *SecurityDisableUserRequest) {
+		if r.Header == nil {
+			r.Header = make(http.Header)
+		}
+		for k, v := range h {
+			r.Header.Add(k, v)
+		}
 	}
 }

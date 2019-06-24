@@ -4,6 +4,7 @@ package esapi
 
 import (
 	"context"
+	"net/http"
 	"strings"
 )
 
@@ -32,6 +33,8 @@ type MLDeleteCalendarEventRequest struct {
 	Human      bool
 	ErrorTrace bool
 	FilterPath []string
+
+	Header http.Header
 
 	ctx context.Context
 }
@@ -85,6 +88,14 @@ func (r MLDeleteCalendarEventRequest) Do(ctx context.Context, transport Transpor
 			q.Set(k, v)
 		}
 		req.URL.RawQuery = q.Encode()
+	}
+
+	if len(r.Header) > 0 {
+		for k, vv := range r.Header {
+			for _, v := range vv {
+				req.Header.Add(k, v)
+			}
+		}
 	}
 
 	if ctx != nil {
@@ -142,5 +153,18 @@ func (f MLDeleteCalendarEvent) WithErrorTrace() func(*MLDeleteCalendarEventReque
 func (f MLDeleteCalendarEvent) WithFilterPath(v ...string) func(*MLDeleteCalendarEventRequest) {
 	return func(r *MLDeleteCalendarEventRequest) {
 		r.FilterPath = v
+	}
+}
+
+// WithHeader adds the headers to the HTTP request
+//
+func (f MLDeleteCalendarEvent) WithHeader(h map[string]string) func(*MLDeleteCalendarEventRequest) {
+	return func(r *MLDeleteCalendarEventRequest) {
+		if r.Header == nil {
+			r.Header = make(http.Header)
+		}
+		for k, v := range h {
+			r.Header.Add(k, v)
+		}
 	}
 }

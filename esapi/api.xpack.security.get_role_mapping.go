@@ -4,6 +4,7 @@ package esapi
 
 import (
 	"context"
+	"net/http"
 	"strings"
 )
 
@@ -33,6 +34,8 @@ type SecurityGetRoleMappingRequest struct {
 	Human      bool
 	ErrorTrace bool
 	FilterPath []string
+
+	Header http.Header
 
 	ctx context.Context
 }
@@ -84,6 +87,14 @@ func (r SecurityGetRoleMappingRequest) Do(ctx context.Context, transport Transpo
 			q.Set(k, v)
 		}
 		req.URL.RawQuery = q.Encode()
+	}
+
+	if len(r.Header) > 0 {
+		for k, vv := range r.Header {
+			for _, v := range vv {
+				req.Header.Add(k, v)
+			}
+		}
 	}
 
 	if ctx != nil {
@@ -149,5 +160,18 @@ func (f SecurityGetRoleMapping) WithErrorTrace() func(*SecurityGetRoleMappingReq
 func (f SecurityGetRoleMapping) WithFilterPath(v ...string) func(*SecurityGetRoleMappingRequest) {
 	return func(r *SecurityGetRoleMappingRequest) {
 		r.FilterPath = v
+	}
+}
+
+// WithHeader adds the headers to the HTTP request
+//
+func (f SecurityGetRoleMapping) WithHeader(h map[string]string) func(*SecurityGetRoleMappingRequest) {
+	return func(r *SecurityGetRoleMappingRequest) {
+		if r.Header == nil {
+			r.Header = make(http.Header)
+		}
+		for k, v := range h {
+			r.Header.Add(k, v)
+		}
 	}
 }

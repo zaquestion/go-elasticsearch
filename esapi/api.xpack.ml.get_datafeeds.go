@@ -4,6 +4,7 @@ package esapi
 
 import (
 	"context"
+	"net/http"
 	"strconv"
 	"strings"
 )
@@ -36,6 +37,8 @@ type MLGetDatafeedsRequest struct {
 	Human      bool
 	ErrorTrace bool
 	FilterPath []string
+
+	Header http.Header
 
 	ctx context.Context
 }
@@ -91,6 +94,14 @@ func (r MLGetDatafeedsRequest) Do(ctx context.Context, transport Transport) (*Re
 			q.Set(k, v)
 		}
 		req.URL.RawQuery = q.Encode()
+	}
+
+	if len(r.Header) > 0 {
+		for k, vv := range r.Header {
+			for _, v := range vv {
+				req.Header.Add(k, v)
+			}
+		}
 	}
 
 	if ctx != nil {
@@ -164,5 +175,18 @@ func (f MLGetDatafeeds) WithErrorTrace() func(*MLGetDatafeedsRequest) {
 func (f MLGetDatafeeds) WithFilterPath(v ...string) func(*MLGetDatafeedsRequest) {
 	return func(r *MLGetDatafeedsRequest) {
 		r.FilterPath = v
+	}
+}
+
+// WithHeader adds the headers to the HTTP request
+//
+func (f MLGetDatafeeds) WithHeader(h map[string]string) func(*MLGetDatafeedsRequest) {
+	return func(r *MLGetDatafeedsRequest) {
+		if r.Header == nil {
+			r.Header = make(http.Header)
+		}
+		for k, v := range h {
+			r.Header.Add(k, v)
+		}
 	}
 }

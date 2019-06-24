@@ -5,6 +5,7 @@ package esapi
 import (
 	"context"
 	"io"
+	"net/http"
 	"strings"
 )
 
@@ -34,6 +35,8 @@ type MLPutFilterRequest struct {
 	Human      bool
 	ErrorTrace bool
 	FilterPath []string
+
+	Header http.Header
 
 	ctx context.Context
 }
@@ -87,6 +90,14 @@ func (r MLPutFilterRequest) Do(ctx context.Context, transport Transport) (*Respo
 
 	if r.Body != nil {
 		req.Header[headerContentType] = headerContentTypeJSON
+	}
+
+	if len(r.Header) > 0 {
+		for k, vv := range r.Header {
+			for _, v := range vv {
+				req.Header.Add(k, v)
+			}
+		}
 	}
 
 	if ctx != nil {
@@ -144,5 +155,18 @@ func (f MLPutFilter) WithErrorTrace() func(*MLPutFilterRequest) {
 func (f MLPutFilter) WithFilterPath(v ...string) func(*MLPutFilterRequest) {
 	return func(r *MLPutFilterRequest) {
 		r.FilterPath = v
+	}
+}
+
+// WithHeader adds the headers to the HTTP request
+//
+func (f MLPutFilter) WithHeader(h map[string]string) func(*MLPutFilterRequest) {
+	return func(r *MLPutFilterRequest) {
+		if r.Header == nil {
+			r.Header = make(http.Header)
+		}
+		for k, v := range h {
+			r.Header.Add(k, v)
+		}
 	}
 }

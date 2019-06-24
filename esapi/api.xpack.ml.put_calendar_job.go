@@ -4,6 +4,7 @@ package esapi
 
 import (
 	"context"
+	"net/http"
 	"strings"
 )
 
@@ -32,6 +33,8 @@ type MLPutCalendarJobRequest struct {
 	Human      bool
 	ErrorTrace bool
 	FilterPath []string
+
+	Header http.Header
 
 	ctx context.Context
 }
@@ -85,6 +88,14 @@ func (r MLPutCalendarJobRequest) Do(ctx context.Context, transport Transport) (*
 			q.Set(k, v)
 		}
 		req.URL.RawQuery = q.Encode()
+	}
+
+	if len(r.Header) > 0 {
+		for k, vv := range r.Header {
+			for _, v := range vv {
+				req.Header.Add(k, v)
+			}
+		}
 	}
 
 	if ctx != nil {
@@ -142,5 +153,18 @@ func (f MLPutCalendarJob) WithErrorTrace() func(*MLPutCalendarJobRequest) {
 func (f MLPutCalendarJob) WithFilterPath(v ...string) func(*MLPutCalendarJobRequest) {
 	return func(r *MLPutCalendarJobRequest) {
 		r.FilterPath = v
+	}
+}
+
+// WithHeader adds the headers to the HTTP request
+//
+func (f MLPutCalendarJob) WithHeader(h map[string]string) func(*MLPutCalendarJobRequest) {
+	return func(r *MLPutCalendarJobRequest) {
+		if r.Header == nil {
+			r.Header = make(http.Header)
+		}
+		for k, v := range h {
+			r.Header.Add(k, v)
+		}
 	}
 }

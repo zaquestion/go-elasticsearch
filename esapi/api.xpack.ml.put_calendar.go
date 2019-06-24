@@ -5,6 +5,7 @@ package esapi
 import (
 	"context"
 	"io"
+	"net/http"
 	"strings"
 )
 
@@ -34,6 +35,8 @@ type MLPutCalendarRequest struct {
 	Human      bool
 	ErrorTrace bool
 	FilterPath []string
+
+	Header http.Header
 
 	ctx context.Context
 }
@@ -87,6 +90,14 @@ func (r MLPutCalendarRequest) Do(ctx context.Context, transport Transport) (*Res
 
 	if r.Body != nil {
 		req.Header[headerContentType] = headerContentTypeJSON
+	}
+
+	if len(r.Header) > 0 {
+		for k, vv := range r.Header {
+			for _, v := range vv {
+				req.Header.Add(k, v)
+			}
+		}
 	}
 
 	if ctx != nil {
@@ -152,5 +163,18 @@ func (f MLPutCalendar) WithErrorTrace() func(*MLPutCalendarRequest) {
 func (f MLPutCalendar) WithFilterPath(v ...string) func(*MLPutCalendarRequest) {
 	return func(r *MLPutCalendarRequest) {
 		r.FilterPath = v
+	}
+}
+
+// WithHeader adds the headers to the HTTP request
+//
+func (f MLPutCalendar) WithHeader(h map[string]string) func(*MLPutCalendarRequest) {
+	return func(r *MLPutCalendarRequest) {
+		if r.Header == nil {
+			r.Header = make(http.Header)
+		}
+		for k, v := range h {
+			r.Header.Add(k, v)
+		}
 	}
 }

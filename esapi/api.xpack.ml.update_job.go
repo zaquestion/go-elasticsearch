@@ -5,12 +5,13 @@ package esapi
 import (
 	"context"
 	"io"
+	"net/http"
 	"strings"
 )
 
 func newMLUpdateJobFunc(t Transport) MLUpdateJob {
-	return func(body io.Reader, job_id string, o ...func(*MLUpdateJobRequest)) (*Response, error) {
-		var r = MLUpdateJobRequest{Body: body, JobID: job_id}
+	return func(job_id string, body io.Reader, o ...func(*MLUpdateJobRequest)) (*Response, error) {
+		var r = MLUpdateJobRequest{JobID: job_id, Body: body}
 		for _, f := range o {
 			f(&r)
 		}
@@ -23,7 +24,7 @@ func newMLUpdateJobFunc(t Transport) MLUpdateJob {
 //
 // See full documentation at http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html.
 //
-type MLUpdateJob func(body io.Reader, job_id string, o ...func(*MLUpdateJobRequest)) (*Response, error)
+type MLUpdateJob func(job_id string, body io.Reader, o ...func(*MLUpdateJobRequest)) (*Response, error)
 
 // MLUpdateJobRequest configures the Ml  Update Job API request.
 //
@@ -36,6 +37,8 @@ type MLUpdateJobRequest struct {
 	Human      bool
 	ErrorTrace bool
 	FilterPath []string
+
+	Header http.Header
 
 	ctx context.Context
 }
@@ -93,6 +96,14 @@ func (r MLUpdateJobRequest) Do(ctx context.Context, transport Transport) (*Respo
 		req.Header[headerContentType] = headerContentTypeJSON
 	}
 
+	if len(r.Header) > 0 {
+		for k, vv := range r.Header {
+			for _, v := range vv {
+				req.Header.Add(k, v)
+			}
+		}
+	}
+
 	if ctx != nil {
 		req = req.WithContext(ctx)
 	}
@@ -148,5 +159,18 @@ func (f MLUpdateJob) WithErrorTrace() func(*MLUpdateJobRequest) {
 func (f MLUpdateJob) WithFilterPath(v ...string) func(*MLUpdateJobRequest) {
 	return func(r *MLUpdateJobRequest) {
 		r.FilterPath = v
+	}
+}
+
+// WithHeader adds the headers to the HTTP request
+//
+func (f MLUpdateJob) WithHeader(h map[string]string) func(*MLUpdateJobRequest) {
+	return func(r *MLUpdateJobRequest) {
+		if r.Header == nil {
+			r.Header = make(http.Header)
+		}
+		for k, v := range h {
+			r.Header.Add(k, v)
+		}
 	}
 }
