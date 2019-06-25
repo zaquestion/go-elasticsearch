@@ -83,6 +83,18 @@ type Command struct {
 // Execute runs the command.
 //
 func (cmd *Command) Execute() (err error) {
+	EsVersion, err = utils.EsVersion("")
+	if err != nil {
+		return err
+	}
+	GitCommit, err = utils.GitCommit("")
+	if err != nil {
+		return err
+	}
+	GitTag, err = utils.GitTag("")
+	if err != nil {
+		return err
+	}
 	return cmd.processAPIConstructor()
 }
 
