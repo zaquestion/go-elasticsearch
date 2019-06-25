@@ -258,6 +258,7 @@ func (e *Endpoint) RequiredArguments() []MethodArgument {
 		"calendar_id",
 		"job_id",
 		"username",
+		"name",
 	}
 
 	var contains = func(s string) bool {
