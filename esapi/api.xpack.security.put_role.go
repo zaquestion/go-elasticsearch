@@ -10,8 +10,8 @@ import (
 )
 
 func newSecurityPutRoleFunc(t Transport) SecurityPutRole {
-	return func(body io.Reader, name string, o ...func(*SecurityPutRoleRequest)) (*Response, error) {
-		var r = SecurityPutRoleRequest{Body: body, Name: name}
+	return func(name string, body io.Reader, o ...func(*SecurityPutRoleRequest)) (*Response, error) {
+		var r = SecurityPutRoleRequest{Name: name, Body: body}
 		for _, f := range o {
 			f(&r)
 		}
@@ -24,7 +24,7 @@ func newSecurityPutRoleFunc(t Transport) SecurityPutRole {
 //
 // See full documentation at https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html.
 //
-type SecurityPutRole func(body io.Reader, name string, o ...func(*SecurityPutRoleRequest)) (*Response, error)
+type SecurityPutRole func(name string, body io.Reader, o ...func(*SecurityPutRoleRequest)) (*Response, error)
 
 // SecurityPutRoleRequest configures the Security  Put Role API request.
 //

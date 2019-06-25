@@ -10,8 +10,8 @@ import (
 )
 
 func newCCRPutAutoFollowPatternFunc(t Transport) CCRPutAutoFollowPattern {
-	return func(body io.Reader, name string, o ...func(*CCRPutAutoFollowPatternRequest)) (*Response, error) {
-		var r = CCRPutAutoFollowPatternRequest{Body: body, Name: name}
+	return func(name string, body io.Reader, o ...func(*CCRPutAutoFollowPatternRequest)) (*Response, error) {
+		var r = CCRPutAutoFollowPatternRequest{Name: name, Body: body}
 		for _, f := range o {
 			f(&r)
 		}
@@ -24,7 +24,7 @@ func newCCRPutAutoFollowPatternFunc(t Transport) CCRPutAutoFollowPattern {
 //
 // See full documentation at https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-auto-follow-pattern.html.
 //
-type CCRPutAutoFollowPattern func(body io.Reader, name string, o ...func(*CCRPutAutoFollowPatternRequest)) (*Response, error)
+type CCRPutAutoFollowPattern func(name string, body io.Reader, o ...func(*CCRPutAutoFollowPatternRequest)) (*Response, error)
 
 // CCRPutAutoFollowPatternRequest configures the Ccr    Put Auto Follow Pattern API request.
 //

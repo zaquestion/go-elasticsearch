@@ -9,8 +9,8 @@ import (
 )
 
 func newSecurityDeletePrivilegesFunc(t Transport) SecurityDeletePrivileges {
-	return func(application string, name string, o ...func(*SecurityDeletePrivilegesRequest)) (*Response, error) {
-		var r = SecurityDeletePrivilegesRequest{Application: application, Name: name}
+	return func(name string, application string, o ...func(*SecurityDeletePrivilegesRequest)) (*Response, error) {
+		var r = SecurityDeletePrivilegesRequest{Name: name, Application: application}
 		for _, f := range o {
 			f(&r)
 		}
@@ -23,7 +23,7 @@ func newSecurityDeletePrivilegesFunc(t Transport) SecurityDeletePrivileges {
 //
 // See full documentation at TODO.
 //
-type SecurityDeletePrivileges func(application string, name string, o ...func(*SecurityDeletePrivilegesRequest)) (*Response, error)
+type SecurityDeletePrivileges func(name string, application string, o ...func(*SecurityDeletePrivilegesRequest)) (*Response, error)
 
 // SecurityDeletePrivilegesRequest configures the Security  Delete Privileges API request.
 //
