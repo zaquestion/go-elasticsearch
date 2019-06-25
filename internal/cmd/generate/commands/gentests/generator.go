@@ -319,10 +319,165 @@ func (g *Generator) genXPackSetup() {
 		xpackSetup := func() {
 			var res *esapi.Response
 
-			res, _ = es.Watcher.DeleteWatch("my_watch")
-			if (res != nil && res.Body != nil) { res.Body.Close() }
-			res, _ = es.Security.PutUser("x_pack_rest_user", strings.NewReader(` + "`" + `{"password":"x-pack-test-password", "roles":["superuser"]}` + "`" + `))
-			if (res != nil && res.Body != nil) { res.Body.Close() }
+			{
+				res, _ = es.Watcher.DeleteWatch("my_watch")
+				if res != nil && res.Body != nil {
+					defer res.Body.Close()
+				}
+			}
+
+			{
+				var r map[string]interface{}
+				res, _ = es.Security.GetRole(es.Security.GetRole.WithPretty())
+				if res != nil && res.Body != nil {
+					defer res.Body.Close()
+					json.NewDecoder(res.Body).Decode(&r)
+					for k, v := range r {
+						reserved, ok := v.(map[string]interface{})["metadata"].(map[string]interface{})["_reserved"].(bool)
+						if ok && reserved {
+							continue
+						}
+						es.Security.DeleteRole(k)
+					}
+				}
+			}
+
+			{
+				var r map[string]interface{}
+				res, _ = es.Security.GetUser(es.Security.GetUser.WithPretty())
+				if res != nil && res.Body != nil {
+					defer res.Body.Close()
+					json.NewDecoder(res.Body).Decode(&r)
+					for k, v := range r {
+						reserved, ok := v.(map[string]interface{})["metadata"].(map[string]interface{})["_reserved"].(bool)
+						if ok && reserved {
+							continue
+						}
+						es.Security.DeleteUser(k)
+					}
+				}
+			}
+
+			{
+				var r map[string]interface{}
+				res, _ = es.Security.GetPrivileges(es.Security.GetPrivileges.WithPretty())
+				if res != nil && res.Body != nil {
+					defer res.Body.Close()
+					json.NewDecoder(res.Body).Decode(&r)
+					for k, v := range r {
+						reserved, ok := v.(map[string]interface{})["metadata"].(map[string]interface{})["_reserved"].(bool)
+						if ok && reserved {
+							continue
+						}
+						es.Security.DeletePrivileges(k, "_all")
+					}
+				}
+			}
+
+			{
+				var r map[string]interface{}
+				es.ML.StopDatafeed("_all", es.ML.StopDatafeed.WithForce(true))
+				res, _ = es.ML.GetDatafeeds(es.ML.GetDatafeeds.WithAllowNoDatafeeds(true))
+				if res != nil && res.Body != nil {
+					defer res.Body.Close()
+					json.NewDecoder(res.Body).Decode(&r)
+					for _, v := range r["datafeeds"].([]interface{}) {
+						datafeedID, ok := v.(map[string]interface{})["datafeed_id"]
+						if !ok {
+							continue
+						}
+						es.ML.DeleteDatafeed(datafeedID.(string), es.ML.DeleteDatafeed.WithForce(true))
+					}
+				}
+			}
+
+			{
+				var r map[string]interface{}
+				es.ML.CloseJob("_all", es.ML.CloseJob.WithForce(true))
+				res, _ = es.ML.GetJobs(es.ML.GetJobs.WithAllowNoJobs(true))
+				if res != nil && res.Body != nil {
+					defer res.Body.Close()
+					json.NewDecoder(res.Body).Decode(&r)
+					for _, v := range r["jobs"].([]interface{}) {
+						jobID, ok := v.(map[string]interface{})["datafeed_id"]
+						if !ok {
+							continue
+						}
+						es.ML.DeleteJob(jobID.(string), es.ML.DeleteJob.WithForce(true))
+					}
+				}
+			}
+
+			{
+				var r map[string]interface{}
+				res, _ = es.Rollup.GetJobs(es.Rollup.GetJobs.WithDocumentID("_all"))
+				if res != nil && res.Body != nil {
+					defer res.Body.Close()
+					json.NewDecoder(res.Body).Decode(&r)
+					for _, v := range r["jobs"].([]interface{}) {
+						jobID, ok := v.(map[string]interface{})["config"].(map[string]interface{})["id"]
+						if !ok {
+							continue
+						}
+						es.Rollup.StopJob(jobID.(string))
+						es.Rollup.DeleteJob(jobID.(string))
+					}
+				}
+			}
+
+			{
+				var r map[string]interface{}
+				res, _ = es.Tasks.List()
+				if res != nil && res.Body != nil {
+					defer res.Body.Close()
+					json.NewDecoder(res.Body).Decode(&r)
+					for _, vv := range r["nodes"].(map[string]interface{}) {
+						for _, v := range vv.(map[string]interface{})["tasks"].(map[string]interface{}) {
+							cancellable, ok := v.(map[string]interface{})["cancellable"]
+							if !ok || !cancellable.(bool) {
+								continue
+							}
+							taskID := fmt.Sprintf("%v:%v", v.(map[string]interface{})["node"], v.(map[string]interface{})["id"])
+							es.Tasks.Cancel(es.Tasks.Cancel.WithTaskID(taskID))
+						}
+					}
+				}
+			}
+
+			{
+				var r map[string]interface{}
+				res, _ = es.Snapshot.GetRepository()
+				if res != nil && res.Body != nil {
+					defer res.Body.Close()
+					json.NewDecoder(res.Body).Decode(&r)
+					for repositoryID, _ := range r {
+						var r map[string]interface{}
+						res, _ = es.Snapshot.Get(repositoryID, []string{"_all"})
+						json.NewDecoder(res.Body).Decode(&r)
+						for _, vv := range r["responses"].([]interface{}) {
+							for _, v := range vv.(map[string]interface{})["snapshots"].([]interface{}) {
+								snapshotID, ok := v.(map[string]interface{})["snapshot"]
+								if !ok {
+									continue
+								}
+								es.Snapshot.Delete(repositoryID, fmt.Sprintf("%s", snapshotID))
+							}
+						}
+						es.Snapshot.DeleteRepository([]string{fmt.Sprintf("%s", repositoryID)})
+					}
+				}
+			}
+
+			{
+				es.Indices.Delete([]string{"_all"})
+			}
+
+			{
+				res, _ = es.Security.PutUser("x_pack_rest_user", strings.NewReader(` + "`" + `{"password":"x-pack-test-password", "roles":["superuser"]}` + "`" + `), es.Security.PutUser.WithPretty())
+				if res != nil && res.Body != nil {
+					defer res.Body.Close()
+				}
+			}
 		}
 
 	`)
