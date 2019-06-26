@@ -192,7 +192,7 @@ func NewTestSuite(fpath string, payloads []TestPayload) TestSuite {
 				}
 
 				if !ts.Skip {
-					t.Name = strings.Replace(k.(string), `"`, `'`, -1)
+					t.Name = strings.ReplaceAll(k.(string), `"`, `'`)
 					t.Filepath = payload.Filepath
 					t.OrigName = k.(string)
 					t.Steps = steps
@@ -263,7 +263,7 @@ func (ts TestSuite) Name() string {
 	for _, v := range strings.Split(bname, "_") {
 		b.WriteString(strings.Title(v))
 	}
-	return b.String()
+	return strings.ReplaceAll(b.String(), "-", "")
 }
 
 // Filename returns a suitable filename for the test suite.
@@ -668,7 +668,7 @@ default:
 				// --------------------------------------------------------------------------------
 				case map[interface{}]interface{}, map[string]interface{}:
 					expectedPayload := fmt.Sprintf("%#v", val)
-					expectedPayload = strings.Replace(expectedPayload, "map[interface {}]interface {}", "map[string]interface {}", -1)
+					expectedPayload = strings.ReplaceAll(expectedPayload, "map[interface {}]interface {}", "map[string]interface {}")
 					output = `		actual, _ = encjson.Marshal(` + escape(subject) + `)
 				expected, _ = encjson.Marshal(` + expectedPayload + `)
 				if fmt.Sprintf("%s", actual) != fmt.Sprintf("%s", expected) {` + "\n"
@@ -676,6 +676,7 @@ default:
 				// --------------------------------------------------------------------------------
 				case []interface{}:
 					expectedPayload := fmt.Sprintf("%#v", val)
+					expectedPayload = strings.ReplaceAll(expectedPayload, "map[interface {}]interface {}", "map[string]interface {}")
 					output = `		actual, _ = encjson.Marshal(` + escape(subject) + `)
 				expected, _ = encjson.Marshal(` + expectedPayload + `)
 				if fmt.Sprintf("%s", actual) != fmt.Sprintf("%s", expected) {` + "\n"
