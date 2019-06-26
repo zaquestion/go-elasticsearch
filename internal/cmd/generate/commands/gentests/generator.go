@@ -60,9 +60,9 @@ func (g *Generator) Output() (io.Reader, error) {
 	}
 	if len(g.TestSuite.Teardown) > 0 {
 		g.w("\t// Teardown\n")
-		g.w("\tdefer func() {\n")
+		g.w("\tdefer func(t *testing.T) {\n")
 		g.genSetupTeardown(g.TestSuite.Teardown)
-		g.w("\t}()\n")
+		g.w("\t}(t)\n")
 	}
 	for i, t := range g.TestSuite.Tests {
 		g.w("\n")
@@ -84,9 +84,9 @@ func (g *Generator) Output() (io.Reader, error) {
 		}
 		if len(t.Teardown) > 0 {
 			g.w("\t// Test teardown\n")
-			g.w("\tdefer func() {\n")
+			g.w("\tdefer func(t) {\n")
 			g.genSetupTeardown(t.Teardown)
-			g.w("\t}()\n")
+			g.w("\t}(t *testing.T)\n")
 		}
 		if len(t.Setup) > 0 || len(t.Teardown) > 0 {
 			g.w("\n")
@@ -464,6 +464,13 @@ func (g *Generator) genXPackSetup() {
 			}
 
 			{
+				res, _ = es.Cluster.Health(es.Cluster.Health.WithWaitForStatus("yellow"))
+				if res != nil && res.Body != nil {
+					defer res.Body.Close()
+				}
+			}
+
+			{
 				res, _ = es.Security.PutUser("x_pack_rest_user", strings.NewReader(` + "`" + `{"password":"x-pack-test-password", "roles":["superuser"]}` + "`" + `), es.Security.PutUser.WithPretty())
 				if res != nil && res.Body != nil {
 					defer res.Body.Close()
@@ -476,15 +483,6 @@ func (g *Generator) genXPackSetup() {
 					defer res.Body.Close()
 				}
 			}
-
-			{
-				res, _ = es.Cluster.Health(es.Cluster.Health.WithWaitForStatus("yellow"))
-				if res != nil && res.Body != nil {
-					defer res.Body.Close()
-				}
-			}
-
-			time.Sleep(100*time.Millisecond)
 		}
 
 	`)
