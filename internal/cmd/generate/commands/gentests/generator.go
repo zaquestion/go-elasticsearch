@@ -287,26 +287,44 @@ func (g *Generator) genCommonSetup() {
 	// ----- Common Setup -------------------------------------------------------------
 	commonSetup := func() {
 		var res *esapi.Response
-		res, _ = es.Indices.Delete([]string{"_all"})
-		if (res != nil && res.Body != nil) { res.Body.Close() }
 
-		res, _ = es.Indices.DeleteTemplate("*")
-		if (res != nil && res.Body != nil) { res.Body.Close() }
+		{
+			res, _ = es.Indices.Delete([]string{"_all"})
+			if res != nil && res.Body != nil { defer res.Body.Close() }
+		}
 
-		res, _ = es.Indices.DeleteAlias([]string{"_all"}, []string{"_all"})
-		if (res != nil && res.Body != nil) { res.Body.Close() }
+		{
+			res, _ = es.Indices.DeleteTemplate("*")
+			if res != nil && res.Body != nil { defer res.Body.Close() }
+		}
 
-		res, _ = es.Snapshot.Delete("test_repo_create_1", "test_snapshot")
-		if (res != nil && res.Body != nil) { res.Body.Close() }
-		res, _ = es.Snapshot.Delete("test_repo_restore_1", "test_snapshot")
-		if (res != nil && res.Body != nil) { res.Body.Close() }
-		res, _ = es.Snapshot.Delete("test_cat_snapshots_1", "snap1")
-		if (res != nil && res.Body != nil) { res.Body.Close() }
-		res, _ = es.Snapshot.Delete("test_cat_snapshots_1", "snap2")
-		if (res != nil && res.Body != nil) { res.Body.Close() }
-		for _, n := range []string{"test_repo_create_1", "test_repo_restore_1", "test_repo_get_1", "test_repo_get_2", "test_repo_status_1", "test_cat_repo_1", "test_cat_repo_2", "test_cat_snapshots_1"} {
-			res, _ = es.Snapshot.DeleteRepository([]string{n})
-			if (res != nil && res.Body != nil) { res.Body.Close() }
+		{
+			res, _ = es.Indices.DeleteAlias([]string{"_all"}, []string{"_all"})
+			if res != nil && res.Body != nil { defer res.Body.Close() }
+		}
+
+		{
+			var r map[string]interface{}
+			res, _ = es.Snapshot.GetRepository()
+			if res != nil && res.Body != nil {
+				defer res.Body.Close()
+				json.NewDecoder(res.Body).Decode(&r)
+				for repositoryID, _ := range r {
+					var r map[string]interface{}
+					res, _ = es.Snapshot.Get(repositoryID, []string{"_all"})
+					json.NewDecoder(res.Body).Decode(&r)
+					for _, vv := range r["responses"].([]interface{}) {
+						for _, v := range vv.(map[string]interface{})["snapshots"].([]interface{}) {
+							snapshotID, ok := v.(map[string]interface{})["snapshot"]
+							if !ok {
+								continue
+							}
+							es.Snapshot.Delete(repositoryID, fmt.Sprintf("%s", snapshotID))
+						}
+					}
+					es.Snapshot.DeleteRepository([]string{fmt.Sprintf("%s", repositoryID)})
+				}
+			}
 		}
 	}
 
@@ -445,39 +463,27 @@ func (g *Generator) genXPackSetup() {
 			}
 
 			{
-				var r map[string]interface{}
-				res, _ = es.Snapshot.GetRepository()
-				if res != nil && res.Body != nil {
-					defer res.Body.Close()
-					json.NewDecoder(res.Body).Decode(&r)
-					for repositoryID, _ := range r {
-						var r map[string]interface{}
-						res, _ = es.Snapshot.Get(repositoryID, []string{"_all"})
-						json.NewDecoder(res.Body).Decode(&r)
-						for _, vv := range r["responses"].([]interface{}) {
-							for _, v := range vv.(map[string]interface{})["snapshots"].([]interface{}) {
-								snapshotID, ok := v.(map[string]interface{})["snapshot"]
-								if !ok {
-									continue
-								}
-								es.Snapshot.Delete(repositoryID, fmt.Sprintf("%s", snapshotID))
-							}
-						}
-						es.Snapshot.DeleteRepository([]string{fmt.Sprintf("%s", repositoryID)})
-					}
-				}
-			}
-
-			{
-				es.Indices.Delete([]string{"_all"})
-			}
-
-			{
 				res, _ = es.Security.PutUser("x_pack_rest_user", strings.NewReader(` + "`" + `{"password":"x-pack-test-password", "roles":["superuser"]}` + "`" + `), es.Security.PutUser.WithPretty())
 				if res != nil && res.Body != nil {
 					defer res.Body.Close()
 				}
 			}
+
+			{
+				res, _ = es.Indices.Refresh(es.Indices.Refresh.WithIndex(".security*"))
+				if res != nil && res.Body != nil {
+					defer res.Body.Close()
+				}
+			}
+
+			{
+				res, _ = es.Cluster.Health(es.Cluster.Health.WithWaitForStatus("yellow"))
+				if res != nil && res.Body != nil {
+					defer res.Body.Close()
+				}
+			}
+
+			time.Sleep(100*time.Millisecond)
 		}
 
 	`)
