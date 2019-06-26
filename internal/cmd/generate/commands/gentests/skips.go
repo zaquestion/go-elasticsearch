@@ -23,6 +23,10 @@ var skipFiles = []string{
 	"ml/jobs_get_result_buckets.yml",    // Passes string value to int variable
 	"ml/jobs_get_result_categories.yml", // --||--
 	"ml/set_upgrade_mode.yml",           // --||--
+
+	"watcher/stats/10_basic.yml", // Sets "emit_stacktraces" as string ("true"), not bool
+
+	"ml/jobs_get_stats.yml", // Gets stuck everytime
 }
 
 // TODO: Comments into descriptions for `Skip()`
@@ -87,9 +91,31 @@ bulk/80_cas.yml:
 bulk/81_cas_with_types.yml:
 
 # ----- X-Pack ----------------------------------------------------------------
-change_password/10_basic.yml:
-  - Test user changing their own password
-license/20_put_license.yml:
+
+# Stash in body
 api_key/10_basic.yml:
   - Test invalidate api key
+
+# Changing password locks out tests
+change_password/10_basic.yml:
+  - Test user changing their own password
+
+# Missing refreshes in the test
+data_frame/transforms_start_stop.yml:
+ml/index_layout.yml:
+
+# More QA tests than API tests
+data_frame/transforms_stats.yml:
+  - Test get multiple transform stats
+  - Test get transform stats on missing transform
+  - Test get multiple transform stats where one does not have a task
+
+# Invalid license makes subsequent tests fail
+license/20_put_license.yml:
+
+# Test gets stuck every time
+ml/jobs_get_stats.yml:
+
+# Cannot connect to Docker IP
+watcher/execute_watch/60_http_input.yml:
 `
