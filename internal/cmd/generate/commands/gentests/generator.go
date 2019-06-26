@@ -195,6 +195,7 @@ import (
 	encyaml "gopkg.in/yaml.v2"
 	"crypto/tls"
 	"testing"
+	"time"
 
 	"github.com/elastic/go-elasticsearch/v8"
 	"github.com/elastic/go-elasticsearch/v8/esapi"
@@ -638,7 +639,7 @@ func (g *Generator) genVarSection(t Test, skipBody ...bool) {
 		g.w("\t\t_ = mapi\n")
 		g.w("\t\t_ = slic\n")
 		g.w("\n")
-		g.w(`handleResponseBody := func(res *esapi.Response) {
+		g.w(`handleResponseBody := func(t *testing.T, res *esapi.Response) {
 			// Reset deserialized structures
 			mapi = make(map[string]interface{})
 			slic = make([]interface{}, 0)
@@ -989,7 +990,7 @@ func (g *Generator) genAction(a Action, skipBody ...bool) {
 
 	if len(skipBody) < 1 || (len(skipBody) > 0 && skipBody[0] == false) {
 		// Read and parse the body
-		g.w(`		handleResponseBody(res)` + "\n")
+		g.w(`		handleResponseBody(t, res)` + "\n")
 	}
 }
 
