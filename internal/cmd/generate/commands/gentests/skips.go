@@ -27,6 +27,8 @@ var skipFiles = []string{
 	"watcher/stats/10_basic.yml", // Sets "emit_stacktraces" as string ("true"), not bool
 
 	"ml/jobs_get_stats.yml", // Gets stuck everytime
+
+	"ml/jobs_crud.yml", // Test is too heavy (1K lines of YAML)
 }
 
 // TODO: Comments into descriptions for `Skip()`
@@ -116,6 +118,35 @@ license/20_put_license.yml:
 # Test gets stuck every time
 ml/jobs_get_stats.yml:
 
+# status_exception, Cannot process data because job [post-data-job] does not have a corresponding autodetect process
+# resource_already_exists_exception, task with id {job-post-data-job} already exist
+ml/post_data.yml:
+
+# Possible bad test setup, Cannot open job [start-stop-datafeed-job] because it has already been opened
+# resource_already_exists_exception, task with id {job-start-stop-datafeed-job-foo-2} already exist
+ml/start_stop_datafeed.yml:
+  - Test start datafeed when persistent task allocation disabled
+  - Test stop given expression
+
+# Test tries to match on whole body, but map keys are unstable in Go
+rollup/security_tests.yml:
+
+# illegal_argument_exception: Provided password hash uses [NOOP] but the configured hashing algorithm is [BCRYPT]
+users/10_basic.yml:
+  - Test put user with password hash
+
+# Test looks for "testnode.crt", but "ca.crt" is returned first
+ssl/10_basic.yml:
+  - Test get SSL certificates
+
 # Cannot connect to Docker IP
 watcher/execute_watch/60_http_input.yml:
+
+# class org.elasticsearch.xpack.vectors.query.VectorScriptDocValues$DenseVectorScriptDocValues cannot be cast to class org.elasticsearch.xpack.vectors.query.VectorScriptDocValues$SparseVectorScriptDocValues ...
+vectors/30_sparse_vector_basic.yml:
+  - vectors/30_sparse_vector_basic.yml
+
+# Test tries to match on "tagline", which requires "human=false", which doesn't work in the Go API.
+# Also test does too much within a single test, so has to be disabled as whole, unfortunately.
+xpack/15_basic.yml:
 `
