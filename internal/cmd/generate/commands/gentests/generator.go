@@ -395,7 +395,7 @@ func (g *Generator) genXPackSetup() {
 
 			{
 				var r map[string]interface{}
-				es.ML.StopDatafeed("_all", es.ML.StopDatafeed.WithForce(true))
+				es.ML.StopDatafeed("_all")
 				res, _ = es.ML.GetDatafeeds(es.ML.GetDatafeeds.WithAllowNoDatafeeds(true))
 				if res != nil && res.Body != nil {
 					defer res.Body.Close()
@@ -405,7 +405,7 @@ func (g *Generator) genXPackSetup() {
 						if !ok {
 							continue
 						}
-						es.ML.DeleteDatafeed(datafeedID.(string), es.ML.DeleteDatafeed.WithForce(true))
+						es.ML.DeleteDatafeed(datafeedID.(string))
 					}
 				}
 			}
@@ -422,7 +422,7 @@ func (g *Generator) genXPackSetup() {
 						if !ok {
 							continue
 						}
-						es.ML.DeleteJob(jobID.(string), es.ML.DeleteJob.WithForce(true))
+						es.ML.DeleteJob(jobID.(string))
 					}
 				}
 			}
@@ -479,6 +479,13 @@ func (g *Generator) genXPackSetup() {
 
 			{
 				res, _ = es.Indices.Refresh(es.Indices.Refresh.WithIndex(".security*"))
+				if res != nil && res.Body != nil {
+					defer res.Body.Close()
+				}
+			}
+
+			{
+				res, _ = es.Cluster.Health(es.Cluster.Health.WithWaitForStatus("yellow"))
 				if res != nil && res.Body != nil {
 					defer res.Body.Close()
 				}
