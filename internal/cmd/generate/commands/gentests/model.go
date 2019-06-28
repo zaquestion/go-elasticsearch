@@ -293,11 +293,15 @@ func (ts TestSuite) SkipEsVersion(minmax string) bool {
 // BaseFilename returns the original filename in form of `foo/10_bar.yml`.
 //
 func (t Test) BaseFilename() string {
+	var index int
 	parts := strings.Split(t.Filepath, string(filepath.Separator))
-	if len(parts) < 2 {
-		return ""
+	for i, v := range parts {
+		index = i
+		if v == "rest-api-spec" {
+			break
+		}
 	}
-	return strings.Join(parts[len(parts)-2:], string(filepath.Separator))
+	return strings.Join(parts[index+2:], string(filepath.Separator))
 }
 
 // SkipEsVersion returns true if the test should be skipped.
