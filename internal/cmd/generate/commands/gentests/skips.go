@@ -25,8 +25,6 @@ var skipFiles = []string{
 	"ml/set_upgrade_mode.yml",           // --||--
 
 	"watcher/stats/10_basic.yml", // Sets "emit_stacktraces" as string ("true"), not bool
-
-	"ml/jobs_get_stats.yml", // Gets stuck everytime
 }
 
 // TODO: Comments into descriptions for `Skip()`
@@ -116,6 +114,9 @@ license/20_put_license.yml:
 # Test tries to match on map from body, but Go keys are not sorted
 ml/jobs_crud.yml:
   - Test job with rules
+
+# Test gets stuck every time
+ml/jobs_get_stats.yml:
 
 # # status_exception, Cannot process data because job [post-data-job] does not have a corresponding autodetect process
 # # resource_already_exists_exception, task with id {job-post-data-job} already exist
