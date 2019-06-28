@@ -27,8 +27,6 @@ var skipFiles = []string{
 	"watcher/stats/10_basic.yml", // Sets "emit_stacktraces" as string ("true"), not bool
 
 	"ml/jobs_get_stats.yml", // Gets stuck everytime
-
-	"ml/jobs_crud.yml", // Test is too heavy (1K lines of YAML)
 }
 
 // TODO: Comments into descriptions for `Skip()`
@@ -115,18 +113,25 @@ data_frame/transforms_stats.yml:
 # Invalid license makes subsequent tests fail
 license/20_put_license.yml:
 
-# Test gets stuck every time
-ml/jobs_get_stats.yml:
+# Test tries to match on map from body, but Go keys are not sorted
+ml/jobs_crud.yml:
+  - Test job with rules
 
-# status_exception, Cannot process data because job [post-data-job] does not have a corresponding autodetect process
-# resource_already_exists_exception, task with id {job-post-data-job} already exist
-ml/post_data.yml:
+# # status_exception, Cannot process data because job [post-data-job] does not have a corresponding autodetect process
+# # resource_already_exists_exception, task with id {job-post-data-job} already exist
+# ml/post_data.yml:
 
 # Possible bad test setup, Cannot open job [start-stop-datafeed-job] because it has already been opened
 # resource_already_exists_exception, task with id {job-start-stop-datafeed-job-foo-2} already exist
 ml/start_stop_datafeed.yml:
   - Test start datafeed when persistent task allocation disabled
-  - Test stop given expression
+
+# Indexing step doesn't appear to work (getting total.hits=0)
+monitoring/bulk/10_basic.yml:
+  - Bulk indexing of monitoring data on closed indices should throw an export exception
+# Indexing step doesn't appear to work (getting total.hits=0)
+monitoring/bulk/20_privileges.yml:
+  - Monitoring Bulk API
 
 # Test tries to match on whole body, but map keys are unstable in Go
 rollup/security_tests.yml:
@@ -135,16 +140,25 @@ rollup/security_tests.yml:
 users/10_basic.yml:
   - Test put user with password hash
 
+# Slash in index name is not escaped (BUG)
+security/authz/13_index_datemath.yml:
+  - Test indexing documents with datemath, when permitted
+
 # Test looks for "testnode.crt", but "ca.crt" is returned first
 ssl/10_basic.yml:
   - Test get SSL certificates
 
-# Cannot connect to Docker IP
-watcher/execute_watch/60_http_input.yml:
-
 # class org.elasticsearch.xpack.vectors.query.VectorScriptDocValues$DenseVectorScriptDocValues cannot be cast to class org.elasticsearch.xpack.vectors.query.VectorScriptDocValues$SparseVectorScriptDocValues ...
 vectors/30_sparse_vector_basic.yml:
-  - vectors/30_sparse_vector_basic.yml
+  - Dot Product
+# java.lang.IllegalArgumentException: No field found for [my_dense_vector] in mapping
+vectors/40_sparse_vector_special_cases.yml:
+  - Vectors of different dimensions and data types
+  - Dimensions can be sorted differently
+  - Distance functions for documents missing vector field should return 0
+
+# Cannot connect to Docker IP
+watcher/execute_watch/60_http_input.yml:
 
 # Test tries to match on "tagline", which requires "human=false", which doesn't work in the Go API.
 # Also test does too much within a single test, so has to be disabled as whole, unfortunately.
