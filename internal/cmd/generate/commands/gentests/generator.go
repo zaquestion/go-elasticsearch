@@ -193,6 +193,7 @@ func (g *Generator) genFileHeader() {
 import (
 	encjson "encoding/json"
 	encyaml "gopkg.in/yaml.v2"
+	"context"
 	"crypto/tls"
 	"testing"
 	"time"
@@ -290,13 +291,36 @@ func (g *Generator) genCommonSetup() {
 		var res *esapi.Response
 
 		{
+			res, _ = es.Cluster.Health(es.Cluster.Health.WithWaitForNoInitializingShards(true))
+			if res != nil && res.Body != nil {
+				defer res.Body.Close()
+			}
+		}
+
+		{
 			res, _ = es.Indices.Delete([]string{"_all"})
 			if res != nil && res.Body != nil { defer res.Body.Close() }
 		}
 
 		{
-			res, _ = es.Indices.DeleteTemplate("*")
-			if res != nil && res.Body != nil { defer res.Body.Close() }
+			var r map[string]interface{}
+			res, _ = es.Indices.GetTemplate()
+			if res != nil && res.Body != nil {
+				defer res.Body.Close()
+				json.NewDecoder(res.Body).Decode(&r)
+				for templateName, _ := range r {
+					if strings.HasPrefix(templateName, ".") {
+						continue
+					}
+					if templateName == "security_audit_log" {
+						continue
+					}
+					if templateName == "logstash-index-template" {
+						continue
+					}
+					es.Indices.DeleteTemplate(templateName)
+				}
+			}
 		}
 
 		{
@@ -327,6 +351,13 @@ func (g *Generator) genCommonSetup() {
 				}
 			}
 		}
+
+		{
+			res, _ = es.Cluster.Health(es.Cluster.Health.WithWaitForStatus("yellow"))
+			if res != nil && res.Body != nil {
+				defer res.Body.Close()
+			}
+		}
 	}
 
 	`)
@@ -337,6 +368,21 @@ func (g *Generator) genXPackSetup() {
 		// ----- XPack Setup -------------------------------------------------------------
 		xpackSetup := func() {
 			var res *esapi.Response
+
+			{
+				var r map[string]interface{}
+				res, _ = es.Indices.GetTemplate()
+				if res != nil && res.Body != nil {
+					defer res.Body.Close()
+					json.NewDecoder(res.Body).Decode(&r)
+					for templateName, _ := range r {
+						if strings.HasPrefix(templateName, ".") {
+							continue
+						}
+						es.Indices.DeleteTemplate(templateName)
+					}
+				}
+			}
 
 			{
 				res, _ = es.Watcher.DeleteWatch("my_watch")
@@ -395,8 +441,10 @@ func (g *Generator) genXPackSetup() {
 
 			{
 				var r map[string]interface{}
-				es.ML.StopDatafeed("_all")
-				res, _ = es.ML.GetDatafeeds(es.ML.GetDatafeeds.WithAllowNoDatafeeds(true))
+				ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+				defer cancel()
+				es.ML.StopDatafeed("_all", es.ML.StopDatafeed.WithContext(ctx))
+				res, _ = es.ML.GetDatafeeds()
 				if res != nil && res.Body != nil {
 					defer res.Body.Close()
 					json.NewDecoder(res.Body).Decode(&r)
@@ -412,13 +460,15 @@ func (g *Generator) genXPackSetup() {
 
 			{
 				var r map[string]interface{}
-				es.ML.CloseJob("_all", es.ML.CloseJob.WithForce(true))
-				res, _ = es.ML.GetJobs(es.ML.GetJobs.WithAllowNoJobs(true))
+				ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+				defer cancel()
+				es.ML.CloseJob("_all", es.ML.CloseJob.WithContext(ctx))
+				res, _ = es.ML.GetJobs()
 				if res != nil && res.Body != nil {
 					defer res.Body.Close()
 					json.NewDecoder(res.Body).Decode(&r)
 					for _, v := range r["jobs"].([]interface{}) {
-						jobID, ok := v.(map[string]interface{})["datafeed_id"]
+						jobID, ok := v.(map[string]interface{})["job_id"]
 						if !ok {
 							continue
 						}
@@ -438,7 +488,7 @@ func (g *Generator) genXPackSetup() {
 						if !ok {
 							continue
 						}
-						es.Rollup.StopJob(jobID.(string))
+						es.Rollup.StopJob(jobID.(string), es.Rollup.StopJob.WithWaitForCompletion(true))
 						es.Rollup.DeleteJob(jobID.(string))
 					}
 				}
@@ -457,9 +507,42 @@ func (g *Generator) genXPackSetup() {
 								continue
 							}
 							taskID := fmt.Sprintf("%v:%v", v.(map[string]interface{})["node"], v.(map[string]interface{})["id"])
-							es.Tasks.Cancel(es.Tasks.Cancel.WithTaskID(taskID))
+							ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+							defer cancel()
+							es.Tasks.Cancel(es.Tasks.Cancel.WithTaskID(taskID), es.Tasks.Cancel.WithContext(ctx))
 						}
 					}
+				}
+			}
+
+			{
+				var r map[string]interface{}
+				res, _ = es.Snapshot.GetRepository()
+				if res != nil && res.Body != nil {
+					defer res.Body.Close()
+					json.NewDecoder(res.Body).Decode(&r)
+					for repositoryID, _ := range r {
+						var r map[string]interface{}
+						res, _ = es.Snapshot.Get(repositoryID, []string{"_all"})
+						json.NewDecoder(res.Body).Decode(&r)
+						for _, vv := range r["responses"].([]interface{}) {
+							for _, v := range vv.(map[string]interface{})["snapshots"].([]interface{}) {
+								snapshotID, ok := v.(map[string]interface{})["snapshot"]
+								if !ok {
+									continue
+								}
+								es.Snapshot.Delete(repositoryID, fmt.Sprintf("%s", snapshotID))
+							}
+						}
+						es.Snapshot.DeleteRepository([]string{fmt.Sprintf("%s", repositoryID)})
+					}
+				}
+			}
+
+			{
+				res, _ = es.ILM.RemovePolicy(es.ILM.RemovePolicy.WithIndex("_all"))
+				if res != nil && res.Body != nil {
+					defer res.Body.Close()
 				}
 			}
 
@@ -478,7 +561,7 @@ func (g *Generator) genXPackSetup() {
 			}
 
 			{
-				res, _ = es.Indices.Refresh(es.Indices.Refresh.WithIndex(".security*"))
+				res, _ = es.Indices.Refresh(es.Indices.Refresh.WithIndex("_all"))
 				if res != nil && res.Body != nil {
 					defer res.Body.Close()
 				}
@@ -488,6 +571,26 @@ func (g *Generator) genXPackSetup() {
 				res, _ = es.Cluster.Health(es.Cluster.Health.WithWaitForStatus("yellow"))
 				if res != nil && res.Body != nil {
 					defer res.Body.Close()
+				}
+			}
+
+			{
+				var i int
+				for {
+					i++
+					var r map[string]interface{}
+					res, _ = es.Cluster.PendingTasks()
+					if res != nil && res.Body != nil {
+						defer res.Body.Close()
+						json.NewDecoder(res.Body).Decode(&r)
+						if len(r["tasks"].([]interface{})) < 1 {
+							break
+						}
+					}
+					if i > 30 {
+						break
+					}
+					time.Sleep(time.Second)
 				}
 			}
 		}
