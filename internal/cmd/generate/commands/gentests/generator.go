@@ -215,9 +215,6 @@ func (g *Generator) genInitializeClient() {
 	if g.TestSuite.Type == "xpack" {
 		g.w(`
 	cfg := elasticsearch.Config{
-		Addresses: []string{"https://localhost:9200"},
-		Username:  "elastic",
-		Password:  "elastic",
 		Transport: &http.Transport{
 			TLSClientConfig: &tls.Config{
 				InsecureSkipVerify: true,
