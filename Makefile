@@ -143,6 +143,7 @@ ifeq ($(shell test $(nodes) && test $(nodes) -gt 1; echo $$?),0)
 else
 	$(eval detached ?= "false")
 endif
+
 ifdef version
 ifneq (,$(findstring oss,$(version)))
 else
