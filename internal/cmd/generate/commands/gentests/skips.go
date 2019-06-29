@@ -137,6 +137,10 @@ monitoring/bulk/20_privileges.yml:
 # Test tries to match on whole body, but map keys are unstable in Go
 rollup/security_tests.yml:
 
+# TEMPORARY: Missing 'body: { indices: "test_index" }' payload, TODO: PR
+snapshot/10_basic.yml:
+  - Create a source only snapshot and then restore it
+
 # illegal_argument_exception: Provided password hash uses [NOOP] but the configured hashing algorithm is [BCRYPT]
 users/10_basic.yml:
   - Test put user with password hash
