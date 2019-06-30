@@ -32,6 +32,7 @@ type DataFrameStopDataFrameTransform func(transform_id string, o ...func(*DataFr
 type DataFrameStopDataFrameTransformRequest struct {
 	TransformID string
 
+	AllowNoMatch      *bool
 	Timeout           time.Duration
 	WaitForCompletion *bool
 
@@ -67,6 +68,10 @@ func (r DataFrameStopDataFrameTransformRequest) Do(ctx context.Context, transpor
 	path.WriteString("_stop")
 
 	params = make(map[string]string)
+
+	if r.AllowNoMatch != nil {
+		params["allow_no_match"] = strconv.FormatBool(*r.AllowNoMatch)
+	}
 
 	if r.Timeout != 0 {
 		params["timeout"] = formatDuration(r.Timeout)
@@ -133,6 +138,14 @@ func (r DataFrameStopDataFrameTransformRequest) Do(ctx context.Context, transpor
 func (f DataFrameStopDataFrameTransform) WithContext(v context.Context) func(*DataFrameStopDataFrameTransformRequest) {
 	return func(r *DataFrameStopDataFrameTransformRequest) {
 		r.ctx = v
+	}
+}
+
+// WithAllowNoMatch - whether to ignore if a wildcard expression matches no data frame transforms. (this includes `_all` string or when no data frame transforms have been specified).
+//
+func (f DataFrameStopDataFrameTransform) WithAllowNoMatch(v bool) func(*DataFrameStopDataFrameTransformRequest) {
+	return func(r *DataFrameStopDataFrameTransformRequest) {
+		r.AllowNoMatch = &v
 	}
 }
 

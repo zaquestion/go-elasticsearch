@@ -31,8 +31,9 @@ type DataFrameGetDataFrameTransformStats func(o ...func(*DataFrameGetDataFrameTr
 type DataFrameGetDataFrameTransformStatsRequest struct {
 	TransformID string
 
-	From *int
-	Size *int
+	AllowNoMatch *bool
+	From         *int
+	Size         *int
 
 	Pretty     bool
 	Human      bool
@@ -68,6 +69,10 @@ func (r DataFrameGetDataFrameTransformStatsRequest) Do(ctx context.Context, tran
 	path.WriteString("_stats")
 
 	params = make(map[string]string)
+
+	if r.AllowNoMatch != nil {
+		params["allow_no_match"] = strconv.FormatBool(*r.AllowNoMatch)
+	}
 
 	if r.From != nil {
 		params["from"] = strconv.FormatInt(int64(*r.From), 10)
@@ -142,6 +147,14 @@ func (f DataFrameGetDataFrameTransformStats) WithContext(v context.Context) func
 func (f DataFrameGetDataFrameTransformStats) WithTransformID(v string) func(*DataFrameGetDataFrameTransformStatsRequest) {
 	return func(r *DataFrameGetDataFrameTransformStatsRequest) {
 		r.TransformID = v
+	}
+}
+
+// WithAllowNoMatch - whether to ignore if a wildcard expression matches no data frame transforms. (this includes `_all` string or when no data frame transforms have been specified).
+//
+func (f DataFrameGetDataFrameTransformStats) WithAllowNoMatch(v bool) func(*DataFrameGetDataFrameTransformStatsRequest) {
+	return func(r *DataFrameGetDataFrameTransformStatsRequest) {
+		r.AllowNoMatch = &v
 	}
 }
 
