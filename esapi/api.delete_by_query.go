@@ -1,4 +1,4 @@
-// Code generated from specification version 8.0.0: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package esapi
 
@@ -459,14 +459,6 @@ func (f DeleteByQuery) WithSearchTimeout(v time.Duration) func(*DeleteByQueryReq
 func (f DeleteByQuery) WithSearchType(v string) func(*DeleteByQueryRequest) {
 	return func(r *DeleteByQueryRequest) {
 		r.SearchType = v
-	}
-}
-
-// WithSize - deprecated, please use `max_docs` instead.
-//
-func (f DeleteByQuery) WithSize(v int) func(*DeleteByQueryRequest) {
-	return func(r *DeleteByQueryRequest) {
-		r.Size = &v
 	}
 }
 

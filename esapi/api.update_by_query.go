@@ -1,4 +1,4 @@
-// Code generated from specification version 8.0.0: DO NOT EDIT
+// Code generated from specification version 8-0-0-SNAPSHOT: DO NOT EDIT
 
 package esapi
 
@@ -486,14 +486,6 @@ func (f UpdateByQuery) WithSearchTimeout(v time.Duration) func(*UpdateByQueryReq
 func (f UpdateByQuery) WithSearchType(v string) func(*UpdateByQueryRequest) {
 	return func(r *UpdateByQueryRequest) {
 		r.SearchType = v
-	}
-}
-
-// WithSize - deprecated, please use `max_docs` instead.
-//
-func (f UpdateByQuery) WithSize(v int) func(*UpdateByQueryRequest) {
-	return func(r *UpdateByQueryRequest) {
-		r.Size = &v
 	}
 }
 
