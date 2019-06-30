@@ -24,6 +24,8 @@ var skipFiles = []string{
 	"ml/jobs_get_result_categories.yml", // --||--
 	"ml/set_upgrade_mode.yml",           // --||--
 
+	"ml/evaluate_data_frame.yml", // Floats as map keys
+
 	"watcher/stats/10_basic.yml", // Sets "emit_stacktraces" as string ("true"), not bool
 }
 
