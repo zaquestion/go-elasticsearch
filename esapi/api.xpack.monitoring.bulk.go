@@ -34,7 +34,7 @@ type MonitoringBulkRequest struct {
 	Body io.Reader
 
 	Interval         string
-	SystemApiVersion string
+	SystemAPIVersion string
 	SystemID         string
 
 	Pretty     bool
@@ -74,8 +74,8 @@ func (r MonitoringBulkRequest) Do(ctx context.Context, transport Transport) (*Re
 		params["interval"] = r.Interval
 	}
 
-	if r.SystemApiVersion != "" {
-		params["system_api_version"] = r.SystemApiVersion
+	if r.SystemAPIVersion != "" {
+		params["system_api_version"] = r.SystemAPIVersion
 	}
 
 	if r.SystemID != "" {
@@ -162,11 +162,11 @@ func (f MonitoringBulk) WithInterval(v string) func(*MonitoringBulkRequest) {
 	}
 }
 
-// WithSystemApiVersion - api version of the monitored system.
+// WithSystemAPIVersion - api version of the monitored system.
 //
-func (f MonitoringBulk) WithSystemApiVersion(v string) func(*MonitoringBulkRequest) {
+func (f MonitoringBulk) WithSystemAPIVersion(v string) func(*MonitoringBulkRequest) {
 	return func(r *MonitoringBulkRequest) {
-		r.SystemApiVersion = v
+		r.SystemAPIVersion = v
 	}
 }
 

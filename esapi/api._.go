@@ -321,14 +321,14 @@ type Security struct {
 	ChangePassword    SecurityChangePassword
 	ClearCachedRealms SecurityClearCachedRealms
 	ClearCachedRoles  SecurityClearCachedRoles
-	CreateApiKey      SecurityCreateApiKey
+	CreateAPIKey      SecurityCreateAPIKey
 	DeletePrivileges  SecurityDeletePrivileges
 	DeleteRoleMapping SecurityDeleteRoleMapping
 	DeleteRole        SecurityDeleteRole
 	DeleteUser        SecurityDeleteUser
 	DisableUser       SecurityDisableUser
 	EnableUser        SecurityEnableUser
-	GetApiKey         SecurityGetApiKey
+	GetAPIKey         SecurityGetAPIKey
 	GetPrivileges     SecurityGetPrivileges
 	GetRoleMapping    SecurityGetRoleMapping
 	GetRole           SecurityGetRole
@@ -336,7 +336,7 @@ type Security struct {
 	GetUserPrivileges SecurityGetUserPrivileges
 	GetUser           SecurityGetUser
 	HasPrivileges     SecurityHasPrivileges
-	InvalidateApiKey  SecurityInvalidateApiKey
+	InvalidateAPIKey  SecurityInvalidateAPIKey
 	InvalidateToken   SecurityInvalidateToken
 	PutPrivileges     SecurityPutPrivileges
 	PutRoleMapping    SecurityPutRoleMapping
@@ -641,14 +641,14 @@ func New(t Transport) *API {
 			ChangePassword:    newSecurityChangePasswordFunc(t),
 			ClearCachedRealms: newSecurityClearCachedRealmsFunc(t),
 			ClearCachedRoles:  newSecurityClearCachedRolesFunc(t),
-			CreateApiKey:      newSecurityCreateApiKeyFunc(t),
+			CreateAPIKey:      newSecurityCreateAPIKeyFunc(t),
 			DeletePrivileges:  newSecurityDeletePrivilegesFunc(t),
 			DeleteRoleMapping: newSecurityDeleteRoleMappingFunc(t),
 			DeleteRole:        newSecurityDeleteRoleFunc(t),
 			DeleteUser:        newSecurityDeleteUserFunc(t),
 			DisableUser:       newSecurityDisableUserFunc(t),
 			EnableUser:        newSecurityEnableUserFunc(t),
-			GetApiKey:         newSecurityGetApiKeyFunc(t),
+			GetAPIKey:         newSecurityGetAPIKeyFunc(t),
 			GetPrivileges:     newSecurityGetPrivilegesFunc(t),
 			GetRoleMapping:    newSecurityGetRoleMappingFunc(t),
 			GetRole:           newSecurityGetRoleFunc(t),
@@ -656,7 +656,7 @@ func New(t Transport) *API {
 			GetUserPrivileges: newSecurityGetUserPrivilegesFunc(t),
 			GetUser:           newSecurityGetUserFunc(t),
 			HasPrivileges:     newSecurityHasPrivilegesFunc(t),
-			InvalidateApiKey:  newSecurityInvalidateApiKeyFunc(t),
+			InvalidateAPIKey:  newSecurityInvalidateAPIKeyFunc(t),
 			InvalidateToken:   newSecurityInvalidateTokenFunc(t),
 			PutPrivileges:     newSecurityPutPrivilegesFunc(t),
 			PutRoleMapping:    newSecurityPutRoleMappingFunc(t),

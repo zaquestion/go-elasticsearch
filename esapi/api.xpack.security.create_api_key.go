@@ -9,9 +9,9 @@ import (
 	"strings"
 )
 
-func newSecurityCreateApiKeyFunc(t Transport) SecurityCreateApiKey {
-	return func(body io.Reader, o ...func(*SecurityCreateApiKeyRequest)) (*Response, error) {
-		var r = SecurityCreateApiKeyRequest{Body: body}
+func newSecurityCreateAPIKeyFunc(t Transport) SecurityCreateAPIKey {
+	return func(body io.Reader, o ...func(*SecurityCreateAPIKeyRequest)) (*Response, error) {
+		var r = SecurityCreateAPIKeyRequest{Body: body}
 		for _, f := range o {
 			f(&r)
 		}
@@ -24,11 +24,11 @@ func newSecurityCreateApiKeyFunc(t Transport) SecurityCreateApiKey {
 //
 // See full documentation at https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-api-key.html.
 //
-type SecurityCreateApiKey func(body io.Reader, o ...func(*SecurityCreateApiKeyRequest)) (*Response, error)
+type SecurityCreateAPIKey func(body io.Reader, o ...func(*SecurityCreateAPIKeyRequest)) (*Response, error)
 
-// SecurityCreateApiKeyRequest configures the Security   Create Api Key API request.
+// SecurityCreateAPIKeyRequest configures the Security   Create Api Key API request.
 //
-type SecurityCreateApiKeyRequest struct {
+type SecurityCreateAPIKeyRequest struct {
 	Body io.Reader
 
 	Refresh string
@@ -45,7 +45,7 @@ type SecurityCreateApiKeyRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r SecurityCreateApiKeyRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r SecurityCreateAPIKeyRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -121,56 +121,56 @@ func (r SecurityCreateApiKeyRequest) Do(ctx context.Context, transport Transport
 
 // WithContext sets the request context.
 //
-func (f SecurityCreateApiKey) WithContext(v context.Context) func(*SecurityCreateApiKeyRequest) {
-	return func(r *SecurityCreateApiKeyRequest) {
+func (f SecurityCreateAPIKey) WithContext(v context.Context) func(*SecurityCreateAPIKeyRequest) {
+	return func(r *SecurityCreateAPIKeyRequest) {
 		r.ctx = v
 	}
 }
 
 // WithRefresh - if `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes..
 //
-func (f SecurityCreateApiKey) WithRefresh(v string) func(*SecurityCreateApiKeyRequest) {
-	return func(r *SecurityCreateApiKeyRequest) {
+func (f SecurityCreateAPIKey) WithRefresh(v string) func(*SecurityCreateAPIKeyRequest) {
+	return func(r *SecurityCreateAPIKeyRequest) {
 		r.Refresh = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f SecurityCreateApiKey) WithPretty() func(*SecurityCreateApiKeyRequest) {
-	return func(r *SecurityCreateApiKeyRequest) {
+func (f SecurityCreateAPIKey) WithPretty() func(*SecurityCreateAPIKeyRequest) {
+	return func(r *SecurityCreateAPIKeyRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f SecurityCreateApiKey) WithHuman() func(*SecurityCreateApiKeyRequest) {
-	return func(r *SecurityCreateApiKeyRequest) {
+func (f SecurityCreateAPIKey) WithHuman() func(*SecurityCreateAPIKeyRequest) {
+	return func(r *SecurityCreateAPIKeyRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f SecurityCreateApiKey) WithErrorTrace() func(*SecurityCreateApiKeyRequest) {
-	return func(r *SecurityCreateApiKeyRequest) {
+func (f SecurityCreateAPIKey) WithErrorTrace() func(*SecurityCreateAPIKeyRequest) {
+	return func(r *SecurityCreateAPIKeyRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f SecurityCreateApiKey) WithFilterPath(v ...string) func(*SecurityCreateApiKeyRequest) {
-	return func(r *SecurityCreateApiKeyRequest) {
+func (f SecurityCreateAPIKey) WithFilterPath(v ...string) func(*SecurityCreateAPIKeyRequest) {
+	return func(r *SecurityCreateAPIKeyRequest) {
 		r.FilterPath = v
 	}
 }
 
 // WithHeader adds the headers to the HTTP request
 //
-func (f SecurityCreateApiKey) WithHeader(h map[string]string) func(*SecurityCreateApiKeyRequest) {
-	return func(r *SecurityCreateApiKeyRequest) {
+func (f SecurityCreateAPIKey) WithHeader(h map[string]string) func(*SecurityCreateAPIKeyRequest) {
+	return func(r *SecurityCreateAPIKeyRequest) {
 		if r.Header == nil {
 			r.Header = make(http.Header)
 		}

@@ -9,9 +9,9 @@ import (
 	"strings"
 )
 
-func newSecurityInvalidateApiKeyFunc(t Transport) SecurityInvalidateApiKey {
-	return func(body io.Reader, o ...func(*SecurityInvalidateApiKeyRequest)) (*Response, error) {
-		var r = SecurityInvalidateApiKeyRequest{Body: body}
+func newSecurityInvalidateAPIKeyFunc(t Transport) SecurityInvalidateAPIKey {
+	return func(body io.Reader, o ...func(*SecurityInvalidateAPIKeyRequest)) (*Response, error) {
+		var r = SecurityInvalidateAPIKeyRequest{Body: body}
 		for _, f := range o {
 			f(&r)
 		}
@@ -24,11 +24,11 @@ func newSecurityInvalidateApiKeyFunc(t Transport) SecurityInvalidateApiKey {
 //
 // See full documentation at https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-api-key.html.
 //
-type SecurityInvalidateApiKey func(body io.Reader, o ...func(*SecurityInvalidateApiKeyRequest)) (*Response, error)
+type SecurityInvalidateAPIKey func(body io.Reader, o ...func(*SecurityInvalidateAPIKeyRequest)) (*Response, error)
 
-// SecurityInvalidateApiKeyRequest configures the Security   Invalidate Api Key API request.
+// SecurityInvalidateAPIKeyRequest configures the Security   Invalidate Api Key API request.
 //
-type SecurityInvalidateApiKeyRequest struct {
+type SecurityInvalidateAPIKeyRequest struct {
 	Body io.Reader
 
 	Pretty     bool
@@ -43,7 +43,7 @@ type SecurityInvalidateApiKeyRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r SecurityInvalidateApiKeyRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r SecurityInvalidateAPIKeyRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -115,48 +115,48 @@ func (r SecurityInvalidateApiKeyRequest) Do(ctx context.Context, transport Trans
 
 // WithContext sets the request context.
 //
-func (f SecurityInvalidateApiKey) WithContext(v context.Context) func(*SecurityInvalidateApiKeyRequest) {
-	return func(r *SecurityInvalidateApiKeyRequest) {
+func (f SecurityInvalidateAPIKey) WithContext(v context.Context) func(*SecurityInvalidateAPIKeyRequest) {
+	return func(r *SecurityInvalidateAPIKeyRequest) {
 		r.ctx = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f SecurityInvalidateApiKey) WithPretty() func(*SecurityInvalidateApiKeyRequest) {
-	return func(r *SecurityInvalidateApiKeyRequest) {
+func (f SecurityInvalidateAPIKey) WithPretty() func(*SecurityInvalidateAPIKeyRequest) {
+	return func(r *SecurityInvalidateAPIKeyRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f SecurityInvalidateApiKey) WithHuman() func(*SecurityInvalidateApiKeyRequest) {
-	return func(r *SecurityInvalidateApiKeyRequest) {
+func (f SecurityInvalidateAPIKey) WithHuman() func(*SecurityInvalidateAPIKeyRequest) {
+	return func(r *SecurityInvalidateAPIKeyRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f SecurityInvalidateApiKey) WithErrorTrace() func(*SecurityInvalidateApiKeyRequest) {
-	return func(r *SecurityInvalidateApiKeyRequest) {
+func (f SecurityInvalidateAPIKey) WithErrorTrace() func(*SecurityInvalidateAPIKeyRequest) {
+	return func(r *SecurityInvalidateAPIKeyRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f SecurityInvalidateApiKey) WithFilterPath(v ...string) func(*SecurityInvalidateApiKeyRequest) {
-	return func(r *SecurityInvalidateApiKeyRequest) {
+func (f SecurityInvalidateAPIKey) WithFilterPath(v ...string) func(*SecurityInvalidateAPIKeyRequest) {
+	return func(r *SecurityInvalidateAPIKeyRequest) {
 		r.FilterPath = v
 	}
 }
 
 // WithHeader adds the headers to the HTTP request
 //
-func (f SecurityInvalidateApiKey) WithHeader(h map[string]string) func(*SecurityInvalidateApiKeyRequest) {
-	return func(r *SecurityInvalidateApiKeyRequest) {
+func (f SecurityInvalidateAPIKey) WithHeader(h map[string]string) func(*SecurityInvalidateAPIKeyRequest) {
+	return func(r *SecurityInvalidateAPIKeyRequest) {
 		if r.Header == nil {
 			r.Header = make(http.Header)
 		}
