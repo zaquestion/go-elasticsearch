@@ -29,6 +29,7 @@ func NameToGo(s string) string {
 		"id":  "ID",
 		"ttl": "TTL",
 
+		"api":   "API",
 		"ccr":   "CCR",
 		"ilm":   "ILM",
 		"ml":    "ML",
