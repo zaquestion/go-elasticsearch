@@ -279,9 +279,9 @@ func (g *Generator) genHelpers() {
 	g.w("\n\n")
 }
 
+// Reference: https://github.com/elastic/elasticsearch/blob/master/test/framework/src/main/java/org/elasticsearch/test/rest/ESRestTestCase.java
+//
 func (g *Generator) genCommonSetup() {
-	// TODO: Full setup
-	// https://github.com/elastic/elasticsearch-ruby/blob/master/elasticsearch-api/test/integration/yaml_test_runner.rb
 	g.w(`
 	// ----- Common Setup -------------------------------------------------------------
 	commonSetup := func() {
@@ -360,6 +360,9 @@ func (g *Generator) genCommonSetup() {
 	`)
 }
 
+// Reference: https://github.com/elastic/elasticsearch/blob/master/x-pack/plugin/src/test/java/org/elasticsearch/xpack/test/rest/XPackRestIT.java
+// Reference: https://github.com/elastic/elasticsearch/blob/master/x-pack/plugin/core/src/test/java/org/elasticsearch/xpack/core/ml/integration/MlRestTestStateCleaner.java
+//
 func (g *Generator) genXPackSetup() {
 	g.w(`
 		// ----- XPack Setup -------------------------------------------------------------
