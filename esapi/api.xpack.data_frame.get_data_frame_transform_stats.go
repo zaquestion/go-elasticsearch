@@ -109,9 +109,13 @@ func (r DataFrameGetDataFrameTransformStatsRequest) Do(ctx context.Context, tran
 	}
 
 	if len(r.Header) > 0 {
-		for k, vv := range r.Header {
-			for _, v := range vv {
-				req.Header.Add(k, v)
+		if len(req.Header) == 0 {
+			req.Header = r.Header
+		} else {
+			for k, vv := range r.Header {
+				for _, v := range vv {
+					req.Header.Add(k, v)
+				}
 			}
 		}
 	}
@@ -206,7 +210,7 @@ func (f DataFrameGetDataFrameTransformStats) WithFilterPath(v ...string) func(*D
 	}
 }
 
-// WithHeader adds the headers to the HTTP request
+// WithHeader adds the headers to the HTTP request.
 //
 func (f DataFrameGetDataFrameTransformStats) WithHeader(h map[string]string) func(*DataFrameGetDataFrameTransformStatsRequest) {
 	return func(r *DataFrameGetDataFrameTransformStatsRequest) {

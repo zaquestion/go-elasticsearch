@@ -21,7 +21,7 @@ func newSecurityGetPrivilegesFunc(t Transport) SecurityGetPrivileges {
 // ----- API Definition -------------------------------------------------------
 
 //
-// See full documentation at TODO.
+// See full documentation at https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html.
 //
 type SecurityGetPrivileges func(o ...func(*SecurityGetPrivilegesRequest)) (*Response, error)
 
@@ -95,9 +95,13 @@ func (r SecurityGetPrivilegesRequest) Do(ctx context.Context, transport Transpor
 	}
 
 	if len(r.Header) > 0 {
-		for k, vv := range r.Header {
-			for _, v := range vv {
-				req.Header.Add(k, v)
+		if len(req.Header) == 0 {
+			req.Header = r.Header
+		} else {
+			for k, vv := range r.Header {
+				for _, v := range vv {
+					req.Header.Add(k, v)
+				}
 			}
 		}
 	}
@@ -176,7 +180,7 @@ func (f SecurityGetPrivileges) WithFilterPath(v ...string) func(*SecurityGetPriv
 	}
 }
 
-// WithHeader adds the headers to the HTTP request
+// WithHeader adds the headers to the HTTP request.
 //
 func (f SecurityGetPrivileges) WithHeader(h map[string]string) func(*SecurityGetPrivilegesRequest) {
 	return func(r *SecurityGetPrivilegesRequest) {

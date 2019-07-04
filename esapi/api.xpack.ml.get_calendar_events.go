@@ -116,9 +116,13 @@ func (r MLGetCalendarEventsRequest) Do(ctx context.Context, transport Transport)
 	}
 
 	if len(r.Header) > 0 {
-		for k, vv := range r.Header {
-			for _, v := range vv {
-				req.Header.Add(k, v)
+		if len(req.Header) == 0 {
+			req.Header = r.Header
+		} else {
+			for k, vv := range r.Header {
+				for _, v := range vv {
+					req.Header.Add(k, v)
+				}
 			}
 		}
 	}
@@ -221,7 +225,7 @@ func (f MLGetCalendarEvents) WithFilterPath(v ...string) func(*MLGetCalendarEven
 	}
 }
 
-// WithHeader adds the headers to the HTTP request
+// WithHeader adds the headers to the HTTP request.
 //
 func (f MLGetCalendarEvents) WithHeader(h map[string]string) func(*MLGetCalendarEventsRequest) {
 	return func(r *MLGetCalendarEventsRequest) {

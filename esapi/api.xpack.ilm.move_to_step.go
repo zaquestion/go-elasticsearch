@@ -97,9 +97,13 @@ func (r ILMMoveToStepRequest) Do(ctx context.Context, transport Transport) (*Res
 	}
 
 	if len(r.Header) > 0 {
-		for k, vv := range r.Header {
-			for _, v := range vv {
-				req.Header.Add(k, v)
+		if len(req.Header) == 0 {
+			req.Header = r.Header
+		} else {
+			for k, vv := range r.Header {
+				for _, v := range vv {
+					req.Header.Add(k, v)
+				}
 			}
 		}
 	}
@@ -178,7 +182,7 @@ func (f ILMMoveToStep) WithFilterPath(v ...string) func(*ILMMoveToStepRequest) {
 	}
 }
 
-// WithHeader adds the headers to the HTTP request
+// WithHeader adds the headers to the HTTP request.
 //
 func (f ILMMoveToStep) WithHeader(h map[string]string) func(*ILMMoveToStepRequest) {
 	return func(r *ILMMoveToStepRequest) {

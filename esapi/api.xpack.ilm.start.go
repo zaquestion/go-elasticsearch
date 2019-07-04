@@ -81,9 +81,13 @@ func (r ILMStartRequest) Do(ctx context.Context, transport Transport) (*Response
 	}
 
 	if len(r.Header) > 0 {
-		for k, vv := range r.Header {
-			for _, v := range vv {
-				req.Header.Add(k, v)
+		if len(req.Header) == 0 {
+			req.Header = r.Header
+		} else {
+			for k, vv := range r.Header {
+				for _, v := range vv {
+					req.Header.Add(k, v)
+				}
 			}
 		}
 	}
@@ -146,7 +150,7 @@ func (f ILMStart) WithFilterPath(v ...string) func(*ILMStartRequest) {
 	}
 }
 
-// WithHeader adds the headers to the HTTP request
+// WithHeader adds the headers to the HTTP request.
 //
 func (f ILMStart) WithHeader(h map[string]string) func(*ILMStartRequest) {
 	return func(r *ILMStartRequest) {

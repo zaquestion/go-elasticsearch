@@ -97,9 +97,13 @@ func (r MLGetJobsRequest) Do(ctx context.Context, transport Transport) (*Respons
 	}
 
 	if len(r.Header) > 0 {
-		for k, vv := range r.Header {
-			for _, v := range vv {
-				req.Header.Add(k, v)
+		if len(req.Header) == 0 {
+			req.Header = r.Header
+		} else {
+			for k, vv := range r.Header {
+				for _, v := range vv {
+					req.Header.Add(k, v)
+				}
 			}
 		}
 	}
@@ -178,7 +182,7 @@ func (f MLGetJobs) WithFilterPath(v ...string) func(*MLGetJobsRequest) {
 	}
 }
 
-// WithHeader adds the headers to the HTTP request
+// WithHeader adds the headers to the HTTP request.
 //
 func (f MLGetJobs) WithHeader(h map[string]string) func(*MLGetJobsRequest) {
 	return func(r *MLGetJobsRequest) {

@@ -34,6 +34,7 @@ type MLStopDataFrameAnalyticsRequest struct {
 	Body io.Reader
 
 	AllowNoMatch *bool
+	Force        *bool
 	Timeout      time.Duration
 
 	Pretty     bool
@@ -75,6 +76,10 @@ func (r MLStopDataFrameAnalyticsRequest) Do(ctx context.Context, transport Trans
 		params["allow_no_match"] = strconv.FormatBool(*r.AllowNoMatch)
 	}
 
+	if r.Force != nil {
+		params["force"] = strconv.FormatBool(*r.Force)
+	}
+
 	if r.Timeout != 0 {
 		params["timeout"] = formatDuration(r.Timeout)
 	}
@@ -110,9 +115,13 @@ func (r MLStopDataFrameAnalyticsRequest) Do(ctx context.Context, transport Trans
 	}
 
 	if len(r.Header) > 0 {
-		for k, vv := range r.Header {
-			for _, v := range vv {
-				req.Header.Add(k, v)
+		if len(req.Header) == 0 {
+			req.Header = r.Header
+		} else {
+			for k, vv := range r.Header {
+				for _, v := range vv {
+					req.Header.Add(k, v)
+				}
 			}
 		}
 	}
@@ -159,6 +168,14 @@ func (f MLStopDataFrameAnalytics) WithAllowNoMatch(v bool) func(*MLStopDataFrame
 	}
 }
 
+// WithForce - true if the data frame analytics should be forcefully stopped.
+//
+func (f MLStopDataFrameAnalytics) WithForce(v bool) func(*MLStopDataFrameAnalyticsRequest) {
+	return func(r *MLStopDataFrameAnalyticsRequest) {
+		r.Force = &v
+	}
+}
+
 // WithTimeout - controls the time to wait until the task has stopped. defaults to 20 seconds.
 //
 func (f MLStopDataFrameAnalytics) WithTimeout(v time.Duration) func(*MLStopDataFrameAnalyticsRequest) {
@@ -199,7 +216,7 @@ func (f MLStopDataFrameAnalytics) WithFilterPath(v ...string) func(*MLStopDataFr
 	}
 }
 
-// WithHeader adds the headers to the HTTP request
+// WithHeader adds the headers to the HTTP request.
 //
 func (f MLStopDataFrameAnalytics) WithHeader(h map[string]string) func(*MLStopDataFrameAnalyticsRequest) {
 	return func(r *MLStopDataFrameAnalyticsRequest) {

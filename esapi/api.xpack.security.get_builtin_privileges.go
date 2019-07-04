@@ -8,9 +8,9 @@ import (
 	"strings"
 )
 
-func newMigrationDeprecationsFunc(t Transport) MigrationDeprecations {
-	return func(o ...func(*MigrationDeprecationsRequest)) (*Response, error) {
-		var r = MigrationDeprecationsRequest{}
+func newSecurityGetBuiltinPrivilegesFunc(t Transport) SecurityGetBuiltinPrivileges {
+	return func(o ...func(*SecurityGetBuiltinPrivilegesRequest)) (*Response, error) {
+		var r = SecurityGetBuiltinPrivilegesRequest{}
 		for _, f := range o {
 			f(&r)
 		}
@@ -21,15 +21,13 @@ func newMigrationDeprecationsFunc(t Transport) MigrationDeprecations {
 // ----- API Definition -------------------------------------------------------
 
 //
-// See full documentation at http://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-deprecation.html.
+// See full documentation at https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-builtin-privileges.html.
 //
-type MigrationDeprecations func(o ...func(*MigrationDeprecationsRequest)) (*Response, error)
+type SecurityGetBuiltinPrivileges func(o ...func(*SecurityGetBuiltinPrivilegesRequest)) (*Response, error)
 
-// MigrationDeprecationsRequest configures the Migration Deprecations API request.
+// SecurityGetBuiltinPrivilegesRequest configures the Security   Get Builtin Privileges API request.
 //
-type MigrationDeprecationsRequest struct {
-	Index string
-
+type SecurityGetBuiltinPrivilegesRequest struct {
 	Pretty     bool
 	Human      bool
 	ErrorTrace bool
@@ -42,7 +40,7 @@ type MigrationDeprecationsRequest struct {
 
 // Do executes the request and returns response or error.
 //
-func (r MigrationDeprecationsRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
+func (r SecurityGetBuiltinPrivilegesRequest) Do(ctx context.Context, transport Transport) (*Response, error) {
 	var (
 		method string
 		path   strings.Builder
@@ -51,15 +49,8 @@ func (r MigrationDeprecationsRequest) Do(ctx context.Context, transport Transpor
 
 	method = "GET"
 
-	path.Grow(1 + len(r.Index) + 1 + len("_migration") + 1 + len("deprecations"))
-	if r.Index != "" {
-		path.WriteString("/")
-		path.WriteString(r.Index)
-	}
-	path.WriteString("/")
-	path.WriteString("_migration")
-	path.WriteString("/")
-	path.WriteString("deprecations")
+	path.Grow(len("/_security/privilege/_builtin"))
+	path.WriteString("/_security/privilege/_builtin")
 
 	params = make(map[string]string)
 
@@ -121,56 +112,48 @@ func (r MigrationDeprecationsRequest) Do(ctx context.Context, transport Transpor
 
 // WithContext sets the request context.
 //
-func (f MigrationDeprecations) WithContext(v context.Context) func(*MigrationDeprecationsRequest) {
-	return func(r *MigrationDeprecationsRequest) {
+func (f SecurityGetBuiltinPrivileges) WithContext(v context.Context) func(*SecurityGetBuiltinPrivilegesRequest) {
+	return func(r *SecurityGetBuiltinPrivilegesRequest) {
 		r.ctx = v
-	}
-}
-
-// WithIndex - index pattern.
-//
-func (f MigrationDeprecations) WithIndex(v string) func(*MigrationDeprecationsRequest) {
-	return func(r *MigrationDeprecationsRequest) {
-		r.Index = v
 	}
 }
 
 // WithPretty makes the response body pretty-printed.
 //
-func (f MigrationDeprecations) WithPretty() func(*MigrationDeprecationsRequest) {
-	return func(r *MigrationDeprecationsRequest) {
+func (f SecurityGetBuiltinPrivileges) WithPretty() func(*SecurityGetBuiltinPrivilegesRequest) {
+	return func(r *SecurityGetBuiltinPrivilegesRequest) {
 		r.Pretty = true
 	}
 }
 
 // WithHuman makes statistical values human-readable.
 //
-func (f MigrationDeprecations) WithHuman() func(*MigrationDeprecationsRequest) {
-	return func(r *MigrationDeprecationsRequest) {
+func (f SecurityGetBuiltinPrivileges) WithHuman() func(*SecurityGetBuiltinPrivilegesRequest) {
+	return func(r *SecurityGetBuiltinPrivilegesRequest) {
 		r.Human = true
 	}
 }
 
 // WithErrorTrace includes the stack trace for errors in the response body.
 //
-func (f MigrationDeprecations) WithErrorTrace() func(*MigrationDeprecationsRequest) {
-	return func(r *MigrationDeprecationsRequest) {
+func (f SecurityGetBuiltinPrivileges) WithErrorTrace() func(*SecurityGetBuiltinPrivilegesRequest) {
+	return func(r *SecurityGetBuiltinPrivilegesRequest) {
 		r.ErrorTrace = true
 	}
 }
 
 // WithFilterPath filters the properties of the response body.
 //
-func (f MigrationDeprecations) WithFilterPath(v ...string) func(*MigrationDeprecationsRequest) {
-	return func(r *MigrationDeprecationsRequest) {
+func (f SecurityGetBuiltinPrivileges) WithFilterPath(v ...string) func(*SecurityGetBuiltinPrivilegesRequest) {
+	return func(r *SecurityGetBuiltinPrivilegesRequest) {
 		r.FilterPath = v
 	}
 }
 
 // WithHeader adds the headers to the HTTP request.
 //
-func (f MigrationDeprecations) WithHeader(h map[string]string) func(*MigrationDeprecationsRequest) {
-	return func(r *MigrationDeprecationsRequest) {
+func (f SecurityGetBuiltinPrivileges) WithHeader(h map[string]string) func(*SecurityGetBuiltinPrivilegesRequest) {
+	return func(r *SecurityGetBuiltinPrivilegesRequest) {
 		if r.Header == nil {
 			r.Header = make(http.Header)
 		}

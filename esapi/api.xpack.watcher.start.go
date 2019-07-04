@@ -81,9 +81,13 @@ func (r WatcherStartRequest) Do(ctx context.Context, transport Transport) (*Resp
 	}
 
 	if len(r.Header) > 0 {
-		for k, vv := range r.Header {
-			for _, v := range vv {
-				req.Header.Add(k, v)
+		if len(req.Header) == 0 {
+			req.Header = r.Header
+		} else {
+			for k, vv := range r.Header {
+				for _, v := range vv {
+					req.Header.Add(k, v)
+				}
 			}
 		}
 	}
@@ -146,7 +150,7 @@ func (f WatcherStart) WithFilterPath(v ...string) func(*WatcherStartRequest) {
 	}
 }
 
-// WithHeader adds the headers to the HTTP request
+// WithHeader adds the headers to the HTTP request.
 //
 func (f WatcherStart) WithHeader(h map[string]string) func(*WatcherStartRequest) {
 	return func(r *WatcherStartRequest) {
